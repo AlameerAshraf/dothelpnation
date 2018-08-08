@@ -4,7 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+<<<<<<< HEAD
     <ProjectGuid>{D0767DD6-B37B-471A-BAAE-214EE1BDC166}</ProjectGuid>
+=======
+    <ProjectGuid>{D5477474-C31F-4891-8DC4-9F8CF00C908E}</ProjectGuid>
+>>>>>>> 590ece856ecab9e13bb32f784f0d74d1a0591136
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Domain</RootNamespace>
@@ -49,10 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="NewFolder1\Model1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
+=======
+    <Compile Include="Common\IEntity.cs" />
+    <Compile Include="Model1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+>>>>>>> 590ece856ecab9e13bb32f784f0d74d1a0591136
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
