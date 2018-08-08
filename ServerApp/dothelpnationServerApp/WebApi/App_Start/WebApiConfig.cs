@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace dothelpnationServerApp
+namespace WebApi
 {
     public static class WebApiConfig
     {
@@ -11,7 +11,6 @@ namespace dothelpnationServerApp
         {
             // Web API configuration and services
 
-            // Web API routes
             // Web API routes
             config.MapHttpAttributeRoutes();
 
