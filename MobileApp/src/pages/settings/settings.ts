@@ -66,11 +66,13 @@ export class SettingsPage {
   }
 
   ionViewDidLoad() {
+    console.log("load")
     // Build an empty form for the template to render
     this.form = this.formBuilder.group({});
   }
 
   ionViewWillEnter() {
+    console.log("enter")
     // Build an empty form for the template to render
     this.form = this.formBuilder.group({});
 
@@ -78,6 +80,7 @@ export class SettingsPage {
     this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
 
     this.translate.get(this.pageTitleKey).subscribe((res) => {
+      console.log(res)
       this.pageTitle = res;
     })
 

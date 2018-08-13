@@ -29,7 +29,6 @@ export class TutorialPage {
       "TUTORIAL_SLIDE3_DESCRIPTION",
     ]).subscribe(
       (values) => {
-        console.log('Loaded values', values);
         this.slides = [
           {
             title: values.TUTORIAL_SLIDE1_TITLE,
@@ -58,16 +57,21 @@ export class TutorialPage {
   }
 
   onSlideChangeStart(slider) {
+    // This to get the last slide from tutorials
     this.showSkip = !slider.isEnd();
   }
 
+
+
+
+
+  // the root left menu should be disabled on the tutorial page
   ionViewDidEnter() {
-    // the root left menu should be disabled on the tutorial page
     this.menu.enable(false);
   }
 
+  // enable the root left menu when leaving the tutorial page
   ionViewWillLeave() {
-    // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
   }
 

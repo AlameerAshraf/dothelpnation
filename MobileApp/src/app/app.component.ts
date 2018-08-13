@@ -47,8 +47,6 @@ export class MyApp {
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -57,23 +55,14 @@ export class MyApp {
 
   initTranslate() {
     // Set the default language for translation strings, and the current language.
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('ar');
     const browserLang = this.translate.getBrowserLang();
+    console.log(browserLang);
 
     if (browserLang) {
-      if (browserLang === 'zh') {
-        const browserCultureLang = this.translate.getBrowserCultureLang();
-
-        if (browserCultureLang.match(/-CN|CHS|Hans/i)) {
-          this.translate.use('zh-cmn-Hans');
-        } else if (browserCultureLang.match(/-TW|CHT|Hant/i)) {
-          this.translate.use('zh-cmn-Hant');
-        }
-      } else {
-        this.translate.use(this.translate.getBrowserLang());
-      }
+      this.translate.use('en');
     } else {
-      this.translate.use('en'); // Set your language here
+      this.translate.use('ar'); // Set the use langauge here FROM DATABASE !
     }
 
     this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
@@ -82,8 +71,6 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 }

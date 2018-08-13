@@ -28,12 +28,14 @@ export class ListMasterPage {
    */
   addItem() {
     let addModal = this.modalCtrl.create('ItemCreatePage');
+    addModal.present();
+
     addModal.onDidDismiss(item => {
+      console.log("here");
       if (item) {
         this.items.add(item);
       }
     })
-    addModal.present();
   }
 
   /**
