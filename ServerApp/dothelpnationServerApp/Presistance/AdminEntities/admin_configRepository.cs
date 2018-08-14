@@ -7,5 +7,8 @@ namespace Presistance.AdminEntities
     class admin_configRepository 
         : Repository<admin_config> , IAdmin_ConfigurationRepository
     {
+        admin_configRepository(IDataBaseContext database) 
+            : base (database)
+        { } 
     }
 }

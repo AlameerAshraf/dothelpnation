@@ -57,7 +57,6 @@
     <Compile Include="Entities\blog.cs" />
     <Compile Include="Entities\blog_sections.cs" />
     <Compile Include="Entities\comment.cs" />
-    <Compile Include="Data.cs" />
     <Compile Include="Entities\destination.cs" />
     <Compile Include="Entities\email_contact.cs" />
     <Compile Include="Entities\fqa.cs" />
