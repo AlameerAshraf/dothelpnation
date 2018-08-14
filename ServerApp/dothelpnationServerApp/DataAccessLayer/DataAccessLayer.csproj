@@ -49,15 +49,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\ads_messagesConfigurations.cs" />
+    <Compile Include="Configurations\BlogConfigurations.cs" />
+    <Compile Include="Entities\admin_config.cs" />
+    <Compile Include="Entities\admin_lang.cs" />
+    <Compile Include="Entities\admin_translation.cs" />
+    <Compile Include="Entities\ads_messages.cs" />
+    <Compile Include="Entities\ad_photos.cs" />
+    <Compile Include="Entities\blog.cs" />
+    <Compile Include="Entities\blog_sections.cs" />
+    <Compile Include="Entities\comment.cs" />
+    <Compile Include="Entities\destination.cs" />
     <Compile Include="Entities\dothelpnationCS.cs" />
+    <Compile Include="Entities\email_contact.cs" />
+    <Compile Include="Entities\fqa.cs" />
+    <Compile Include="Entities\newslatter.cs" />
+    <Compile Include="Entities\password_resets.cs" />
+    <Compile Include="Entities\photo.cs" />
+    <Compile Include="Entities\rating.cs" />
+    <Compile Include="Entities\site_config.cs" />
+    <Compile Include="Entities\site_lang.cs" />
+    <Compile Include="Entities\site_translation.cs" />
+    <Compile Include="Entities\sysdiagram.cs" />
+    <Compile Include="Entities\tag.cs" />
+    <Compile Include="Entities\tour.cs" />
+    <Compile Include="Entities\tour_category.cs" />
+    <Compile Include="Entities\tour_dayes.cs" />
+    <Compile Include="Entities\user.cs" />
+    <Compile Include="Entities\user_access_rolls.cs" />
+    <Compile Include="Entities\user_rolls.cs" />
+    <Compile Include="Entities\video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
