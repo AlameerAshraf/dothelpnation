@@ -60,7 +60,7 @@ export class MyApp {
     console.log(browserLang);
 
     if (browserLang) {
-      this.translate.use('en');
+      this.translate.use('ar');
     } else {
       this.translate.use('ar'); // Set the use langauge here FROM DATABASE !
     }

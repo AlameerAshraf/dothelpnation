@@ -44,6 +44,7 @@ namespace DataAccessLayer.Entities
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new BlogConfigurations());
+            modelBuilder.Configurations.Add(new ads_messagesConfigurations());
 
             modelBuilder.Entity<blog_sections>()
                 .HasMany(e => e.blogs)
@@ -60,12 +61,12 @@ namespace DataAccessLayer.Entities
 
             modelBuilder.Entity<user>()
                 .HasMany(e => e.ads_messages)
-                .WithOptional(e => e.user)
+                .WithOptional(e => e.sender)
                 .HasForeignKey(e => e.from_user_id);
 
             modelBuilder.Entity<user>()
                 .HasMany(e => e.ads_messages1)
-                .WithOptional(e => e.user1)
+                .WithOptional(e => e.receiver)
                 .HasForeignKey(e => e.to_user_id);
 
             modelBuilder.Entity<user>()
