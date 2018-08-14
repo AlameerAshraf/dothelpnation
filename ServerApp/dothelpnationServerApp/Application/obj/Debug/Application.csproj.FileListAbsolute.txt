@@ -1,6 +1,0 @@
-Z:\GitHub\dothelpnation\ServerApp\dothelpnationServerApp\Application\bin\Debug\Application.dll
-Z:\GitHub\dothelpnation\ServerApp\dothelpnationServerApp\Application\bin\Debug\Application.pdb
-Z:\GitHub\dothelpnation\ServerApp\dothelpnationServerApp\Application\obj\Debug\Application.csprojResolveAssemblyReference.cache
-Z:\GitHub\dothelpnation\ServerApp\dothelpnationServerApp\Application\obj\Debug\Application.csproj.CoreCompileInputs.cache
-Z:\GitHub\dothelpnation\ServerApp\dothelpnationServerApp\Application\obj\Debug\Application.dll
-Z:\GitHub\dothelpnation\ServerApp\dothelpnationServerApp\Application\obj\Debug\Application.pdb
