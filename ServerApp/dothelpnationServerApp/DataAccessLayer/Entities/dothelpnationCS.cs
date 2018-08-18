@@ -45,6 +45,8 @@ namespace DataAccessLayer.Entities
         {
             modelBuilder.Configurations.Add(new BlogConfigurations());
             modelBuilder.Configurations.Add(new ads_messagesConfigurations());
+            modelBuilder.Configurations.Add(new ad_photosConfigurations());
+            modelBuilder.Configurations.Add(new commentConfigurations());
 
             modelBuilder.Entity<blog_sections>()
                 .HasMany(e => e.blogs)
