@@ -49,41 +49,12 @@ namespace DataAccessLayer.Entities
             modelBuilder.Configurations.Add(new commentConfigurations());
             modelBuilder.Configurations.Add(new blog_sectionsConfigurations());
             modelBuilder.Configurations.Add(new ratingConfigurations());
+            modelBuilder.Configurations.Add(new userConfigurations());
 
 
 
-            modelBuilder.Entity<user>()
-                .Property(e => e.created_at)
-                .HasPrecision(0);
 
-            modelBuilder.Entity<user>()
-                .Property(e => e.updated_at)
-                .HasPrecision(0);
 
-            modelBuilder.Entity<user>()
-                .HasMany(e => e.ads_messages)
-                .WithOptional(e => e.sender)
-                .HasForeignKey(e => e.from_user_id);
-
-            modelBuilder.Entity<user>()
-                .HasMany(e => e.ads_messages1)
-                .WithOptional(e => e.receiver)
-                .HasForeignKey(e => e.to_user_id);
-
-            modelBuilder.Entity<user>()
-                .HasMany(e => e.blogs)
-                .WithOptional(e => e.user)
-                .HasForeignKey(e => e.user_id);
-
-            modelBuilder.Entity<user>()
-                .HasMany(e => e.comments)
-                .WithOptional(e => e.user)
-                .HasForeignKey(e => e.user_id);
-
-            modelBuilder.Entity<user>()
-                .HasMany(e => e.ratings)
-                .WithOptional(e => e.user)
-                .HasForeignKey(e => e.user_id);
 
             modelBuilder.Entity<password_resets>()
                 .Property(e => e.created_at)

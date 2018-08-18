@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using DataAccessLayer.Entities;
+
+
 namespace DataAccessLayer.Configurations
 {
     class ad_photosConfigurations : EntityTypeConfiguration<ad_photos>
