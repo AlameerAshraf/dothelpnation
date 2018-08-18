@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Reflection;
 using System.Web.Http;
-using System.Web.Routing;
+using Autofac;
+using Autofac.Integration.WebApi;
+using BusinessLayer.Repositories;
 
 namespace WebApi
 {
@@ -12,6 +11,35 @@ namespace WebApi
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            RegisterAutofac();
         }
+
+
+        void RegisterAutofac()
+        {
+            var config = GlobalConfiguration.Configuration;
+            config.Formatters.JsonFormatter
+                .SerializerSettings
+                .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            var builder = new ContainerBuilder();
+
+            // Register Api Controllers 
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterWebApiFilterProvider(config);
+            builder.RegisterWebApiModelBinderProvider();
+
+
+            //builder.RegisterGeneric(typeof(Repository<>)).AsSelf();
+
+            builder
+                .RegisterGeneric(typeof(Repository<>))
+                .As(typeof(IRepository<>))
+                .InstancePerDependency();
+
+            var conatiner = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(conatiner);
+        }
+
     }
 }
