@@ -3,9 +3,9 @@ using DataAccessLayer.Entities;
 
 namespace DataAccessLayer.Configurations
 {
-    public class BlogConfigurations : EntityTypeConfiguration<blog>
+    public class blogConfigurations : EntityTypeConfiguration<blog>
     {
-        public BlogConfigurations()
+        public blogConfigurations()
         {
             this.ToTable("blog");
 
@@ -41,6 +41,10 @@ namespace DataAccessLayer.Configurations
             this.HasMany(e => e.ratings)
                 .WithOptional(e => e.blog)
                 .HasForeignKey(e => e.post_id);
+
+            //this.HasOptional<blog_sections>(x => x.blog_sections)
+            //    .WithMany(x => x.blogs)
+            //    .HasForeignKey(x => x.blog_sections);
         }
     }
 }

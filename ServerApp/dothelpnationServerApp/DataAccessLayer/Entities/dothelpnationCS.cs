@@ -43,15 +43,13 @@ namespace DataAccessLayer.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new BlogConfigurations());
+            modelBuilder.Configurations.Add(new blogConfigurations());
             modelBuilder.Configurations.Add(new ads_messagesConfigurations());
             modelBuilder.Configurations.Add(new ad_photosConfigurations());
             modelBuilder.Configurations.Add(new commentConfigurations());
+            modelBuilder.Configurations.Add(new blog_sectionsConfigurations());
 
-            modelBuilder.Entity<blog_sections>()
-                .HasMany(e => e.blogs)
-                .WithOptional(e => e.blog_sections)
-                .HasForeignKey(e => e.section_id);
+
 
             modelBuilder.Entity<user>()
                 .Property(e => e.created_at)
