@@ -50,7 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\ads_messagesConfigurations.cs" />
-    <Compile Include="Configurations\BlogConfigurations.cs" />
+    <Compile Include="Configurations\ad_photosConfigurations.cs" />
+    <Compile Include="Configurations\blogConfigurations.cs" />
+    <Compile Include="Configurations\blog_sectionsConfigurations.cs" />
+    <Compile Include="Configurations\commentConfigurations.cs" />
+    <Compile Include="Configurations\ratingConfigurations.cs" />
+    <Compile Include="Configurations\userConfigurations.cs" />
     <Compile Include="Entities\admin_config.cs" />
     <Compile Include="Entities\admin_lang.cs" />
     <Compile Include="Entities\admin_translation.cs" />
@@ -60,7 +65,7 @@
     <Compile Include="Entities\blog_sections.cs" />
     <Compile Include="Entities\comment.cs" />
     <Compile Include="Entities\destination.cs" />
-    <Compile Include="Entities\dothelpnationCS.cs" />
+    <Compile Include="DataContext\dothelpnationCS.cs" />
     <Compile Include="Entities\email_contact.cs" />
     <Compile Include="Entities\fqa.cs" />
     <Compile Include="Entities\newslatter.cs" />
