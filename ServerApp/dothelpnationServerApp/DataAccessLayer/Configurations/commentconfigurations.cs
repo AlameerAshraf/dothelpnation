@@ -9,6 +9,8 @@ namespace DataAccessLayer.Configurations
         {
             this.ToTable("comment");
 
+            this.HasKey(x => x.id);
+
             this.Property(t => t.type).HasMaxLength(155);
             this.Property(t => t.name).HasMaxLength(255);
             this.Property(t => t.email).HasMaxLength(255);

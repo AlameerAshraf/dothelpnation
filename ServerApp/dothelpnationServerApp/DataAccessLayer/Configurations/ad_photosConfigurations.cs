@@ -8,6 +8,8 @@ namespace DataAccessLayer.Configurations
         {
             this.ToTable("ad_photos");
 
+            this.HasKey(x => x.id);
+
             this.Property(t => t.photo).HasMaxLength(500);
 
             this.HasOptional(x => x.blog)

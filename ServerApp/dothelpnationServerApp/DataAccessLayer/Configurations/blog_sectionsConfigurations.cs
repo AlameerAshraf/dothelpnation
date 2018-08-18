@@ -10,6 +10,8 @@ namespace DataAccessLayer.Configurations
         {
             this.ToTable("blog_sections");
 
+            this.HasKey(x => x.id);
+
             this.Property(t => t.langkey).HasMaxLength(255);
             this.Property(t => t.title).HasMaxLength(255);
             this.Property(t => t.stuts).HasMaxLength(20);

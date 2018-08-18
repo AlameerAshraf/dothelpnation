@@ -48,6 +48,7 @@ namespace DataAccessLayer.Entities
             modelBuilder.Configurations.Add(new ad_photosConfigurations());
             modelBuilder.Configurations.Add(new commentConfigurations());
             modelBuilder.Configurations.Add(new blog_sectionsConfigurations());
+            modelBuilder.Configurations.Add(new ratingConfigurations());
 
 
 
