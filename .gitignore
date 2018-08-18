@@ -9,3 +9,5 @@ ServerApp/dothelpnationServerApp/Domain/obj/
 ServerApp/dothelpnationServerApp/DataAccessLayer/obj/
 ServerApp/dothelpnationServerApp/BusinessLayer/obj/
 ServerApp/dothelpnationServerApp/DataAccessLayer/bin/
+ServerApp/dothelpnationServerApp/WebApi/bin/
+ServerApp/dothelpnationServerApp/WebApi/obj/
