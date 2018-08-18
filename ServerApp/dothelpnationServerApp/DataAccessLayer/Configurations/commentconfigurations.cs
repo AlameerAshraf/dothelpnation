@@ -20,9 +20,9 @@ namespace DataAccessLayer.Configurations
             this.Property(t => t.time).HasMaxLength(155);
 
 
-            this.HasRequired<blog>(x => x.blog)
-                .WithMany(x => x.comments)
-                .HasForeignKey(x => x.ad_id);
+            //this.HasRequired<blog>(x => x.blog)
+            //    .WithMany(x => x.comments)
+            //    .HasForeignKey(x => x.ad_id);
         }
     }
 }

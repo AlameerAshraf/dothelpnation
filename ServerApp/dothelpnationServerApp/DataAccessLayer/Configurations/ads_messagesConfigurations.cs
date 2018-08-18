@@ -17,9 +17,9 @@ namespace DataAccessLayer.Configurations
 
 
 
-            this.HasRequired<blog>(x => x.blog)
-                .WithMany(x => x.ads_messages)
-                .HasForeignKey(x => x.ad_id);
+            //this.HasRequired<blog>(x => x.blog)
+            //    .WithMany(x => x.ads_messages)
+            //    .HasForeignKey(x => x.ad_id);
         }
     }
 }

@@ -14,8 +14,8 @@ namespace DataAccessLayer.Configurations
 
             this.Property(t => t.photo).HasMaxLength(500);
 
-            this.HasOptional(x => x.blog)
-                .WithRequired(x => x.ad_photos);
+            //this.HasOptional(x => x.blog)
+            //    .WithRequired(x => x.ad_photos);
         }
     }
 }
