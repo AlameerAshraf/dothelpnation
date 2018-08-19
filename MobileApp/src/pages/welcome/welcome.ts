@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
-/**
- * The Welcome Page is a splash page that quickly describes the app,
- * and then directs the user to create an account or log in.
- * If you'd like to immediately put the user onto a login/signup page,
- * we recommend not using the Welcome page.
-*/
 @IonicPage()
 @Component({
   selector: 'page-welcome',
@@ -14,7 +9,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController , private fb : Facebook) { }
 
   login() {
     this.navCtrl.push('LoginPage');
@@ -22,5 +17,16 @@ export class WelcomePage {
 
   signup() {
     this.navCtrl.push('SignupPage');
+  }
+
+  FBlogin(){
+    console.log("Hey")
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+    .then((res:FacebookLoginResponse) => {console.log(res)})
+    .catch(e => console.log(e));
+  }
+
+  Glogin(){
+
   }
 }

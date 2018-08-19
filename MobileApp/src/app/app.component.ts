@@ -60,9 +60,9 @@ export class MyApp {
     console.log(browserLang);
 
     if (browserLang) {
-      this.translate.use('ar');
+      this.translate.use('en');
     } else {
-      this.translate.use('ar'); // Set the use langauge here FROM DATABASE !
+      this.translate.use('en'); // Set the use langauge here FROM DATABASE !
     }
 
     this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {

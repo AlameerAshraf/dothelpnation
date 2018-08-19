@@ -8,6 +8,7 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook'
 
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api } from '../providers';
@@ -20,12 +21,6 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 export function provideSettings(storage: Storage) {
-  /**
-   * The Settings provider takes a set of default settings for your app.
-   *
-   * You can add new settings options at any time. Once the settings are saved,
-   * these values will not overwrite the saved values (this can be done manually if desired).
-   */
   return new Settings(storage, {
     option1: true,
     option2: 'Ionitron J. Framework',
@@ -56,6 +51,7 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
+    Facebook,
     Api,
     Items,
     User,

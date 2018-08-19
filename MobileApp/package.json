@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/camera": "4.3.3",
     "@ionic-native/core": "~4.10.0",
+    "@ionic-native/facebook": "^4.12.0",
     "@ionic-native/splash-screen": "~4.10.0",
     "@ionic-native/status-bar": "~4.10.0",
     "@ionic/pro": "2.0.3",
@@ -31,6 +32,7 @@
     "cordova-android": "7.0.0",
     "cordova-ios": "4.5.5",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-facebook4": "^2.3.0",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^2.0.1",
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
@@ -59,6 +61,11 @@
         "MICROPHONE_USAGE_DESCRIPTION": "your microphone usage message here",
         "PHOTOLIBRARY_ADD_USAGE_DESCRIPTION": "your photo library usage message here",
         "PHOTOLIBRARY_USAGE_DESCRIPTION": "your photo library usage message here"
+      },
+      "cordova-plugin-facebook4": {
+        "APP_ID": "2356930160991081",
+        "APP_NAME": "dothelpnation",
+        "ANDROID_SDK_VERSION": "4.+"
       }
     },
     "platforms": [
