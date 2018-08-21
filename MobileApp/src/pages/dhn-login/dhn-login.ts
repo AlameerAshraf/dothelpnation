@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+  import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
@@ -11,7 +11,7 @@ export class DhnLoginPage {
 
   data = {
     forgotPassword : "forgot Password" ,
-    subtitle : "Welcome To Dothelpnation" ,
+    subtitle : "Welcome To dothelpnation" ,
     title : "Login to your account" ,
     labelUsername : "Username" ,
     username : "Username" ,
