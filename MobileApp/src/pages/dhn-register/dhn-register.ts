@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'dhn-register.html',
 })
 export class DhnRegisterPage {
-
+  dir: string = 'rtl';
   data = {
     forgotPassword : "forgot Password" ,
     subtitle : "Welcome To dothelpnation" ,

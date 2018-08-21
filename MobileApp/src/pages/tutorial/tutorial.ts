@@ -17,7 +17,7 @@ export interface Slide {
 export class TutorialPage {
   slides: Slide[];
   showSkip = true;
-  dir: string = 'ltr';
+  dir: string = 'rtl';
 
   constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
     this.dir = platform.dir();
