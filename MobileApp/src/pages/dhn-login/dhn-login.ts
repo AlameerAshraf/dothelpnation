@@ -48,8 +48,8 @@ export class DhnLoginPage {
     console.log(event);
   }
 
-  onRegister(event){
-    console.log(event);
+  onRedierctToRegister(event){
+    this.navCtrl.push('DhnRegisterPage');
   }
 
   onEvent(event){
