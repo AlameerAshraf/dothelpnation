@@ -62,16 +62,24 @@ $colors: (
 // default are overridden.
 
 @import "ionic.theme.default";
-
+@import "animate"; // App Main Sass
 
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionic.ionicons";
+@import "green-themes"; // Ionicons
+// @import "blue-light-themes"; // Ionicons
+// @import "ionic.ionicons";
 
-
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+// // App Fontelo Style
+//--------------------------------------------------
+@import "fontello";
+@import "ionicons"; // Fonts
 // Fonts
 // --------------------------------------------------
 
