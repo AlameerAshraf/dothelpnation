@@ -85,3 +85,11 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+@font-face {
+  font-family: "notosansregular";
+  src: url($font-path+'/noto-sans-regular.ttf');
+}
+
+$font-family-base: "notosansregular";
