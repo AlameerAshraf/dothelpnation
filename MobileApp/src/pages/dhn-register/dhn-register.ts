@@ -80,7 +80,7 @@ export class DhnRegisterPage {
 
     let result_translation = new ValidationSupplier(translate);
     this.validations = result_translation.getValidationMessages();
-    console.log(this.validations);
+
     this.registerForm = this.formBuilder.group({
       username : ['' , Validators.required],
       age: ['' , Validators.required],

@@ -88,6 +88,9 @@
   "LOGIN_PAGE_TITLE":"Login to your account",
   "LOGIN_PAGE_SUBTITLE":"Welcome To dothelpnation",
 
+  "FACEBOOK_REGISTER_BUTTON" : "Login with Facebook" ,
+  "GOOGLE_PLUS_REGISTER_BUTTON" : "Login with Google",
+
 
   "REQUIRED_ERROR" : "this field is required" ,
   "PHONE_LENGTH" : "phone length shuold be 11" ,
