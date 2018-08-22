@@ -87,5 +87,12 @@
   "LOGIN_PAGE_LABEL":"Login",
   "REGISTER_PAGE_TITLE":"Create new account",
   "LOGIN_PAGE_TITLE":"Login to your account",
-  "LOGIN_PAGE_SUBTITLE":"Welcome To dothelpnation"
+  "LOGIN_PAGE_SUBTITLE":"Welcome To dothelpnation" ,
+
+  "REQUIRED_ERROR" : "this field is required" ,
+  "PHONE_LENGTH" : "phone length shuold be 11" ,
+  "EMAIL_FORMAT" : "your email is not in correct format" ,
+  "PASWORD_FORMAT" : "password should contain both upercase and lowercase letters and numbers" ,
+  "PASWORD_LENGTH" : "password must be 5 characters or more" ,
+  "CONFIRMPASWORD_MATCHING" : "Password doesn't match"
 }
