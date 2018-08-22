@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: 'dhn-register.html',
 })
 export class DhnRegisterPage {
-  dir: string = 'rtl';
+  dir: string = 'ltr';
   revDir: string;
   data = {
     forgotPassword : "" ,

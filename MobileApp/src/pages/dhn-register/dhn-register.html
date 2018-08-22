@@ -1,9 +1,7 @@
-<ion-header dir="{{dir}}">
-
-  <ion-navbar>
+<ion-header >
+  <ion-navbar dir="{{dir}}">
     <ion-title>{{ data.backtologin }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -79,11 +77,11 @@
               <ion-input dir="{{dir}}" formControlName="confirmpassword"
               required placeholder="{{data.confirmpassword}}" type="password" [(ngModel)]="confirmpassword"></ion-input>
 
-              <ion-label [style.direction]="revDir"color="error"
+              <ion-label [style.direction]="revDir"  error-field color="error"
               *ngIf="registerForm.controls['passwords'].controls?.confirmpassword.hasError('required')
               && registerForm.controls['passwords'].controls?.confirmpassword.touched">{{ validations.ConfirmPassword.required }}</ion-label>
 
-               <ion-label [style.direction]="revDir" color="error" no-margin
+               <ion-label [style.direction]="revDir"  error-field color="error" no-margin
               *ngIf="registerForm.get(['passwords','password'])?.value != registerForm.get(['passwords','confirmpassword'])?.value && registerForm.get(['passwords','confirmpassword'])?.value != null">
               {{ validations.ConfirmPassword.matching }}</ion-label>
             </ion-item>
