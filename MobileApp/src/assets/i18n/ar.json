@@ -64,5 +64,26 @@
   "CARDS_TITLE": "اجتماعي",
 
   "SEARCH_TITLE": "بحث",
-  "SEARCH_PLACEHOLDER": "ابحث في قائمة العناصر، مثل \"Donald Duck\""
+  "SEARCH_PLACEHOLDER": "ابحث في قائمة العناصر، مثل \"Donald Duck\"",
+
+  "USERNAME_PLACHOLDER" : "dothelpnation_user" ,
+  "PHONE_PLACEHOLDER" : "0020000000" ,
+  "AGE_PLACEHOLDER" : "32" ,
+  "PASSWORD_PLACEHOLDER" : "Password" ,
+  "PASSWORDCONFIRMATION_PLACEHOLDER" : "Confirm password" ,
+  "EMAIL_PLACEHOLDER" : "Email" ,
+
+  "USERNAME_LABEL" : "Username",
+  "PASSWORD_LABEL" : "Password",
+  "AGE_LABEL": "العمر",
+  "EMAIL_LABEL" : "Email",
+  "FORGETPASSWORD_LABEL":"forgot Password",
+  "PHONE_LABEL": "Phone" ,
+  "PASSWORDCONFIRMATION_LABEL":"Confirm Password",
+  "BACK" : "العوده" ,
+  "REGISTER_PAGE_LABEL":"register",
+  "LOGIN_PAGE_LABEL":"Login",
+  "REGISTER_PAGE_TITLE":"Create new account",
+  "LOGIN_PAGE_TITLE":"Login to your account",
+  "LOGIN_PAGE_SUBTITLE":"Welcome To dothelpnation"
 }
