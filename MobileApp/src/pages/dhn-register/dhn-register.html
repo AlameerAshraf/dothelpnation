@@ -23,7 +23,7 @@
             <ion-label stacked>{{data.labelUsername}}</ion-label>
             <ion-input dir="{{dir}}" [formControl]="registerForm.controls['username']"
              required placeholder="{{data.username}}" type="text" [(ngModel)]="username"></ion-input>
-            <ion-label dir="{{dir}}" error-field color="error" no-margin
+            <ion-label [style.direction] = "revDir" error-field color="error" no-margin
             *ngIf="registerForm.controls.username.hasError('required') && registerForm.controls.username.touched">{{ validations.Username.required }}</ion-label>
           </ion-item>
           <!---Input field age-->
@@ -31,7 +31,7 @@
             <ion-label stacked>{{data.lableAge}}</ion-label>
             <ion-input dir="{{dir}}" [formControl]="registerForm.controls['age']"
             required placeholder="{{data.age}}" type="age" [(ngModel)]="age"></ion-input>
-            <ion-label dir="{{dir}}" error-field color="error" no-margin
+            <ion-label [style.direction] = "revDir"  error-field color="error" no-margin
             *ngIf="registerForm.controls.age.hasError('required') && registerForm.controls.age.touched">{{ validations.Age.required }}</ion-label>
           </ion-item>
           <!---Input field phone-->
@@ -39,13 +39,13 @@
             <ion-label stacked>{{data.lablePhone}}</ion-label>
             <ion-input dir="{{dir}}"  [formControl]="registerForm.controls['phone']"
             required placeholder="{{data.phone}}" type="phone" [(ngModel)]="phone"></ion-input>
-            <ion-label dir="{{dir}}" error-field color="error" no-margin
+            <ion-label [style.direction] = "revDir"  error-field color="error" no-margin
             *ngIf="registerForm.controls.phone.hasError('required') && registerForm.controls.phone.touched">{{ validations.Phone.required }}</ion-label>
 
-            <ion-label dir="{{dir}}" error-field color="error" no-margin
+            <ion-label [style.direction] = "revDir"  error-field color="error" no-margin
             *ngIf="registerForm.controls.phone.hasError('maxlength') && registerForm.controls.phone.touched">{{ validations.Phone.length }}</ion-label>
 
-            <ion-label dir="{{dir}}" error-field color="error" no-margin
+            <ion-label [style.direction] = "revDir"  error-field color="error" no-margin
             *ngIf="registerForm.controls.phone.hasError('minlength') && registerForm.controls.phone.touched">{{ validations.Phone.length }}</ion-label>
           </ion-item>
           <!---Input field email-->
@@ -53,10 +53,10 @@
             <ion-label stacked>{{data.lableEmail}}</ion-label>
             <ion-input dir="{{dir}}" [formControl]="registerForm.controls['email']"
             required placeholder="{{data.email}}" type="email" required [(ngModel)]="email"></ion-input>
-            <ion-label dir="{{dir}}" error-field color="error" no-margin
+            <ion-label [style.direction] = "revDir" error-field color="error" no-margin
             *ngIf="registerForm.controls.email.hasError('required') && registerForm.controls.email.touched">{{ validations.Eamil.required }}</ion-label>
 
-            <ion-label dir="{{dir}}" error-field color="error" no-margin
+            <ion-label [style.direction] = "revDir"  error-field color="error" no-margin
             *ngIf="registerForm.controls.email.hasError('pattern') && registerForm.controls.email.touched">{{ validations.Eamil.format }}</ion-label>
           </ion-item>
           <!---Input field password-->
@@ -65,11 +65,11 @@
               <ion-label stacked>{{data.lablePassword}}</ion-label>
               <ion-input formControlName="password"
               required dir="{{dir}}" placeholder="{{data.password}}" type="password" [(ngModel)]="password"></ion-input>
-              <ion-label dir="{{dir}}" error-field color="error" no-margin
+              <ion-label [style.direction] = "revDir"  error-field color="error" no-margin
               *ngIf="registerForm.controls['passwords'].controls?.password.hasError('required')
               && registerForm.controls['passwords'].controls?.password.touched">{{ validations.Password.required }}</ion-label>
 
-              <ion-label dir="{{dir}}" error-field color="error" no-margin
+              <ion-label [style.direction] = "revDir"  error-field color="error" no-margin
               *ngIf="registerForm.controls['passwords'].controls?.password.hasError('pattern')
               && registerForm.controls['passwords'].controls?.password.touched">{{ validations.Password.format }}</ion-label>
             </ion-item>
@@ -79,11 +79,11 @@
               <ion-input dir="{{dir}}" formControlName="confirmpassword"
               required placeholder="{{data.confirmpassword}}" type="password" [(ngModel)]="confirmpassword"></ion-input>
 
-              <ion-label error-field style ="direction: ltr;" color="error"
+              <ion-label [style.direction]="revDir"color="error"
               *ngIf="registerForm.controls['passwords'].controls?.confirmpassword.hasError('required')
               && registerForm.controls['passwords'].controls?.confirmpassword.touched">{{ validations.ConfirmPassword.required }}</ion-label>
 
-               <ion-label error-field color="error" no-margin
+               <ion-label [style.direction]="revDir" color="error" no-margin
               *ngIf="registerForm.get(['passwords','password'])?.value != registerForm.get(['passwords','confirmpassword'])?.value && registerForm.get(['passwords','confirmpassword'])?.value != null">
               {{ validations.ConfirmPassword.matching }}</ion-label>
             </ion-item>

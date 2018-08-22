@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class DhnRegisterPage {
   dir: string = 'rtl';
+  revDir: string;
   data = {
     forgotPassword : "" ,
     subtitle : "" ,
@@ -51,6 +52,11 @@ export class DhnRegisterPage {
     public navParams: NavParams,
     private translate: TranslateService,
     private formBuilder: FormBuilder) {
+      if(this.dir == "rtl"){
+        this.revDir = "ltr"
+      } else if (this.dir == "ltr"){
+        this.revDir = "rtl";
+      }
     this.translate.get([
       'BACK', 'REGISTER_PAGE_TITLE', 'USERNAME_LABEL', 'REGISTER_BUTTON',
       'PASSWORD_LABEL', 'AGE_LABEL', 'EMAIL_LABEL',
