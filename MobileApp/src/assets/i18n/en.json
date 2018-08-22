@@ -64,5 +64,19 @@
   "CARDS_TITLE": "Social",
 
   "SEARCH_TITLE": "Search",
-  "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\""
+  "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\"",
+
+  "USERNAME_LABEL" : "Username",
+  "PASSWORD_LABEL" : "Password",
+  "AGE_LABEL": "العمر",
+  "EMAIL_LAB" : "Email",
+  "FORGETPASSWORD_LABEL":"forgot Password",
+  "PHONE_LABEL": "Phone" ,
+  "PASSWORDCONFIRMATION_LABEL":"Confirm Password",
+  "BACK" : "العوده" ,
+  "REGISTER_PAGE_LABEL":"register",
+  "LOGIN_PAGE_LABEL":"Login",
+  "REGISTER_PAGE_TITLE":"Create new account",
+  "LOGIN_PAGE_TITLE":"Login to your account",
+  "LOGIN_PAGE_SUBTITLE":"Welcome To dothelpnation"
 }
