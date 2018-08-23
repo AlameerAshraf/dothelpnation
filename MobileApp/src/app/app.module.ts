@@ -1,3 +1,5 @@
+import { NativeStorage } from '@ionic-native/native-storage';
+import { FakeService } from './../CoreAssestiveModules/Services/FakeService';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -51,6 +53,8 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
+    NativeStorage,
+    FakeService,
     Facebook,
     Api,
     Items,

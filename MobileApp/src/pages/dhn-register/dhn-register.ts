@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { FakeService } from '../../CoreAssestiveModules/Services/FakeService';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -51,7 +52,9 @@ export class DhnRegisterPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private translate: TranslateService,
-    private formBuilder: FormBuilder) {
+    private nativeStorage: NativeStorage,
+    private formBuilder: FormBuilder ,
+    private FS: FakeService) {
       if(this.dir == "rtl"){
         this.revDir = "ltr"
       } else if (this.dir == "ltr"){
@@ -109,7 +112,17 @@ export class DhnRegisterPage {
     console.log('ionViewDidLoad DhnRegisterPage');
   }
   onRegister(event){
-    console.log(event);
+    console.log(this.username , this.password , this.age , this.phone , this.confirmpassword);
+    var NewUser = {
+      Username : this.username ,
+      Password : this.password ,
+      Age : this.age,
+      Phone : this.phone ,
+      ConfirmPassword : this.confirmpassword ,
+      access_token : 5
+    };
+    this.FS.AddUser(NewUser);
+    this.nativeStorage.setItem('access_token' , NewUser.access_token);
   }
 
 
