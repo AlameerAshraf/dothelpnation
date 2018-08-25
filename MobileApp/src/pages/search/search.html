@@ -8,6 +8,14 @@
 
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="crescent"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
   <ion-list>
     <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">

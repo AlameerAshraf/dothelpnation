@@ -97,6 +97,11 @@
   "EMAIL_FORMAT" : "your email is not in correct format" ,
   "PASWORD_FORMAT" : "password should contain both upercase and lowercase letters and numbers" ,
   "PASWORD_LENGTH" : "password must be 5 characters or more" ,
-  "CONFIRMPASWORD_MATCHING" : "Password doesn't match"
+  "CONFIRMPASWORD_MATCHING" : "Password doesn't match" ,
+
+  "BLOGS_TAB" : "Blogs" ,
+  "MESSAGES_TAB" : "Messages" ,
+  "PROFILE_TAB" : "Profile" ,
+  "SETTINGS_TAB" : "Settings"
 
 }

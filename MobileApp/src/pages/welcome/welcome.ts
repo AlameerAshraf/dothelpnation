@@ -36,7 +36,7 @@ export class WelcomePage {
 
   getUserDestailsFBGraphCall(userId){
     this.fb.api("/"+userId+"/?fields=id,email,name,picture,birthday"
-     ,['public_profile', 'user_friends', 'email'])
+     ,['public_profile', 'user_birthday', 'email'])
     .then(res => {
       // console.log("https://graph.facebook.com/" + userId + "/picture?type=large")
       console.log(res);
