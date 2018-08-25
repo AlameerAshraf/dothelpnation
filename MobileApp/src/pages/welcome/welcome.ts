@@ -22,11 +22,27 @@ export class WelcomePage {
   FBlogin(){
     console.log("Hey")
     this.fb.login(['public_profile', 'user_friends', 'email'])
-    .then((res:FacebookLoginResponse) => {console.log(res)})
+    .then((res:FacebookLoginResponse) => {
+      if(res.status == "connected"){
+        this.getUserDestailsFBGraphCall(res.authResponse.userID);
+      }
+    })
     .catch(e => console.log(e));
   }
 
   Glogin(){
 
+  }
+
+  getUserDestailsFBGraphCall(userId){
+    this.fb.api("/"+userId+"/?fields=id,email,name,picture,birthday"
+     ,['public_profile', 'user_friends', 'email'])
+    .then(res => {
+      // console.log("https://graph.facebook.com/" + userId + "/picture?type=large")
+      console.log(res);
+    })
+    .catch(e => {
+      console.log(e);
+    });
   }
 }

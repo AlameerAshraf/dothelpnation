@@ -88,6 +88,7 @@
         <variable name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" value="your photo library usage message here" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="your photo library usage message here" />
     </plugin>
+    <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-facebook4" spec="^2.3.0">
         <variable name="APP_ID" value="2356930160991081" />
         <variable name="APP_NAME" value="dothelpnation" />
@@ -95,5 +96,4 @@
     </plugin>
     <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.5" />
-    <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
 </widget>
