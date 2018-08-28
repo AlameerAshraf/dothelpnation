@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using BusinessLayer.Repositories;
 using DataAccessLayer.Entities;
+using BusinessLayer.Repositories;
 
 namespace WebApi.Controllers
 {

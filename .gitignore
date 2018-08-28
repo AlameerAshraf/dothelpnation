@@ -12,3 +12,12 @@ ServerApp/dothelpnationServerApp/DataAccessLayer/bin/
 ServerApp/dothelpnationServerApp/WebApi/bin/
 ServerApp/dothelpnationServerApp/WebApi/obj/
 ServerApp/dothelpnationServerApp/BusinessLayer/bin/
+BackendApp/dothelpnationBackend/.vs/
+BackendApp/dothelpnationBackend/BusinessLayer/BusinessLayer.csproj.user
+BackendApp/dothelpnationBackend/BusinessLayer/bin/
+BackendApp/dothelpnationBackend/BusinessLayer/obj/
+BackendApp/dothelpnationBackend/DataAccessLayer/bin/
+BackendApp/dothelpnationBackend/DataAccessLayer/obj/
+BackendApp/dothelpnationBackend/dothelpnationBackend/bin/
+BackendApp/dothelpnationBackend/packages/
+BackendApp/dothelpnationBackend/dothelpnationBackend/obj/

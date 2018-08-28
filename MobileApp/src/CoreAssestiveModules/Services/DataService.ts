@@ -35,9 +35,19 @@ export class DataService implements IDataService {
       });
   }
 
-  Post(url: string, entity?: any, params?: any) {
+  Post(url: string, entity?: any, params?: any , options? : any[]) {
+    let _options: RequestOptions;
+
+    if(options != null){
+      let headers = new Headers();
+      options.forEach(element => {
+        headers.append(element.key , element.value)
+      });
+      _options = new RequestOptions({headers: headers});
+    }
+
     var requestUrl = this.GenerateUrl(url, params);
-    return this.http.post(requestUrl, entity, this.options).pipe(map((res) => {
+    return this.http.post(requestUrl, entity, _options).pipe(map((res) => {
       try {
         return res.json();
       } catch (error) {

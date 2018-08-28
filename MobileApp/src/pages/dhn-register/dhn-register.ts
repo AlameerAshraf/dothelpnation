@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FakeService } from '../../CoreAssestiveModules/Services/FakeService';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 
 @IonicPage()
 @Component({
@@ -54,7 +55,8 @@ export class DhnRegisterPage {
     private translate: TranslateService,
     private nativeStorage: NativeStorage,
     private formBuilder: FormBuilder ,
-    private FS: FakeService) {
+    private FS: FakeService ,
+    private DataService: DataService) {
       if(this.dir == "rtl"){
         this.revDir = "ltr"
       } else if (this.dir == "ltr"){
@@ -121,7 +123,7 @@ export class DhnRegisterPage {
       ConfirmPassword : this.confirmpassword ,
       access_token : 5
     };
-    this.FS.AddUser(NewUser);
+    // this.FS.AddUser(NewUser);
     this.nativeStorage.setItem('access_token' , NewUser.access_token);
   }
 
