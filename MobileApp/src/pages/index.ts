@@ -9,7 +9,7 @@ export const MainPage = 'TabsPage';
 
 export const BlogsRoot: any = "SearchPage";
 export const MessagesRoot: any = "SettingsPage";
-export const SettingsRoot: any = "ListMasterPage";
+export const SettingsRoot: any = "DhnSettingsPage";
 export const ProfileRoot: any = "SettingsPage";
 
 export const Tab1Root = 'ListMasterPage';
