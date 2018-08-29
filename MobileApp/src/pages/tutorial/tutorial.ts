@@ -69,10 +69,6 @@ export class TutorialPage {
     this.showSkip = !slider.isEnd();
   }
 
-
-
-
-
   // the root left menu should be disabled on the tutorial page
   ionViewDidEnter() {
     this.menu.enable(false);
