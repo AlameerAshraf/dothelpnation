@@ -151,7 +151,6 @@ export class DhnLoginPage {
         "email"
       ])
       .then(res => {
-        // console.log("https://graph.facebook.com/" + userId + "/picture?type=large")
         let newUserData = {
           name : res.name ,
           mobile : "" ,
@@ -162,6 +161,7 @@ export class DhnLoginPage {
           created_at : new Date(),
           updated_at : null
         }
+        
         this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser` , newUserData).subscribe((x) => {
           if(x){
             this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`,null , null , {

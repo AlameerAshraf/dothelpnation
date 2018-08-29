@@ -16,6 +16,14 @@ namespace dothelpnationBackend.Controllers
         }
 
 
+        [HttpPost]
+        [Route("api/IsUserExisted")]
+        public bool ChekUserExistance([FromUri]string Email)
+        {
+            var User = _userRepo.Get().Where(x => x.email == Email).FirstOrDefault();
+            return User != null ? true : false;
+        }
+
         [HttpGet]
         [Route("api/GetUser/{id}")]
         public user GetUserData(int id)
@@ -34,8 +42,16 @@ namespace dothelpnationBackend.Controllers
         [Route("api/CraeteUser")]
         public bool AddNewUser([FromBody] user userData)
         {
-            var InsertedUser = _userRepo.Insert(userData);
-            return InsertedUser != null ? true : false;
+            var IsExisted = _userRepo.Get().Where(x => x.email == userData.email).FirstOrDefault();
+            if (IsExisted != null)
+            {
+                return true;
+            }
+            else
+            {
+                var InsertedUser = _userRepo.Insert(userData);
+                return InsertedUser != null ? true : false;
+            }
         }
 
         [HttpGet]
