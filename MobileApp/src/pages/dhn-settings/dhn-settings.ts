@@ -44,7 +44,7 @@ export class DhnSettingsPage {
 
   Logout(){
     this.Storage.remove('access_token').then(() => {
-      this.navCtrl.setRoot('DhnLoginPage');
+      this.navCtrl.popToRoot();
     })
   }
 

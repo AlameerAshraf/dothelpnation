@@ -52,10 +52,16 @@ export class MyApp implements OnInit {
 
   ngOnInit(): void {
     this.Storage.get('IsAppStarted').then((IsAppStarted) => {
-      if(IsAppStarted){
+      if (IsAppStarted) {
         this.Storage.get('access_token').then((access_token) => {
-          if(new Date(new Date().getTime() + access_token.expires_in*1000) > new Date()){
-            this.rootPage = "DhnHomeTabsPage";
+          if (access_token != null) {
+            if (new Date(new Date().getTime() + access_token.expires_in * 1000) > new Date()) {
+              this.rootPage = "DhnHomeTabsPage";
+            } else {
+              this.rootPage = "DhnLoginPage";
+            }
+          } else {
+            this.rootPage = "DhnLoginPage";
           }
         })
       } else {
