@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import {  Storage } from '@ionic/storage';
-
-
 @IonicPage()
 @Component({
   selector: 'page-dhn-settings',
@@ -11,6 +9,7 @@ import {  Storage } from '@ionic/storage';
 export class DhnSettingsPage {
 
   constructor(public navCtrl: NavController,
+    private events: Events,
     public navParams: NavParams ,
     private Storage: Storage,
     public alertCtrl: AlertController) {
@@ -44,7 +43,7 @@ export class DhnSettingsPage {
 
   Logout(){
     this.Storage.remove('access_token').then(() => {
-      this.navCtrl.popToRoot();
+      this.events.publish('logout:clicked');
     })
   }
 

@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { BlogsRoot , SettingsRoot , ProfileRoot , MessagesRoot } from './../index';
-
+import { Events } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-dhn-home-tabs',
   templateUrl: 'dhn-home-tabs.html',
 })
-export class DhnHomeTabsPage {
+export class DhnHomeTabsPage implements OnDestroy  {
 
 
   _BlogsRoot: any = BlogsRoot;
@@ -29,6 +29,7 @@ export class DhnHomeTabsPage {
 
   constructor(public navCtrl: NavController,
     public menu: MenuController,
+    private events: Events,
     public navParams: NavParams ,
     private translate: TranslateService) {
       this.translate.get([
@@ -39,10 +40,23 @@ export class DhnHomeTabsPage {
         this.ProfileTablabel = values.PROFILE_TAB;
         this.SettingsTablabel = values.SETTINGS_TAB;
       })
+
+      events.subscribe('logout:clicked', () => {
+        this.navCtrl.setRoot('DhnLoginPage');
+      });
   }
+
+  ngOnDestroy(): void {
+    this.events.unsubscribe('logout:clicked');
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DhnHomeTabsPage');
+  }
+
+  onTabGotClosed(df){
+    console.log("Assssssss*****")
   }
 
 
