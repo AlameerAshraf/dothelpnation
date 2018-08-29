@@ -117,7 +117,6 @@ export class DhnRegisterPage {
     console.log('ionViewDidLoad DhnRegisterPage');
   }
   onRegister(event){
-    console.log(this.username , this.password , this.age , this.phone , this.confirmpassword);
     var newUserData = {
       name : this.username ,
       mobile : this.phone ,
@@ -135,7 +134,7 @@ export class DhnRegisterPage {
           "client_id" : "dothelpnation",
           "client_secret" : "**dothelpmobile",
           "password" : this.password ,
-          "username" : this.username
+          "username" : this.email
         }).subscribe((accessToken)=>{
           var access_token_auth = {
             "access_token" : accessToken.access_token ,

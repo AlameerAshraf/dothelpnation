@@ -55,9 +55,6 @@ export class DhnHomeTabsPage implements OnDestroy  {
     console.log('ionViewDidLoad DhnHomeTabsPage');
   }
 
-  onTabGotClosed(df){
-    console.log("Assssssss*****")
-  }
 
 
 }

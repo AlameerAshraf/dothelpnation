@@ -44,8 +44,8 @@ namespace dothelpnationBackend.Authorization
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim("sub", context.UserName));
 
-
-            access_request = _context.users.Where(x => x.name == context.UserName && x.password == context.Password).FirstOrDefault();
+            // username mapped for Email
+            access_request = _context.users.Where(x => x.email == context.UserName && x.password == context.Password).FirstOrDefault();
 
             if (access_request != null)
             {
