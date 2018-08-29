@@ -13,7 +13,7 @@ namespace dothelpnationBackend.Authorization
 {
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        dynamic BasicApplicationClient = new { Id = "abcAppId" , Secret = "abcApp" , RedirectUrl = (object)null };
+        dynamic BasicApplicationClient = new { Id = "dothelpnation" , Secret = "**dothelpmobile" , RedirectUrl = (object)null };
         dothelpnationMySqlContext _context = new dothelpnationMySqlContext();
         user access_request;
 

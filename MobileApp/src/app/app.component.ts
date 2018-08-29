@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,6 +6,8 @@ import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { Storage } from '@ionic/storage';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -26,8 +28,9 @@ import { Settings } from '../providers';
   </ion-menu>
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
-export class MyApp {
-  rootPage = FirstRunPage;
+export class MyApp implements OnInit {
+
+  rootPage = "";
 
   @ViewChild(Nav) nav: Nav;
 
@@ -47,7 +50,29 @@ export class MyApp {
     { title: 'TabsHome', component: 'DhnHomeTabsPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  ngOnInit(): void {
+    this.Storage.get('IsAppStarted').then((IsAppStarted) => {
+      if(IsAppStarted){
+        this.Storage.get('access_token').then((access_token) => {
+          if(new Date(new Date().getTime() + access_token.expires_in*1000) > new Date()){
+            this.rootPage = "DhnHomeTabsPage";
+          }
+        })
+      } else {
+        this.rootPage = "TutorialPage";
+      }
+    })
+  }
+
+
+  constructor(private translate: TranslateService,
+    private platform: Platform,
+    private Storage: Storage,
+    settings: Settings,
+    private config: Config,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen ,
+    private NativeStorage: NativeStorage) {
     platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

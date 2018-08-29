@@ -5,7 +5,10 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { map } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
+
 // import { URLs } from '../URLs';
 // import { CacheHelper } from '../CacheHelper';
 
@@ -35,15 +38,20 @@ export class DataService implements IDataService {
       });
   }
 
-  Post(url: string, entity?: any, params?: any , options? : any[]) {
+  Post(url: string, entity?: any, params?: any , options? : any) {
     let _options: RequestOptions;
 
-    if(options != null){
-      let headers = new Headers();
-      options.forEach(element => {
-        headers.append(element.key , element.value)
-      });
-      _options = new RequestOptions({headers: headers});
+    if (options != null) {
+      let body = new URLSearchParams();
+      for (var key in options) {
+        if (options.hasOwnProperty(key)) {
+          body.set(key, options[key]);
+        }
+      }
+      let _options = {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      };
+      entity = body.toString();
     }
 
     var requestUrl = this.GenerateUrl(url, params);
@@ -51,6 +59,7 @@ export class DataService implements IDataService {
       try {
         return res.json();
       } catch (error) {
+
         return this.ErrorHandler(error);
       }
     }))

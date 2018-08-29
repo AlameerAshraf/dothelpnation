@@ -40,8 +40,5 @@ export class DhnHomeTabsPage {
     console.log('ionViewDidLoad DhnHomeTabsPage');
   }
 
-  dos(){
-    this.navCtrl.setRoot("WelcomePage");
-  }
 
 }

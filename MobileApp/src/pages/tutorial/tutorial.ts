@@ -1,3 +1,5 @@
+import { Storage } from '@ionic/storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { Component } from '@angular/core';
 import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
 
@@ -19,7 +21,12 @@ export class TutorialPage {
   showSkip = true;
   dir: string = 'rtl';
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
+  constructor(public navCtrl: NavController,
+    public menu: MenuController,
+    translate: TranslateService,
+    public platform: Platform ,
+    private Storage: Storage,
+    private NativeStorage: NativeStorage) {
     this.dir = platform.dir();
     translate.get(["TUTORIAL_SLIDE1_TITLE",
       "TUTORIAL_SLIDE1_DESCRIPTION",
@@ -50,7 +57,8 @@ export class TutorialPage {
   }
 
   startApp() {
-    this.navCtrl.setRoot('WelcomePage', {}, {
+    this.Storage.set('IsAppStarted' , true);
+    this.navCtrl.setRoot('DhnLoginPage', {}, {
       animate: true,
       direction: 'forward'
     });

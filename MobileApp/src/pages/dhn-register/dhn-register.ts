@@ -1,3 +1,4 @@
+import { Url } from './../../CoreAssestiveModules/Url';
 import { PasswordMatchingValidation } from './../../CoreAssestiveModules/forms/PasswordMatchingValidation';
 import { ValidationSupplier } from './../../CoreAssestiveModules/forms/ValidationSupplier';
 import { Component } from '@angular/core';
@@ -7,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FakeService } from '../../CoreAssestiveModules/Services/FakeService';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -51,6 +53,7 @@ export class DhnRegisterPage {
 
 
   constructor(public navCtrl: NavController,
+    private Storage: Storage,
     public navParams: NavParams,
     private translate: TranslateService,
     private nativeStorage: NativeStorage,
@@ -115,16 +118,36 @@ export class DhnRegisterPage {
   }
   onRegister(event){
     console.log(this.username , this.password , this.age , this.phone , this.confirmpassword);
-    var NewUser = {
-      Username : this.username ,
-      Password : this.password ,
-      Age : this.age,
-      Phone : this.phone ,
-      ConfirmPassword : this.confirmpassword ,
-      access_token : 5
+    var newUserData = {
+      name : this.username ,
+      mobile : this.phone ,
+      age : this.age,
+      email : this.email ,
+      password : this.password,
+      created_at : new Date(),
+      updated_at : null
     };
-    // this.FS.AddUser(NewUser);
-    this.nativeStorage.setItem('access_token' , NewUser.access_token);
+
+    this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser` , newUserData).subscribe((x) => {
+      if(x){
+        this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`,null , null , {
+          "grant_type" : "password",
+          "client_id" : "dothelpnation",
+          "client_secret" : "**dothelpmobile",
+          "password" : this.password ,
+          "username" : this.username
+        }).subscribe((accessToken)=>{
+          var access_token_auth = {
+            "access_token" : accessToken.access_token ,
+            "expires_in" : accessToken.expires_in,
+            "token_type" : accessToken.token_type
+          };
+
+          this.Storage.set('access_token' , access_token_auth);
+          this.navCtrl.setRoot('DhnHomeTabsPage' , newUserData);
+        })
+      }
+    });
   }
 
 

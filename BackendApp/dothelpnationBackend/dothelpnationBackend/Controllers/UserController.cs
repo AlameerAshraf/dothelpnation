@@ -16,7 +16,7 @@ namespace dothelpnationBackend.Controllers
 
 
         [HttpPost]
-        [Route("api/InsertUser")]
+        [Route("api/CraeteUser")]
         public bool AddNewUser([FromBody] user userData)
         {
             var InsertedUser = _userRepo.Insert(userData);
