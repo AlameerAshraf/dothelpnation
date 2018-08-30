@@ -18,6 +18,7 @@ import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
 import { DataService } from '../CoreAssestiveModules/Services/DataService';
 import { HttpModule } from '@angular/http';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -57,6 +58,7 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
+    GooglePlus,
     DataService,
     LoadingService,
     NativeStorage,

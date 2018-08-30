@@ -23,6 +23,7 @@
     "@ionic-native/camera": "4.3.3",
     "@ionic-native/core": "~4.10.0",
     "@ionic-native/facebook": "^4.12.0",
+    "@ionic-native/google-plus": "^4.12.0",
     "@ionic-native/native-storage": "^4.12.0",
     "@ionic-native/splash-screen": "~4.10.0",
     "@ionic-native/status-bar": "~4.10.0",
@@ -36,6 +37,7 @@
     "cordova-ios": "4.5.5",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-facebook4": "^2.3.0",
+    "cordova-plugin-googleplus": "^5.3.0",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^2.0.1",
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
@@ -71,7 +73,11 @@
         "APP_NAME": "dothelpnation",
         "ANDROID_SDK_VERSION": "4.+"
       },
-      "cordova-plugin-nativestorage": {}
+      "cordova-plugin-nativestorage": {},
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.323317174806-a6f6gnq4gvshjebc2cugok0cjpurb55t",
+        "WEB_APPLICATION_CLIENT_ID": "323317174806-39tuepkh7mrkcgs9573blcjq6ole2js8.apps.googleusercontent.com"
+      }
     },
     "platforms": [
       "android",
