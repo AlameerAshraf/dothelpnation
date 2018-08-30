@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+      <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div text-center>
+    <img class="circle-pic" src="{{CurrentUserProfileData?.photo}}" />
+
+  </div>
+  <ion-item>
+    <ion-label stacked>Username</ion-label>
+    <ion-input disabled="true" value="{{CurrentUserProfileData?.name}}"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Email</ion-label>
+    <ion-input disabled="true" value="{{CurrentUserProfileData?.email}}"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Age</ion-label>
+    <ion-input disabled="true" value="22"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Password</ion-label>
+    <ion-input type="password" disabled="true" value="{{CurrentUserProfileData?.password}}"></ion-input>
+  </ion-item>
+
+<ion-item>
+  <ion-label stacked>Password</ion-label>
+  <ion-input disabled="true" value="{{CurrentUserProfileData?.mobile}}"></ion-input>
+</ion-item>
+
+<br>
+  <button ion-button block color="primary" outline (click)="showConfirm()">Show My Ads</button>
+
+
+</ion-content>

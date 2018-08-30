@@ -44,6 +44,9 @@ export class DhnHomeTabsPage implements OnDestroy  {
       events.subscribe('logout:clicked', () => {
         this.navCtrl.setRoot('DhnLoginPage');
       });
+
+      var UserData = navParams.get('data');
+      events.publish('user:logined' , UserData);
   }
 
   ngOnDestroy(): void {

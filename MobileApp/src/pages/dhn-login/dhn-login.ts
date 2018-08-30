@@ -110,14 +110,15 @@ export class DhnLoginPage {
       this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetLoginedUser`, {
         Email: this.email
       }).subscribe(UserData => {
-        console.log(UserData);
+
         var access_token_auth = {
           access_token: accessToken.access_token,
           expires_in: accessToken.expires_in,
           token_type: accessToken.token_type
         };
         this.storage.set("access_token", access_token_auth);
-        this.navCtrl.setRoot("DhnHomeTabsPage", UserData);
+        this.storage.set('Profile_Data' , UserData);
+        this.navCtrl.setRoot("DhnHomeTabsPage");
       });
     });
   }
@@ -137,32 +138,33 @@ export class DhnLoginPage {
     this.googlePlus.login({})
       .then((res) => {
         let newUserData = {
-          name : res.displayName ,
-          mobile : "" ,
-          age : "",
-          email : res.email ,
-          password : "***",
-          photo: res.imageUrl , 
-          created_at : new Date(),
-          updated_at : null
+          name: res.displayName,
+          mobile: "",
+          age: "",
+          email: res.email,
+          password: "***",
+          photo: res.imageUrl,
+          created_at: new Date(),
+          updated_at: null
         }
         //TODO: REFACTOR AND ADD IT TO INDEPENDANT FUNCTION !!
-        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser` , newUserData).subscribe((x) => {
-          if(x){
-            this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`,null , null , {
-              "grant_type" : "password",
-              "client_id" : "dothelpnation",
-              "client_secret" : "**dothelpmobile",
-              "password" : "***" ,
-              "username" : res.email
-            }).subscribe((accessToken)=>{
+        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, newUserData).subscribe((x) => {
+          if (x) {
+            this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
+              "grant_type": "password",
+              "client_id": "dothelpnation",
+              "client_secret": "**dothelpmobile",
+              "password": "***",
+              "username": res.email
+            }).subscribe((accessToken) => {
               var access_token_auth = {
-                "access_token" : accessToken.access_token ,
-                "expires_in" : accessToken.expires_in,
-                "token_type" : accessToken.token_type
-              };   
-              this.storage.set('access_token' , access_token_auth);
-              this.navCtrl.setRoot('DhnHomeTabsPage' , newUserData);
+                "access_token": accessToken.access_token,
+                "expires_in": accessToken.expires_in,
+                "token_type": accessToken.token_type
+              };
+              this.storage.set('access_token', access_token_auth);
+              this.storage.set('Profile_Data' , newUserData);
+              this.navCtrl.setRoot('DhnHomeTabsPage',{ data : newUserData} );
             })
           }
         });
@@ -189,33 +191,34 @@ export class DhnLoginPage {
       ])
       .then(res => {
         let newUserData = {
-          name : res.name ,
-          mobile : "" ,
-          age : "",
-          email : res.email ,
-          password : "***",
-          photo: "https://graph.facebook.com/" + userId + "/picture?type=large" , 
-          created_at : new Date(),
-          updated_at : null
+          name: res.name,
+          mobile: "",
+          age: "",
+          email: res.email,
+          password: "***",
+          photo: "https://graph.facebook.com/" + userId + "/picture?type=large",
+          created_at: new Date(),
+          updated_at: null
         }
-        
-        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser` , newUserData).subscribe((x) => {
-          if(x){
-            this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`,null , null , {
-              "grant_type" : "password",
-              "client_id" : "dothelpnation",
-              "client_secret" : "**dothelpmobile",
-              "password" : "***" ,
-              "username" : res.email
-            }).subscribe((accessToken)=>{
+
+        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, newUserData).subscribe((x) => {
+          if (x) {
+            this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
+              "grant_type": "password",
+              "client_id": "dothelpnation",
+              "client_secret": "**dothelpmobile",
+              "password": "***",
+              "username": res.email
+            }).subscribe((accessToken) => {
               var access_token_auth = {
-                "access_token" : accessToken.access_token ,
-                "expires_in" : accessToken.expires_in,
-                "token_type" : accessToken.token_type
+                "access_token": accessToken.access_token,
+                "expires_in": accessToken.expires_in,
+                "token_type": accessToken.token_type
               };
-    
-              this.storage.set('access_token' , access_token_auth);
-              this.navCtrl.setRoot('DhnHomeTabsPage' , newUserData);
+
+              this.storage.set('access_token', access_token_auth);
+              this.storage.set('Profile_Data' , newUserData);
+              this.navCtrl.setRoot('DhnHomeTabsPage');
             })
           }
         });
