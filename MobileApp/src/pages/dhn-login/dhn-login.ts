@@ -146,6 +146,7 @@ export class DhnLoginPage {
           created_at : new Date(),
           updated_at : null
         }
+        //TODO: REFACTOR AND ADD IT TO INDEPENDANT FUNCTION !!
         this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser` , newUserData).subscribe((x) => {
           if(x){
             this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`,null , null , {
