@@ -36,10 +36,20 @@
     </ion-row>
 
 
-      <ion-content class="spinner-view">
-        <img [src]="'assets/svg/tail-spin.svg'" />
-      </ion-content>
-
 
   </ion-grid>
+
+
+  <ion-content padding class="spinnerCenter" *ngIf="data == null">
+    <ion-spinner name="ios"></ion-spinner>
+  </ion-content>
+
+
+  
 </ion-content>
+
+
+
+<!-- <ion-content class="spinner-view">
+  <img [src]="'assets/svg/tail-spin.svg'" />
+</ion-content> -->

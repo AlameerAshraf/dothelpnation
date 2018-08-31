@@ -19,7 +19,11 @@ namespace dothelpnationBackend.Controllers
         }
 
 
-        //[HttpGet]
-        //[Route("")]
+        [HttpGet]
+        [Route("api/GetBlogs")]
+        public IEnumerable<blog> GetAllBlogs()
+        {
+            return _blogRepo.Get();
+        }
     }
 }
