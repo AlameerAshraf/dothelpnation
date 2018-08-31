@@ -12,8 +12,8 @@ export const MessagesRoot: any = "SettingsPage";
 export const SettingsRoot: any = "DhnSettingsPage";
 export const ProfileRoot: any = "DhnProfilePage";
 
-export const Tab1Root = '';
-export const Tab2Root = '';
-export const Tab3Root = '';
-export const Tab4Root = '';
+export const Tab1Root = "DhnBlogsPage"
+export const Tab2Root = "DhnBlogsPage"
+export const Tab3Root = "DhnBlogsPage"
+export const Tab4Root = "DhnBlogsPage"
 

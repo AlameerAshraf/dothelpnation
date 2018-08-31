@@ -1,13 +1,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Advertisements</ion-title>
-  </ion-navbar>
+    <ion-title>Advertisement</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addAdvertisement()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
 
+    <ion-buttons end>
+      <button ion-button icon-only (click)="filter()">
+        <ion-icon name="ios-funnel-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 
 <ion-content>
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="sd"></ion-searchbar>
   <ion-grid no-padding>
     <ion-row *ngIf="Blogs != null">
       <ion-col col-12 col-lg-4 *ngFor="let advertisement of Blogs;let i = index">
@@ -15,7 +26,7 @@
           <!--Card Image-->
           <div card-image>
             <img [src]="advertisement.image" />
-            <ion-badge ion-fixed item-end class="badge-dark">{{advertisement.button}}</ion-badge>
+            <ion-badge ion-fixed item-end class="badge-dark">about {{advertisement.date | timeAgo}}</ion-badge>
             <button ion-fixed ion-button button-action-shit (click)="onEvent('onShare', '', $event)">
               <ion-icon name="{{advertisement.shareIcon}}"></ion-icon>
             </button>
@@ -40,7 +51,7 @@
   </ion-grid>
 
 
-  <ion-content padding class="spinnerCenter" *ngIf="data == null">
+  <ion-content padding class="spinnerCenter" *ngIf="Blogs == null">
     <ion-spinner name="ios"></ion-spinner>
   </ion-content>
 

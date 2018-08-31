@@ -13,28 +13,30 @@ page-dhn-blogs {
       background: theme-colors('mainColors', 'accent') !important;
     }
   }
+
   .spinnerCenter {
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     height: 100%;
-}
+  }
 
-ion-spinner * {
-  stroke: #ff0000;
-  fill: #8b0000;
-  position: fixed;
-  z-index: 999;
-  height: 5em;
-  width: em;
-  overflow: show;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+  ion-spinner * {
+    stroke: #ff0000;
+    fill: #8b0000;
+    position: fixed;
+    z-index: 999;
+    height: 5em;
+    width: em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
   ion-card {
     box-shadow: none !important;
     border-radius: $border-radius !important;

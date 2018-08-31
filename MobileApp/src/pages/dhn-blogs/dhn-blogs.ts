@@ -1,25 +1,21 @@
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { Storage } from '@ionic/storage';
 
-
-
+ 
 @IonicPage()
 @Component({
   selector: 'page-dhn-blogs',
   templateUrl: 'dhn-blogs.html',
 })
-export class DhnBlogsPage implements AfterViewInit {
-  ngAfterViewInit(): void {
-    console.error ("As")
-  }
+export class DhnBlogsPage {
 
 
 
-  data = null;
+  Blogs = null;
   access_token: string;
 
   constructor(public navCtrl: NavController, 
@@ -27,34 +23,57 @@ export class DhnBlogsPage implements AfterViewInit {
     public navParams: NavParams,
     private storage: Storage,
     private LoadingService: LoadingService) {
+      
       this.storage.get('access_token').then((SECURITY_DATA) => {
         this.access_token = SECURITY_DATA.access_token;
       })
-  
-      let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null , "S40uEvGMFnWAsP40hxbwpraqVie-pcONUCJGu7Y2lkeYVoQGDeK9VQZ8WAJfd9QFql63rvSomwxmxJhl8RWLerFBTQKjdGAUlphLmML7CcrqOFrEnKiwGBfB_jhzPlPVQHY37murtjt61ile9vDP-ejdfx-C5BBa4FlD6HooWnCrVwGKeaz0aJLrAkcwiV0YKitcP-yhnq1F22kOMZemYwZH0rn-3J3NdmRh1DUebo2LQJuXQ29G_yMoPt_Hyfrk5irYgtOCNYJtU99_69-o9ebYB4_MHp1atSiZYJS74cA").subscribe((data) => {
-        console.log(data);
-  
-      });
   }
 
-  ngOnInit(): void {
-    console.warn("As")
-   
-  }
+  ionViewWillEnter() {
+    this.Blogs = [
+      {
+        "id": 1,
+        "title": "Green Cactus",
+        "subtitle": "Family: Cactaceae",
+        "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock",
+        "image": "assets/img/8.jpg",
+        "button": "$14.90",
+        "shareIcon": "more",
+        "date": new Date('2018-07-10 08:31:27 PM')
+      },
+    ]
+    let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
 
-  ionViewDidLoad() {
-    console.warn("As")
- 
-  }
-
-  ionViewDidEnter(){
-    console.log("jbdsbvnidvbnivbs'zubo")
-  }
-
-  ionViewCanEnter(){
-    console.log("syiebf237b9yv scbayv2 efbicb clegv pbin")
+      console.log(this.createFormatedDate('2018-07-10T00:00:00','08-31-27-PM'))
+    });
   }
 
 
+  createFormatedDate(date , time){
+    var originalTime = "08-31-27-PM"
+    var formattedTime = originalTime.replace(/-/g , ":");
+
+    var timebody = formattedTime.substring(0, formattedTime.length - 3);
+
+    var AM_PM = originalTime.substring(originalTime.length -2, originalTime.length)
+    var finalTime = `${timebody} ${AM_PM}`; 
+
+    var finalDate = date.split('T')[0];
+
+    var notificationFomrattedDate = `${finalDate} ${finalTime}`;
+    console.log(notificationFomrattedDate);
+
+  }
+
+  // Add new Item 
+  addAdvertisement(){
+
+  }
+
+
+  //Filter advertiesmsnets 
+  filter(){
+    
+  }
 
 }

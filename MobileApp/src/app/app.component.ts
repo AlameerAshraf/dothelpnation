@@ -47,7 +47,7 @@ export class MyApp implements OnInit {
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' },
     { title: 'Login', component: 'DhnLoginPage' },
-    { title: 'TabsHome', component: 'DhnHomeTabsPage' }
+    // { title: 'TabsHome', component: 'DhnHomeTabsPage' }
   ]
 
   ngOnInit(): void {
