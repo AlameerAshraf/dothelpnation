@@ -24,7 +24,7 @@ export class DhnHomeTabsPage implements OnDestroy  {
   SettingsTablabel: string = "";
 
   ionViewDidEnter() {
-    this.menu.enable(true);
+    this.menu.enable(false);
   }
 
   constructor(public navCtrl: NavController,
