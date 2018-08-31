@@ -24,9 +24,13 @@ export class DataService implements IDataService {
 
 
 
-  Get(url: string, models?: any) {
+  Get(url: string, models?: any , access_token?: any) {
+    var Request_headers = new Headers();
+    if(access_token != ""){
+      Request_headers.append("Authorization", "Bearer " + access_token)
+    }
     var requestUrl = this.GenerateUrl(url, models);
-    return this.http.get(requestUrl, this.options).pipe(map((res) => {
+    return this.http.get(requestUrl, {headers : Request_headers }).pipe(map((res) => {
       try {
         return res.json();
       } catch (error) {

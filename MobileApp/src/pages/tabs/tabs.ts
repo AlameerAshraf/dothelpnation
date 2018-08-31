@@ -21,6 +21,7 @@ export class TabsPage {
   tab4Title = " ";
 
   constructor(public navCtrl: NavController, public translateService: TranslateService) {
+    console.warn('a7777777777a******')
 
     translateService.get(['TAB1_TITLE', 'TAB2_TITLE', 'TAB3_TITLE']).subscribe(values => {
       this.tab1Title = values['TAB1_TITLE'];

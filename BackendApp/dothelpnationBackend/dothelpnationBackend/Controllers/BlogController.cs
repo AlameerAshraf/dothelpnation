@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace dothelpnationBackend.Controllers
 {
+    [Authorize]
     public class BlogController : ApiController
     {
         private readonly IRepository<blog> _blogRepo;
