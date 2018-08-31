@@ -42,9 +42,9 @@ export class DhnSettingsPage {
 
 
   Logout(){
-    this.Storage.remove('access_token').then(() => {
+    Promise.all([this.Storage.remove('access_token') , this.Storage.remove('Profile_Data')]).then(() => {
       this.events.publish('logout:clicked');
-    })
+    });
   }
 
 }
