@@ -52,619 +52,619 @@ namespace DataAccessLayer.DataContext
         {
             modelBuilder.Entity<ad_photos>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_lang>()
                 .Property(e => e.code)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_lang>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_lang>()
                 .Property(e => e.dir)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_lang>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_lang>()
                 .Property(e => e.is_main)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_translation>()
                 .Property(e => e.lang_code)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_translation>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_translation>()
                 .Property(e => e.text)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<ads_messages>()
                 .Property(e => e.type)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<ads_messages>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<ads_messages>()
                 .Property(e => e.info)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<ads_messages>()
                 .Property(e => e.time)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.address)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.map_address)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.map_radius)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.map_latitude)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.map_longitude)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.bloodtype)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.short_desc)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.type)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.meat_description)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.meat_keywords)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog>()
                 .Property(e => e.time)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.stuts)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.meat_description)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<blog_sections>()
                 .Property(e => e.meat_keywords)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<comment>()
                 .Property(e => e.type)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<comment>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<comment>()
                 .Property(e => e.email)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<comment>()
                 .Property(e => e.phone)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<comment>()
                 .Property(e => e.comment1)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<comment>()
                 .Property(e => e.time)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<destination>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<destination>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<destination>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<destination>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<destination>()
                 .Property(e => e.short_desc)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<destination>()
                 .Property(e => e.meat_description)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<destination>()
                 .Property(e => e.meat_keywords)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.email)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.phone)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.subject)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.message)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.attach)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.time)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<email_contact>()
                 .Property(e => e.stuts)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<fqa>()
                 .Property(e => e.type)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<fqa>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<fqa>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<fqa>()
                 .Property(e => e.info)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<menu_locations>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<menu_locations>()
                 .Property(e => e.code)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<menu_locations>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<menu>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<menu>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<menu>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<migration>()
                 .Property(e => e.migration1)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<newslatter>()
                 .Property(e => e.email)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<page>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<page>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<page>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<page>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<page>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<page>()
                 .Property(e => e.meat_description)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<page>()
                 .Property(e => e.meat_keywords)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<photo>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<photo>()
                 .Property(e => e.photo1)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<photos_videos_sections>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<photos_videos_sections>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<photos_videos_sections>()
                 .Property(e => e.type)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<place>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<place>()
                 .Property(e => e.type)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<place>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<rating>()
                 .Property(e => e.time)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<service>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<service>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<service>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<service>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<service>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<service>()
                 .Property(e => e.meat_description)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<service>()
                 .Property(e => e.meat_keywords)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_lang>()
                 .Property(e => e.code)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_lang>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_lang>()
                 .Property(e => e.dir)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_lang>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_lang>()
                 .Property(e => e.is_main)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_translation>()
                 .Property(e => e.lang_code)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_translation>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_translation>()
                 .Property(e => e.text)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<slider>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<slider>()
                 .Property(e => e.text_1)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<slider>()
                 .Property(e => e.text_2)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<slider>()
                 .Property(e => e.text_3)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<slider>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<slider>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<slider>()
                 .Property(e => e.stuts)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tag>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_category>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_category>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_category>()
                 .Property(e => e.stuts)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_category>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_category>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_category>()
                 .Property(e => e.meat_description)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_category>()
                 .Property(e => e.meat_keywords)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_dayes>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_dayes>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_dayes>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_dayes>()
                 .Property(e => e.price_1)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour_dayes>()
                 .Property(e => e.price_2)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.main_price)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.price)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.duration)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.type)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.content)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.short_info)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.meat_description)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tour>()
                 .Property(e => e.meat_keywords)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.mobile)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.age)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.email)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.level)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.photo)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.provider)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.provider_id)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.access_token)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.password)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.remember_token)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_config>()
                 .Property(e => e.key)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<admin_config>()
                 .Property(e => e.value)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<password_resets>()
                 .Property(e => e.email)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<password_resets>()
                 .Property(e => e.token)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_config>()
                 .Property(e => e.key)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<site_config>()
                 .Property(e => e.value)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user_rolls>()
                 .Property(e => e.name)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<user_rolls>()
                 .Property(e => e.key)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<video>()
                 .Property(e => e.langkey)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<video>()
                 .Property(e => e.title)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<video>()
                 .Property(e => e.url)
-                .IsUnicode(false);
+                .IsUnicode(true);
         }
     }
 }
