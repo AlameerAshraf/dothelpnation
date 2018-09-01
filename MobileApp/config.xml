@@ -98,6 +98,10 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.323317174806-a6f6gnq4gvshjebc2cugok0cjpurb55t" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="323317174806-39tuepkh7mrkcgs9573blcjq6ole2js8.apps.googleusercontent.com" />
     </plugin>
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+    <plugin name="cordova-plugin-filepath" spec="^1.4.2" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.5" />
 </widget>

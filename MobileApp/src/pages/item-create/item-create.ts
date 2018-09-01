@@ -37,10 +37,12 @@ export class ItemCreatePage {
   getPicture() {
     if (Camera['installed']()) {
       this.camera.getPicture({
+        sourceType : this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.camera.DestinationType.DATA_URL,
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
+        console.log(data)
         this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');

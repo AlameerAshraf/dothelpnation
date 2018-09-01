@@ -1,7 +1,7 @@
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { Storage } from '@ionic/storage';
 
@@ -22,6 +22,7 @@ export class DhnBlogsPage {
     private DataService: DataService,
     public navParams: NavParams,
     private storage: Storage,
+    public modalCtrl: ModalController,
     private LoadingService: LoadingService) {
       
       this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -61,19 +62,29 @@ export class DhnBlogsPage {
     var finalDate = date.split('T')[0];
 
     var notificationFomrattedDate = `${finalDate} ${finalTime}`;
-    console.log(notificationFomrattedDate);
-
+    return notificationFomrattedDate;
   }
 
   // Add new Item 
-  addAdvertisement(){
+  openBlogAddItem() {
+    let addModal = this.modalCtrl.create('DhnBlogCraetePage');
+    addModal.present();
 
+    addModal.onDidDismiss(item => {
+      if (item) {
+        this.AddBlogToServer(item);
+      }
+    })
   }
 
 
   //Filter advertiesmsnets 
   filter(){
-    
+
+  }
+
+  AddBlogToServer(Blog_Item){
+    console.log(Blog_Item);
   }
 
 }
