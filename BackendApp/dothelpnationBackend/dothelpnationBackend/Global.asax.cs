@@ -3,6 +3,7 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using BusinessLayer.Repositories;
+using BusinessLayer.DTOs;
 
 namespace dothelpnationBackend
 {
@@ -12,6 +13,7 @@ namespace dothelpnationBackend
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RegisterAutofac();
+            AutoMapperConfiguration.Configure();
         }
 
 
