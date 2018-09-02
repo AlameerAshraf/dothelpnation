@@ -77,12 +77,16 @@ export class DhnBlogsPage {
     filterModal.present();
 
     filterModal.onDidDismiss(item => {
-      console.log(item);
+      this.filteredBlogs(item);
     })
   }
 
   AddBlogToServer(Blog_Item){
     console.log(Blog_Item);
+  }
+
+  filteredBlogs(filterTail){
+    console.log(filterTail);
   }
 
 }

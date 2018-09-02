@@ -24,6 +24,8 @@ import { DataService } from '../CoreAssestiveModules/Services/DataService';
 import { HttpModule } from '@angular/http';
 import { GooglePlus } from '@ionic-native/google-plus';
 
+import { WheelSelector } from '@ionic-native/wheel-selector';
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -62,6 +64,7 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
+    WheelSelector,
     File,
     FileTransfer,
     FilePath,
