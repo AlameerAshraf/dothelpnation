@@ -1,7 +1,7 @@
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { Storage } from '@ionic/storage';
 
@@ -23,6 +23,7 @@ export class DhnBlogsPage {
     public navParams: NavParams,
     private storage: Storage,
     public modalCtrl: ModalController,
+    private toast: ToastController,
     private LoadingService: LoadingService) {
       
       this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -86,7 +87,30 @@ export class DhnBlogsPage {
   }
 
   filteredBlogs(filterTail){
-    console.log(filterTail);
+    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SearchBlogs${filterTail.DataFilters}`,null , this.access_token).subscribe((data) => {
+      this.Blogs = null;
+      if(data.length > 0){
+        data.forEach(element => {
+          element.date = this.createFormatedDate(element.publish_date , element.time);
+          element.shareIcon = "more"
+        });
+  
+        this.Blogs = data;
+      } else {
+        this.toast.create({message : "No Data Matched" , duration: 3000});
+        setTimeout(() => {
+          let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
+            data.forEach(element => {
+              element.date = this.createFormatedDate(element.publish_date , element.time);
+              element.shareIcon = "more"
+              // element.alt = "assets/img/dothelpnation.jpg";
+            });
+      
+            this.Blogs = data;
+          });
+        }, 3000);
+      }
+    })
   }
 
 }

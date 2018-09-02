@@ -35,25 +35,25 @@ namespace dothelpnationBackend.Controllers
             [FromUri] string PlaceFilter ,
             [FromUri] string SearchFilter)
         {
-            var blogs = _blogRepo.Get();
+            var blogs = _blogRepo.Get().ToList();
             if (!String.IsNullOrEmpty(BlogFilter))
             {
                 var BlogTypeId = int.Parse(BlogFilter);
-                blogs = blogs.Where(x => x.section_id == BlogTypeId);
+                blogs = blogs.Where(x => x.section_id == BlogTypeId).ToList();
             }
             if (!String.IsNullOrEmpty(CityFilter))
             {
                 var CityId = int.Parse(CityFilter);
-                blogs = blogs.Where(x => x.city_id == CityId);
+                blogs = blogs.Where(x => x.city_id == CityId).ToList();
             }
             if (!String.IsNullOrEmpty(PlaceFilter))
             {
                 var PlaceId = int.Parse(PlaceFilter);
-                blogs = blogs.Where(x => x.place_id == PlaceId);
+                blogs = blogs.Where(x => x.place_id == PlaceId).ToList();
             }
             if (!String.IsNullOrEmpty(SearchFilter))
             {
-                blogs = blogs.Where(x => x.content.Contains(SearchFilter) || x.title.Contains(SearchFilter));
+                blogs = blogs.Where(x => x.content.Contains(SearchFilter) || x.title.Contains(SearchFilter)).ToList();
             }
 
             var MappedBlogs = Mapper.Map<IEnumerable<blogDTO>>(blogs);
