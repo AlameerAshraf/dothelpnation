@@ -29,6 +29,48 @@ namespace dothelpnationBackend.Controllers
 
 
         [HttpGet]
+        [Route("api/SearchBlogs")]
+        public IEnumerable<blogDTO> SearchAllMatchingBlogs([FromUri] string BlogFilter ,
+            [FromUri] string CityFilter ,
+            [FromUri] string PlaceFilter ,
+            [FromUri] string SearchFilter)
+        {
+            var blogs = _blogRepo.Get();
+            if (!String.IsNullOrEmpty(BlogFilter))
+            {
+                var BlogTypeId = int.Parse(BlogFilter);
+                blogs = blogs.Where(x => x.section_id == BlogTypeId);
+            }
+            if (!String.IsNullOrEmpty(CityFilter))
+            {
+                var CityId = int.Parse(CityFilter);
+                blogs = blogs.Where(x => x.city_id == CityId);
+            }
+            if (!String.IsNullOrEmpty(PlaceFilter))
+            {
+                var PlaceId = int.Parse(PlaceFilter);
+                blogs = blogs.Where(x => x.place_id == PlaceId);
+            }
+            if (!String.IsNullOrEmpty(SearchFilter))
+            {
+                blogs = blogs.Where(x => x.content.Contains(SearchFilter) || x.title.Contains(SearchFilter));
+            }
+
+            var MappedBlogs = Mapper.Map<IEnumerable<blogDTO>>(blogs);
+
+            foreach (var blog in MappedBlogs)
+            {
+                blog.section_name = GetSectionNameById((int)blog.section_id);
+                blog.user_name = GetUserNameById((int)blog.user_id);
+                blog.place_name = GetPlaceById((int)blog.place_id);
+                blog.city_name = GetPlaceById((int)blog.city_id);
+            }
+
+            return MappedBlogs;
+
+        }
+
+        [HttpGet]
         [Route("api/GetBlogs")]
         public IEnumerable<blogDTO> GetAllBlogs()
         {
@@ -100,6 +142,8 @@ namespace dothelpnationBackend.Controllers
 
             return (IsInserted != null && ImageUploaded == true) ? true : false;
         }
+
+
 
 
 
