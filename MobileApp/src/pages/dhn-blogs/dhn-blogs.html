@@ -18,14 +18,14 @@
 
 
 <ion-content>
-    <ion-searchbar (ionInput)="getItems($event)" placeholder="sd"></ion-searchbar>
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="Seach in blogs"></ion-searchbar>
   <ion-grid no-padding>
     <ion-row *ngIf="Blogs != null">
       <ion-col col-12 col-lg-4 *ngFor="let advertisement of Blogs;let i = index">
         <ion-card text-left>
           <!--Card Image-->
           <div card-image>
-            <img [src]="advertisement.image" />
+            <img class="image-blog" onError="this.src='assets/img/dothelpnation.jpg';" [src]="advertisement.photo" />
             <ion-badge ion-fixed item-end class="badge-dark">about {{advertisement.date | timeAgo}}</ion-badge>
             <button ion-fixed ion-button button-action-shit (click)="onEvent('onShare', '', $event)">
               <ion-icon name="{{advertisement.shareIcon}}"></ion-icon>
@@ -37,9 +37,9 @@
               <!--Card Title-->
               <h2 card-title>{{advertisement.title}}</h2>
               <!--Card Subtitle-->
-              <h1 card-subtitle>{{advertisement.subtitle}}</h1>
+              <h1 card-subtitle>{{advertisement.user_name}}</h1>
               <!--Card Body Text-->
-              <p card-body-text>{{advertisement.description}}</p>
+              <p card-body-text>{{advertisement.content}}</p>
             </ion-card-title>
           </ion-card-content>
         </ion-card>

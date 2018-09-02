@@ -22,6 +22,10 @@ page-dhn-blogs {
     height: 100%;
   }
 
+  .image-blog{
+    width: 854px;
+    height: 290px;
+  }
   ion-spinner * {
     stroke: #ff0000;
     fill: #8b0000;
@@ -43,6 +47,7 @@ page-dhn-blogs {
 
     [card-image] {
       position: relative;
+
 
       ion-badge {
         right: 65px;

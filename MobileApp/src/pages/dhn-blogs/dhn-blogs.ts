@@ -31,27 +31,33 @@ export class DhnBlogsPage {
   }
 
   ionViewWillEnter() {
-    this.Blogs = [
-      {
-        "id": 1,
-        "title": "Green Cactus",
-        "subtitle": "Family: Cactaceae",
-        "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock",
-        "image": "assets/img/8.jpg",
-        "button": "$14.90",
-        "shareIcon": "more",
-        "date": new Date('2018-07-10 08:31:27 PM')
-      },
-    ]
+    // this.Blogs = [
+    //   {
+    //     "id": 1,
+    //     "title": "Green Cactus",
+    //     "subtitle": "Family: Cactaceae",
+    //     "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock",
+    //     "image": "assets/img/8.jpg",
+    //     "button": "$14.90",
+    //     "shareIcon": "more",
+    //     "date": new Date('2018-07-10 08:31:27 PM')
+    //   },
+    // ]
     let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
+      console.log(data);
 
-      console.log(this.createFormatedDate('2018-07-10T00:00:00','08-31-27-PM'))
+      data.forEach(element => {
+        element.date = this.createFormatedDate(element.publish_date , element.time);
+        element.alt = "assets/img/dothelpnation.jpg";
+      });
+
+      this.Blogs = data;
     });
   }
 
 
   createFormatedDate(date , time){
-    var originalTime = "08-31-27-PM"
+    var originalTime = time
     var formattedTime = originalTime.replace(/-/g , ":");
 
     var timebody = formattedTime.substring(0, formattedTime.length - 3);

@@ -1,11 +1,11 @@
 ﻿using BusinessLayer.Repositories;
+using BusinessLayer.DTOs;
 using DataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using AutoMapper;
 using System.Web;
 using System.Web.Http;
 
@@ -15,18 +15,35 @@ namespace dothelpnationBackend.Controllers
     public class BlogController : ApiController
     {
         private readonly IRepository<blog> _blogRepo;
+        private readonly IRepository<blog_sections> _blogSectionsRepo;
+        private readonly IRepository<place> _placeRepo;
+        private readonly IRepository<user> _userRepo;
 
-        public BlogController(IRepository<blog> blogRepo)
+        public BlogController(IRepository<blog> blogRepo , IRepository<blog_sections> blogSectionsRepo, IRepository<place> placeRepo , IRepository<user> userRepo)
         {
             _blogRepo = blogRepo;
+            _blogSectionsRepo = blogSectionsRepo;
+            _placeRepo = placeRepo;
+            _userRepo = userRepo;
         }
 
 
         [HttpGet]
         [Route("api/GetBlogs")]
-        public IEnumerable<blog> GetAllBlogs()
+        public IEnumerable<blogDTO> GetAllBlogs()
         {
-            return _blogRepo.Get();
+            var blogs = _blogRepo.Get();
+            var MappedBlogs = Mapper.Map<IEnumerable<blogDTO>>(blogs);
+
+            foreach (var blog in MappedBlogs)
+            {
+                blog.section_name = GetSectionNameById((int)blog.section_id);
+                blog.user_name = GetUserNameById((int)blog.user_id);
+                blog.place_name = GetPlaceById((int)blog.place_id);
+                blog.city_name = GetPlaceById((int)blog.city_id);
+            }
+
+            return MappedBlogs;
         }
 
         [HttpPost]
@@ -55,7 +72,8 @@ namespace dothelpnationBackend.Controllers
                     );
 
                     file.SaveAs(path);
-                    photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
+                    //photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
+                    photoPath = "http://f6cd5256.ngrok.io" + "/BlogPhotos/" + fileName;
                     ImageUploaded = true;
                 }
             }
@@ -84,12 +102,23 @@ namespace dothelpnationBackend.Controllers
         }
 
 
-        private string convertBytes(string originalString)
+
+        // Private Metods 
+        private string GetSectionNameById(int sectionId)
         {
-            byte[] byt = System.Text.Encoding.UTF8.GetBytes(originalString);
-            // convert the byte array to a Base64 string
-            return Convert.ToBase64String(byt);
+            return _blogSectionsRepo.Get().Where(x => x.id == sectionId).Single()?.title;
         }
+
+        private string GetUserNameById(int userId)
+        {
+            return _userRepo.Get().Where(x => x.id == userId).Single()?.name;
+        }
+
+        private string GetPlaceById(int placeId)
+        {
+            return _placeRepo.Get().Where(x => x.id == placeId).Single()?.name;
+        }
+
     }
 }
 
