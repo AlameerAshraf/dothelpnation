@@ -38,9 +38,17 @@ namespace dothelpnationBackend.Controllers
 
         [HttpGet]
         [Route("api/GetListOfSubCities")]
-        public IEnumerable<place> GetAllSubCities([FromUri] int MohafzaId)
+        public IEnumerable<place> GetAllSubCities([FromUri] int? MohafzaId)
         {
-            var places = _placeRepo.Get().Where(x => x.mohafza_id == MohafzaId).ToList();
+            List<place> places = null;
+            if (MohafzaId != null)
+            {
+                places = _placeRepo.Get().Where(x => x.mohafza_id == MohafzaId).ToList();
+            }
+            else
+            {
+                places = _placeRepo.Get().ToList();
+            }
             return places;
         }
 

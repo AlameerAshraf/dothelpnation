@@ -1,0 +1,59 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Blogs Filter</ion-title>
+  </ion-navbar>
+  <ion-buttons start>
+    <button ion-button (click)="cancel()">
+      <span color="primary" showWhen="ios">
+        Cancel
+      </span>
+      <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-buttons end>
+    <button ion-button (click)="filter()" strong>
+      <span color="primary" showWhen="ios">
+        Search
+      </span>
+      <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+
+
+    <ion-item>
+      <ion-label>Post Type</ion-label>
+      <ion-select (change)="onblogSectionsChange($event.target.value)">
+        <ion-option *ngFor="let i of blogSections">{{i.title}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Main City</ion-label>
+      <ion-select (change)="onMainCitiesChange($event.target.value)">
+        <ion-option *ngFor="let i of MainCities" value="i.id">{{i.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Place</ion-label>
+      <ion-select (change)="onPlacesChange($event.target.value)">
+        <ion-option *ngFor="let i of places" value="i.id">{{i.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Search Words</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>

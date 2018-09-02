@@ -31,24 +31,11 @@ export class DhnBlogsPage {
   }
 
   ionViewWillEnter() {
-    // this.Blogs = [
-    //   {
-    //     "id": 1,
-    //     "title": "Green Cactus",
-    //     "subtitle": "Family: Cactaceae",
-    //     "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock",
-    //     "image": "assets/img/8.jpg",
-    //     "button": "$14.90",
-    //     "shareIcon": "more",
-    //     "date": new Date('2018-07-10 08:31:27 PM')
-    //   },
-    // ]
     let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
-      console.log(data);
-
       data.forEach(element => {
         element.date = this.createFormatedDate(element.publish_date , element.time);
-        element.alt = "assets/img/dothelpnation.jpg";
+        element.shareIcon = "more"
+        // element.alt = "assets/img/dothelpnation.jpg";
       });
 
       this.Blogs = data;
@@ -86,7 +73,12 @@ export class DhnBlogsPage {
 
   //Filter advertiesmsnets 
   filter(){
+    let filterModal = this.modalCtrl.create('DhnBlogFilterPage');
+    filterModal.present();
 
+    filterModal.onDidDismiss(item => {
+      console.log(item);
+    })
   }
 
   AddBlogToServer(Blog_Item){
