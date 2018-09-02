@@ -31,11 +31,12 @@ namespace dothelpnationBackend.Controllers
 
         [HttpPost]
         [Route("api/CraeteNewBlog")]
-        public bool UploadFile([FromUri] string section_id , 
-            [FromUri] string city_id,
-            [FromUri] string place_id, 
+        public bool UploadFile([FromUri] int section_id , 
+            [FromUri] int city_id,
+            [FromUri] int place_id, 
             [FromUri] string title,
-            [FromUri] string description)
+            [FromUri] string description,
+            [FromUri] int userId )
         {
             var file = HttpContext.Current.Request.Files.Count > 0 ?
                 HttpContext.Current.Request.Files[0] : null;
@@ -66,9 +67,12 @@ namespace dothelpnationBackend.Controllers
 
             var newBlog = new blog()
             {
-                section_id = int.Parse(section_id),
-                city_id = int.Parse(city_id),
-                place_id = int.Parse(place_id),
+                user_id = userId,
+                publish_date = DateTime.Now,
+                time = DateTime.Now.ToString("h:mm:ss tt"),
+                section_id = section_id,
+                city_id = city_id,
+                place_id = place_id,
                 title = title,
                 content = description,
                 photo = photoPath
