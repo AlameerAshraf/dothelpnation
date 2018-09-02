@@ -87,8 +87,9 @@ export class DhnBlogsPage {
   }
 
   filteredBlogs(filterTail){
+    this.Blogs = null;
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SearchBlogs${filterTail.DataFilters}`,null , this.access_token).subscribe((data) => {
-      this.Blogs = null;
+
       if(data.length > 0){
         data.forEach(element => {
           element.date = this.createFormatedDate(element.publish_date , element.time);
@@ -97,7 +98,8 @@ export class DhnBlogsPage {
   
         this.Blogs = data;
       } else {
-        this.toast.create({message : "No Data Matched" , duration: 3000});
+        let toast = this.toast.create({message : "No Data Matched" , duration: 3000});
+        toast.present();
         setTimeout(() => {
           let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
             data.forEach(element => {
