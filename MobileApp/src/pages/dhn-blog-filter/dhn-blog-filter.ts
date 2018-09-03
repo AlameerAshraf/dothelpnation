@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 
-import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController, ToastController } from 'ionic-angular';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { Url } from '../../CoreAssestiveModules/Url';
 
@@ -33,6 +33,7 @@ export class DhnBlogFilterPage {
     private DataService: DataService,
     public navParams: NavParams,
     private storage: Storage,
+    private toast: ToastController,
     public modalCtrl: ModalController) {
     this.storage.get('access_token').then((SECURITY_DATA) => {
       this.access_token = SECURITY_DATA.access_token;
@@ -97,23 +98,29 @@ export class DhnBlogFilterPage {
   }
 
   onPlaces(){
-    this.WheelSelector.show({
-      title: 'Select specific place',
-      items: [
-        this.places
-      ],
-      positiveButtonText: 'Choose',
-      negativeButtonText: 'Close',
-      displayKey: "name",
-    }).then((result) => {
-      var SelectedPlaceFilter = this.places.find(function (element) {
-        return element.name === result[0].name;
+    if(this.places != null){
+      this.WheelSelector.show({
+        title: 'Select specific place',
+        items: [
+          this.places
+        ],
+        positiveButtonText: 'Choose',
+        negativeButtonText: 'Close',
+        displayKey: "name",
+      }).then((result) => {
+        var SelectedPlaceFilter = this.places.find(function (element) {
+          return element.name === result[0].name;
+        });
+        this.Place = SelectedPlaceFilter.name;
+        this.PlaceFilter = `&PlaceFilter=${SelectedPlaceFilter.id}`;
+      } , (err) => {
       });
-      this.Place = SelectedPlaceFilter.name;
-      this.PlaceFilter = `&PlaceFilter=${SelectedPlaceFilter.id}`;
-    } , (err) => {
-      console.log("closed");
-    });
+    } else {
+      console.log("Sd")
+      let toaster = this.toast.create({message : "Select city first" ,  duration: 3000})
+      toaster.present();
+    }
+
   }
 
   searchFilterWord(ev) {
