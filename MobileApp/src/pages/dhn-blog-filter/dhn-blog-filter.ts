@@ -126,9 +126,6 @@ export class DhnBlogFilterPage {
     });
   }
 
-  cancel(){
-    this.viewCtrl.dismiss();
-  }
 
   filter(){
     let Filter = this.BlogFilter+this.CityFilter+this.PlaceFilter+this.SearchFilter;
