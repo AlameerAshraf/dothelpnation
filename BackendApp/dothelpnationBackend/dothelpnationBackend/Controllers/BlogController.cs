@@ -114,8 +114,8 @@ namespace dothelpnationBackend.Controllers
                     );
 
                     file.SaveAs(path);
-                    photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
-                    //photoPath = "http://f6cd5256.ngrok.io" + "/BlogPhotos/" + fileName;
+                    //photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
+                    photoPath = "http://5d62cc17.ngrok.io" + "/BlogPhotos/" + fileName;
                     ImageUploaded = true;
                 }
             }
