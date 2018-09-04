@@ -116,7 +116,6 @@ export class DhnBlogFilterPage {
       } , (err) => {
       });
     } else {
-      console.log("Sd")
       let toaster = this.toast.create({message : "Select city first" ,  duration: 3000})
       toaster.present();
     }
