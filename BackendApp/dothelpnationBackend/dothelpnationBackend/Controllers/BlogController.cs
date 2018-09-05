@@ -143,6 +143,15 @@ namespace dothelpnationBackend.Controllers
             return (IsInserted != null && ImageUploaded == true) ? true : false;
         }
 
+        [HttpGet]
+        [Route("api/IISLoader")]
+        public bool IsThisIISLoading()
+        {
+            var flag = new IIS();
+            flag.flag = true;
+            return flag.flag; 
+        }
+
 
 
 

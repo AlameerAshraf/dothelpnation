@@ -73,6 +73,7 @@
     <Compile Include="DTOs\AutoMapperConfiguration.cs" />
     <Compile Include="DTOs\blogDTO.cs" />
     <Compile Include="DTOs\blog_sectionDTO.cs" />
+    <Compile Include="DTOs\IIS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
