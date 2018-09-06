@@ -95,6 +95,7 @@ namespace dothelpnationBackend.Controllers
             [FromUri] int place_id, 
             [FromUri] string title,
             [FromUri] string description,
+            [FromUri] string address,
             [FromUri] int userId )
         {
             var file = HttpContext.Current.Request.Files.Count > 0 ?
@@ -135,7 +136,8 @@ namespace dothelpnationBackend.Controllers
                 place_id = place_id,
                 title = title,
                 content = description,
-                photo = photoPath
+                photo = photoPath ,
+                address = address
             };
             var IsInserted = _blogRepo.Insert(newBlog);
 
