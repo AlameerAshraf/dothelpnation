@@ -11,15 +11,17 @@
 
 
   <div class="profile-image-wrapper" (click)="presentImageActionSheet()">
-    <div class="profile-image-placeholder" *ngIf="!this.form">
+    <div class="profile-image-placeholder" *ngIf="!blogImage">
       <ion-icon name="add"></ion-icon>
       <div>
         Add Image
       </div>
     </div>
+    <div class="profile-image" [style.backgroundImage]="imageViewer()" *ngIf="blogImage"></div>
   </div>
 
-  <img src="{{ blogImage }}" style="width: 100%">
+
+  
 
   <ion-content padding>
     <button ion-button block color="primary" outline (click)="uploadImage()">Filter</button>

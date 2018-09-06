@@ -22,6 +22,14 @@ export class DhnBlogCraetePage {
   imageURI: any;
   imageFileName: any;
 
+  section_id = "?section_id=";
+  city_id = "&city_id=";
+  place_id = "&place_id=";
+  title = "&title=";
+  description = "&description=";
+  userId = "&userId="
+
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -64,10 +72,14 @@ export class DhnBlogCraetePage {
     ImageCaptureSheet.present();
   }
 
+  imageViewer(){
+    return 'url(' + this.blogImage + ')'
+  }
+
 
   getImage(sourceType) {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 70,
       correctOrientation: true,
       allowEdit: true,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -83,8 +95,9 @@ export class DhnBlogCraetePage {
 
 
   public uploadImage() {
+    var requestParams = this.section_id+this.city_id+this.place_id+this.title+this.description+this.userId;
     // Destination URL
-    var url = `${Url.ApiUrlLocalTunnul()}/CraeteNewBlog?section_id=11&city_id=2&place_id=5&title=العثور على طفلتين&description=الطفلتين دول معثور عليهم بمدينة طنطا منذ حوالي أسبوعين.....أي أحد يعرف أهليهم يتصل بي ٠١٢٢٥٨٧٥٦٠٧&userId=5`;
+    var url = `${Url.ApiUrlLocalTunnul()}/CraeteNewBlog`;
     // File for Upload
 
     // File name only
