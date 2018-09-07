@@ -82,41 +82,50 @@ export class DhnBlogsPage {
     })
   }
 
-  AddBlogToServer(Blog_Item){
-    if(Blog_Item.Close){
-      let toaster = this.toast.create({message : "Close function"});
+
+  // Addition handlers 
+  AddBlogToServer(Blog_Item) {
+    if (Blog_Item.Close) {
+      let toaster = this.toast.create({ message: "Close function" });
       toaster.present();
     } else {
-      let toaster = this.toast.create({message : "Blog Added"});
-      toaster.present();
+      this.Blogs = null;
+      let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
+        data.forEach(element => {
+          element.date = this.createFormatedDate(element.publish_date, element.time);
+          element.shareIcon = "more"
+        });
+        this.Blogs = data;
+      });
     }
   }
 
-  filteredBlogs(filterTail){
-    this.Blogs = null;
-    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SearchBlogs${filterTail.DataFilters}`,null , this.access_token).subscribe((data) => {
 
-      if(data.length > 0){
+  // Filters Handler 
+  filteredBlogs(filterTail) {
+    this.Blogs = null;
+    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SearchBlogs${filterTail.DataFilters}`, null, this.access_token).subscribe((data) => {
+
+      if (data.length > 0) {
         data.forEach(element => {
-          element.date = this.createFormatedDate(element.publish_date , element.time);
+          element.date = this.createFormatedDate(element.publish_date, element.time);
           element.shareIcon = "more"
         });
-  
+
         this.Blogs = data;
       } else {
-        let toast = this.toast.create({message : "No Data Matched" , duration: 3000});
+        let toast = this.toast.create({ message: "No Data Matched", duration: 2000 });
         toast.present();
         setTimeout(() => {
           let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
             data.forEach(element => {
-              element.date = this.createFormatedDate(element.publish_date , element.time);
+              element.date = this.createFormatedDate(element.publish_date, element.time);
               element.shareIcon = "more"
               // element.alt = "assets/img/dothelpnation.jpg";
             });
-      
             this.Blogs = data;
           });
-        }, 3000);
+        }, 2000);
       }
     })
   }

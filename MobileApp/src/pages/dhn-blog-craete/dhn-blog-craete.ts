@@ -5,7 +5,8 @@ import {
   NavParams,
   ActionSheetController,
   ToastController,
-  ViewController
+  ViewController,
+  LoadingController
 } from "ionic-angular";
 
 import { Storage } from "@ionic/storage";
@@ -13,8 +14,10 @@ import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { File } from "@ionic-native/file";
 import { Url } from "../../CoreAssestiveModules/Url";
-import { DataService } from "./../../CoreAssestiveModules/Services/DataService";
 import { WheelSelector } from "@ionic-native/wheel-selector";
+import { DataService } from "./../../CoreAssestiveModules/Services/DataService";
+import { LoadingService } from "../../CoreAssestiveModules/Services/LoadingService";
+
 
 @IonicPage()
 @Component({
@@ -57,6 +60,7 @@ export class DhnBlogCraetePage {
   PlaceId;
 
   constructor(
+    private loadingService: LoadingService,
     public navCtrl: NavController,
     public navParams: NavParams,
     private camera: Camera,
@@ -185,6 +189,7 @@ export class DhnBlogCraetePage {
         this.City = SelectedCityFilter.name;
         this.city_id = `&city_id=${SelectedCityFilter.id}`;
         this.CityId = SelectedCityFilter.id;
+        this.loadingService.show("Loading Places"); // Places loader
         this.GetPalces(SelectedCityFilter.id);
         delete this.errors["CityId"];
       },
@@ -201,6 +206,7 @@ export class DhnBlogCraetePage {
       this.access_token
     ).subscribe(data => {
       this.places = data;
+      this.loadingService.hide(); // Places hidder 
     });
   }
 
@@ -263,11 +269,14 @@ export class DhnBlogCraetePage {
       };
 
       const fileTransfer: FileTransferObject = this.transfer.create();
+      this.loadingService.show("Posting Blog"); // Posting blog loader 
 
       fileTransfer
         .upload(this.blogImage, url, options)
         .then(data => {
           console.log(data);
+          this.loadingService.hide(); // Posting blog hidder 
+          this.viewCtrl.dismiss({"Close" : false});
         })
         .catch(err => {
           console.log(err);
@@ -291,10 +300,10 @@ export class DhnBlogCraetePage {
     return count > 0 ? true : false;
   }
 
-  reValidateErrors(attribute){
-    if(attribute == "address" ) { delete this.errors["address"] }
-    if(attribute == "title" ) { delete this.errors["title"] }
-    if(attribute == "description" ) { delete this.errors["description"] }
+  reValidateErrors(attribute) {
+    if (attribute == "address") { delete this.errors["address"] }
+    if (attribute == "title") { delete this.errors["title"] }
+    if (attribute == "description") { delete this.errors["description"] }
   }
 
   //Private Methods ...
@@ -305,7 +314,7 @@ export class DhnBlogCraetePage {
     return newFileName;
   }
 
-  close(){
-    this.viewCtrl.dismiss({"Close" : true});
+  close() {
+    this.viewCtrl.dismiss({ "Close": true });
   }
 }

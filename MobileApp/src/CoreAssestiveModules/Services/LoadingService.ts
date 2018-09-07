@@ -9,9 +9,9 @@ export class LoadingService {
 
   }
 
-  show() {
+  show(label) {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: label+"...."
     });
     this.loading.present();
   }

@@ -8,6 +8,7 @@ using System.Linq;
 using AutoMapper;
 using System.Web;
 using System.Web.Http;
+using System.Globalization;
 
 namespace dothelpnationBackend.Controllers
 {
@@ -79,13 +80,14 @@ namespace dothelpnationBackend.Controllers
 
             foreach (var blog in MappedBlogs)
             {
+                blog.time_span = DateTime.ParseExact(blog.time , "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay;
                 blog.section_name = GetSectionNameById((int)blog.section_id);
                 blog.user_name = GetUserNameById((int)blog.user_id);
                 blog.place_name = GetPlaceById((int)blog.place_id);
                 blog.city_name = GetPlaceById((int)blog.city_id);
             }
 
-            return MappedBlogs;
+            return MappedBlogs.OrderByDescending(x => x.publish_date).ThenByDescending(x => x.time);
         }
 
         [HttpPost]
@@ -115,8 +117,8 @@ namespace dothelpnationBackend.Controllers
                     );
 
                     file.SaveAs(path);
-                    photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
-                    //photoPath = "http://5d62cc17.ngrok.io" + "/BlogPhotos/" + fileName;
+                    //photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
+                    photoPath = "http://12016a9a.ngrok.io" + "/BlogPhotos/" + fileName;
                     ImageUploaded = true;
                 }
             }
@@ -132,7 +134,7 @@ namespace dothelpnationBackend.Controllers
             {
                 user_id = (int) userId,
                 publish_date = DateTime.Now,
-                time = DateTime.Now.ToString("h:mm:ss tt"),
+                time = DateTime.Now.ToString("hh:mm:ss tt"),
                 section_id = section_id,
                 city_id = city_id,
                 place_id = place_id,

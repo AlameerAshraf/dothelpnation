@@ -18,6 +18,7 @@ namespace BusinessLayer.DTOs
         public int? city_id { get; set; }
         public string photo { get; set; }
         public DateTime? publish_date { get; set; }
+        public TimeSpan? time_span { get; set; }
         public string time { get; set; }
         public int? user_id { get; set; }
 

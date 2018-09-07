@@ -13,7 +13,7 @@ import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingServi
 export class SearchPage implements OnInit {
   ngOnInit(): void {
     console.log('ONINT');
-    this.loading.show();
+    this.loading.show("Searching");
 
     setTimeout(() => {
       this.loading.hide();
