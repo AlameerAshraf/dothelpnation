@@ -5,7 +5,7 @@ import { IonicPage, NavController, NavParams, ModalController, ToastController }
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { Storage } from '@ionic/storage';
 
- 
+
 @IonicPage()
 @Component({
   selector: 'page-dhn-blogs',
@@ -18,23 +18,23 @@ export class DhnBlogsPage {
   Blogs = null;
   access_token: string;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     private DataService: DataService,
     public navParams: NavParams,
     private storage: Storage,
     public modalCtrl: ModalController,
     private toast: ToastController,
     private LoadingService: LoadingService) {
-      
-      this.storage.get('access_token').then((SECURITY_DATA) => {
-        this.access_token = SECURITY_DATA.access_token;
-      })
+
+    this.storage.get('access_token').then((SECURITY_DATA) => {
+      this.access_token = SECURITY_DATA.access_token;
+    })
   }
 
   ionViewWillEnter() {
     let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
       data.forEach(element => {
-        element.date = this.createFormatedDate(element.publish_date , element.time);
+        element.date = this.createFormatedDate(element.publish_date, element.time);
         element.shareIcon = "more"
         // element.alt = "assets/img/dothelpnation.jpg";
       });
@@ -44,14 +44,14 @@ export class DhnBlogsPage {
   }
 
 
-  createFormatedDate(date , time){
+  createFormatedDate(date, time) {
     var originalTime = time
-    var formattedTime = originalTime.replace(/-/g , ":");
+    var formattedTime = originalTime.replace(/-/g, ":");
 
     var timebody = formattedTime.substring(0, formattedTime.length - 3);
 
-    var AM_PM = originalTime.substring(originalTime.length -2, originalTime.length)
-    var finalTime = `${timebody} ${AM_PM}`; 
+    var AM_PM = originalTime.substring(originalTime.length - 2, originalTime.length)
+    var finalTime = `${timebody} ${AM_PM}`;
 
     var finalDate = date.split('T')[0];
 
@@ -73,7 +73,7 @@ export class DhnBlogsPage {
 
 
   //Filter advertiesmsnets 
-  filter(){
+  filter() {
     let filterModal = this.modalCtrl.create('DhnBlogFilterPage');
     filterModal.present();
 
@@ -114,20 +114,18 @@ export class DhnBlogsPage {
 
         this.Blogs = data;
       } else {
-        let toast = this.toast.create({ message: "No Data Matched", duration: 2000 });
+        
+        let toast = this.toast.create({ message: "No results found ", duration: 1000 });
         toast.present();
-        setTimeout(() => {
-          let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
-            data.forEach(element => {
-              element.date = this.createFormatedDate(element.publish_date, element.time);
-              element.shareIcon = "more"
-              // element.alt = "assets/img/dothelpnation.jpg";
-            });
-            this.Blogs = data;
+        let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
+          data.forEach(element => {
+            element.date = this.createFormatedDate(element.publish_date, element.time);
+            element.shareIcon = "more"
           });
-        }, 2000);
+
+          this.Blogs = data;
+        });
       }
     })
   }
-
 }
