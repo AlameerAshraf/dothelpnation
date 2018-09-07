@@ -96,7 +96,7 @@ namespace dothelpnationBackend.Controllers
             [FromUri] string title,
             [FromUri] string description,
             [FromUri] string address,
-            [FromUri] int userId )
+            [FromUri] string email )
         {
             var file = HttpContext.Current.Request.Files.Count > 0 ?
                 HttpContext.Current.Request.Files[0] : null;
@@ -126,9 +126,11 @@ namespace dothelpnationBackend.Controllers
             }
 
 
+            var userId = _userRepo.Get().Where(x => x.email == email).Single()?.id;
+
             var newBlog = new blog()
             {
-                user_id = userId,
+                user_id = (int) userId,
                 publish_date = DateTime.Now,
                 time = DateTime.Now.ToString("h:mm:ss tt"),
                 section_id = section_id,
