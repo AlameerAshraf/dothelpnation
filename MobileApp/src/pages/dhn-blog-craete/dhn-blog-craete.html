@@ -56,19 +56,19 @@
 
     <ion-item>
       <ion-label [style.color]="errors.address != null ? 'red' : 'black'" stacked>Your address</ion-label>
-      <ion-input [(ngModel)]="UserAddress" type="text"></ion-input>
+      <ion-input (keyup)="reValidateErrors('address')" [(ngModel)]="UserAddress" type="text"></ion-input>
     </ion-item>
 
 
     <ion-item>
       <ion-label [style.color]="errors.title != null ? 'red' : 'black'" stacked>Title</ion-label>
-      <ion-input [(ngModel)]="BlogTitle" type="text"></ion-input>
+      <ion-input (keyup)="reValidateErrors('title')" [(ngModel)]="BlogTitle" type="text"></ion-input>
     </ion-item>
 
 
     <ion-item>
       <ion-label [style.color]="errors.description != null ? 'red' : 'black'" stacked>Description</ion-label>
-      <ion-textarea [(ngModel)]="BlogDescription" rows="4">
+      <ion-textarea (keyup)="reValidateErrors('description')" [(ngModel)]="BlogDescription" rows="4">
       </ion-textarea>
     </ion-item>
 

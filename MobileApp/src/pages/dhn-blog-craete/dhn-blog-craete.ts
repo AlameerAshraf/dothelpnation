@@ -162,6 +162,7 @@ export class DhnBlogCraetePage {
         this.BlogType = SelectedBlogFilter.title;
         this.section_id = `?section_id=${SelectedBlogFilter.id}`;
         this.SectionId = SelectedBlogFilter.id;
+        delete this.errors["SectionId"];
       },
       err => {
         console.log("closed");
@@ -185,6 +186,7 @@ export class DhnBlogCraetePage {
         this.city_id = `&city_id=${SelectedCityFilter.id}`;
         this.CityId = SelectedCityFilter.id;
         this.GetPalces(SelectedCityFilter.id);
+        delete this.errors["CityId"];
       },
       err => {
         console.log("closed");
@@ -218,6 +220,7 @@ export class DhnBlogCraetePage {
           this.Place = SelectedPlaceFilter.name;
           this.place_id = `&place_id=${SelectedPlaceFilter.id}`;
           this.PlaceId = SelectedPlaceFilter.id;
+          delete this.errors["PlaceId"];
         },
         err => { }
       );
@@ -286,6 +289,12 @@ export class DhnBlogCraetePage {
     if (this.PlaceId == undefined) { this.errors.PlaceId = "error"; count++; }
 
     return count > 0 ? true : false;
+  }
+
+  reValidateErrors(attribute){
+    if(attribute == "address" ) { delete this.errors["address"] }
+    if(attribute == "title" ) { delete this.errors["title"] }
+    if(attribute == "description" ) { delete this.errors["description"] }
   }
 
   //Private Methods ...
