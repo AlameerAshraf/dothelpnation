@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding no-bounce>
 
 
   <div class="profile-image-wrapper" (click)="presentImageActionSheet()">
@@ -20,11 +20,52 @@
     <div class="profile-image" [style.backgroundImage]="imageViewer()" *ngIf="blogImage"></div>
   </div>
 
+  <ion-list>
+    <ion-item (click)="onblogSections()">
+      <ion-label [style.color]="errors.SectionId != null ? 'red' : 'black'"> Blog Type </ion-label>       
+      <ion-note item-end>
+        {{ BlogType }}
+      </ion-note>
+    </ion-item>
 
-  
+    <ion-item (click)="onMainCities()">
+        <ion-label [style.color]="errors.CityId != null ? 'red' : 'black'"> City </ion-label> 
+      <ion-note item-end>
+        {{ City }}
+      </ion-note>
+    </ion-item>
 
-  <ion-content padding>
-    <button ion-button block color="primary" outline (click)="uploadImage()">Filter</button>
-</ion-content>
+    <ion-item (click)="onPlaces()">
+      <ion-label [style.color]="errors.PlaceId != null ? 'red' : 'black'"> Place </ion-label> 
+      <ion-note item-end>
+        {{ Place }}
+      </ion-note>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label [style.color]="errors.address != null ? 'red' : 'black'" stacked>Your address</ion-label>
+      <ion-input [(ngModel)]="UserAddress" type="text"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label [style.color]="errors.title != null ? 'red' : 'black'" stacked>Title</ion-label>
+      <ion-input [(ngModel)]="BlogTitle" type="text"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label [style.color]="errors.description != null ? 'red' : 'black'" stacked>Description</ion-label>
+      <ion-textarea [(ngModel)]="BlogDescription" rows="4">
+      </ion-textarea>
+    </ion-item>
+
+  </ion-list>
+
+
+
+  <button ion-button block color="primary" outline (click)="uploadImage()">Filter</button>
+
 
 </ion-content>
