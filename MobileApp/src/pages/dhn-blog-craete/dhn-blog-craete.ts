@@ -4,7 +4,8 @@ import {
   NavController,
   NavParams,
   ActionSheetController,
-  ToastController
+  ToastController,
+  ViewController
 } from "ionic-angular";
 
 import { Storage } from "@ionic/storage";
@@ -64,7 +65,8 @@ export class DhnBlogCraetePage {
     private transfer: FileTransfer,
     private storage: Storage,
     private toast: ToastController,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private viewCtrl: ViewController
   ) {
     this.errors = {};
     this.storage.get("access_token").then(SECURITY_DATA => {
@@ -292,5 +294,9 @@ export class DhnBlogCraetePage {
       n = d.getTime(),
       newFileName = n + ".jpg";
     return newFileName;
+  }
+
+  close(){
+    this.viewCtrl.dismiss({"Close" : true});
   }
 }

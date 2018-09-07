@@ -83,7 +83,13 @@ export class DhnBlogsPage {
   }
 
   AddBlogToServer(Blog_Item){
-    console.log(Blog_Item);
+    if(Blog_Item.Close){
+      let toaster = this.toast.create({message : "Close function"});
+      toaster.present();
+    } else {
+      let toaster = this.toast.create({message : "Blog Added"});
+      toaster.present();
+    }
   }
 
   filteredBlogs(filterTail){

@@ -2,7 +2,18 @@
 
   <ion-navbar>
     <ion-title>Add Advertisement</ion-title>
+
+    <ion-buttons start>
+      <button ion-button (click)="close()">
+        <span color="primary" showWhen="ios">
+          cancel
+        </span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    
   </ion-navbar>
+
 
 </ion-header>
 
@@ -22,21 +33,21 @@
 
   <ion-list>
     <ion-item (click)="onblogSections()">
-      <ion-label [style.color]="errors.SectionId != null ? 'red' : 'black'"> Blog Type </ion-label>       
+      <ion-label [style.color]="errors.SectionId != null ? 'red' : 'black'"> Blog Type </ion-label>
       <ion-note item-end>
         {{ BlogType }}
       </ion-note>
     </ion-item>
 
     <ion-item (click)="onMainCities()">
-        <ion-label [style.color]="errors.CityId != null ? 'red' : 'black'"> City </ion-label> 
+      <ion-label [style.color]="errors.CityId != null ? 'red' : 'black'"> City </ion-label>
       <ion-note item-end>
         {{ City }}
       </ion-note>
     </ion-item>
 
     <ion-item (click)="onPlaces()">
-      <ion-label [style.color]="errors.PlaceId != null ? 'red' : 'black'"> Place </ion-label> 
+      <ion-label [style.color]="errors.PlaceId != null ? 'red' : 'black'"> Place </ion-label>
       <ion-note item-end>
         {{ Place }}
       </ion-note>
