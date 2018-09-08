@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, ActionSheetController } from 'ionic-angular';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
+
 
 @IonicPage()
 @Component({
@@ -8,20 +11,23 @@ import { IonicPage, NavController, NavParams, Content, ActionSheetController } f
 })
 export class DhnBlogViewPage {
 
-  // Map related decs ..
-  blogId ;
+  sharingMessageStamp:string = `#dothelpnation #help #attention`; 
+  sectionName ;
+  blogId;
   map;
 
   data
-  active: boolean =  false
+  active: boolean = false
 
-  constructor(private navCtrl: NavController ,
+  constructor(private navCtrl: NavController,
     private navParams: NavParams,
-    private actionSheet: ActionSheetController) {
-      let BlogData = this.navParams.get("blogData");
-      this.data = BlogData;
-      this.data.shareIcon = "more"
-      this.map = {
+    private socialSharing: SocialSharing,
+    private actionSheet: ActionSheetController
+  ) {
+    let BlogData = this.navParams.get("blogData");
+    this.data = BlogData;
+    this.data.shareIcon = "more"
+    this.map = {
       "map": {
         "lat": this.data.map_latitude != null ? parseFloat(this.data.map_latitude) : 0,
         "lng": this.data.map_latitude != null ? parseFloat(this.data.map_longitude) : 0,
@@ -31,51 +37,30 @@ export class DhnBlogViewPage {
       }
     }
     this.blogId = this.data.id;
+    this.sectionName = this.data.section_name;
   }
 
 
-  // Show Action sheet for blog options 
-  presentBlogOptionsActionSheet(){
-    let blogOptions = this.actionSheet.create({
-      title : "Options",
-      buttons : [
-        {
-          text : 'Share in Facebook',
-          handler : () => {
-            console.log("FaceBook")
-          }
-        },
-        {
-          text : 'Sahre in Twitter' ,
-          handler : () => {
-            console.log("Twitter")
-          }
-        } ,
-        {
-          text : "Message blog publisher",
-          handler : () => {
-            console.log("Message")
-          }
-        } ,
-        {
-          text : "Report",
-          role : "destructive" , 
-          handler : () => {
-            console.log("report")
-          }
-        } ,
-        {
-          text : "Cancel" ,
-          role : "cancel" ,
-          handler : () => {
-            console.log("cancel");
-          }
-        }
-      ]
+
+  // Share on Facebook 
+  socialSharingLauncher() {
+    let message = `${this.sharingMessageStamp} #${this.sectionName} \n ${this.data.title} \n  ${this.data.content}`;
+    this.socialSharing.share(message,"#dothelpnationApp",this.data.photo , this.data.url)
+    .then((valuesReturned) => {
+      console.log("shared" , valuesReturned);
+    })
+    .catch((err) => {
+      console.log("err" , err);
     });
-
-    blogOptions.present();
   }
+
+
+
+  // message blog poster 
+  messagePoster() {
+
+  }
+
 
 
 }
