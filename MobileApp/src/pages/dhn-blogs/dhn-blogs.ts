@@ -1,7 +1,7 @@
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, ActionSheetController } from 'ionic-angular';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { Storage } from '@ionic/storage';
 
@@ -24,6 +24,7 @@ export class DhnBlogsPage {
     private storage: Storage,
     public modalCtrl: ModalController,
     private toast: ToastController,
+    private actionSheet : ActionSheetController,
     private LoadingService: LoadingService) {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -86,8 +87,8 @@ export class DhnBlogsPage {
   // Addition handlers 
   AddBlogToServer(Blog_Item) {
     if (Blog_Item.Close) {
-      let toaster = this.toast.create({ message: "Close function" });
-      toaster.present();
+      // let toaster = this.toast.create({ message: "Close function" });
+      // toaster.present();
     } else {
       this.Blogs = null;
       let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
@@ -133,6 +134,59 @@ export class DhnBlogsPage {
 
   // View Selected Blog 
   viewSingleBlog(blogId){
-    this.navCtrl.push("DhnBlogViewPage");
+    this.LoadingService.show("Loading blog data");
+    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/ViewSingleBlog?blogId=${blogId}` , null , this.access_token )
+    .subscribe((blogData) => {
+      this.LoadingService.hide();
+      this.navCtrl.push("DhnBlogViewPage" , { 
+        "blogData" : blogData
+      });
+    } , (err) => {
+      console.log(err);
+    })
+  }
+
+
+  // Show Action sheet for blog options 
+  presentBlogOptionsActionSheet(blogId){
+    let blogOptions = this.actionSheet.create({
+      title : "Options",
+      buttons : [
+        {
+          text : 'Share in Facebook',
+          handler : () => {
+            console.log("FaceBook")
+          }
+        },
+        {
+          text : 'Sahre in Twitter' ,
+          handler : () => {
+            console.log("Twitter")
+          }
+        } ,
+        {
+          text : "Message blog publisher",
+          handler : () => {
+            console.log("Message")
+          }
+        } ,
+        {
+          text : "Report",
+          role : "destructive" , 
+          handler : () => {
+            console.log("report")
+          }
+        } ,
+        {
+          text : "Cancel" ,
+          role : "cancel" ,
+          handler : () => {
+            console.log("cancel");
+          }
+        }
+      ]
+    });
+
+    blogOptions.present();
   }
 }

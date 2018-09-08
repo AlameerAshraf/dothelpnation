@@ -9,12 +9,53 @@
 </ion-header>
 
 
+
 <!--- Header Big Image-->
 <ion-content elastic-header>
 
 
-    <agm-map [latitude]="51.678418" [longitude]="7.809007">
-        <agm-marker [latitude]="51.678418" [longitude]="7.809007"></agm-marker>
-      </agm-map>
-      
+  <ion-item no-lines background-size id="elastic-header" [ngStyle]="{'background-image': 'url(' + data.photo + ')'}">
+    <div title-block *ngIf="data != null">
+      <!--- Category -->
+      <span new-category>{{data.category}}</span>
+    </div>
+  </ion-item>
+
+
+  <ion-item-group *ngIf="data != null">
+
+
+    <ion-item-divider border no-lines>
+      <!--- poster photo -->
+      <ion-avatar item-start>
+        <img [src]="data.user_photo" />
+      </ion-avatar>
+      <!-- poster name -->
+      <h2 item-subtitle>{{data.user_name}}</h2>
+      <h3 item-subtitle>{{data.address}}</h3>
+      <button (click)="presentBlogOptionsActionSheet()" item-end ion-button button-action-shit>
+        <ion-icon name="{{data.shareIcon}}"></ion-icon>
+      </button>
+    </ion-item-divider>
+
+
+
+    <!-- Content -->
+    <ion-item no-margin no-lines >
+      <!-- Content Title-->
+      <h2 parallax-subtitle margin-bottom text-wrap>{{data.title}}</h2>
+      <!-- Content Description-->
+      <p parallax-description text-wrap>{{data.content}}</p>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+            <agm-map [latitude]="map.map.lat" [longitude]="map.map.lng" [zoom]="map.map.zoom" [mapTypeControl]="map.map.mapTypeControl" [streetViewControl]="map.map.streetViewControl">
+                <agm-marker [latitude]="map.map.lat" [longitude]="map.map.lng"></agm-marker>
+            </agm-map>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-group>
 </ion-content>

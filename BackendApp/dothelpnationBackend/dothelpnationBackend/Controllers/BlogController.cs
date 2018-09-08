@@ -118,7 +118,7 @@ namespace dothelpnationBackend.Controllers
 
                     file.SaveAs(path);
                     //photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
-                    photoPath = "http://12016a9a.ngrok.io" + "/BlogPhotos/" + fileName;
+                    photoPath = "http://8d4c49f6.ngrok.io" + "/BlogPhotos/" + fileName;
                     ImageUploaded = true;
                 }
             }
