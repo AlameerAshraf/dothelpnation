@@ -24,17 +24,17 @@
   <ion-grid no-padding>
     <ion-row *ngIf="Blogs != null">
       <ion-col col-12 col-lg-4 *ngFor="let advertisement of Blogs;let i = index">
-        <ion-card text-left>
+        <ion-card text-left (click)="viewSingleBlog(advertisement.id)">
           <!--Card Image-->
           <div card-image>
             <img class="image-blog" onError="this.src='assets/img/dothelpnation.jpg';" [src]="advertisement.photo" />
             <ion-badge ion-fixed item-end class="badge-dark">about {{advertisement.date | timeAgo}}</ion-badge>
-            <button ion-fixed ion-button button-action-shit (click)="onEvent('onShare', '', $event)">
+            <button ion-fixed ion-button button-action-shit (click)="presentBlogOptionsActionSheet(advertisement.id)">
               <ion-icon name="{{advertisement.shareIcon}}"></ion-icon>
             </button>
           </div>
           <!--Card descriptiom-->
-          <ion-card-content (click)="viewSingleBlog(advertisement.id)">
+          <ion-card-content >
             <ion-card-title>
               <!--Card Title-->
               <h2 card-title>{{advertisement.title}}</h2>
