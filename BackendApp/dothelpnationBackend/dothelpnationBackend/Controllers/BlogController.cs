@@ -166,6 +166,7 @@ namespace dothelpnationBackend.Controllers
                 MappedBlog.user_name = blogPoster.name;
                 MappedBlog.user_email = blogPoster.email;
                 MappedBlog.user_photo = blogPoster.photo;
+                MappedBlog.section_name = _blogSectionsRepo.Get().Where(x => x.id == MappedBlog.section_id).Single()?.title;
 
                 return MappedBlog;
             }

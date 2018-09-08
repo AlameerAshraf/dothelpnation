@@ -17,6 +17,7 @@ namespace BusinessLayer.DTOs
 
         public int id { get; set; }
         public int? section_id { get; set; }
+        public string section_name { get; set; }
         public string title { get; set; }
         public string url { get; set; }
         public string address { get; set; }
