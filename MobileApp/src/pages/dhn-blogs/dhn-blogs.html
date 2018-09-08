@@ -18,7 +18,9 @@
 
 
 <ion-content>
-    <ion-searchbar (ionInput)="getItems($event)" placeholder="Seach in blogs"></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="Seach in blogs"></ion-searchbar>
+
+
   <ion-grid no-padding>
     <ion-row *ngIf="Blogs != null">
       <ion-col col-12 col-lg-4 *ngFor="let advertisement of Blogs;let i = index">
@@ -32,7 +34,7 @@
             </button>
           </div>
           <!--Card descriptiom-->
-          <ion-card-content (click)="onEvent('onItemClick', item.title, $event)">
+          <ion-card-content (click)="viewSingleBlog(advertisement.id)">
             <ion-card-title>
               <!--Card Title-->
               <h2 card-title>{{advertisement.title}}</h2>

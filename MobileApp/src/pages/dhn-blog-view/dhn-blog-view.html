@@ -1,0 +1,20 @@
+<!--- Theme Parallax - News -->
+<ion-header header-ios>
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="data != null">{{data.headerTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<!--- Header Big Image-->
+<ion-content elastic-header>
+
+
+    <agm-map [latitude]="51.678418" [longitude]="7.809007">
+        <agm-marker [latitude]="51.678418" [longitude]="7.809007"></agm-marker>
+      </agm-map>
+      
+</ion-content>

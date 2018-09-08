@@ -128,4 +128,11 @@ export class DhnBlogsPage {
       }
     })
   }
+
+
+
+  // View Selected Blog 
+  viewSingleBlog(blogId){
+    this.navCtrl.push("DhnBlogViewPage");
+  }
 }

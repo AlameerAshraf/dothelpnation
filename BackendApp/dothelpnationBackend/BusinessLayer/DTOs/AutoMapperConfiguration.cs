@@ -17,7 +17,10 @@ namespace BusinessLayer.DTOs
                 cfg.CreateMap<blog_sections, blog_sectionDTO>();
 
                 cfg.CreateMap<blog, blogDTO>();
-                cfg.CreateMap<blogDTO, blog>(); 
+                cfg.CreateMap<blogDTO, blog>();
+
+                cfg.CreateMap<blog, singBlogViewDTO>();
+                cfg.CreateMap<singBlogViewDTO, blog>();
             });
         }
     }

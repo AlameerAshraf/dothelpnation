@@ -141,13 +141,41 @@ namespace dothelpnationBackend.Controllers
                 title = title,
                 content = description,
                 photo = photoPath ,
-                address = address
+                address = address ,
+                vists = 0
             };
             var IsInserted = _blogRepo.Insert(newBlog);
 
 
             return (IsInserted != null && ImageUploaded == true) ? true : false;
         }
+
+
+        [HttpGet]
+        [Route("api/ViewSingleBlog")]
+        public singBlogViewDTO GetBlogData([FromUri] int blogId)
+        {
+            var blogData = _blogRepo.Get().Where(x => x.id == blogId).FirstOrDefault();
+            var posterId = blogData.user_id;
+            if(blogData != null)
+            {
+                var MappedBlog = Mapper.Map<singBlogViewDTO>(blogData);
+
+                var blogPoster = _userRepo.Get().Where(x => x.id == posterId).FirstOrDefault();
+                MappedBlog.user_id = blogPoster.id;
+                MappedBlog.user_name = blogPoster.name;
+                MappedBlog.user_email = blogPoster.email;
+                MappedBlog.user_photo = blogPoster.photo;
+
+                return MappedBlog;
+            }
+            else
+            {
+                return new singBlogViewDTO();
+            }
+        }
+
+
 
         [HttpGet]
         [Route("api/IISLoader")]

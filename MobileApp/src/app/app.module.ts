@@ -26,6 +26,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 
 import { WheelSelector } from '@ionic-native/wheel-selector';
 
+import { AgmCoreModule } from '@agm/core';
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -46,6 +48,9 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey : "AIzaSyA4-GoZzOqYTvxMe52YQZch5JaCFN6ACLg"
+    }),
     HttpModule,
     BrowserModule,
     HttpClientModule,
