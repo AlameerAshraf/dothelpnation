@@ -11,8 +11,9 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 })
 export class DhnBlogViewPage {
 
-  sharingMessageStamp:string = `#dothelpnation #help #attention`; 
-  sectionName ;
+  ratingStars;
+  sharingMessageStamp: string = `#dothelpnation #help #attention`;
+  sectionName;
   blogId;
   map;
 
@@ -38,20 +39,57 @@ export class DhnBlogViewPage {
     }
     this.blogId = this.data.id;
     this.sectionName = this.data.section_name;
-  }
+    this.ratingStars = [
+      {
+        "isActive": true,
+        "iconActive": "icon-star",
+        "iconInactive": "icon-star-outline"
+      },
+      {
+        "isActive": true,
+        "iconActive": "icon-star",
+        "iconInactive": "icon-star-outline"
+      },
+      {
+        "isActive": true,
+        "iconActive": "icon-star",
+        "iconInactive": "icon-star-outline"
+      },
+      {
+        "isActive": true,
+        "iconActive": "icon-star",
+        "iconInactive": "icon-star-outline"
+      },
+      {
+        "isActive": true,
+        "iconActive": "icon-star",
+        "iconInactive": "icon-star-outline"
+      },
+    ]
+  };
+
+
+  onStarClass(index: number, e: any) {
+    console.log(this.ratingStars)
+
+    for (var i = 0; i < this.ratingStars.length; i++) {
+      this.ratingStars[i].isActive = i <= index;
+    }
+    console.log(this.ratingStars)
+  };
 
 
 
   // Share on Facebook 
   socialSharingLauncher() {
     let message = `${this.sharingMessageStamp} #${this.sectionName} \n ${this.data.title} \n  ${this.data.content}`;
-    this.socialSharing.share(message,"#dothelpnationApp",this.data.photo , this.data.url)
-    .then((valuesReturned) => {
-      console.log("shared" , valuesReturned);
-    })
-    .catch((err) => {
-      console.log("err" , err);
-    });
+    this.socialSharing.share(message, "#dothelpnationApp", this.data.photo, this.data.url)
+      .then((valuesReturned) => {
+        console.log("shared", valuesReturned);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   }
 
 
