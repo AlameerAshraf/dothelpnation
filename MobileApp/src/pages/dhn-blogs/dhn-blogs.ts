@@ -150,31 +150,19 @@ export class DhnBlogsPage {
   // Show Action sheet for blog options 
   presentBlogOptionsActionSheet(blogId){
     let blogOptions = this.actionSheet.create({
-      title : "Options",
+      title : "Blog options",
       buttons : [
-        {
-          text : 'Share in Facebook',
-          handler : () => {
-            console.log("FaceBook")
-          }
-        },
-        {
-          text : 'Sahre in Twitter' ,
-          handler : () => {
-            console.log("Twitter")
-          }
-        } ,
         {
           text : "Message blog publisher",
           handler : () => {
-            console.log("Message")
+            this.messageBlogPoster();
           }
         } ,
         {
           text : "Report",
           role : "destructive" , 
           handler : () => {
-            console.log("report")
+            this.reportBlog();
           }
         } ,
         {
@@ -188,5 +176,21 @@ export class DhnBlogsPage {
     });
 
     blogOptions.present();
+  }
+
+
+  // Message the poster 
+  messageBlogPoster(){
+
+    // TODO : Get the poster (user) data from server and send message to the user 
+
+  }
+
+
+  // Report this blog 
+  reportBlog(){
+
+    // No functionality to implement 
+
   }
 }
