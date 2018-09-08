@@ -25,7 +25,7 @@ import { HttpModule } from '@angular/http';
 import { GooglePlus } from '@ionic-native/google-plus';
 
 import { WheelSelector } from '@ionic-native/wheel-selector';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { AgmCoreModule } from '@agm/core';
 
 // The translate loader needs to know where to load i18n files
@@ -69,6 +69,7 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
+    SocialSharing,
     WheelSelector,
     File,
     FileTransfer,
