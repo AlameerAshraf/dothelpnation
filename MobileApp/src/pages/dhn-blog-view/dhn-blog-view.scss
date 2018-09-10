@@ -1,4 +1,6 @@
 page-dhn-blog-view {
+
+
   // Animation
   @include settingAnimationHeader;
 
@@ -46,8 +48,8 @@ page-dhn-blog-view {
   [background-size] {
     height: 300px;
     position: relative;
-    // @include darkening-blend-mode;
 
+    // @include darkening-blend-mode;
     [title-block] {
       position: absolute;
       bottom: 0;
@@ -104,10 +106,16 @@ page-dhn-blog-view {
   .toolbar-title-ios {
     padding-top: 20px;
   }
-    .sebm-google-map-container {
-        height: 200px;
-    }
-    .item-inner {
-        margin-left: 0 !important;
-    }
+
+  .sebm-google-map-container {
+    height: 200px;
+  }
+
+  .item-inner {
+    margin-left: 0 !important;
+  }
+
+  li {
+    list-style-type: none;
+}
 }

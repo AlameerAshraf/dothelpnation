@@ -1,6 +1,9 @@
+import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, ActionSheetController, ToastController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Storage } from "@ionic/storage";
+import { Url } from '../../CoreAssestiveModules/Url';
 
 
 
@@ -13,6 +16,7 @@ export class DhnBlogViewPage {
 
   ratingStars;
   sharingMessageStamp: string = `#dothelpnation #help #attention`;
+  logginedUserEmail;
   sectionName;
   blogId;
   map;
@@ -23,11 +27,21 @@ export class DhnBlogViewPage {
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
     private socialSharing: SocialSharing,
-    private actionSheet: ActionSheetController
+    private storage: Storage,
+    private actionSheet: ActionSheetController,
+    private DataService: DataService,
+    private toast : ToastController
   ) {
+
+    this.storage.get("Profile_Data").then(PROFILE_DATA => {
+      this.logginedUserEmail = PROFILE_DATA.email;
+    });
+
+
+
     let BlogData = this.navParams.get("blogData");
     this.data = BlogData;
-    this.data.shareIcon = "more"
+    this.data.shareIcon = "md-share-alt"
     this.map = {
       "map": {
         "lat": this.data.map_latitude != null ? parseFloat(this.data.map_latitude) : 0,
@@ -66,16 +80,29 @@ export class DhnBlogViewPage {
         "iconInactive": "icon-star-outline"
       },
     ]
+
+    this.onStarClass(this.data.stars , "bind");
   };
 
 
   onStarClass(index: number, e: any) {
-    console.log(this.ratingStars)
-
     for (var i = 0; i < this.ratingStars.length; i++) {
       this.ratingStars[i].isActive = i <= index;
     }
-    console.log(this.ratingStars)
+
+    if(e === 'rate'){
+      console.log(index , this.logginedUserEmail , this.blogId);
+      this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/RateBlog?blogId=${this.blogId}&email=${this.logginedUserEmail}&stars=${index+1}`)
+      .subscribe((x) => {
+        if(x){
+          let toaster = this.toast.create({message : "Blog rated successfully" , duration : 2000});
+          toaster.present();
+        } else {
+          let toaster = this.toast.create({message : "Something went wrong" , duration : 2000});
+          toaster.present();
+        }
+      })
+    }
   };
 
 

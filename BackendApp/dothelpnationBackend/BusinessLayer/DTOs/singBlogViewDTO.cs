@@ -28,6 +28,7 @@ namespace BusinessLayer.DTOs
         public DateTime? publish_date { get; set; }
         public string time { get; set; }
         public int? vists { get; set; }
+        public double? stars { get; set; }
 
 
         public string map_address { get; set; }

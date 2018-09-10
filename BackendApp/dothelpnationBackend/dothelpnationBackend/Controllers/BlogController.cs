@@ -19,13 +19,16 @@ namespace dothelpnationBackend.Controllers
         private readonly IRepository<blog_sections> _blogSectionsRepo;
         private readonly IRepository<place> _placeRepo;
         private readonly IRepository<user> _userRepo;
+        private readonly IRepository<rating> _rateRepo;
 
-        public BlogController(IRepository<blog> blogRepo , IRepository<blog_sections> blogSectionsRepo, IRepository<place> placeRepo , IRepository<user> userRepo)
+        public BlogController(IRepository<blog> blogRepo , IRepository<blog_sections> blogSectionsRepo, IRepository<place> placeRepo ,
+            IRepository<user> userRepo , IRepository<rating> rateRepo)
         {
             _blogRepo = blogRepo;
             _blogSectionsRepo = blogSectionsRepo;
             _placeRepo = placeRepo;
             _userRepo = userRepo;
+            _rateRepo = rateRepo;
         }
 
 
@@ -118,7 +121,7 @@ namespace dothelpnationBackend.Controllers
 
                     file.SaveAs(path);
                     //photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
-                    photoPath = "http://8d4c49f6.ngrok.io" + "/BlogPhotos/" + fileName;
+                    photoPath = "http://b86d33e0.ngrok.io" + "/BlogPhotos/" + fileName;
                     ImageUploaded = true;
                 }
             }
@@ -168,6 +171,12 @@ namespace dothelpnationBackend.Controllers
                 MappedBlog.user_photo = blogPoster.photo;
                 MappedBlog.section_name = _blogSectionsRepo.Get().Where(x => x.id == MappedBlog.section_id).Single()?.title;
 
+                var singleBlogRate =  _rateRepo.Get()
+                                                .Where(x => x.post_id == MappedBlog.id).ToList().Average(x => x.stars);
+
+                MappedBlog.stars =  singleBlogRate == null ? 0 : singleBlogRate;
+
+
                 return MappedBlog;
             }
             else
@@ -177,18 +186,29 @@ namespace dothelpnationBackend.Controllers
         }
 
 
-
         [HttpGet]
-        [Route("api/IISLoader")]
-        public bool IsThisIISLoading()
+        [Route("api/RateBlog")]
+        public bool RateBlog([FromUri] int blogId , [FromUri] string email , [FromUri] int stars)
         {
-            var flag = new IIS();
-            flag.flag = true;
-            return flag.flag; 
+            var userId = _userRepo.Get().Where(x => x.email == email).Single()?.id;
+
+            if (userId != null)
+            {
+                var IsInserted = _rateRepo.Insert(new rating() {
+                    user_id = (int) userId , 
+                    post_id = blogId ,
+                    stars = stars,
+                    date = DateTime.Now,
+                    time = DateTime.Now.ToString("hh:mm:ss tt")
+                });
+
+                return IsInserted != null  ? true : false;
+            }
+            else
+            {
+                return false;
+            }
         }
-
-
-
 
 
         // Private Metods 
