@@ -13,10 +13,13 @@ import { Storage } from "@ionic/storage";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { File } from "@ionic-native/file";
-import { Url } from "../../CoreAssestiveModules/Url";
+import { Geolocation } from '@ionic-native/geolocation';
+
 import { WheelSelector } from "@ionic-native/wheel-selector";
 import { DataService } from "./../../CoreAssestiveModules/Services/DataService";
 import { LoadingService } from "../../CoreAssestiveModules/Services/LoadingService";
+import { Url } from "../../CoreAssestiveModules/Url";
+
 
 
 @IonicPage()
@@ -43,6 +46,8 @@ export class DhnBlogCraetePage {
   description = "&description=";
   address = "&address=";
   email = "&email=";
+  map_latitude ;
+  map_longitude;
 
   // Binded Attributes 
   BlogType;
@@ -59,6 +64,8 @@ export class DhnBlogCraetePage {
   CityId;
   PlaceId;
 
+  map;
+
   constructor(
     private loadingService: LoadingService,
     public navCtrl: NavController,
@@ -70,7 +77,8 @@ export class DhnBlogCraetePage {
     private storage: Storage,
     private toast: ToastController,
     private actionSheetCtrl: ActionSheetController,
-    private viewCtrl: ViewController
+    private viewCtrl: ViewController,
+    private geolocation: Geolocation
   ) {
     this.errors = {};
     this.storage.get("access_token").then(SECURITY_DATA => {
@@ -96,6 +104,37 @@ export class DhnBlogCraetePage {
     ).subscribe(data => {
       this.MainCities = data;
     });
+
+    this.map = {
+      "map": {
+        "lat": 0,
+        "lng": 0,
+        "zoom": 20,
+        "mapTypeControl": true,
+        "streetViewControl": true
+      }
+    }
+
+    this.map_latitude = `&map_latitude=${0}`;
+    this.map_longitude = `&map_longitude=${0}`;
+
+    // Getting current location 
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.map.map.lat = resp.coords.latitude;
+      this.map.map.lng = resp.coords.longitude;
+
+      this.map_latitude = `&map_latitude=${resp.coords.latitude}`;
+      this.map_longitude = `&map_longitude=${resp.coords.longitude}`;
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
+
+  }
+
+  ionViewDidEnter() {
+
   }
 
   ionViewDidLoad() {
@@ -250,7 +289,8 @@ export class DhnBlogCraetePage {
         `${this.email}${this.logginedUserEmail}` +
         `${this.title}${this.BlogTitle}` +
         `${this.description}${this.BlogDescription}` +
-        `${this.address}${this.UserAddress}`;
+        `${this.address}${this.UserAddress}`+
+        this.map_latitude + this.map_longitude;
 
       // Destination URL
       var url = `${Url.ApiUrlLocalTunnul()}/CraeteNewBlog${requestParams}`;
@@ -276,7 +316,7 @@ export class DhnBlogCraetePage {
         .then(data => {
           console.log(data);
           this.loadingService.hide(); // Posting blog hidder 
-          this.viewCtrl.dismiss({"Close" : false});
+          this.viewCtrl.dismiss({ "Close": false });
         })
         .catch(err => {
           console.log(err);

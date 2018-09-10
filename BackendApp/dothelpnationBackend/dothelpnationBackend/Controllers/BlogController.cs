@@ -101,7 +101,9 @@ namespace dothelpnationBackend.Controllers
             [FromUri] string title,
             [FromUri] string description,
             [FromUri] string address,
-            [FromUri] string email )
+            [FromUri] string email ,
+            [FromUri] string map_latitude,
+            [FromUri] string map_longitude)
         {
             var file = HttpContext.Current.Request.Files.Count > 0 ?
                 HttpContext.Current.Request.Files[0] : null;
@@ -145,7 +147,9 @@ namespace dothelpnationBackend.Controllers
                 content = description,
                 photo = photoPath ,
                 address = address ,
-                vists = 0
+                vists = 0 ,
+                map_latitude = map_latitude ,
+                map_longitude = map_longitude
             };
             var IsInserted = _blogRepo.Insert(newBlog);
 

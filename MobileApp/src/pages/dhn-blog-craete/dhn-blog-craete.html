@@ -72,6 +72,16 @@
       </ion-textarea>
     </ion-item>
 
+    <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+              <agm-map [latitude]="map.map.lat" [longitude]="map.map.lng" [zoom]="map.map.zoom" [mapTypeControl]="map.map.mapTypeControl" [streetViewControl]="map.map.streetViewControl">
+                  <agm-marker [latitude]="map.map.lat" [longitude]="map.map.lng"></agm-marker>
+              </agm-map>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+
   </ion-list>
 
 

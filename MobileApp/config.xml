@@ -104,6 +104,12 @@
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-wheel-selector-plugin" spec="^1.1.1" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Locate you is making experince very easier and helpful , dothelpnation" />
+    </plugin>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Locate you is making experince very easier and helpful , dothelpnation</string>
+    </edit-config>
     <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.5" />
 </widget>
