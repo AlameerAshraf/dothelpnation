@@ -122,8 +122,8 @@ namespace dothelpnationBackend.Controllers
                     );
 
                     file.SaveAs(path);
-                    photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
-                    //photoPath = "http://b86d33e0.ngrok.io" + "/BlogPhotos/" + fileName;
+                    //photoPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + "/BlogPhotos/" + fileName;
+                    photoPath = "http://b86d33e0.ngrok.io" + "/BlogPhotos/" + fileName;
                     ImageUploaded = true;
                 }
             }
@@ -194,19 +194,32 @@ namespace dothelpnationBackend.Controllers
         [Route("api/RateBlog")]
         public bool RateBlog([FromUri] int blogId , [FromUri] string email , [FromUri] int stars)
         {
+            var IsInserted = (object)null;
             var userId = _userRepo.Get().Where(x => x.email == email).Single()?.id;
 
             if (userId != null)
             {
-                var IsInserted = _rateRepo.Insert(new rating() {
-                    user_id = (int) userId , 
-                    post_id = blogId ,
-                    stars = stars,
-                    date = DateTime.Now,
-                    time = DateTime.Now.ToString("hh:mm:ss tt")
-                });
+                var IsRateExistedForUserAndBlog = _rateRepo.Get().Where(x => x.post_id == blogId && x.user_id == userId).FirstOrDefault();
 
-                return IsInserted != null  ? true : false;
+                if (IsRateExistedForUserAndBlog == null)
+                {
+                    IsInserted = _rateRepo.Insert(new rating()
+                    {
+                        user_id = (int)userId,
+                        post_id = blogId,
+                        stars = stars,
+                        date = DateTime.Now,
+                        time = DateTime.Now.ToString("hh:mm:ss tt")
+                    });
+                }
+                else
+                {
+                    IsRateExistedForUserAndBlog.stars = stars;
+                    var IsUpdated = _rateRepo.Update(IsRateExistedForUserAndBlog);
+                    return IsUpdated != null ? true : false;
+                }
+
+                return IsInserted != null ? true : false;
             }
             else
             {
