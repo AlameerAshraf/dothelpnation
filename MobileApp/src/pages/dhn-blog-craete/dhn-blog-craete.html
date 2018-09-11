@@ -76,7 +76,22 @@
         <ion-row>
           <ion-col col-12>
               <agm-map [latitude]="map.map.lat" [longitude]="map.map.lng" [zoom]="map.map.zoom" [mapTypeControl]="map.map.mapTypeControl" [streetViewControl]="map.map.streetViewControl">
-                  <agm-marker [latitude]="map.map.lat" [longitude]="map.map.lng"></agm-marker>
+                  <agm-marker 
+                  [latitude]="map.map.lat" 
+                  [longitude]="map.map.lng"
+                  [disableDefaultUI]="false"
+                  [markerDraggable]="true"
+                  (dragEnd)="markerDragEnd($event)">
+                </agm-marker>
+
+              <agm-circle 
+                  [latitude]="map.map.lat" 
+                  [longitude]="map.map.lng" 
+                  [radius]="80"
+                  [fillColor]="'red'"
+                  [circleDraggable]="false"
+                  [editable]="false">
+              </agm-circle>
               </agm-map>
           </ion-col>
         </ion-row>

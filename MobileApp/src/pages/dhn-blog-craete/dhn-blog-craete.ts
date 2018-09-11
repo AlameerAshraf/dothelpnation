@@ -14,11 +14,14 @@ import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { File } from "@ionic-native/file";
 import { Geolocation } from '@ionic-native/geolocation';
+import { MouseEvent } from '@agm/core';
+
 
 import { WheelSelector } from "@ionic-native/wheel-selector";
 import { DataService } from "./../../CoreAssestiveModules/Services/DataService";
 import { LoadingService } from "../../CoreAssestiveModules/Services/LoadingService";
 import { Url } from "../../CoreAssestiveModules/Url";
+import { Marker } from "@agm/core/services/google-maps-types";
 
 
 
@@ -109,7 +112,7 @@ export class DhnBlogCraetePage {
       "map": {
         "lat": 0,
         "lng": 0,
-        "zoom": 20,
+        "zoom": 17,
         "mapTypeControl": true,
         "streetViewControl": true
       }
@@ -356,5 +359,18 @@ export class DhnBlogCraetePage {
 
   close() {
     this.viewCtrl.dismiss({ "Close": true });
+  }
+
+
+
+  // Map Markers 
+  markerDragEnd($event: MouseEvent) {
+    this.map_latitude = `&map_latitude=${$event.coords.lat}`;
+    this.map_longitude = `&map_longitude=${$event.coords.lng}`;
+
+    this.map.map.lat = $event.coords.lat;
+    this.map.map.lng = $event.coords.lng;
+
+    console.log($event.coords.lat , $event.coords.lng);
   }
 }
