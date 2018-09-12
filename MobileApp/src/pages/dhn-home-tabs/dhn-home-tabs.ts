@@ -48,10 +48,6 @@ export class DhnHomeTabsPage implements OnDestroy {
       });
     });
 
-
-
-
-
     this.translate.get([
       'BLOGS_TAB', 'MESSAGES_TAB', 'PROFILE_TAB', 'SETTINGS_TAB'
     ]).subscribe((values) => {
