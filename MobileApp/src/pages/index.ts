@@ -8,7 +8,7 @@ export const MainPage = 'TabsPage';
 // The initial root pages for our tabs (remove if not using tabs)
 
 export const BlogsRoot: any = "DhnBlogsPage";
-export const MessagesRoot: any = "SettingsPage";
+export const MessagesRoot: any = "DhnMessagesPage";
 export const SettingsRoot: any = "DhnSettingsPage";
 export const ProfileRoot: any = "DhnProfilePage";
 

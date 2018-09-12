@@ -370,7 +370,5 @@ export class DhnBlogCraetePage {
 
     this.map.map.lat = $event.coords.lat;
     this.map.map.lng = $event.coords.lng;
-
-    console.log($event.coords.lat , $event.coords.lng);
   }
 }
