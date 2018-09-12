@@ -4,6 +4,14 @@
   font-family: $font-family-base;
 }
 
+body.keyboard-is-open .tabbar {
+  display: none;
+}
+
+body.keyboard-is-open .scroll-content {
+  margin-bottom: 0 !important;
+}
+
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These

@@ -9,12 +9,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'dhn-chat.html',
 })
 export class DhnChatPage {
+  chatData;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams) {
       let chatParamters = navParams.get("MessagingParams");
-      console.log(chatParamters);
+      this.chatData = chatParamters;
   }
 
   ionViewDidLoad() {

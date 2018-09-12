@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Dhn-Chat</ion-title>
+    <ion-title>{{chatData.UserName}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,10 +17,10 @@
     <ion-row>
       <ion-col col-10>
         <!-- <ion-input type="text" placeholder="Type a message" name="message"></ion-input> -->
-        <ion-textarea rows="2" placeholder="Type a message" name="message"></ion-textarea>
+        <ion-textarea rows="1" placeholder="Type a message" name="message"></ion-textarea>
       </ion-col>
       <ion-col col-2 (click)="sendMessage()">
-        <ion-icon style="font-size: 2em !important;" name="paper-plane"></ion-icon>
+        <ion-icon style="font-size: 2em !important;" color="primary" name="paper-plane"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
