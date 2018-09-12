@@ -6,11 +6,9 @@
 
 
 <ion-content class="outer-content">
-  <ion-list>
+  <ion-searchbar (ionInput)="getMessages($event)" placeholder="Seach in messages"></ion-searchbar>
 
-    <ion-list-header>
-      Blog messages
-    </ion-list-header>
+  <ion-list>
 
 
     <ion-item-sliding>
@@ -21,6 +19,7 @@
 
         <h2>Venkman</h2>
         <p>Back off man, I'm a scientist.</p>
+        <ion-note item-end>3:43 pm</ion-note>
       </ion-item>
       <ion-item-options>
         <button ion-button color="delateButton" icon-start>
