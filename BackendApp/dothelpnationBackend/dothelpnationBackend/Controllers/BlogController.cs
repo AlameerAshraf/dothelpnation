@@ -64,13 +64,14 @@ namespace dothelpnationBackend.Controllers
 
             foreach (var blog in MappedBlogs)
             {
+                blog.time_span = DateTime.ParseExact(blog.time, "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay;
                 blog.section_name = GetSectionNameById((int)blog.section_id);
                 blog.user_name = GetUserNameById((int)blog.user_id);
                 blog.place_name = GetPlaceById((int)blog.place_id);
                 blog.city_name = GetPlaceById((int)blog.city_id);
             }
 
-            return MappedBlogs;
+            return MappedBlogs.OrderByDescending(x => x.publish_date).ThenByDescending(x => x.time);
 
         }
 
