@@ -12,7 +12,6 @@ import {
 import { Storage } from "@ionic/storage";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Camera, CameraOptions } from "@ionic-native/camera";
-import { File } from "@ionic-native/file";
 import { Geolocation } from '@ionic-native/geolocation';
 import { MouseEvent } from '@agm/core';
 
@@ -21,7 +20,9 @@ import { WheelSelector } from "@ionic-native/wheel-selector";
 import { DataService } from "./../../CoreAssestiveModules/Services/DataService";
 import { LoadingService } from "../../CoreAssestiveModules/Services/LoadingService";
 import { Url } from "../../CoreAssestiveModules/Url";
-import { Marker } from "@agm/core/services/google-maps-types";
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/observable/forkJoin';
 
 
 
@@ -92,20 +93,16 @@ export class DhnBlogCraetePage {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
 
-    this.DataService.Get(
-      `${Url.ApiUrlLocalTunnul()}/GetListOfBlogSections?site_lang=en`,
-      null,
-      this.access_token
-    ).subscribe(data => {
-      this.blogSections = data;
-    });
+    this.loadingService.show("Loading data"); // show loaders 
+    let blogTypeData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfBlogSections?site_lang=en`,null,this.access_token)
+    let mainCitiesData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`,null,this.access_token)
 
-    this.DataService.Get(
-      `${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`,
-      null,
-      this.access_token
-    ).subscribe(data => {
-      this.MainCities = data;
+    Observable.forkJoin([blogTypeData , mainCitiesData]).subscribe((results) => {
+      this.blogSections = results[0];
+      this.MainCities = results[1];
+
+      // Hide the loaders for loading data 
+      this.loadingService.hide();
     });
 
     this.map = {
