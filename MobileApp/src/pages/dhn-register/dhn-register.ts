@@ -143,6 +143,7 @@ export class DhnRegisterPage {
           };
 
           this.Storage.set('access_token' , access_token_auth);
+          this.Storage.set('Profile_Data' , newUserData);
           this.navCtrl.setRoot('DhnHomeTabsPage' , newUserData);
         })
       }
