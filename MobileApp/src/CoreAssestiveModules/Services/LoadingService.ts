@@ -11,7 +11,7 @@ export class LoadingService {
 
   show(label) {
     this.loading = this.loadingCtrl.create({
-      content: label+"...."
+      content: label+"..."
     });
     this.loading.present();
   }

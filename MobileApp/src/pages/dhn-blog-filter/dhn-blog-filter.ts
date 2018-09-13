@@ -5,7 +5,11 @@ import { Storage } from '@ionic/storage';
 
 import { IonicPage, NavController, NavParams, ModalController, ViewController, ToastController } from 'ionic-angular';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
+import { LoadingService } from './../../CoreAssestiveModules/Services/LoadingService';
 import { Url } from '../../CoreAssestiveModules/Url';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/observable/forkJoin';
 
 @IonicPage()
 @Component({
@@ -28,6 +32,7 @@ export class DhnBlogFilterPage {
   SearchFilter = `&SearchFilter=`;
 
   constructor(public navCtrl: NavController, 
+    private loading: LoadingService,
     private WheelSelector : WheelSelector,
     private viewCtrl : ViewController,
     private DataService: DataService,
@@ -39,13 +44,21 @@ export class DhnBlogFilterPage {
       this.access_token = SECURITY_DATA.access_token;
     })
 
-    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfBlogSections?site_lang=en`, null, this.access_token).subscribe((data) => {
-      this.blogSections = data;
+    // Show loading for blog types 
+    this.loading.show("Loading data");
+
+    let blogTypeData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfBlogSections?site_lang=en`, null, this.access_token);
+    let mainCitiesData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`, null, this.access_token);
+
+    let formData = Observable.forkJoin([ blogTypeData , mainCitiesData ]).subscribe((results) => {
+      this.blogSections = results[0];
+      this.MainCities = results[1];
+
+      // Hide the loader 
+      this.loading.hide();
     });
 
-    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`, null, this.access_token).subscribe((data) => {
-      this.MainCities = data;
-    });
+    
   }
 
   ionViewWillEnter(){
@@ -91,6 +104,8 @@ export class DhnBlogFilterPage {
       });
       this.City = SelectedCityFilter.name;
       this.CityFilter = `&CityFilter=${SelectedCityFilter.id}`;
+
+      this.loading.show("Loading Places");  // show loading places 
       this.GetPalces(SelectedCityFilter.id);
     } , (err) => {
       console.log("closed");
@@ -128,6 +143,7 @@ export class DhnBlogFilterPage {
 
   GetPalces(id){
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfSubCities?MohafzaId=${id}`, null, this.access_token).subscribe((data) => {
+      this.loading.hide(); // Loading places loader  
       this.places = data;
     });
   }
