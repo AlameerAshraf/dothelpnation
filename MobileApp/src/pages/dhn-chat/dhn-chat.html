@@ -1,14 +1,35 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{chatData.UserName}}</ion-title>
+    <ion-title>{{ currentUserName }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let chat of chats" no-lines>
+      <div class="chat-status" text-center *ngIf="chat.showMessage == false ; else message">
+      </div>
+      <ng-template #message>
+        <div class="chat-message" text-right *ngIf="chat.userId === currentUserId">
+          <div class="right-bubble">
+            <!-- <span class="msg-name"> {{ chat.userName }} </span> -->
+            <span class="msg-date">{{ chat.sendDate | date:'short' }}</span>
+            <p text-wrap>{{chat.message}}</p>
+          </div>
+        </div>
+        <div class="chat-message" text-left *ngIf="chat.userId !== currentUserId">
+          <div class="left-bubble">
+            <!-- <span class="msg-name">{{ chat.userName }}</span> -->
+            <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
+            <p text-wrap>{{chat.message}}</p>
+          </div>
+        </div>
+      </ng-template>
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 
@@ -16,8 +37,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-10>
-        <!-- <ion-input type="text" placeholder="Type a message" name="message"></ion-input> -->
-        <ion-textarea rows="1" placeholder="Type a message" name="message"></ion-textarea>
+        <ion-textarea [(ngModel)]="newMessage" rows="1" placeholder="Type a message" name="message"></ion-textarea>
       </ion-col>
       <ion-col col-2 (click)="sendMessage()">
         <ion-icon style="font-size: 2em !important;" color="primary" name="paper-plane"></ion-icon>
