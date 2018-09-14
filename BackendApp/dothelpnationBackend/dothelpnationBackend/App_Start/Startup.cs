@@ -34,6 +34,7 @@ namespace dothelpnationBackend.App_Start
 
             // SignalR Mapper
             app.MapSignalR();
+
         }
     }
 }

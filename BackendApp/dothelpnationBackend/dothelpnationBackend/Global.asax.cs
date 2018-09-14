@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using Autofac.Integration.SignalR;
 using BusinessLayer.Repositories;
 using BusinessLayer.DTOs;
 
@@ -30,6 +31,7 @@ namespace dothelpnationBackend
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterWebApiFilterProvider(config);
             builder.RegisterWebApiModelBinderProvider();
+            builder.RegisterHubs(Assembly.GetExecutingAssembly());
 
 
             //builder.RegisterGeneric(typeof(Repository<>)).AsSelf();
