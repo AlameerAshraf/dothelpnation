@@ -12,7 +12,10 @@ namespace dothelpnationBackend.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
+            // ENABLE CORS 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+
+            // IDENTITY SECURITY 
             var myProvider = new AuthorizationServerProvider();
 
             OAuthAuthorizationServerOptions options = new OAuthAuthorizationServerOptions()
@@ -28,6 +31,9 @@ namespace dothelpnationBackend.App_Start
 
             HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
+
+            // SignalR Mapper
+            app.MapSignalR();
         }
     }
 }
