@@ -8,6 +8,7 @@ import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Storage } from '@ionic/storage';
+import { VolatileStorage } from '../CoreAssestiveModules/VolatileStorage';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -40,14 +41,12 @@ export class MyApp implements OnInit {
     { title: 'Tabs', component: 'TabsPage' },
     { title: 'Cards', component: 'CardsPage' },
     { title: 'Content', component: 'ContentPage' },
-    // { title: 'Login', component: 'LoginPage' },
     { title: 'Signup', component: 'SignupPage' },
     { title: 'Master Detail', component: 'ListMasterPage' },
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' },
     { title: 'Login', component: 'DhnLoginPage' },
-    // { title: 'TabsHome', component: 'DhnHomeTabsPage' }
   ]
 
   ngOnInit(): void {
@@ -57,6 +56,12 @@ export class MyApp implements OnInit {
           if (access_token != null) {
             if (new Date(new Date().getTime() + access_token.expires_in * 1000) > new Date()) {
               this.rootPage = "DhnHomeTabsPage";
+
+              // get profile data .. 
+              this.Storage.get("Profile_Data").then((data) => {
+                VolatileStorage.setData(data);
+              });
+              
             } else {
               this.rootPage = "DhnLoginPage";
             }
