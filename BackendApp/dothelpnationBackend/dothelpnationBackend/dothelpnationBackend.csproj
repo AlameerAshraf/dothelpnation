@@ -213,6 +213,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authorization\AuthorizationServerProvider.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">

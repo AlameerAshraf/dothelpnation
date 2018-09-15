@@ -44,7 +44,9 @@ namespace dothelpnationBackend
             var conatiner = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(conatiner);
 
-            // Hub configurations .. 
+
+
+            // SignalR Hub configurations .. 
             var HubBuilder = new ContainerBuilder();
             HubBuilder.RegisterHubs(Assembly.GetExecutingAssembly());
 
@@ -55,7 +57,6 @@ namespace dothelpnationBackend
 
             var hubContainer = HubBuilder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(hubContainer);
-
         }
     }
 }

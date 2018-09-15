@@ -12,6 +12,8 @@ import { Url } from './../../CoreAssestiveModules/Url';
 export class DhnChatPage implements OnInit {
   currentUserName;
   currentUserId;
+  currentEmail;
+  currentPhotoUrl;
   chats: any[];
 
 
@@ -23,28 +25,30 @@ export class DhnChatPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    private _signalR: SignalR,
+    // private _signalR: SignalR,
     public navParams: NavParams) {
     let chatParamters = navParams.get("MessagingParams");
     this.currentUserId = chatParamters.Id;
     this.currentUserName = chatParamters.UserName;
+    this.currentEmail = chatParamters.Email;
+    this.currentPhotoUrl = chatParamters.PhotoUrl;
 
     // chat list .. 
     this.chats = [
-      { userId: '22', sendDate: new Date(), message: '3am elnas !', showMessage: "false", userName: "Ahmed Elmasry" },
-      { userId: '33', sendDate: new Date(), message: 'shaba7 elsenin !', showMessage: "false", userName: "AlameerAshraf" },
+      // { userId: '22', sendDate: new Date(), message: '3am elnas !', showMessage: "false", userName: "Ahmed Elmasry" },
+      // { userId: '33', sendDate: new Date(), message: 'shaba7 elsenin !', showMessage: "false", userName: "AlameerAshraf" },
     ];
 
   }
 
 
   ngOnInit(): void {
-    this._signalR.connect().then((c) => {
-      console.log(c);
-      c.invoke("send" , "amir" , "dothelpnation").then((tst) => {
-        console.log(tst);
-      })
-    });
+    // this._signalR.connect().then((c) => {
+    //   console.log(c);
+    //   c.invoke("send" , "amir" , "dothelpnation").then((tst) => {
+    //     console.log(tst);
+    //   })
+    // });
 
 
   }

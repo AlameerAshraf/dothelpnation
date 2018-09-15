@@ -38,7 +38,6 @@ export class DhnBlogViewPage {
     });
 
 
-
     let BlogData = this.navParams.get("blogData");
     this.data = BlogData;
     this.data.shareIcon = "md-share-alt"
@@ -123,7 +122,14 @@ export class DhnBlogViewPage {
 
   // message blog poster 
   messagePoster() {
-
+    this.navCtrl.push("DhnChatPage", {
+      MessagingParams: {
+        Id : this.data.user_id,
+        Email : this.data.user_email,
+        UserName : this.data.user_name,
+        PhotoUrl : this.data.user_photo
+      }
+    });
   }
 
 
