@@ -5,6 +5,7 @@ using Autofac.Integration.WebApi;
 using Autofac.Integration.SignalR;
 using BusinessLayer.Repositories;
 using BusinessLayer.DTOs;
+using Microsoft.AspNet.SignalR;
 
 namespace dothelpnationBackend
 {
@@ -31,7 +32,6 @@ namespace dothelpnationBackend
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterWebApiFilterProvider(config);
             builder.RegisterWebApiModelBinderProvider();
-            builder.RegisterHubs(Assembly.GetExecutingAssembly());
 
 
             //builder.RegisterGeneric(typeof(Repository<>)).AsSelf();
@@ -43,6 +43,19 @@ namespace dothelpnationBackend
 
             var conatiner = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(conatiner);
+
+            // Hub configurations .. 
+            var HubBuilder = new ContainerBuilder();
+            HubBuilder.RegisterHubs(Assembly.GetExecutingAssembly());
+
+            HubBuilder
+                .RegisterGeneric(typeof(Repository<>))
+                .As(typeof(IRepository<>))
+                .InstancePerDependency();
+
+            var hubContainer = HubBuilder.Build();
+            GlobalHost.DependencyResolver = new AutofacDependencyResolver(hubContainer);
+
         }
     }
 }

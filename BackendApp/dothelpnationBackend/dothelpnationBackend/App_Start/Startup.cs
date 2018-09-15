@@ -33,7 +33,7 @@ namespace dothelpnationBackend.App_Start
             WebApiConfig.Register(config);
 
             // SignalR Mapper
-            app.MapSignalR();
+            app.MapSignalR("/dothelpnationchat", new Microsoft.AspNet.SignalR.HubConfiguration());
 
         }
     }
