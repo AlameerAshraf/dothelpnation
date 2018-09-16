@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2018 at 08:48 PM
+-- Generation Time: Sep 17, 2018 at 01:00 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -377,30 +377,7 @@ CREATE TABLE `ads_messages` (
 --
 
 INSERT INTO `ads_messages` (`id`, `type`, `parent_id`, `ad_id`, `from_user_id`, `to_user_id`, `title`, `info`, `stuts`, `date`, `time`) VALUES
-(2, 'message', NULL, 6, 14, 2, 'sdhfghmsd', 'fjghkghjktg', 1, '2017-11-03', '11-57-38-AM'),
-(3, 'message', 2, 6, 14, 2, 'ربما هناك امر ما', 'ابلايب ب  ي با يباياي اابلايب ب  ي با يباياي اابلايب ب  ي با يباياي اابلايب ب  ي با يباياي ا', 1, '2017-11-03', '11-58-32-AM'),
-(4, 'message', 2, 6, 2, 14, 'السلام عليكم ارغب فى التواصل معك بخصوص الشي المقود', 'السلام عليكم السلام عليكم السلام عليكم السلام عليكم السلام عليكم السلام عليكم السلام عليكم السلام عليكم السلام عليكم ', 1, '2017-11-03', '02-42-17-PM'),
-(5, 'message', NULL, 14, 2, 14, 'السلام عليكم اخي', 'جزاك الله خيرا علي هذا العمل الرائع', 1, '2017-11-03', '02-43-22-PM'),
-(6, 'report', NULL, 14, 12, 14, 'اخي لقد تم ايجاد الشئ المفقود بنجاح', 'شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير شكرا لك علي جهودك في غمل الخير', 1, '2017-11-03', '04-34-58-PM'),
-(7, 'message', NULL, 14, 2, 14, 'مرحبا اححمد ارغيب فى التواصل معط', 'بخصوص اعلانك المميز', 1, '2017-11-24', '09-26-21-PM'),
-(8, 'message', NULL, 14, 2, 14, 'fjgjdfhdfjgjdfhjdhjkd', 'jdsjfdjkyjkjkeke', 1, '2017-11-24', '09-30-36-PM'),
-(9, 'message', 2, 6, 2, 14, NULL, 'sfdsgsdfgsdg', 1, '2017-11-24', '11-00-29-pm'),
-(10, 'message', 2, 6, 14, 14, NULL, 'dgnsfgsgfbsgjfjgjdfg', 0, '2017-11-24', '11-04-23-pm'),
-(11, 'message', 3, 6, 2, 14, NULL, 'fhfgdgfdhdgf', 0, '2017-11-24', '11-06-27-pm'),
-(12, 'message', 4, 6, 14, 2, NULL, 'ad dcvd f ds  sd fs', 0, '2017-11-24', '11-08-05-pm'),
-(13, 'message', 3, 6, 14, 14, NULL, 'sdgfdnfgdhd', 0, '2017-11-24', '11-08-38-pm'),
-(14, 'message', 5, 14, 14, 2, NULL, 'dfsdfdnfsdhfsd', 0, '2017-11-24', '11-09-46-pm'),
-(15, 'message', 5, 14, 2, 2, NULL, 'dsfndsnfndsfndsnfnsdnfnns', 0, '2017-11-24', '11-10-09-pm'),
-(16, 'message', NULL, 21, 17, 17, NULL, 'أنا اقدر اساعدك', 1, '2017-12-10', '01-57-35-PM'),
-(17, 'message', NULL, 17, 18, 18, NULL, 'أنا عندى فصيلة الدم ده', 1, '2017-12-10', '02-17-16-PM'),
-(18, 'message', NULL, 21, 18, 17, NULL, 'انا اقدر اساعد', 1, '2017-12-10', '02-19-42-PM'),
-(19, 'message', NULL, 17, 2, 18, 'تسقفتسقفتقسفتقسفتسفق', 'تفستسقفتسقفتسفق', 1, '2018-02-05', '09-09-21-PM'),
-(20, 'report', NULL, 17, 2, 18, 'شقلاشقلاشقلاشق', 'لا شيقلاش', 0, '2018-02-05', '09-14-42-PM'),
-(21, 'message', NULL, 29, 2, 19, NULL, 'uuuuu', 1, '2018-04-16', '01-34-27-PM'),
-(22, 'message', 21, 29, 19, 2, NULL, 'thx', 0, '2018-04-16', '01-35-19-pm'),
-(23, 'message', 21, 29, 19, 2, NULL, 'ok', 0, '2018-04-16', '01-35-54-pm'),
-(24, 'message', NULL, 26, 19, 2, 'mm', 'kkkk', 1, '2018-04-16', '01-39-43-PM'),
-(25, 'report', NULL, 26, 19, 2, 'TTTT', 'TTTTTTTTTTTTTTTTTTTTTTTT', 0, '2018-04-16', '01-50-14-PM');
+(3, 'message', 2, 6, 14, 2, 'ربما هناك امر ما', 'ابلايب ب  ي با يباياي اابلايب ب  ي با يباياي اابلايب ب  ي با يباياي اابلايب ب  ي با يباياي ا', 1, '2017-11-03', '11-58-32-AM');
 
 -- --------------------------------------------------------
 
@@ -513,9 +490,17 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `langkey`, `section_id`, `title`, `url`, `address`, `place_id`, `city_id`, `map_address`, `map_radius`, `map_latitude`, `map_longitude`, `photo`, `bloodtype`, `content`, `short_desc`, `type`, `user_id`, `stuts`, `meat_description`, `meat_keywords`, `publish_date`, `time`, `vists`) VALUES
-(34, 'ar', 1, 'العثور على طفلتين', '%D8%A7%D9%84%D8%B9%D8%AB%D9%88%D8%B1-%D8%B9%D9%84%D9%89-%D8%B7%D9%81%D9%84%D8%AA%D9%8A%D9%86', 'مدينة طنطا', 96, 540, 'Darb Al Saqqa, Tanta Qism 2, Tanta, Gharbia Governorate, مصر', '300', '30.782170380285844', '31.00089202031245', 'post-15312546875b45179f90159.jpg', NULL, 'الطفلتين دول معثور عليهم بمدينة طنطا منذ حوالي أسبوعين.....أي أحد يعرف أهليهم يتصل بي ٠١٢٢٥٨٧٥٦٠٧', NULL, NULL, 26, 1, NULL, NULL, '2018-07-10', '08-31-27-PM', 825),
-(93, NULL, 1, 'طفل كبير مفقود', NULL, NULL, 86, 184, NULL, NULL, NULL, NULL, 'http://f6cd5256.ngrok.io/BlogPhotos/4d201052-4c65-450b-b7e2-883b020d4011.png', NULL, 'عيل اهبل تايه واسمه ابراهيم يا ولاد الحلاح', NULL, NULL, 67, NULL, NULL, NULL, '2018-09-02', '2:15:31 AM', NULL),
-(94, NULL, 11, 'العثور على طفلتين', NULL, NULL, 135, 87, NULL, NULL, NULL, NULL, 'http://f6cd5256.ngrok.io/BlogPhotos/3b643afa-f6b0-40f1-9a9e-75b5ce56dacc.jpg', NULL, 'الطفلتين دول معثور عليهم بمدينة طنطا منذ حوالي أسبوعين.....أي أحد يعرف أهليهم يتصل بي ٠١٢٢٥٨٧٥٦٠٧', NULL, NULL, 70, NULL, NULL, NULL, '2018-09-02', '2:19:46 AM', NULL);
+(34, 'ar', 1, 'العثور على طفلتين', '%D8%A7%D9%84%D8%B9%D8%AB%D9%88%D8%B1-%D8%B9%D9%84%D9%89-%D8%B7%D9%81%D9%84%D8%AA%D9%8A%D9%86', 'مدينة طنطا', 96, 540, 'Darb Al Saqqa, Tanta Qism 2, Tanta, Gharbia Governorate, مصر', '300', '30.782170380285844', '31.00089202031245', 'post-15312546875b45179f90159.jpg', NULL, 'الطفلتين دول معثور عليهم بمدينة طنطا منذ حوالي أسبوعين.....أي أحد يعرف أهليهم يتصل بي ٠١٢٢٥٨٧٥٦٠٧', NULL, NULL, 26, 1, NULL, NULL, '2018-07-10', '02:15:31 AM', 825),
+(93, NULL, 1, 'طفل كبير مفقود', 'http://www.dothelpnation.com/', NULL, 86, 184, NULL, NULL, '31.2114916', '29.9243751', 'http://c87b8985.ngrok.io/BlogPhotos/4d201052-4c65-450b-b7e2-883b020d4011.png', NULL, 'عيل اهبل تايه واسمه ابراهيم يا ولاد الحلاح', NULL, NULL, 67, NULL, NULL, NULL, '2018-09-02', '02:15:31 AM', NULL),
+(94, NULL, 11, 'العثور على طفلتين', 'http://www.dothelpnation.com/', NULL, 135, 87, NULL, NULL, '31.2114916', '29.9243751', 'http://c87b8985.ngrok.io/BlogPhotos/3b643afa-f6b0-40f1-9a9e-75b5ce56dacc.jpg', NULL, 'الطفلتين دول معثور عليهم بمدينة طنطا منذ حوالي أسبوعين.....أي أحد يعرف أهليهم يتصل بي ٠١٢٢٥٨٧٥٦٠٧', NULL, NULL, 70, NULL, NULL, NULL, '2018-09-02', '02:19:46 AM', NULL),
+(95, NULL, 11, 'العثور على طفلتين', 'http://www.dothelpnation.com/', NULL, 135, 87, NULL, NULL, '31.2114916', '29.9243751', 'http://c87b8985.ngrok.io/BlogPhotos/89fba660-fcb2-4a2b-ad78-b4f0ea9aa32e.jpg', NULL, 'الطفلتين دول معثور عليهم بمدينة طنطا منذ حوالي أسبوعين.....أي أحد يعرف أهليهم يتصل بي ٠١٢٢٥٨٧٥٦٠٧', NULL, NULL, 70, NULL, NULL, NULL, '2018-09-04', '11:39:45 PM', NULL),
+(96, NULL, 11, 'tst', 'http://www.dothelpnation.com/', 'tst', 116, 87, NULL, NULL, '31.2114916', '29.9243751', 'http://c87b8985.ngrok.io/BlogPhotos/081dc1b4-0b6d-4c02-9586-bc93d0bd347f.jpg', NULL, 'bdhdbdbdjdjddjndsjsnjdbdbdnxbnjjdk', NULL, NULL, 62, NULL, NULL, NULL, '2018-09-07', '01:20:44 AM', NULL),
+(97, NULL, 11, 'شاب غريب الاطوار ضاءع ف المنصورة', 'http://www.dothelpnation.com/', 'المنصورة شارع الطيران', 246, 89, NULL, NULL, '31.2114916', '29.9243751', 'http://c87b8985.ngrok.io/BlogPhotos/eed62322-bd64-4fda-a664-83e307d4827a.jpg', NULL, 'العثور ع الشاب ده ببتعانل بشكل غريب مع الناس واسلوله مريب والناس طلبتله الشرطة ', NULL, NULL, 62, NULL, NULL, NULL, '2018-09-07', '06:12:16 PM', NULL),
+(98, NULL, 15, 'العثور ع شاب وسيم', 'http://www.dothelpnation.com/', 'نور الاسلام', 116, 87, NULL, NULL, '31.2114916', '29.9243751', 'http://www.saydala.online/BlogPhotos/d330e325-bde1-4179-bdf6-de4d13b207eb.jpg', NULL, 'لاقينا شاب وسيم جدا هنا الحقونااا', NULL, NULL, 62, NULL, NULL, NULL, '2018-09-07', '07:12:50 PM', NULL),
+(99, NULL, 14, 'مسطرة ضاءعه في الاسكندرية', NULL, 'الابرهيمه', 115, 87, NULL, NULL, NULL, NULL, 'http://c87b8985.ngrok.io/BlogPhotos/0d68a383-7e5a-4760-be2d-205e312fb7d0.jpg', NULL, 'مسطرة لونها احمر ضاعت مني اللي يشوفها بتصل ع الرقم ده ضروري ٠١٠٩٥٧٠٨٤٨٤', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-08', '08:41:04 AM', 0),
+(100, NULL, 11, 'علبة مناديل سوفت روز ضايعه ', NULL, 'حدايق المعادي', 190, 86, NULL, NULL, NULL, NULL, 'http://www.saydala.online/BlogPhotos/e91822f2-8049-4d63-911e-1fcd7a5ef7bc.jpg', NULL, 'ضاعت مني علبة مناديل سوفت روز الله يخليكم دلوني عليها ', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-10', '03:55:19 AM', 0),
+(101, NULL, 13, 'كرسي ضايع جدا', NULL, 'حدايق المعادي', 168, 86, NULL, NULL, '29.9737325', '31.2491471', 'http://www.saydala.online/BlogPhotos/c1ec7835-6d22-45af-99df-8e0a958e85f4.jpg', NULL, 'فيه كرسي ضاع مننا جامد ', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-10', '04:25:14 AM', 0),
+(102, NULL, 11, 'الموضع', NULL, 'العنوان ', 219, 9, NULL, NULL, '29.968685126646545', '31.24945012187152', 'http://b86d33e0.ngrok.io/BlogPhotos/bff0f8af-c8d5-4695-8d1b-0f09bcf6cbfa.jpg', NULL, 'الشرح ', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-11', '07:13:24 PM', 0);
 
 -- --------------------------------------------------------
 
@@ -1525,29 +1510,8 @@ CREATE TABLE `rating` (
 --
 
 INSERT INTO `rating` (`id`, `post_id`, `user_id`, `stars`, `date`, `time`) VALUES
-(1, 13, 2, 5, '2017-11-23', '10-54-33-AM'),
-(2, 13, 2, 4, '2017-11-23', '10-54-44-AM'),
-(3, 13, 2, 3, '2017-11-23', '10-54-48-AM'),
-(4, 13, 2, 2, '2017-11-23', '10-54-51-AM'),
-(5, 13, 2, 1, '2017-11-23', '10-54-54-AM'),
-(6, 13, 2, 5, '2017-11-23', '10-58-48-AM'),
-(7, 13, 2, 5, '2017-11-23', '10-58-56-AM'),
-(8, 13, 2, 3, '2017-11-23', '10-59-00-AM'),
-(9, 13, 2, 3, '2017-11-23', '10-59-03-AM'),
-(10, 11, 2, 5, '2017-11-23', '11-02-04-AM'),
-(11, 11, 2, 5, '2017-11-23', '11-02-24-AM'),
-(12, 13, 2, 3, '2017-11-23', '11-08-17-AM'),
-(13, 13, 2, 1, '2017-11-23', '11-08-20-AM'),
-(14, 13, 2, 3, '2017-11-24', '09-49-58-PM'),
-(15, 14, 2, 5, '2017-11-30', '12-16-22-AM'),
-(16, 6, 2, 4, '2017-11-30', '12-18-36-AM'),
-(17, 6, 2, 5, '2017-11-30', '12-18-40-AM'),
-(18, 6, 2, 3, '2017-11-30', '12-18-45-AM'),
-(19, 13, 2, 1, '2017-11-30', '03-45-12-PM'),
-(20, 13, 2, 5, '2017-11-30', '03-45-26-PM'),
-(21, 17, 17, 5, '2017-12-08', '02-39-14-PM'),
-(22, 17, 17, 5, '2017-12-08', '02-39-14-PM'),
-(23, 28, 18, 2, '2018-02-05', '08-56-47-PM');
+(28, 99, 65, 1, '2018-09-11', '05:13:10 PM'),
+(29, 101, 72, 5, '2018-09-12', '11:14:21 PM');
 
 -- --------------------------------------------------------
 
@@ -2223,7 +2187,9 @@ INSERT INTO `users` (`id`, `name`, `mobile`, `age`, `email`, `level`, `photo`, `
 (68, 'lulu', '01060931989', '14', 'lilu@gg.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-08-31 11:45:19', NULL),
 (69, 'as', '01060931989', '22', 'alameer@sd.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-08-31 11:52:05', NULL),
 (70, 'Saydala Elmasry', '', '', 'alex_pharma_2007@yahoo.com', NULL, 'https://graph.facebook.com/10216474303630645/picture?type=large', NULL, NULL, NULL, '***', NULL, '2018-09-01 14:32:43', NULL),
-(71, 'saydala', '01006688839', '28', 'a.elmasry@appgenesis.net', NULL, NULL, NULL, NULL, NULL, 'Aa123456', NULL, '2018-09-01 14:41:05', NULL);
+(71, 'saydala', '01006688839', '28', 'a.elmasry@appgenesis.net', NULL, NULL, NULL, NULL, NULL, 'Aa123456', NULL, '2018-09-01 14:41:05', NULL),
+(72, 'Arsany Nagy', '', '', 'arsanynagylion@gmail.com', NULL, 'https://lh3.googleusercontent.com/-ddy7cl2RsmA/AAAAAAAAAAI/AAAAAAAAADw/zpSqqySu0HQ/photo.jpg', NULL, NULL, NULL, '***', NULL, '2018-09-12 19:13:12', NULL),
+(73, 'EmanMohamed', '01095708484', '26', 'eman@gmail.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-09-12 23:26:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -2516,7 +2482,7 @@ ALTER TABLE `admin_translation`
 -- AUTO_INCREMENT for table `ads_messages`
 --
 ALTER TABLE `ads_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ad_photos`
@@ -2528,7 +2494,7 @@ ALTER TABLE `ad_photos`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `blog_sections`
@@ -2564,7 +2530,7 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `site_lang`
@@ -2588,7 +2554,7 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
