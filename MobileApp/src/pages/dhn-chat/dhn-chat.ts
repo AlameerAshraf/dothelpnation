@@ -1,4 +1,3 @@
-import { SignalR, SignalRConnection, ConnectionStatus } from 'ng2-signalr';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Component, OnInit } from '@angular/core';
 import { Url } from './../../CoreAssestiveModules/Url';
@@ -25,7 +24,6 @@ export class DhnChatPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    // private _signalR: SignalR,
     public navParams: NavParams) {
     let chatParamters = navParams.get("MessagingParams");
     this.currentUserId = chatParamters.Id;
@@ -43,13 +41,6 @@ export class DhnChatPage implements OnInit {
 
 
   ngOnInit(): void {
-    // this._signalR.connect().then((c) => {
-    //   console.log(c);
-    //   c.invoke("send" , "amir" , "dothelpnation").then((tst) => {
-    //     console.log(tst);
-    //   })
-    // });
-
 
   }
 

@@ -21,6 +21,9 @@ namespace BusinessLayer.DTOs
 
                 cfg.CreateMap<blog, singBlogViewDTO>();
                 cfg.CreateMap<singBlogViewDTO, blog>();
+
+                cfg.CreateMap<ads_messages, chatDTO>();
+                cfg.CreateMap<chatDTO, ads_messages>();
             });
         }
     }

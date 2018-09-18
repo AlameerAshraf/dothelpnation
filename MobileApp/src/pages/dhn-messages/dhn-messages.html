@@ -10,16 +10,17 @@
 
   <ion-list>
 
+    
 
-    <ion-item-sliding (click)="startChat('33')">
-      <ion-item>
+    <ion-item-sliding *ngFor="let singleChat of userChats"  >
+      <ion-item (click)="startChat(singleChat.from_user_id)">
         <ion-avatar item-start>
-          <img src="assets/img/sarah-avatar.png.jpeg">
+          <img src="{{ singleChat.from_user_photo }}">
         </ion-avatar>
 
-        <h2>Venkman</h2>
-        <p>Back off man, I'm a scientist.</p>
-        <ion-note item-end>3:43 pm</ion-note>
+        <h2>{{ singleChat.from_user_name }}</h2>
+        <p>{{ singleChat.info }}</p>
+        <ion-note item-end>{{ singleChat.time }}</ion-note>
       </ion-item>
       <ion-item-options>
         <button ion-button color="delateButton" icon-start>
