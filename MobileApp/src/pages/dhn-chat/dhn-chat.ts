@@ -60,7 +60,10 @@ export class DhnChatPage implements OnInit {
 
 
   ionViewWillEnter(){
-    this.loading.show("Loading chat");
+    if(!this.middleTextShow){
+      this.loading.show("Loading chat");
+    }
+    
     let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`,null , this.access_token)
     .subscribe((chats) => {
       chats.forEach(element => {

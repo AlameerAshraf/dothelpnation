@@ -122,13 +122,15 @@ export class DhnBlogViewPage {
 
   // message blog poster 
   messagePoster() {
+    var MessagingParamsdata = {
+      destination_user_id : this.data.user_id ,
+      destination_user_name : this.data.user_name,
+      destination_user_email : this.data.user_email, 
+
+    }
     this.navCtrl.push("DhnChatPage", {
-      MessagingParams: {
-        Id : this.data.user_id,
-        Email : this.data.user_email,
-        UserName : this.data.user_name,
-        PhotoUrl : this.data.user_photo
-      }
+      "MessagingParams": MessagingParamsdata,
+      "IsTextInitializer" : {textShow : true}
     });
   }
 

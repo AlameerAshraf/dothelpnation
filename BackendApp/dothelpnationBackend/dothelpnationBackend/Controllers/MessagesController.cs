@@ -60,7 +60,7 @@ namespace dothelpnationBackend.Controllers
                 });
             }
 
-            return peerToPeerChats;
+            return peerToPeerChats.OrderBy(x => x.sendDate).ThenBy(x => x.time);
         }
 
 
@@ -143,7 +143,7 @@ namespace dothelpnationBackend.Controllers
                 message.destination_user_photo = fromUserData.photo;
             }
 
-            return chats.OrderByDescending(x => x.date).ThenByDescending(x => x.time);
+            return chats.OrderBy(x => x.date).ThenBy(x => x.time);
         }
 
 
