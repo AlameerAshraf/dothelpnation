@@ -16,7 +16,6 @@ export class DhnProfilePage {
     private storage: Storage,
     private events: Events) {
       this.storage.get('Profile_Data').then((Profile_Data) => {
-        console.log(Profile_Data)
         if(Profile_Data.photo == null){
           Profile_Data.photo = "assets/img/avatar2.png";
         }

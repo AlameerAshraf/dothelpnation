@@ -13,13 +13,13 @@
     
 
     <ion-item-sliding *ngFor="let singleChat of userChats"  >
-      <ion-item (click)="startChat(singleChat.from_user_id)">
+      <ion-item (click)="startChat(singleChat.destination_user_id)">
         <ion-avatar item-start>
-          <img src="{{ singleChat.from_user_photo }}">
+          <img src="{{ singleChat.destination_user_photo }}">
         </ion-avatar>
 
-        <h2>{{ singleChat.from_user_name }}</h2>
-        <p>{{ singleChat.info }}</p>
+        <h2>{{ singleChat.destination_user_name }}</h2>
+        <p>{{ singleChat.message }}</p>
         <ion-note item-end>{{ singleChat.time }}</ion-note>
       </ion-item>
       <ion-item-options>

@@ -1,10 +1,12 @@
 import { Storage } from '@ionic/storage';
-import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Component, OnInit } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SignalR, SignalRConnection, ConnectionStatus } from 'ng2-signalr';
 import { Url } from '../../CoreAssestiveModules/Url';
+import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
+import { DataService } from './../../CoreAssestiveModules/Services/DataService';
+
 
 
 @IonicPage()
@@ -24,6 +26,7 @@ export class DhnMessagesPage implements OnInit {
     private events: Events,
     private _signalR: SignalR,
     private DataService: DataService,
+    private loading: LoadingService,
     private storage: Storage,
     public navParams: NavParams) {
 
@@ -31,24 +34,23 @@ export class DhnMessagesPage implements OnInit {
       this.access_token = SECURITY_DATA.access_token;
     });
 
-    
     this.storage.get("Profile_Data").then(PROFILE_DATA => {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
 
-
-
   }
 
   ionViewWillEnter() {
+    this.loading.show("Loading messages");
+
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetChatList?email=${this.logginedUserEmail}`, null, this.access_token).subscribe((data) => {
       data.forEach(element => {
-        if (element.from_user_photo == null) {
-          element.from_user_photo = "assets/img/avatar2.png";
+        if (element.destination_user_photo == null) {
+          element.destination_user_photo = "assets/img/avatar2.png";
         }
       });
-      console.log(data)
 
+      this.loading.hide();
       this.userChats = data;
     })
   }
@@ -65,8 +67,10 @@ export class DhnMessagesPage implements OnInit {
   }
 
   startChat(Id) {
+    var destinationData = this.userChats.find( x => x.destination_user_id == Id);
     this.navCtrl.push("DhnChatPage", {
-      "MessagingParams": { "UserName": "AlameerAshraf", "Id": Id }
+      "MessagingParams": destinationData ,
+      "IsTextInitializer" : {textShow : false}
     });
   }
 

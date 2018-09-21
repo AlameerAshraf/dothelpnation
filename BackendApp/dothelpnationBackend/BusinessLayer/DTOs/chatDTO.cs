@@ -10,18 +10,16 @@ namespace BusinessLayer.DTOs
     {
         public int id { get; set; }
         public int? ad_id { get; set; }
-        public int? from_user_id { get; set; }
-        public int? to_user_id { get; set; }
-        public string info { get; set; }
+        public string message { get; set; }
         public int stuts { get; set; }
         public DateTime? date { get; set; }
         public TimeSpan? time_span { get; set; }
         public string time { get; set; }
+        public int? destination_user_id { get; set; }
 
 
-
-        public string from_user_name { get; set; }
-        public string from_user_email { get; set; }
-        public string from_user_photo { get; set; }
+        public string destination_user_name { get; set; }
+        public string destination_user_email { get; set; }
+        public string destination_user_photo { get; set; }
     }
 }

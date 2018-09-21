@@ -76,6 +76,7 @@
     <Compile Include="DTOs\chatDTO.cs" />
     <Compile Include="DTOs\IIS.cs" />
     <Compile Include="DTOs\singBlogViewDTO.cs" />
+    <Compile Include="DTOs\singleChatDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
