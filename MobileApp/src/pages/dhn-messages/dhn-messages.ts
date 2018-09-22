@@ -70,10 +70,9 @@ export class DhnMessagesPage implements OnInit {
       c.listen(onMessageReceived$);
       // 3.subscribe for incoming messages
       onMessageReceived$.subscribe((chatMessage) => {
-        console.log(chatMessage)
         var destinationData = this.userChats.find(x => x.destination_user_id == chatMessage.from_user_id);
         destinationData.message = chatMessage.message;
-        // this.events.publish("message:received" , chatMessage);
+        this.events.publish("message:received" , chatMessage);
       });
     });
   }
