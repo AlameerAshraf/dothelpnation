@@ -54,6 +54,7 @@ namespace dothelpnationBackend.Hubs
 
 
             Clients.Group(sentMessage.receiverId.ToString()).receiveMessage(new {
+                userId = fromUserId,
                 date = sentMessage.sendDate,
                 from_user_id = fromUserId,
                 to_user_id = sentMessage.receiverId.ToString(),
