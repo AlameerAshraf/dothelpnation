@@ -122,7 +122,7 @@ namespace dothelpnationBackend.Controllers
                 message.destination_user_photo = fromUserData.photo;
             }
 
-            return chats.OrderBy(x => x.date).ThenBy(x => x.time);
+            return chats.OrderByDescending(x => x.date).ThenByDescending(x => x.time);
         }
 
 
