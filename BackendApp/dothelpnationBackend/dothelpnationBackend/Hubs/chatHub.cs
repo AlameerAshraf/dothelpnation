@@ -31,8 +31,7 @@ namespace dothelpnationBackend.Hubs
             var UserId = _userRepo.Get().Where(x => x.email == Email).FirstOrDefault()?.id;
 
             // Add user to group ..
-            Groups.Add(Context.ConnectionId, UserId.ToString());
-            return base.OnConnected();
+            return Groups.Add(Context.ConnectionId, UserId.ToString());
         }
 
 
@@ -54,10 +53,10 @@ namespace dothelpnationBackend.Hubs
             });
 
 
-            Clients.Group(sentMessage.receiverId).receiveMessage(new {
-                date = sentMessage.sendDate ,
-                from_user_id = fromUserId , 
-                message = sentMessage.message ,
+            Clients.Group(sentMessage.receiverId.ToString()).receiveMessage(new {
+                date = sentMessage.sendDate,
+                from_user_id = fromUserId,
+                message = sentMessage.message,
                 time = sentMessage.time
             });
         }

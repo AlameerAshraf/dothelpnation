@@ -1,8 +1,8 @@
 import { Storage } from '@ionic/storage';
 import { Component, OnInit } from '@angular/core';
-import { Events } from 'ionic-angular';
+import { Events, ToastController } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SignalR, SignalRConnection, ConnectionStatus } from 'ng2-signalr';
+import { SignalR, SignalRConnection, ConnectionStatus, BroadcastEventListener } from 'ng2-signalr';
 import { Url } from '../../CoreAssestiveModules/Url';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
@@ -28,6 +28,7 @@ export class DhnMessagesPage implements OnInit {
     private DataService: DataService,
     private loading: LoadingService,
     private storage: Storage,
+    private toast: ToastController,
     public navParams: NavParams) {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -58,17 +59,30 @@ export class DhnMessagesPage implements OnInit {
   ngOnInit(): void {
     this._signalR.connect().then((c) => {
       console.log(c);
-      this.events.subscribe("message:sent" , (messageDetails) => {
-        c.invoke("sendMessage" , messageDetails);
+      this.events.subscribe("message:sent", (messageDetails) => {
+        // Send messages ..
+        c.invoke("sendMessage", messageDetails);
+      });
+
+      //  1.create a listener object
+      let onMessageReceived$ = new BroadcastEventListener<any>('receiveMessage')
+      // 2.register the listener
+      c.listen(onMessageReceived$);
+      // 3.subscribe for incoming messages
+      onMessageReceived$.subscribe((chatMessage) => {
+        console.log(chatMessage)
+        var destinationData = this.userChats.find(x => x.destination_user_id == chatMessage.from_user_id);
+        destinationData.message = chatMessage.message;
+        // this.events.publish("message:received" , chatMessage);
       });
     });
   }
 
   startChat(Id) {
-    var destinationData = this.userChats.find( x => x.destination_user_id == Id);
+    var destinationData = this.userChats.find(x => x.destination_user_id == Id);
     this.navCtrl.push("DhnChatPage", {
-      "MessagingParams": destinationData ,
-      "IsTextInitializer" : {textShow : false}
+      "MessagingParams": destinationData,
+      "IsTextInitializer": { textShow: false }
     });
   }
 
