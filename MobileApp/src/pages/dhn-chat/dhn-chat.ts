@@ -59,6 +59,8 @@ export class DhnChatPage implements OnInit {
       this.access_token = SECURITY_DATA.access_token;
     });
 
+    // this.events.subscribe("message:received" )
+
     // chat list .. 
     this.chats = [];
   }

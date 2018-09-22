@@ -52,6 +52,14 @@ namespace dothelpnationBackend.Hubs
                 parent_id = 2,
                 time = sentMessage._time
             });
+
+
+            Clients.Group(sentMessage.receiverId).receiveMessage(new {
+                date = sentMessage.sendDate ,
+                from_user_id = fromUserId , 
+                message = sentMessage.message ,
+                time = sentMessage.time
+            });
         }
 
 

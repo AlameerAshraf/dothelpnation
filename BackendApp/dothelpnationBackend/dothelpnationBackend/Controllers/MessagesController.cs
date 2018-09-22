@@ -74,63 +74,44 @@ namespace dothelpnationBackend.Controllers
 
             var froms = _messagesRepo.Get()
                 .Where(x => x.to_user_id == userId)
-                .GroupBy(x => x.from_user_id)
-                .Select(x => x.OrderByDescending(z => z.date).FirstOrDefault()).ToList();
+                .ToList();
 
             var tos = _messagesRepo.Get()
                 .Where(x => x.from_user_id == userId) // I sent the message 
-                .GroupBy(x => x.to_user_id) // the user the message was sent to 
-                .Select(x => x.OrderByDescending(z => z.date).FirstOrDefault()).ToList();
+                .ToList();
 
-
-            for (int i = 0; i < froms.Count; i++)
+            foreach (var from_message in froms)
             {
-                for (int j = 0; j < tos.Count; j++)
+                chats.Add(new chatDTO()
                 {
-                    if (froms[i].from_user_id == tos[j].to_user_id) // from user have been contacted by (me) , chack the message to push .. 
-                    {
-                        if (froms[i].date > tos[j].date)
-                        {
-                            chats.Add(new chatDTO()
-                            {
-                                id = froms[i].id,
-                                ad_id = froms[i].ad_id,
-                                message = froms[i].info,
-                                destination_user_id = (int)froms[i].from_user_id,
-                                date = froms[i].date,
-                                time = froms[i].time,
-                                stuts = froms[i].stuts
-                            });
-                        }
-                        else
-                        {
-                            chats.Add(new chatDTO()
-                            {
-                                id = tos[j].id,
-                                ad_id = tos[j].ad_id,
-                                message = tos[j].info,
-                                destination_user_id = (int)tos[j].to_user_id,
-                                date = tos[j].date,
-                                time = tos[j].time,
-                                stuts = tos[j].stuts
-                            });
-                        }
-                    }
-                    else
-                    {
-                        chats.Add(new chatDTO()
-                        {
-                            id = froms[i].id,
-                            ad_id = froms[i].ad_id,
-                            message = froms[i].info,
-                            destination_user_id = (int)froms[i].from_user_id,
-                            date = froms[i].date,
-                            time = froms[i].time,
-                            stuts = froms[i].stuts
-                        });
-                    }
-                }
+                    id = from_message.id,
+                    ad_id = from_message.ad_id,
+                    message = from_message.info,
+                    destination_user_id = (int)from_message.from_user_id,
+                    date = from_message.date,
+                    time = from_message.time,
+                    stuts = from_message.stuts
+                });
             }
+
+            foreach (var to_message in tos)
+            {
+                chats.Add(new chatDTO()
+                {
+                    id = to_message.id,
+                    ad_id = to_message.ad_id,
+                    message = to_message.info,
+                    destination_user_id = (int)to_message.to_user_id,
+                    date = to_message.date,
+                    time = to_message.time,
+                    stuts = to_message.stuts
+                });
+            }
+
+            chats = chats.GroupBy(x => x.destination_user_id)
+                .Select(x => x.OrderByDescending(z => z.date).ThenByDescending(y => y.time).FirstOrDefault())
+                .ToList();
+
 
             foreach (var message in chats)
             {
