@@ -8,6 +8,7 @@ import { Url } from '../../CoreAssestiveModules/Url';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { VolatileStorage } from '../../CoreAssestiveModules/VolatileStorage';
 
 
 @IonicPage()
@@ -118,6 +119,7 @@ export class DhnLoginPage {
         };
         this.storage.set("access_token", access_token_auth);
         this.storage.set('Profile_Data' , UserData);
+        VolatileStorage.setData(UserData);
         this.navCtrl.setRoot("DhnHomeTabsPage");
       });
     });
@@ -163,6 +165,7 @@ export class DhnLoginPage {
               };
               this.storage.set('access_token', access_token_auth);
               this.storage.set('Profile_Data' , newUserData);
+              VolatileStorage.setData(newUserData);
               this.navCtrl.setRoot('DhnHomeTabsPage',{ data : newUserData} );
             })
           }
@@ -217,6 +220,7 @@ export class DhnLoginPage {
 
               this.storage.set('access_token', access_token_auth);
               this.storage.set('Profile_Data' , newUserData);
+              VolatileStorage.setData(newUserData);              
               this.navCtrl.setRoot('DhnHomeTabsPage');
             })
           }

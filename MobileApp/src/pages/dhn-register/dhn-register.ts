@@ -9,6 +9,7 @@ import { FakeService } from '../../CoreAssestiveModules/Services/FakeService';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { Storage } from '@ionic/storage';
+import { VolatileStorage } from '../../CoreAssestiveModules/VolatileStorage';
 
 @IonicPage()
 @Component({
@@ -144,6 +145,7 @@ export class DhnRegisterPage {
 
           this.Storage.set('access_token' , access_token_auth);
           this.Storage.set('Profile_Data' , newUserData);
+          VolatileStorage.setData(newUserData);
           this.navCtrl.setRoot('DhnHomeTabsPage' , newUserData);
         })
       }
