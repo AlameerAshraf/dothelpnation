@@ -56,14 +56,12 @@ export class DhnMessagesPage implements OnInit {
   }
 
   ngOnInit(): void {
-    // this._signalR.connect().then((c) => {
-    //   console.log(c);
-    //   // this.events.subscribe()
-    // });
-
-    // this.events.subscribe("message:sent" , (messageDetails , receiverDeatils) => {
-
-    // });
+    this._signalR.connect().then((c) => {
+      console.log(c);
+      this.events.subscribe("message:sent" , (messageDetails) => {
+        c.invoke("sendMessage" , messageDetails);
+      });
+    });
   }
 
   startChat(Id) {

@@ -7,20 +7,20 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content id="messagesContent">
   <ion-list>
     <ion-item *ngFor="let chat of chats" no-lines>
       <div class="chat-status" text-center *ngIf="!chat.showMessage ; else message">
       </div>
       <ng-template #message>
-        <div class="chat-message" text-right *ngIf="chat.userId === currentUserId">
+        <div class="chat-message" text-right *ngIf="chat.userId !== currentUserId">
           <div class="right-bubble">
             <!-- <span class="msg-name"> {{ chat.userName }} </span> -->
             <span class="msg-date">{{ chat.sendDate }} , {{ chat.time }}</span>
             <p text-wrap>{{chat.message}}</p>
           </div>
         </div>
-        <div class="chat-message" text-left *ngIf="chat.userId !== currentUserId">
+        <div class="chat-message" text-left *ngIf="chat.userId === currentUserId">
           <div class="left-bubble">
             <!-- <span class="msg-name">{{ chat.userName }}</span> -->
             <span class="msg-date">{{chat.sendDate}} , {{ chat.time }}</span>
@@ -36,6 +36,7 @@
       <p style="margin:0px;color: gray;"> that may help the publisher , try to help </p>
       <p style="margin:0px;color: gray;"> by typing and click send Or <ion-icon name="paper-plane"></ion-icon></p>
   </div>
+  
 
 </ion-content>
 

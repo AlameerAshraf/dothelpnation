@@ -3,6 +3,10 @@ using DataAccessLayer.Entities;
 using Microsoft.AspNet.SignalR;
 using Autofac;
 using System.Threading.Tasks;
+using System.Linq;
+using BusinessLayer.DTOs;
+using System;
+using System.Globalization;
 
 namespace dothelpnationBackend.Hubs
 {
@@ -10,6 +14,7 @@ namespace dothelpnationBackend.Hubs
     {
         private readonly ILifetimeScope _hubLifetimeScope;
         private readonly IRepository<ads_messages> _messagesRepo;
+        private readonly IRepository<user> _userRepo;
 
         public chatHub(ILifetimeScope lifetimeScope)
         {
@@ -17,17 +22,40 @@ namespace dothelpnationBackend.Hubs
             _hubLifetimeScope = lifetimeScope.BeginLifetimeScope();
 
             _messagesRepo = _hubLifetimeScope.Resolve<IRepository<ads_messages>>();
+            _userRepo = _hubLifetimeScope.Resolve<IRepository<user>>();
         }
+
+        public override Task OnConnected()
+        {
+            var Email = Context.QueryString["loggedInUserEmail"];
+            var UserId = _userRepo.Get().Where(x => x.email == Email).FirstOrDefault()?.id;
+
+            // Add user to group ..
+            Groups.Add(Context.ConnectionId, UserId.ToString());
+            return base.OnConnected();
+        }
+
+
+        public void sendMessage(sentMessagesDTO sentMessage)
+        {
+            var fromUserId = _userRepo.Get().Where(x => x.email == sentMessage.senderEmail).FirstOrDefault()?.id;
+
+            _messagesRepo.Insert(new ads_messages()
+            {
+                date = DateTime.Parse(sentMessage.sendDate),
+                from_user_id = (int)fromUserId,
+                to_user_id = int.Parse(sentMessage.receiverId),
+                info = sentMessage.message,
+                title = "message",
+                parent_id = 2,
+                time = sentMessage.time
+            });
+        }
+
 
         public override Task OnDisconnected(bool stopCalled)
         {
             return base.OnDisconnected(stopCalled);
-        }
-
-        public void send(string name, string message)
-        {
-            var ssd = Context.QueryString["loggedInUserEmail"];
-            Clients.All.broadcast(name, message);
         }
 
         protected override void Dispose(bool disposing)

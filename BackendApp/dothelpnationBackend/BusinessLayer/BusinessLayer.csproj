@@ -75,6 +75,7 @@
     <Compile Include="DTOs\blog_sectionDTO.cs" />
     <Compile Include="DTOs\chatDTO.cs" />
     <Compile Include="DTOs\IIS.cs" />
+    <Compile Include="DTOs\sentMessagesDTO.CS" />
     <Compile Include="DTOs\singBlogViewDTO.cs" />
     <Compile Include="DTOs\singleChatDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

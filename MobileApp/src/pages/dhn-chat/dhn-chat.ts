@@ -1,6 +1,7 @@
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Component, OnInit } from '@angular/core';
+import { IonicPage, App , NavController, NavParams, ToastController, IonicApp, Content } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
@@ -12,6 +13,9 @@ import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingServi
   templateUrl: 'dhn-chat.html',
 })
 export class DhnChatPage implements OnInit {
+
+  @ViewChild(Content) content: Content;
+
   currentUserName;
   currentUserId;
   currentEmail;
@@ -20,7 +24,7 @@ export class DhnChatPage implements OnInit {
   logginedUserEmail;
   access_token;
   middleTextShow = false;
-
+  
 
   // Current Sent message from user 
   newMessage: string;
@@ -29,11 +33,15 @@ export class DhnChatPage implements OnInit {
 
 
   constructor(
+    // private network: Network,
+    public events: Events,
     public navCtrl: NavController,
     private storage: Storage,
     private DataService: DataService,
-    private loading : LoadingService,
+    private loading: LoadingService,
+    private toast: ToastController,
     public navParams: NavParams) {
+
     let chatParamters = navParams.get("MessagingParams");
     let IsTextInitializer = navParams.get("IsTextInitializer");
     this.currentUserId = chatParamters.destination_user_id;
@@ -49,29 +57,26 @@ export class DhnChatPage implements OnInit {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
       this.access_token = SECURITY_DATA.access_token;
-    })
+    });
 
     // chat list .. 
-    this.chats = [
-      // { userId: '22', sendDate: new Date(), message: '3am elnas !', showMessage: "false", userName: "Ahmed Elmasry" },
-      // { userId: '33', sendDate: new Date(), message: 'shaba7 elsenin !', showMessage: "false", userName: "AlameerAshraf" },
-    ];
+    this.chats = [];
   }
 
 
-  ionViewWillEnter(){
-    if(!this.middleTextShow){
+  ionViewWillEnter() {
+    if (!this.middleTextShow) {
       this.loading.show("Loading chat");
     }
-    
-    let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`,null , this.access_token)
-    .subscribe((chats) => {
-      chats.forEach(element => {
-        element.sendDate = element.sendDate.split('T')[0];
+
+    let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`, null, this.access_token)
+      .subscribe((chats) => {
+        chats.forEach(element => {
+          element.sendDate = element.sendDate.split('T')[0];
+        });
+        this.loading.hide();
+        this.chats = chats;
       });
-      this.loading.hide();
-      this.chats = chats;
-    });
   }
 
 
@@ -81,14 +86,22 @@ export class DhnChatPage implements OnInit {
 
 
   sendMessage() {
-    this.chats.push({
-      userId: '33',
-      sendDate: new Date(),
+    var newChat = {
+      userId: '',
+      sendDate: new Date().toISOString().split('T')[0],
+      time : new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
       message: this.newMessage,
-      userName: "AlameerAshraf",
-      showMessage: "false"
-    });
+      showMessage: true,
+      senderEmail: this.logginedUserEmail,
+      receiverId: this.currentUserId
+    }
+    this.chats.push(newChat);
     this.newMessage = "";
+
+    // scroll content down 
+    this.content.scrollToBottom();
+
+    this.events.publish('message:sent' , newChat );
   }
 
   ionViewDidLoad() {
