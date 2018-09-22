@@ -1,4 +1,4 @@
-import { IonicPage, App , NavController, NavParams, ToastController, IonicApp, Content } from 'ionic-angular';
+import { IonicPage, App, NavController, NavParams, ToastController, IonicApp, Content } from 'ionic-angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
@@ -24,7 +24,7 @@ export class DhnChatPage implements OnInit {
   logginedUserEmail;
   access_token;
   middleTextShow = false;
-  
+
 
   // Current Sent message from user 
   newMessage: string;
@@ -89,7 +89,8 @@ export class DhnChatPage implements OnInit {
     var newChat = {
       userId: '',
       sendDate: new Date().toISOString().split('T')[0],
-      time : new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
+      time: this.formatAMPM(new Date()).view,
+      _time : this.formatAMPM(new Date()).server,
       message: this.newMessage,
       showMessage: true,
       senderEmail: this.logginedUserEmail,
@@ -101,11 +102,23 @@ export class DhnChatPage implements OnInit {
     // scroll content down 
     this.content.scrollToBottom();
 
-    this.events.publish('message:sent' , newChat );
+    this.events.publish('message:sent', newChat);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DhnChatPage');
+
+
+  formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours < 10 ? '0'+ hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var serverDate = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    var viewDate = hours + ':' + minutes + ' ' + ampm;
+    return {server : serverDate , view : viewDate };
   }
 
 }

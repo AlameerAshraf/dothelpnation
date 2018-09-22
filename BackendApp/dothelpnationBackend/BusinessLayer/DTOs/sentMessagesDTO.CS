@@ -11,6 +11,7 @@ namespace BusinessLayer.DTOs
         public string userId { get; set; }
         public string sendDate { get; set; }
         public string time { get; set; }
+        public string _time { get; set; }
         public string message { get; set; }
         public string senderEmail { get; set; }
         public string receiverId { get; set; }

@@ -47,8 +47,10 @@ namespace dothelpnationBackend.Hubs
                 to_user_id = int.Parse(sentMessage.receiverId),
                 info = sentMessage.message,
                 title = "message",
+                type = "message",
+                stuts = 1,
                 parent_id = 2,
-                time = sentMessage.time
+                time = sentMessage._time
             });
         }
 

@@ -28,13 +28,11 @@ namespace dothelpnationBackend.Controllers
 
             var froms = _messagesRepo.Get()
                 .Where(x => x.to_user_id == userId && x.from_user_id == target_id)
-                .GroupBy(x => x.from_user_id)
-                .Select(x => x.OrderByDescending(z => z.date).FirstOrDefault()).ToList();
+                .ToList();
 
             var tos = _messagesRepo.Get()
                 .Where(x => x.from_user_id == userId && x.to_user_id == target_id) // I sent the message 
-                .GroupBy(x => x.to_user_id) // the user the message was sent to 
-                .Select(x => x.OrderByDescending(z => z.date).FirstOrDefault()).ToList();
+                .ToList();
 
             for (int i = 0; i < froms.Count; i++)
             {
