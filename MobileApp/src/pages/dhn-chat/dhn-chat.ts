@@ -2,6 +2,7 @@ import { IonicPage, App, NavController, NavParams, ToastController, IonicApp, Co
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
@@ -40,6 +41,7 @@ export class DhnChatPage implements OnInit {
     private DataService: DataService,
     private loading: LoadingService,
     private toast: ToastController,
+    private push: Push,
     public navParams: NavParams) {
 
     let chatParamters = navParams.get("MessagingParams");
@@ -65,6 +67,7 @@ export class DhnChatPage implements OnInit {
 
     // chat list .. 
     this.chats = [];
+
   }
 
 
