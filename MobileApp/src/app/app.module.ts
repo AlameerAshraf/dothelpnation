@@ -30,7 +30,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { AgmCoreModule } from '@agm/core';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -74,7 +74,7 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
-    Push,
+    LocalNotifications,
     Network,
     Keyboard,
     Geolocation,

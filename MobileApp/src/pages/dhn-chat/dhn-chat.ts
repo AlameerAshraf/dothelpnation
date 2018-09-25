@@ -2,7 +2,9 @@ import { IonicPage, App, NavController, NavParams, ToastController, IonicApp, Co
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
+
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
@@ -41,7 +43,7 @@ export class DhnChatPage implements OnInit {
     private DataService: DataService,
     private loading: LoadingService,
     private toast: ToastController,
-    private push: Push,
+    private localNotifications : LocalNotifications,
     public navParams: NavParams) {
 
     let chatParamters = navParams.get("MessagingParams");
@@ -61,8 +63,14 @@ export class DhnChatPage implements OnInit {
       this.access_token = SECURITY_DATA.access_token;
     });
 
-    this.events.subscribe("message:received" , (receivedMessage) => {
+    this.events.subscribe("message:received", (receivedMessage) => {
       this.chats.push(receivedMessage);
+
+      // Notify 
+      this.localNotifications.schedule({
+        title : "dothelpnation",
+        text : receivedMessage.message,
+      });
     });
 
     // chat list .. 
@@ -97,7 +105,7 @@ export class DhnChatPage implements OnInit {
       userId: '',
       sendDate: new Date().toISOString().split('T')[0],
       time: this.formatAMPM(new Date()).view,
-      _time : this.formatAMPM(new Date()).server,
+      _time: this.formatAMPM(new Date()).server,
       message: this.newMessage,
       showMessage: true,
       senderEmail: this.logginedUserEmail,
@@ -112,8 +120,6 @@ export class DhnChatPage implements OnInit {
     this.events.publish('message:sent', newChat);
   }
 
-
-
   formatAMPM(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -121,11 +127,11 @@ export class DhnChatPage implements OnInit {
     var ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    hours = hours < 10 ? '0'+ hours : hours;
+    hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var serverDate = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     var viewDate = hours + ':' + minutes + ' ' + ampm;
-    return {server : serverDate , view : viewDate };
+    return { server: serverDate, view: viewDate };
   }
 
 }
