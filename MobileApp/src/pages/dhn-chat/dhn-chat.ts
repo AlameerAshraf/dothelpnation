@@ -1,4 +1,5 @@
-import { IonicPage, App, NavController, NavParams, ToastController, IonicApp, Content } from 'ionic-angular';
+import { IonicPage, App, NavController, NavParams, ToastController, IonicApp } from 'ionic-angular';
+import { Content } from 'ionic-angular/index';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
@@ -45,6 +46,8 @@ export class DhnChatPage implements OnInit {
     private toast: ToastController,
     private localNotifications : LocalNotifications,
     public navParams: NavParams) {
+    this.content.scrollToBottom(0);
+
 
     let chatParamters = navParams.get("MessagingParams");
     let IsTextInitializer = navParams.get("IsTextInitializer");
@@ -69,8 +72,13 @@ export class DhnChatPage implements OnInit {
       // Notify 
       this.localNotifications.schedule({
         title : "dothelpnation",
-        text : receivedMessage.message,
+        text : this.currentUserName + ":" + receivedMessage.message,
       });
+      
+      if(this.content != null){
+        this.content.scrollToBottom(0);
+      }
+
     });
 
     // chat list .. 
@@ -91,12 +99,16 @@ export class DhnChatPage implements OnInit {
         });
         this.loading.hide();
         this.chats = chats;
+
+        // scroll content down 
+        this.content.scrollToBottom(0);
       });
   }
 
 
   ngOnInit(): void {
-
+    // scroll content down 
+    this.content.scrollToBottom(0);
   }
 
 
@@ -115,7 +127,7 @@ export class DhnChatPage implements OnInit {
     this.newMessage = "";
 
     // scroll content down 
-    this.content.scrollToBottom();
+    this.content.scrollToBottom(0);
 
     this.events.publish('message:sent', newChat);
   }
