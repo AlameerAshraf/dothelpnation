@@ -37,7 +37,10 @@ namespace dothelpnationBackend.Hubs
 
         public void sendMessage(sentMessagesDTO sentMessage)
         {
-            var fromUserId = _userRepo.Get().Where(x => x.email == sentMessage.senderEmail).FirstOrDefault()?.id;
+            var receiverId = long.Parse(sentMessage.receiverId);
+            var senderUser = _userRepo.Get().Where(x => x.email == sentMessage.senderEmail).FirstOrDefault();
+            var fromUserId = senderUser.id;
+            var senderName = senderUser.name;
 
             _messagesRepo.Insert(new ads_messages()
             {
@@ -59,6 +62,7 @@ namespace dothelpnationBackend.Hubs
                 from_user_id = fromUserId,
                 to_user_id = sentMessage.receiverId.ToString(),
                 showMessage = true,
+                to_user_name = senderName,
                 message = sentMessage.message,
                 sendDate = sentMessage.sendDate,
                 time = sentMessage.time
