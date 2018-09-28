@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content id="messagesContent">
+<ion-content #content id="messagesContent">
   <ion-list>
     <ion-item *ngFor="let chat of chats" no-lines>
       <div class="chat-status" text-center *ngIf="!chat.showMessage ; else message">
