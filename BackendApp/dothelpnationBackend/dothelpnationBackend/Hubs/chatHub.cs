@@ -61,6 +61,8 @@ namespace dothelpnationBackend.Hubs
             var senderUser = _userRepo.Get().Where(x => x.email == sentMessage.senderEmail).FirstOrDefault();
             var fromUserId = senderUser.id;
             var senderName = senderUser.name;
+            var senderEmail = senderUser.email;
+            var senderPhoto = senderUser.photo;
 
             _messagesRepo.Insert(new ads_messages()
             {
@@ -77,12 +79,15 @@ namespace dothelpnationBackend.Hubs
 
 
             Clients.Group(sentMessage.receiverId.ToString()).receiveMessage(new {
+                ad_id = int.Parse(sentMessage.ad_id),
                 userId = fromUserId,
                 date = sentMessage.sendDate,
                 from_user_id = fromUserId,
                 to_user_id = sentMessage.receiverId.ToString(),
                 showMessage = true,
-                to_user_name = senderName,
+                senderName = senderName,
+                senderPhoto = senderPhoto,
+                senderEmail = senderEmail, 
                 message = sentMessage.message,
                 sendDate = sentMessage.sendDate,
                 time = sentMessage.time
