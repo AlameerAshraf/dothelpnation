@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Events, ToastController } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SignalR, SignalRConnection, ConnectionStatus, BroadcastEventListener } from 'ng2-signalr';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import * as _ from 'lodash';
+
+
 import { Url } from '../../CoreAssestiveModules/Url';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
@@ -29,6 +33,7 @@ export class DhnMessagesPage implements OnInit {
     private loading: LoadingService,
     private storage: Storage,
     private toast: ToastController,
+    private localNotifications : LocalNotifications,
     public navParams: NavParams) {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -46,6 +51,7 @@ export class DhnMessagesPage implements OnInit {
 
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetChatList?email=${this.logginedUserEmail}`, null, this.access_token).subscribe((data) => {
       data.forEach(element => {
+        element.sortDate = new Date(`${element.date.split('T')[0]} ${element.time}`);
         if (element.destination_user_photo == null) {
           element.destination_user_photo = "assets/img/avatar2.png";
         }
@@ -71,8 +77,26 @@ export class DhnMessagesPage implements OnInit {
       // 3.subscribe for incoming messages
       onMessageReceived$.subscribe((chatMessage) => {
         var destinationData = this.userChats.find(x => x.destination_user_id == chatMessage.from_user_id);
+        // Sort current list 
+        console.log(this.userChats);
+
+        // Bind last message on messages list 
         destinationData.message = chatMessage.message;
+        destinationData.time = chatMessage.time;
+        destinationData.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
+        this.userChats = _.orderBy(this.userChats , ['sortDate'] , ['desc']);
+
+
+        
+        // publish event to the chat page 
         this.events.publish("message:received" , chatMessage);
+
+        // Notify 
+        this.localNotifications.schedule({
+          title: "dothelpnation",
+          text: chatMessage.to_user_name + ":" + chatMessage.message,
+        });
+
       });
     });
   }

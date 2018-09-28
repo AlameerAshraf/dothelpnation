@@ -44,9 +44,9 @@ export class DhnChatPage implements OnInit {
     private DataService: DataService,
     private loading: LoadingService,
     private toast: ToastController,
-    private localNotifications : LocalNotifications,
+    private localNotifications: LocalNotifications,
     public navParams: NavParams) {
-    this.content.scrollToBottom(0);
+
 
 
     let chatParamters = navParams.get("MessagingParams");
@@ -66,28 +66,33 @@ export class DhnChatPage implements OnInit {
       this.access_token = SECURITY_DATA.access_token;
     });
 
-    this.events.subscribe("message:received", (receivedMessage) => {
-      this.chats.push(receivedMessage);
-
-      // Notify 
-      this.localNotifications.schedule({
-        title : "dothelpnation",
-        text : this.currentUserName + ":" + receivedMessage.message,
-      });
-      
-      if(this.content != null){
-        this.content.scrollToBottom(0);
-      }
-
-    });
-
     // chat list .. 
     this.chats = [];
 
   }
 
 
+  ionViewDidEnter() {
+    this.events.subscribe("message:received", (receivedMessage) => {
+      this.chats.push(receivedMessage);
+
+      // Notify 
+      this.localNotifications.schedule({
+        title: "dothelpnation",
+        text: this.currentUserName + ":" + receivedMessage.message,
+      });
+
+      if (this.content != null) {
+        this.content.scrollToBottom(0);
+      }
+    });
+  }
+
+
   ionViewWillEnter() {
+    console.warn("777777")
+
+    this.content.scrollToBottom(0);
     if (!this.middleTextShow) {
       this.loading.show("Loading chat");
     }
@@ -107,8 +112,6 @@ export class DhnChatPage implements OnInit {
 
 
   ngOnInit(): void {
-    // scroll content down 
-    this.content.scrollToBottom(0);
   }
 
 
