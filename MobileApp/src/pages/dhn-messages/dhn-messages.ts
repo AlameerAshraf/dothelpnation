@@ -93,8 +93,8 @@ export class DhnMessagesPage implements OnInit {
 
         // Notify 
         this.localNotifications.schedule({
-          title: "dothelpnation",
-          text: chatMessage.to_user_name + ":" + chatMessage.message,
+          title: chatMessage.to_user_name + " " + "sent you a message",
+          text:  chatMessage.message,
         });
 
       });
