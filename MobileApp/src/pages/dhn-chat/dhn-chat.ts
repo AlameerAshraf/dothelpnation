@@ -114,6 +114,9 @@ export class DhnChatPage {
   }
 
   sendMessage() {
+    this.middleTextShowChatsLoaded = false;
+    this.middleTextShowInitially = false;
+    
     var newChat = {
       userId: "",
       sendDate: new Date().toISOString().split("T")[0],
