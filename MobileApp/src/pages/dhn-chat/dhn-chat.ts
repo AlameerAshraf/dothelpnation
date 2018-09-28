@@ -32,7 +32,8 @@ export class DhnChatPage {
   chats: any[];
   logginedUserEmail;
   access_token;
-  middleTextShow = false;
+  middleTextShowInitially = false;
+  middleTextShowChatsLoaded = false;
 
   // Current Sent message from user
   newMessage: string;
@@ -55,7 +56,7 @@ export class DhnChatPage {
     this.currentUserId = chatParamters.destination_user_id;
     this.currentUserName = chatParamters.destination_user_name;
     this.currentEmail = chatParamters.destination_user_email;
-    this.middleTextShow = IsTextInitializer.textShow;
+    this.middleTextShowInitially = IsTextInitializer.textShow;
     // this.currentPhotoUrl = chatParamters.destination_user_photo;
 
     this.storage.get("Profile_Data").then(PROFILE_DATA => {
@@ -71,13 +72,14 @@ export class DhnChatPage {
   }
 
   ionViewDidEnter() {
-    if (!this.middleTextShow) {
+    if (!this.middleTextShowInitially) {
+      this.loading.show("Loading chat");
+    }
+    if (!this.middleTextShowChatsLoaded) {
       this.loading.show("Loading chat");
     }
     let DataRequest = this.DataService.Get(
-      `${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${
-        this.logginedUserEmail
-      }&target_id=${this.currentUserId}`,
+      `${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`,
       null,
       this.access_token
     ).subscribe(chats => {
@@ -86,6 +88,8 @@ export class DhnChatPage {
       });
       this.loading.hide();
       this.chats = chats;
+
+      this.middleTextShowChatsLoaded = this.chats.length > 0 ? false : true ;
 
       setTimeout(() => {
         this.content.scrollToBottom(300);
