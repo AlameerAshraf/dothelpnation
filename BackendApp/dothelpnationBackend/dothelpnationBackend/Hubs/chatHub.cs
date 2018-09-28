@@ -34,6 +34,26 @@ namespace dothelpnationBackend.Hubs
             return Groups.Add(Context.ConnectionId, UserId.ToString());
         }
 
+        public override Task OnReconnected()
+        {
+            var Email = Context.QueryString["loggedInUserEmail"];
+            var UserId = _userRepo.Get().Where(x => x.email == Email).FirstOrDefault()?.id;
+
+            // Add user to group ..
+            return Groups.Add(Context.ConnectionId, UserId.ToString());
+        }
+
+        public override Task OnDisconnected(bool stopCalled)
+        {
+
+            var Email = Context.QueryString["loggedInUserEmail"];
+            var UserId = _userRepo.Get().Where(x => x.email == Email).FirstOrDefault()?.id;
+
+            // Add user to group ..
+            return Groups.Remove(Context.ConnectionId, UserId.ToString());
+        }
+
+
 
         public void sendMessage(sentMessagesDTO sentMessage)
         {
@@ -68,13 +88,6 @@ namespace dothelpnationBackend.Hubs
                 time = sentMessage.time
             });
         }
-
-
-        public override Task OnDisconnected(bool stopCalled)
-        {
-            return base.OnDisconnected(stopCalled);
-        }
-
         protected override void Dispose(bool disposing)
         {
             // Dispose the hub lifetime scope when the hub is disposed.
