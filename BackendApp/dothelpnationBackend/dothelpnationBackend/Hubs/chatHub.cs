@@ -63,6 +63,7 @@ namespace dothelpnationBackend.Hubs
             var senderName = senderUser.name;
             var senderEmail = senderUser.email;
             var senderPhoto = senderUser.photo;
+            var ad_id = sentMessage.ad_id != null ? int.Parse(sentMessage.ad_id) : 0;
 
             _messagesRepo.Insert(new ads_messages()
             {
@@ -79,7 +80,7 @@ namespace dothelpnationBackend.Hubs
 
 
             Clients.Group(sentMessage.receiverId.ToString()).receiveMessage(new {
-                ad_id = int.Parse(sentMessage.ad_id),
+                ad_id = ad_id,
                 userId = fromUserId,
                 date = sentMessage.sendDate,
                 from_user_id = fromUserId,
