@@ -58,7 +58,9 @@ namespace dothelpnationBackend.Controllers
                 });
             }
 
-            return peerToPeerChats.OrderBy(x => x.sendDate).ThenBy(x => x.time);
+            var p2pchatList = peerToPeerChats.OrderBy(x => x.sendDate).ThenBy(x => x.time);
+            p2pchatList.ToList().ForEach(x => { x.time = x.time.Remove(5, 3); });
+            return p2pchatList;
         }
 
 

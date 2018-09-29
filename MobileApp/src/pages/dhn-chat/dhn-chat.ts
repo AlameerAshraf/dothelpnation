@@ -81,7 +81,7 @@ export class DhnChatPage {
       `${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`,
       null,
       this.access_token
-    ).subscribe(chats => {
+      ).subscribe(chats => {
       chats.forEach(element => {
         element.sendDate = element.sendDate.split("T")[0];
       });
