@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2018 at 01:00 AM
+-- Generation Time: Sep 29, 2018 at 02:53 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -360,24 +360,17 @@ INSERT INTO `admin_translation` (`id`, `lang_code`, `langkey`, `text`) VALUES
 
 CREATE TABLE `ads_messages` (
   `id` int(11) NOT NULL,
-  `type` varchar(155) COLLATE utf8_bin DEFAULT NULL,
+  `type` varchar(155) COLLATE utf8mb4_bin DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `ad_id` int(11) DEFAULT NULL,
   `from_user_id` int(11) DEFAULT NULL,
   `to_user_id` int(11) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `info` text COLLATE utf8_bin,
+  `title` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `info` mediumtext COLLATE utf8mb4_bin,
   `stuts` int(11) NOT NULL DEFAULT '0',
   `date` date DEFAULT NULL,
-  `time` varchar(155) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `ads_messages`
---
-
-INSERT INTO `ads_messages` (`id`, `type`, `parent_id`, `ad_id`, `from_user_id`, `to_user_id`, `title`, `info`, `stuts`, `date`, `time`) VALUES
-(3, 'message', 2, 6, 14, 2, 'ربما هناك امر ما', 'ابلايب ب  ي با يباياي اابلايب ب  ي با يباياي اابلايب ب  ي با يباياي اابلايب ب  ي با يباياي ا', 1, '2017-11-03', '11-58-32-AM');
+  `time` varchar(155) COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -500,7 +493,16 @@ INSERT INTO `blog` (`id`, `langkey`, `section_id`, `title`, `url`, `address`, `p
 (99, NULL, 14, 'مسطرة ضاءعه في الاسكندرية', NULL, 'الابرهيمه', 115, 87, NULL, NULL, NULL, NULL, 'http://c87b8985.ngrok.io/BlogPhotos/0d68a383-7e5a-4760-be2d-205e312fb7d0.jpg', NULL, 'مسطرة لونها احمر ضاعت مني اللي يشوفها بتصل ع الرقم ده ضروري ٠١٠٩٥٧٠٨٤٨٤', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-08', '08:41:04 AM', 0),
 (100, NULL, 11, 'علبة مناديل سوفت روز ضايعه ', NULL, 'حدايق المعادي', 190, 86, NULL, NULL, NULL, NULL, 'http://www.saydala.online/BlogPhotos/e91822f2-8049-4d63-911e-1fcd7a5ef7bc.jpg', NULL, 'ضاعت مني علبة مناديل سوفت روز الله يخليكم دلوني عليها ', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-10', '03:55:19 AM', 0),
 (101, NULL, 13, 'كرسي ضايع جدا', NULL, 'حدايق المعادي', 168, 86, NULL, NULL, '29.9737325', '31.2491471', 'http://www.saydala.online/BlogPhotos/c1ec7835-6d22-45af-99df-8e0a958e85f4.jpg', NULL, 'فيه كرسي ضاع مننا جامد ', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-10', '04:25:14 AM', 0),
-(102, NULL, 11, 'الموضع', NULL, 'العنوان ', 219, 9, NULL, NULL, '29.968685126646545', '31.24945012187152', 'http://b86d33e0.ngrok.io/BlogPhotos/bff0f8af-c8d5-4695-8d1b-0f09bcf6cbfa.jpg', NULL, 'الشرح ', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-11', '07:13:24 PM', 0);
+(102, NULL, 11, 'الموضع', NULL, 'العنوان ', 219, 9, NULL, NULL, '29.968685126646545', '31.24945012187152', 'http://10c10748.ngrok.io/BlogPhotos/bff0f8af-c8d5-4695-8d1b-0f09bcf6cbfa.jpg', NULL, 'الشرح ', NULL, NULL, 65, NULL, NULL, NULL, '2018-09-11', '07:13:24 PM', 0),
+(103, NULL, 12, 'vvghhhgfvjjg', NULL, 'ttfgttttftt', 171, 86, NULL, NULL, '29.974157291339182', '31.250148222915982', 'http://10c10748.ngrok.io/BlogPhotos/ed99864c-ba44-4b1a-9331-14e8ee340fa8.jpg', NULL, 'ggghggy', NULL, NULL, 73, NULL, NULL, NULL, '2018-09-18', '02:54:51 AM', 0),
+(104, NULL, 11, 'كيبورد ', NULL, 'كيبورد تاينه', 115, 87, NULL, NULL, '31.2114018', '29.9243256', 'http://10c10748.ngrok.io/BlogPhotos/ef96d1f9-3ff3-4d71-a667-3484aa16bed7.jpg', NULL, 'كيبورد ', NULL, NULL, 71, NULL, NULL, NULL, '2018-09-21', '10:28:35 PM', 0),
+(105, NULL, 11, 'Shshshhs', NULL, 'Gsgsgsgs', 167, 86, NULL, NULL, '29.9736834', '31.2492016', '', NULL, 'Hshshshs', NULL, NULL, 74, NULL, NULL, NULL, '2018-09-25', '10:33:31 PM', 0),
+(106, NULL, 12, 'Hshshshdhh', NULL, 'Shhshsh', 115, 87, NULL, NULL, '29.9736781', '31.2491889', '', NULL, 'Hshshshdbsh', NULL, NULL, 74, NULL, NULL, NULL, '2018-09-25', '10:35:54 PM', 0),
+(107, NULL, 12, 'hhshshgs', NULL, 'gshshhs', 116, 87, NULL, NULL, '29.9736888', '31.2491922', 'http://10c10748.ngrok.io/BlogPhotos/216dbff2-7974-4d46-b6cc-6f556ab9420e.jpg', NULL, 'hhshshshsh', NULL, NULL, 71, NULL, NULL, NULL, '2018-09-25', '10:38:21 PM', 0),
+(108, NULL, 12, 'ngrok test ', NULL, 'ngrok test', 129, 87, NULL, NULL, '31.21248633453479', '29.922464806201674', '', NULL, 'ng rok description ', NULL, NULL, 72, NULL, NULL, NULL, '2018-09-28', '10:30:42 PM', 0),
+(109, NULL, 11, 'amr ', NULL, 'amr ', 247, 89, NULL, NULL, '31.211411117720978', '29.926090413009433', 'http://b86d33e0.ngrok.io/BlogPhotos/02f2a30d-b6e7-4391-be37-90a8f0c46303.jpg', NULL, 'amr', NULL, NULL, 72, NULL, NULL, NULL, '2018-09-28', '10:36:42 PM', 0),
+(110, NULL, 13, 'موبايل تايه', NULL, 'عند الترام', 116, 87, NULL, NULL, '31.211221634746366', '29.923009791601316', 'http://b86d33e0.ngrok.io/BlogPhotos/b6dfd5e1-5e16-4a94-9e95-9d9e1989d8aa.jpg', NULL, 'موبايل تايه ', NULL, NULL, 75, NULL, NULL, NULL, '2018-09-29', '03:09:52 AM', 0),
+(111, NULL, 11, 'bhghggf', NULL, 'gffjgf', 115, 87, NULL, NULL, '31.211276284165745', '29.92376721112032', 'http://02526b67.ngrok.io/BlogPhotos/a8ba6b34-e793-4bff-aa9b-80e4b1e68a7d.jpg', NULL, 'ggghgg', NULL, NULL, 76, NULL, NULL, NULL, '2018-09-29', '12:43:26 PM', 0);
 
 -- --------------------------------------------------------
 
@@ -1511,7 +1513,9 @@ CREATE TABLE `rating` (
 
 INSERT INTO `rating` (`id`, `post_id`, `user_id`, `stars`, `date`, `time`) VALUES
 (28, 99, 65, 1, '2018-09-11', '05:13:10 PM'),
-(29, 101, 72, 5, '2018-09-12', '11:14:21 PM');
+(29, 101, 72, 5, '2018-09-12', '11:14:21 PM'),
+(30, 110, 76, 5, '2018-09-29', '03:10:49 AM'),
+(31, 111, 75, 4, '2018-09-29', '12:44:00 PM');
 
 -- --------------------------------------------------------
 
@@ -2189,7 +2193,10 @@ INSERT INTO `users` (`id`, `name`, `mobile`, `age`, `email`, `level`, `photo`, `
 (70, 'Saydala Elmasry', '', '', 'alex_pharma_2007@yahoo.com', NULL, 'https://graph.facebook.com/10216474303630645/picture?type=large', NULL, NULL, NULL, '***', NULL, '2018-09-01 14:32:43', NULL),
 (71, 'saydala', '01006688839', '28', 'a.elmasry@appgenesis.net', NULL, NULL, NULL, NULL, NULL, 'Aa123456', NULL, '2018-09-01 14:41:05', NULL),
 (72, 'Arsany Nagy', '', '', 'arsanynagylion@gmail.com', NULL, 'https://lh3.googleusercontent.com/-ddy7cl2RsmA/AAAAAAAAAAI/AAAAAAAAADw/zpSqqySu0HQ/photo.jpg', NULL, NULL, NULL, '***', NULL, '2018-09-12 19:13:12', NULL),
-(73, 'EmanMohamed', '01095708484', '26', 'eman@gmail.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-09-12 23:26:25', NULL);
+(73, 'EmanMohamed', '01095708484', '26', 'eman@gmail.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-09-12 23:26:25', NULL),
+(74, 'arsannnynaggggy', '01095708484', '22', 'arsany@arsany.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-09-17 23:26:58', NULL),
+(75, 'OmAlamir', '01095708484', '52', 'omalamor@gmail.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-09-28 23:07:20', NULL),
+(76, 'elshaba7', '01095708484', '24', 'elshaba7@gmail.com', NULL, NULL, NULL, NULL, NULL, '01060931989Aa', NULL, '2018-09-28 23:08:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -2482,7 +2489,7 @@ ALTER TABLE `admin_translation`
 -- AUTO_INCREMENT for table `ads_messages`
 --
 ALTER TABLE `ads_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
 -- AUTO_INCREMENT for table `ad_photos`
@@ -2494,7 +2501,7 @@ ALTER TABLE `ad_photos`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `blog_sections`
@@ -2530,7 +2537,7 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `site_lang`
@@ -2554,7 +2561,7 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

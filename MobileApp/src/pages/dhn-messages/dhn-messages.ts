@@ -18,7 +18,7 @@ import { DataService } from './../../CoreAssestiveModules/Services/DataService';
   selector: 'page-dhn-messages',
   templateUrl: 'dhn-messages.html',
 })
-export class DhnMessagesPage implements OnInit {
+export class DhnMessagesPage  {
   userChats;
   logginedUserEmail;
   access_token;
@@ -62,7 +62,7 @@ export class DhnMessagesPage implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  ionViewDidLoad(): void {
     this._signalR.connect().then((c) => {
       console.log(c);
       this.events.subscribe("message:sent", (messageDetails) => {
