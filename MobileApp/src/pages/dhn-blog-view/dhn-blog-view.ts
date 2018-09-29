@@ -126,7 +126,7 @@ export class DhnBlogViewPage {
       destination_user_id : this.data.user_id ,
       destination_user_name : this.data.user_name,
       destination_user_email : this.data.user_email, 
-
+      ad_id :this.data.id
     }
     this.navCtrl.push("DhnChatPage", {
       "MessagingParams": MessagingParamsdata,

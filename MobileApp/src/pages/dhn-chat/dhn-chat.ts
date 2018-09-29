@@ -32,8 +32,9 @@ export class DhnChatPage {
   chats: any[];
   logginedUserEmail;
   access_token;
+  ad_id;
   middleTextShowInitially = false;
-  middleTextShowChatsLoaded = false;
+  middleTextShowChatsLoaded = true;
 
   // Current Sent message from user
   newMessage: string;
@@ -56,6 +57,7 @@ export class DhnChatPage {
     this.currentUserId = chatParamters.destination_user_id;
     this.currentUserName = chatParamters.destination_user_name;
     this.currentEmail = chatParamters.destination_user_email;
+    this.ad_id = chatParamters.ad_id;
     this.middleTextShowInitially = IsTextInitializer.textShow;
     // this.currentPhotoUrl = chatParamters.destination_user_photo;
 
@@ -72,12 +74,9 @@ export class DhnChatPage {
   }
 
   ionViewDidEnter() {
-    if (!this.middleTextShowInitially) {
-      this.loading.show("Loading chat");
-    }
-    if (!this.middleTextShowChatsLoaded) {
-      this.loading.show("Loading chat");
-    }
+    // if (!this.middleTextShowInitially) {
+    //   this.loading.show("Loading chat");
+    // }
     let DataRequest = this.DataService.Get(
       `${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`,
       null,
@@ -86,7 +85,7 @@ export class DhnChatPage {
       chats.forEach(element => {
         element.sendDate = element.sendDate.split("T")[0];
       });
-      this.loading.hide();
+      // this.loading.hide();
       this.chats = chats;
 
       this.middleTextShowChatsLoaded = this.chats.length > 0 ? false : true ;
@@ -116,7 +115,7 @@ export class DhnChatPage {
   sendMessage() {
     this.middleTextShowChatsLoaded = false;
     this.middleTextShowInitially = false;
-    
+
     var newChat = {
       userId: "",
       sendDate: new Date().toISOString().split("T")[0],
@@ -125,7 +124,8 @@ export class DhnChatPage {
       message: this.newMessage,
       showMessage: true,
       senderEmail: this.logginedUserEmail,
-      receiverId: this.currentUserId
+      receiverId: this.currentUserId,
+      ad_id : this.ad_id
     };
     this.chats.push(newChat);
     this.newMessage = "";
