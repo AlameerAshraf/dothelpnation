@@ -14,5 +14,7 @@ namespace BusinessLayer.DTOs
         public Boolean showMessage { get; set; }
         public string userName { get; set; }
         public string time { get; set; }
+        public TimeSpan? time_span { get; set; }
+
     }
 }

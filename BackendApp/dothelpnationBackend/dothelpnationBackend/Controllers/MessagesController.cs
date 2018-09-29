@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using AutoMapper;
+using System.Globalization;
+using System;
 
 namespace dothelpnationBackend.Controllers
 {
@@ -40,9 +42,10 @@ namespace dothelpnationBackend.Controllers
                 {
                     userId = froms[i].from_user_id,
                     message = froms[i].info,
-                    sendDate = froms[i].date,
+                    sendDate = froms[i].date.Value.Date,
                     showMessage = true,
-                    time = froms[i].time
+                    time = froms[i].time,
+                    time_span = DateTime.ParseExact(froms[i].time, "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay
                 });
             }
 
@@ -52,13 +55,14 @@ namespace dothelpnationBackend.Controllers
                 {
                     userId = tos[i].from_user_id,
                     message = tos[i].info,
-                    sendDate = tos[i].date,
+                    sendDate = tos[i].date.Value.Date,
                     showMessage = true,
-                    time = tos[i].time
+                    time = tos[i].time,
+                    time_span = DateTime.ParseExact(tos[i].time , "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay
                 });
             }
 
-            var p2pchatList = peerToPeerChats.OrderBy(x => x.sendDate).ThenBy(x => x.time);
+            var p2pchatList = peerToPeerChats.OrderBy(x => x.sendDate).ThenBy(x => x.time_span);
             p2pchatList.ToList().ForEach(x => { x.time = x.time.Remove(5, 3); });
             return p2pchatList;
         }
@@ -118,13 +122,14 @@ namespace dothelpnationBackend.Controllers
             foreach (var message in chats)
             {
                 var fromUserData = _userRepo.Get().Where(x => x.id == message.destination_user_id).FirstOrDefault();
+                message.time_span = DateTime.ParseExact(message.time, "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay;
                 message.time = message.time.Remove(5, 3);
                 message.destination_user_name = fromUserData.name;
                 message.destination_user_email = fromUserData.email;
                 message.destination_user_photo = fromUserData.photo;
             }
 
-            return chats.OrderByDescending(x => x.date).ThenByDescending(x => x.time);
+            return chats.OrderByDescending(x => x.date).ThenByDescending(x => x.time_span);
         }
 
 
