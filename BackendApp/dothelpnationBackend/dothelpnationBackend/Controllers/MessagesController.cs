@@ -42,7 +42,7 @@ namespace dothelpnationBackend.Controllers
                     message = froms[i].info,
                     sendDate = froms[i].date,
                     showMessage = true,
-                    time = froms[i].time.Remove(5, 3)
+                    time = froms[i].time
                 });
             }
 
@@ -54,7 +54,7 @@ namespace dothelpnationBackend.Controllers
                     message = tos[i].info,
                     sendDate = tos[i].date,
                     showMessage = true,
-                    time = tos[i].time.Remove(5, 3)
+                    time = tos[i].time
                 });
             }
 

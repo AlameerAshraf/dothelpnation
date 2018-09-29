@@ -145,6 +145,7 @@ export class DhnChatPage {
     hours = hours ? hours : 12; // the hour '0' should be '12'
     hours = hours < 10 ? "0" + hours : hours;
     minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
     var serverDate = hours + ":" + minutes + ":" + seconds + " " + ampm;
     var viewDate = hours + ":" + minutes + " " + ampm;
     return { server: serverDate, view: viewDate };
