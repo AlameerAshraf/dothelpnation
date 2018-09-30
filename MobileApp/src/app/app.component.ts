@@ -1,14 +1,16 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
+import { VolatileStorage } from '../CoreAssestiveModules/VolatileStorage';
+
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Storage } from '@ionic/storage';
-import { VolatileStorage } from '../CoreAssestiveModules/VolatileStorage';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -79,7 +81,7 @@ export class MyApp implements OnInit {
   constructor(private translate: TranslateService,
     private platform: Platform,
     private Storage: Storage,
-    settings: Settings,
+    public push: Push,
     private config: Config,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen ,
@@ -89,6 +91,32 @@ export class MyApp implements OnInit {
       this.splashScreen.hide();
     });
     this.initTranslate();
+    this.initPushNotifications();
+  }
+
+
+  initPushNotifications(){
+    if(this.platform.is('cordova')){
+    console.warn("********2")
+
+
+      const options : PushOptions = {
+        android : {
+          senderID : '323317174806'
+        } ,
+        ios : {
+          alert : true , 
+          badge : true , 
+          sound : true
+        } ,
+        windows : {}
+      };
+
+      const pushObject: PushObject = this.push.init(options);
+      pushObject.on('registration').subscribe((data) => {
+        console.warn('device token ->' , data.registrationId);
+      });
+    }
   }
 
   initTranslate() {
