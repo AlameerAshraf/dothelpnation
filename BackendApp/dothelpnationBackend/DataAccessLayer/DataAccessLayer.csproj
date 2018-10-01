@@ -70,6 +70,7 @@
     <Compile Include="Entities\blog_sections.cs" />
     <Compile Include="Entities\comment.cs" />
     <Compile Include="Entities\destination.cs" />
+    <Compile Include="Entities\device_tokens.cs" />
     <Compile Include="Entities\email_contact.cs" />
     <Compile Include="Entities\fqa.cs" />
     <Compile Include="Entities\menu.cs" />

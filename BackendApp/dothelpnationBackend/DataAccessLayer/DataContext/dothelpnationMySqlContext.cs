@@ -13,6 +13,7 @@ namespace DataAccessLayer.DataContext
         {
         }
 
+        public virtual DbSet<device_tokens> device_tokens { get; set; }
         public virtual DbSet<ad_photos> ad_photos { get; set; }
         public virtual DbSet<admin_lang> admin_lang { get; set; }
         public virtual DbSet<admin_translation> admin_translation { get; set; }
@@ -50,6 +51,11 @@ namespace DataAccessLayer.DataContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<device_tokens>()
+                .Property(e => e.device_token)
+                .IsUnicode(false);
+
+
             modelBuilder.Entity<ad_photos>()
                 .Property(e => e.photo)
                 .IsUnicode(true);

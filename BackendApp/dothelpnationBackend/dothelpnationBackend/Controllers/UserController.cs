@@ -9,10 +9,12 @@ namespace dothelpnationBackend.Controllers
     public class UserController : ApiController
     {
         private readonly IRepository<user> _userRepo;
+        private readonly IRepository<device_tokens> _tokensRepo;
 
-        public UserController(IRepository<user> userRepo)
+        public UserController(IRepository<user> userRepo , IRepository<device_tokens> tokensRepo)
         {
             _userRepo = userRepo;
+            _tokensRepo = tokensRepo;
         }
 
 
@@ -52,6 +54,22 @@ namespace dothelpnationBackend.Controllers
                 var InsertedUser = _userRepo.Insert(userData);
                 return InsertedUser != null ? true : false;
             }
+        }
+
+        [HttpGet]
+        [Route("api/SaveDeviceTokens")]
+        public bool SaveUserDeviceTokens([FromUri] string deviceToken , string email )
+        {
+            var userId = _userRepo.Get().Where(x => x.email == email).FirstOrDefault()?.id;
+
+            var IsInserted = _tokensRepo.Insert(new device_tokens()
+            {
+                user_id = (int)userId,
+                device_token = deviceToken,
+            });
+
+
+            return IsInserted != null ? true : false ;
         }
 
         [HttpGet]
