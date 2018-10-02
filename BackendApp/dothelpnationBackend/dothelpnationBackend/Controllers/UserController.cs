@@ -57,7 +57,7 @@ namespace dothelpnationBackend.Controllers
         }
 
         [HttpGet]
-        [Route("api/SaveDeviceTokens")]
+        [Route("api/AddDeviceTokens")]
         public bool SaveUserDeviceTokens([FromUri] string deviceToken , string email )
         {
             var userId = _userRepo.Get().Where(x => x.email == email).FirstOrDefault()?.id;

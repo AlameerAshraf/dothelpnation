@@ -1,3 +1,4 @@
+import { Url } from './../CoreAssestiveModules/Url';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
@@ -10,7 +11,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Storage } from '@ionic/storage';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -59,11 +59,11 @@ export class MyApp implements OnInit {
             if (new Date(new Date().getTime() + access_token.expires_in * 1000) > new Date()) {
               this.rootPage = "DhnHomeTabsPage";
 
-              // get profile data .. 
+              // get profile data ..
               this.Storage.get("Profile_Data").then((data) => {
                 VolatileStorage.setData(data);
               });
-              
+
             } else {
               this.rootPage = "DhnLoginPage";
             }
@@ -81,7 +81,6 @@ export class MyApp implements OnInit {
   constructor(private translate: TranslateService,
     private platform: Platform,
     private Storage: Storage,
-    public push: Push,
     private config: Config,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen ,
@@ -91,33 +90,10 @@ export class MyApp implements OnInit {
       this.splashScreen.hide();
     });
     this.initTranslate();
-    this.initPushNotifications();
   }
 
 
-  initPushNotifications(){
-    if(this.platform.is('cordova')){
-    console.warn("********2")
 
-
-      const options : PushOptions = {
-        android : {
-          senderID : '323317174806'
-        } ,
-        ios : {
-          alert : true , 
-          badge : true , 
-          sound : true
-        } ,
-        windows : {}
-      };
-
-      const pushObject: PushObject = this.push.init(options);
-      pushObject.on('registration').subscribe((data) => {
-        console.warn('device token ->' , data.registrationId);
-      });
-    }
-  }
 
   initTranslate() {
     // Set the default language for translation strings, and the current language.
