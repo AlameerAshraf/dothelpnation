@@ -6,6 +6,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { BlogsRoot, SettingsRoot, ProfileRoot, MessagesRoot } from './../index';
 
 import { Keyboard } from '@ionic-native/keyboard';
+import { Storage } from '@ionic/storage';
+
 
 @IonicPage()
 @Component({
@@ -25,12 +27,15 @@ export class DhnHomeTabsPage implements OnDestroy {
   MessagesTablabel: string = "";
   ProfileTablabel: string = "";
   SettingsTablabel: string = "";
+  access_token: any;
+  logginedUserEmail: any;
 
   ionViewDidEnter() {
     this.menu.enable(true);
   }
 
   constructor(public navCtrl: NavController,
+    private Storage: Storage,
     private platform: Platform,
     public menu: MenuController,
     private events: Events,
@@ -63,6 +68,15 @@ export class DhnHomeTabsPage implements OnDestroy {
 
     var UserData = navParams.get('data');
     events.publish('user:logined', UserData);
+
+    this.Storage.get("access_token").then(SECURITY_DATA => {
+      this.access_token = SECURITY_DATA.access_token;
+    });
+
+    this.Storage.get("Profile_Data").then(PROFILE_DATA => {
+      this.logginedUserEmail = PROFILE_DATA.email;
+    });
+
   }
 
   ngOnDestroy(): void {

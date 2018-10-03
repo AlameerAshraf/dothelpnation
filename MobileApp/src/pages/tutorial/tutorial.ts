@@ -3,6 +3,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { Component } from '@angular/core';
 import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
 
+
+
 import { TranslateService } from '@ngx-translate/core';
 
 export interface Slide {
@@ -20,6 +22,7 @@ export class TutorialPage {
   slides: Slide[];
   showSkip = true;
   dir: string = 'rtl';
+  access_token: any;
 
   constructor(public navCtrl: NavController,
     public menu: MenuController,
@@ -58,6 +61,7 @@ export class TutorialPage {
 
   startApp() {
     this.Storage.set('IsAppStarted' , true);
+    this.Storage.set('DeviceTokenGenerated' , false);
     this.navCtrl.setRoot('DhnLoginPage', {}, {
       animate: true,
       direction: 'forward'
@@ -78,5 +82,6 @@ export class TutorialPage {
   ionViewWillLeave() {
     this.menu.enable(true);
   }
+
 
 }
