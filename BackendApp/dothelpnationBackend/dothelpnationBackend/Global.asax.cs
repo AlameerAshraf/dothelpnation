@@ -6,6 +6,7 @@ using Autofac.Integration.SignalR;
 using BusinessLayer.Repositories;
 using BusinessLayer.DTOs;
 using Microsoft.AspNet.SignalR;
+using BusinessLayer.PushService;
 
 namespace dothelpnationBackend
 {
@@ -41,7 +42,11 @@ namespace dothelpnationBackend
                 .As(typeof(IRepository<>))
                 .InstancePerDependency();
 
+            builder.RegisterType<Push>()
+                .As<IPush>();
+
             var conatiner = builder.Build();
+            conatiner.Resolve<IPush>();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(conatiner);
 
 
@@ -54,6 +59,9 @@ namespace dothelpnationBackend
                 .RegisterGeneric(typeof(Repository<>))
                 .As(typeof(IRepository<>))
                 .InstancePerDependency();
+
+            HubBuilder.RegisterType<Push>()
+                .As<IPush>();
 
             var hubContainer = HubBuilder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(hubContainer);
