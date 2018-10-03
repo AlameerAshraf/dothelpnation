@@ -79,6 +79,8 @@
     <Compile Include="DTOs\singBlogViewDTO.cs" />
     <Compile Include="DTOs\singleChatDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushService\IPush.cs" />
+    <Compile Include="PushService\Push.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
