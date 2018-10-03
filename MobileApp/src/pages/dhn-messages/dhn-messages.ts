@@ -108,10 +108,10 @@ export class DhnMessagesPage  {
         this.events.publish("message:received" , chatMessage);
 
         // Notify 
-        this.localNotifications.schedule({
-          title: chatMessage.senderName + " " + "sent you a message",
-          text:  chatMessage.message,
-        });
+        // this.localNotifications.schedule({
+        //   title: chatMessage.senderName + " " + "sent you a message",
+        //   text:  chatMessage.message,
+        // });
 
       });
     });

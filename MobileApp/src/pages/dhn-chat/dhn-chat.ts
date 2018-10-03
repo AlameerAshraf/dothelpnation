@@ -99,10 +99,10 @@ export class DhnChatPage {
       this.chats.push(receivedMessage);
 
       // Notify
-      this.localNotifications.schedule({
-        title: this.currentUserName + " " + "sent you a message",
-        text: receivedMessage.message
-      });
+      // this.localNotifications.schedule({
+      //   title: this.currentUserName + " " + "sent you a message",
+      //   text: receivedMessage.message
+      // });
 
       if (this.content != null) {
         setTimeout(() => {
