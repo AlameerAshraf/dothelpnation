@@ -58,7 +58,7 @@ namespace dothelpnationBackend.Controllers
 
         [HttpGet]
         [Route("api/AddDeviceTokens")]
-        public bool SaveUserDeviceTokens([FromUri] string deviceToken , string email )
+        public bool SaveUserDeviceTokens([FromUri] string deviceToken , string email , string deviceType)
         {
             var userId = _userRepo.Get().Where(x => x.email == email).FirstOrDefault()?.id;
 
@@ -66,8 +66,8 @@ namespace dothelpnationBackend.Controllers
             {
                 user_id = (int)userId,
                 device_token = deviceToken,
+                device_type = deviceType
             });
-
 
             return IsInserted != null ? true : false ;
         }
