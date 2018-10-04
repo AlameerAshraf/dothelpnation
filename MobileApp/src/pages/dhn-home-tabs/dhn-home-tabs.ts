@@ -1,12 +1,14 @@
-import { IonicPage, NavController, NavParams, MenuController, Platform, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Platform, Events, Tabs } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 
 import { BlogsRoot, SettingsRoot, ProfileRoot, MessagesRoot } from './../index';
 
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
+import { DataService } from '../../CoreAssestiveModules/Services/DataService';
+import { Url } from '../../CoreAssestiveModules/Url';
 
 
 @IonicPage()
@@ -16,6 +18,7 @@ import { Storage } from '@ionic/storage';
 })
 export class DhnHomeTabsPage implements OnDestroy {
 
+  @ViewChild("tabs") mianTabs: Tabs;
 
   _BlogsRoot: any = BlogsRoot;
   _MessagesRoot: any = MessagesRoot;
@@ -29,12 +32,14 @@ export class DhnHomeTabsPage implements OnDestroy {
   SettingsTablabel: string = "";
   access_token: any;
   logginedUserEmail: any;
+  messagesCount: any;
 
   ionViewDidEnter() {
     this.menu.enable(true);
   }
 
   constructor(public navCtrl: NavController,
+    private DataService: DataService,
     private Storage: Storage,
     private platform: Platform,
     public menu: MenuController,
@@ -66,6 +71,11 @@ export class DhnHomeTabsPage implements OnDestroy {
       this.navCtrl.setRoot('DhnLoginPage');
     });
 
+    events.subscribe("tab:chnaged:messages" , (flag) => {
+      if(flag)
+        this.mianTabs.select(1);
+    });
+
     var UserData = navParams.get('data');
     events.publish('user:logined', UserData);
 
@@ -75,7 +85,12 @@ export class DhnHomeTabsPage implements OnDestroy {
 
     this.Storage.get("Profile_Data").then(PROFILE_DATA => {
       this.logginedUserEmail = PROFILE_DATA.email;
+      let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetUnreadChatsNumber?email=${this.logginedUserEmail}`, null, this.access_token).subscribe((numberOfChats) => {
+          this.messagesCount = numberOfChats;
+      });
     });
+
+
 
   }
 
@@ -85,7 +100,7 @@ export class DhnHomeTabsPage implements OnDestroy {
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DhnHomeTabsPage');
+  
   }
 
 
