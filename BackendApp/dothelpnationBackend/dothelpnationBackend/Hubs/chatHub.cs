@@ -75,6 +75,8 @@ namespace dothelpnationBackend.Hubs
             var senderPhoto = senderUser.photo;
             var receiverDeviceTokens = _deviceTokensRepo.Get().Where(x => x.user_id == receiverId).ToList();
             var ad_id = sentMessage.ad_id != null ? int.Parse(sentMessage.ad_id) : 0;
+            var pushNotificationTitle = senderName + " " + "sent you a message";
+
 
             _messagesRepo.Insert(new ads_messages()
             {
@@ -107,7 +109,10 @@ namespace dothelpnationBackend.Hubs
 
             foreach (var token in receiverDeviceTokens)
             {
-                _pushNotificationService.SendNotificationsToFCM(FCMServerApiKey, FCMSenderId, token.device_token ,sentMessage.message);
+                if(token.device_type.ToLower() == "android")
+                {
+                    _pushNotificationService.SendNotificationsToFCM(FCMServerApiKey, FCMSenderId, token.device_token, sentMessage.message, pushNotificationTitle);
+                }
             }
 
         }
