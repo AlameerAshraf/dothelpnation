@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, ToastController, 
 import { Storage } from '@ionic/storage';
 
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Device } from '@ionic-native/device';
 
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
@@ -21,6 +22,7 @@ export class DhnBlogsPage {
   Blogs = null;
   access_token: string;
   logginedUserEmail: any;
+  deviceType: string;
 
   constructor(public navCtrl: NavController,
     private push: Push,
@@ -31,6 +33,7 @@ export class DhnBlogsPage {
     public modalCtrl: ModalController,
     private toast: ToastController,
     private actionSheet: ActionSheetController,
+    private device: Device,
     private LoadingService: LoadingService) {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -41,7 +44,8 @@ export class DhnBlogsPage {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
 
-    // Initialize push notifications 
+    // Initialize push notifications
+    this.deviceType = this.device.platform; 
     this.initPushNotifications();
   }
 
@@ -232,20 +236,21 @@ export class DhnBlogsPage {
       if (!DeviceTokenGenerated && this.platform.is('cordova')) {
         const options: PushOptions = {
           android: {
-            senderID: '323317174806', 
-
+            senderID: '323317174806',
+            vibrate : true ,
+            sound : true, 
           },
           ios: {
             alert: 'true',
             badge: true,
-            sound: 'false'
+            sound: 'true'
           },
           windows: {}
         };
 
         const pushObject: PushObject = this.push.init(options);
         pushObject.on('registration').subscribe((data) => {
-          this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/AddDeviceTokens?deviceToken=${data.registrationId}&email=${this.logginedUserEmail}`,
+          this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/AddDeviceTokens?deviceToken=${data.registrationId}&email=${this.logginedUserEmail}&deviceType=${this.deviceType}`,
             null,
             this.access_token).subscribe((tokenSaved) => {
               if (tokenSaved)

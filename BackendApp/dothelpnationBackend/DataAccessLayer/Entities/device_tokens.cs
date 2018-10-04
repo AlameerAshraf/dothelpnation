@@ -12,10 +12,12 @@ namespace DataAccessLayer.Entities
         public int id { get; set; }
 
         [Column(TypeName = "text")]
-        [Required]
         [StringLength(65535)]
         public string device_token { get; set; }
 
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string device_type { get; set; }
         public int user_id { get; set; }
     }
 }
