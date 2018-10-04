@@ -133,5 +133,20 @@ namespace dothelpnationBackend.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/GetUnreadChatsNumber")]
+        public int GetUnreadChatsNumber([FromUri] string email)
+        {
+            var userId = _userRepo.Get().Where(x => x.email == email).FirstOrDefault()?.id;
+
+            var froms = _messagesRepo.Get()
+                .Where(x => x.to_user_id == userId)
+                .ToList();
+
+            return froms.GroupBy(x => x.from_user_id)
+                .Select(x => x.OrderByDescending(z => z.date).ThenByDescending(y => y.time).FirstOrDefault()).Count(x => x.stuts == 1);
+        }
+
+
     }
 }
