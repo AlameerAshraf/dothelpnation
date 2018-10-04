@@ -13,7 +13,7 @@ namespace BusinessLayer.PushService
 
         }
 
-        public void SendNotificationsToFCM(string serverApiKey,string senderId, string targetDeviceToken, string message)
+        public void SendNotificationsToFCM(string serverApiKey,string senderId, string targetDeviceToken, string message , string title)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace BusinessLayer.PushService
                 tRequest.Headers.Add(string.Format("Authorization: key={0}" , serverApiKey));
                 tRequest.Headers.Add(string.Format("Sender: id={0}", senderId));
 
-                string postData = "data.message=" + message + "&data.time=" + System.DateTime.Now.ToString() + "&registration_id=" + targetDeviceToken + "";
+                string postData = "data.message=" + message + "&data.time=" + System.DateTime.Now.ToString() + "&registration_id=" + targetDeviceToken + "&data.title=" + title + "" ;
 
                 Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
                 tRequest.ContentLength = byteArray.Length;
