@@ -32,6 +32,8 @@ import { Network } from '@ionic-native/network';
 import { AgmCoreModule } from '@agm/core';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Device } from '@ionic-native/device';
+
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -75,6 +77,7 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
+    Device,
     Push,
     LocalNotifications,
     Network,
