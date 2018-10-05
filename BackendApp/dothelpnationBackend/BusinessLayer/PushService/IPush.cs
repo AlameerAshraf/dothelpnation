@@ -8,7 +8,7 @@ namespace BusinessLayer.PushService
 {
     public interface IPush
     {
-        void SendNotificationsToFCM(string serverApiKey , string senderId, string targetDeviceToken, string message , string title);
+        void SendNotificationsToFCM(string serverApiKey , string senderId, string targetDeviceToken, string message , string title , string messageType);
         void SendNotificationsToAPNS(string passPhrase, string deviceToken, string message);
     }
 }

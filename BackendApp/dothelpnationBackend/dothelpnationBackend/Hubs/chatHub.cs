@@ -111,7 +111,7 @@ namespace dothelpnationBackend.Hubs
             {
                 if(token.device_type.ToLower() == "android")
                 {
-                    _pushNotificationService.SendNotificationsToFCM(FCMServerApiKey, FCMSenderId, token.device_token, sentMessage.message, pushNotificationTitle);
+                    _pushNotificationService.SendNotificationsToFCM(FCMServerApiKey, FCMSenderId, token.device_token, sentMessage.message, pushNotificationTitle , "chatMessage");
                 }
             }
 
