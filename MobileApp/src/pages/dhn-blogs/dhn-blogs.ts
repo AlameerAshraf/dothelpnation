@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ToastController, ActionSheetController, Platform } from 'ionic-angular';
+import { Events , IonicPage, NavController, NavParams, ModalController, ToastController, ActionSheetController, Platform, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+
 
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Device } from '@ionic-native/device';
@@ -34,6 +35,8 @@ export class DhnBlogsPage {
     private toast: ToastController,
     private actionSheet: ActionSheetController,
     private device: Device,
+    private alertController : AlertController,
+    private events: Events,
     private LoadingService: LoadingService) {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -214,24 +217,6 @@ export class DhnBlogsPage {
 
   // Initialize Push Notifications 
   initPushNotifications() {
-
-    this.push.hasPermission()
-      .then((res: any) => {
-
-        if (res.isEnabled) {
-          console.log('We have permission to send push notifications');
-        } else {
-          console.log('We do not have permission to send push notifications');
-        }
-    });
-
-    this.push.createChannel({
-      id: "testchannel1",
-      description: "My first test channel",
-      // The importance property goes from 1 = Lowest, 2 = Low, 3 = Normal, 4 = High and 5 = Highest.
-      importance: 3
-     }).then(() => console.log('Channel created'));
-
     this.storage.get('DeviceTokenGenerated').then((DeviceTokenGenerated) => {
       if (!DeviceTokenGenerated && this.platform.is('cordova')) {
         const options: PushOptions = {
@@ -258,7 +243,14 @@ export class DhnBlogsPage {
             });
         });
 
-        pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+        pushObject.on('notification').subscribe((notification: any)=> {
+ 
+          if(notification.additionalData.foreground){
+            this.events.publish("tab:changed:messagesCount" , 1 , "increase");
+          } else {
+            this.events.publish("tab:chnaged:messages" , true);           
+          }
+        });
         pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
       };
     })

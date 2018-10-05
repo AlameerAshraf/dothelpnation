@@ -50,7 +50,7 @@ export class DhnMessagesPage  {
     this.loading.show("Loading messages");
 
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetChatList?email=${this.logginedUserEmail}`, null, this.access_token).subscribe((data) => {
-
+      let unreadMessagesCounter = 0 ;
       data.forEach(element => {
         element.sortDate = new Date(`${element.date.split('T')[0]} ${element.time}`);
         if (element.destination_user_photo == null) {
@@ -59,9 +59,11 @@ export class DhnMessagesPage  {
         if(element.source == "from" && element.stuts == 1){ // unread messages found 
           element.time = "🔔" + element.time;
           element.unreadmessages = true;
+          unreadMessagesCounter += 1;
         }
       });
-
+      
+      this.events.publish("tab:changed:messagesCount" , unreadMessagesCounter , "set");
 
       this.loading.hide();
       this.userChats = data;
@@ -88,8 +90,11 @@ export class DhnMessagesPage  {
         if (destinationData != null) {
           // Bind last message on messages list 
           destinationData.message = chatMessage.message;
-          destinationData.time = chatMessage.time;
+          destinationData.time = "🔔" + chatMessage.time;
           destinationData.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
+          destinationData.unreadmessages = true;
+
+          this.events.publish("tab:changed:messagesCount" , 1 , "increase");
           this.userChats = _.orderBy(this.userChats, ['sortDate'], ['desc']);
         } else {
           let newArrivedMessage = {
@@ -97,13 +102,15 @@ export class DhnMessagesPage  {
             destination_user_name : chatMessage.senderName ,
             destination_user_email : chatMessage.senderEmail ,
             destination_user_photo : chatMessage.senderPhoto ,
-            time : chatMessage.time ,
+            time : "🔔" + chatMessage.time ,
             date : chatMessage.date ,
             message : chatMessage.message,
             ad_id : chatMessage.ad_id,
-            sortDate : new Date()
+            sortDate : new Date(),
+            unreadmessages : true
           };
           
+          this.events.publish("tab:changed:messagesCount" , 1 , "increase");
           newArrivedMessage.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
           this.userChats.push(newArrivedMessage);
 

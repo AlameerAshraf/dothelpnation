@@ -189,8 +189,22 @@ namespace dothelpnationBackend.Controllers
         }
 
 
-        //[HttpGet]
-        //[Route("api/")]
+        [HttpGet]
+        [Route("api/SetMesssagesAsRead")]
+        public bool SetMesssagesAsRead([FromUri] string email , [FromUri] string from_user_id)
+        {
+            var userId = _userRepo.Get().Where(x => x.email == email).FirstOrDefault()?.id;
+            int fromUserId = int.Parse(from_user_id);
+
+            var lastMessage = _messagesRepo.Get()
+                .Where(x => x.from_user_id == fromUserId && x.to_user_id == userId)
+                .OrderByDescending(x => x.date).ThenByDescending(x => x.time).FirstOrDefault();
+            lastMessage.stuts = 2;
+
+            var IsUpdated = _messagesRepo.Update(lastMessage);
+
+            return (IsUpdated != null) ? true : false;
+        }
 
 
     }

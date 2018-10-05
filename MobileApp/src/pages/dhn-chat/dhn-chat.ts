@@ -38,6 +38,7 @@ export class DhnChatPage {
 
   // Current Sent message from user
   newMessage: string;
+  unreadFlag: any;
 
   // SignalR
 
@@ -59,6 +60,7 @@ export class DhnChatPage {
     this.currentEmail = chatParamters.destination_user_email;
     this.ad_id = chatParamters.ad_id;
     this.middleTextShowInitially = IsTextInitializer.textShow;
+    this.unreadFlag = chatParamters.unreadmessages;
     // this.currentPhotoUrl = chatParamters.destination_user_photo;
 
     this.storage.get("Profile_Data").then(PROFILE_DATA => {
@@ -69,6 +71,8 @@ export class DhnChatPage {
       this.access_token = SECURITY_DATA.access_token;
     });
 
+
+
     // chat list ..
     this.chats = [];
   }
@@ -77,18 +81,23 @@ export class DhnChatPage {
     // if (!this.middleTextShowInitially) {
     //   this.loading.show("Loading chat");
     // }
+
+    if(this.unreadFlag){
+      this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SetMesssagesAsRead?email=${this.logginedUserEmail}&from_user_id=${this.currentUserId}` ,
+      null , this.access_token).subscribe();
+    }
+
     let DataRequest = this.DataService.Get(
       `${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`,
       null,
-      this.access_token
-      ).subscribe(chats => {
+      this.access_token).subscribe(chats => {
       chats.forEach(element => {
         element.sendDate = element.sendDate.split("T")[0];
       });
       // this.loading.hide();
       this.chats = chats;
 
-      this.middleTextShowChatsLoaded = this.chats.length > 0 ? false : true ;
+      this.middleTextShowInitially = this.chats.length > 0 ? false : true ;
 
       setTimeout(() => {
         this.content.scrollToBottom(300);

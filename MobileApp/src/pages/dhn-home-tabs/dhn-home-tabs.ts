@@ -7,6 +7,8 @@ import { BlogsRoot, SettingsRoot, ProfileRoot, MessagesRoot } from './../index';
 
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
+import { Badge } from '@ionic-native/badge';
+
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { Url } from '../../CoreAssestiveModules/Url';
 
@@ -39,6 +41,7 @@ export class DhnHomeTabsPage implements OnDestroy {
   }
 
   constructor(public navCtrl: NavController,
+    private badge: Badge,
     private DataService: DataService,
     private Storage: Storage,
     private platform: Platform,
@@ -71,9 +74,19 @@ export class DhnHomeTabsPage implements OnDestroy {
       this.navCtrl.setRoot('DhnLoginPage');
     });
 
-    events.subscribe("tab:chnaged:messages" , (flag) => {
+    this.events.subscribe("tab:chnaged:messages" , (flag) => {
+      console.warn("888888888")
       if(flag)
         this.mianTabs.select(1);
+    });
+
+
+    this.events.subscribe("tab:changed:messagesCount" , (messagesCount , operation) => {
+      if(operation == "increase"){
+        this.increaseCounter(messagesCount);
+      } else if (operation == "set"){
+        this.setCounter(messagesCount);
+      }
     });
 
     var UserData = navParams.get('data');
@@ -86,7 +99,13 @@ export class DhnHomeTabsPage implements OnDestroy {
     this.Storage.get("Profile_Data").then(PROFILE_DATA => {
       this.logginedUserEmail = PROFILE_DATA.email;
       let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetUnreadChatsNumber?email=${this.logginedUserEmail}`, null, this.access_token).subscribe((numberOfChats) => {
+        if(numberOfChats != 0){
           this.messagesCount = numberOfChats;
+          this.badge.set(numberOfChats);
+        } else {
+          this.messagesCount = "";
+          this.badge.clear();
+        }
       });
     });
 
@@ -101,6 +120,30 @@ export class DhnHomeTabsPage implements OnDestroy {
 
   ionViewDidLoad() {
   
+  }
+
+
+  // Increase Counter 
+  increaseCounter(increaseBy){
+    if(this.messagesCount == 0 || this.messagesCount == null){
+      this.messagesCount == 0 ;
+      let newMessageCounts = this.messagesCount + increaseBy;
+      this.badge.set(newMessageCounts);
+    } else {
+      this.messagesCount += 1;
+    }
+  }
+
+
+  // Set messages counters 
+  setCounter(counter){
+    if(counter == 0){
+      this.messagesCount = "";
+      this.badge.clear();
+    } else {
+      this.messagesCount = counter;
+      this.badge.set(counter);
+    }
   }
 
 
