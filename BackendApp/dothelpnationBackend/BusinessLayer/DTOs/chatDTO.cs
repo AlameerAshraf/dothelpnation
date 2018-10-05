@@ -15,9 +15,10 @@ namespace BusinessLayer.DTOs
         public DateTime? date { get; set; }
         public TimeSpan? time_span { get; set; }
         public string time { get; set; }
+
+        public string  source { get; set; }
+
         public int? destination_user_id { get; set; }
-
-
         public string destination_user_name { get; set; }
         public string destination_user_email { get; set; }
         public string destination_user_photo { get; set; }
