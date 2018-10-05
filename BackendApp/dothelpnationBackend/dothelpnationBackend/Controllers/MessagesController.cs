@@ -10,6 +10,7 @@ using System;
 
 namespace dothelpnationBackend.Controllers
 {
+    [Authorize]
     public class MessagesController : ApiController
     {
         private readonly IRepository<ads_messages> _messagesRepo;
@@ -96,7 +97,8 @@ namespace dothelpnationBackend.Controllers
                     destination_user_id = (int)from_message.from_user_id,
                     date = from_message.date,
                     time = from_message.time,
-                    stuts = from_message.stuts
+                    stuts = from_message.stuts,
+                    source = "from"
                 });
             }
 
@@ -110,7 +112,8 @@ namespace dothelpnationBackend.Controllers
                     destination_user_id = (int)to_message.to_user_id,
                     date = to_message.date,
                     time = to_message.time,
-                    stuts = to_message.stuts
+                    stuts = to_message.stuts,
+                    source = "to"
                 });
             }
 
@@ -137,15 +140,57 @@ namespace dothelpnationBackend.Controllers
         [Route("api/GetUnreadChatsNumber")]
         public int GetUnreadChatsNumber([FromUri] string email)
         {
+            var chats = new List<chatDTO>();
             var userId = _userRepo.Get().Where(x => x.email == email).FirstOrDefault()?.id;
 
             var froms = _messagesRepo.Get()
                 .Where(x => x.to_user_id == userId)
                 .ToList();
 
-            return froms.GroupBy(x => x.from_user_id)
-                .Select(x => x.OrderByDescending(z => z.date).ThenByDescending(y => y.time).FirstOrDefault()).Count(x => x.stuts == 1);
+            var tos = _messagesRepo.Get()
+                .Where(x => x.from_user_id == userId) // I sent the message 
+                .ToList();
+
+            foreach (var from_message in froms)
+            {
+                chats.Add(new chatDTO()
+                {
+                    id = from_message.id,
+                    ad_id = from_message.ad_id,
+                    message = from_message.info,
+                    destination_user_id = (int)from_message.from_user_id,
+                    date = from_message.date,
+                    time = from_message.time,
+                    stuts = from_message.stuts,
+                    source = "from"
+                });
+            }
+
+            foreach (var to_message in tos)
+            {
+                chats.Add(new chatDTO()
+                {
+                    id = to_message.id,
+                    ad_id = to_message.ad_id,
+                    message = to_message.info,
+                    destination_user_id = (int)to_message.to_user_id,
+                    date = to_message.date,
+                    time = to_message.time,
+                    stuts = to_message.stuts,
+                    source = "to"
+                });
+            }
+
+
+            var messagesCount = chats.GroupBy(x => x.destination_user_id)
+                .Select(x => x.OrderByDescending(z => z.date).ThenByDescending(y => y.time).FirstOrDefault()).Count(x => x.stuts == 1 && x.source == "from");
+
+            return messagesCount;
         }
+
+
+        //[HttpGet]
+        //[Route("api/")]
 
 
     }
