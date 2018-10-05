@@ -32,6 +32,7 @@ import { Network } from '@ionic-native/network';
 import { AgmCoreModule } from '@agm/core';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Badge } from '@ionic-native/badge';
 import { Device } from '@ionic-native/device';
 
 
@@ -78,6 +79,7 @@ export function provideSettings(storage: Storage) {
   ],
   providers: [
     Device,
+    Badge,
     Push,
     LocalNotifications,
     Network,

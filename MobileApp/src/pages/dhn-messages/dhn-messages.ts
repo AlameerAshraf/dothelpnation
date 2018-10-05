@@ -50,12 +50,18 @@ export class DhnMessagesPage  {
     this.loading.show("Loading messages");
 
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetChatList?email=${this.logginedUserEmail}`, null, this.access_token).subscribe((data) => {
+
       data.forEach(element => {
         element.sortDate = new Date(`${element.date.split('T')[0]} ${element.time}`);
         if (element.destination_user_photo == null) {
           element.destination_user_photo = "assets/img/avatar2.png";
         }
+        if(element.source == "from" && element.stuts == 1){ // unread messages found 
+          element.time = "🔔" + element.time;
+          element.unreadmessages = true;
+        }
       });
+
 
       this.loading.hide();
       this.userChats = data;
