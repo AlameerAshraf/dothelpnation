@@ -78,64 +78,59 @@ export class DhnMessagesPage  {
         console.warn("******** message sent")
         connectionObject.invoke("sendMessage", messageDetails);
       });
-    });
 
-    // this._signalR.connect().then((c) => {
-    //   this.events.subscribe("message:sent", (messageDetails) => {
-    //     // Send messages ..
-    //     c.invoke("sendMessage", messageDetails);
-    //   });
+      //  1.create a listener object
+      let onMessageReceived$ = new BroadcastEventListener<any>('receiveMessage')
+      // 2.register the listener
+      connectionObject.listen(onMessageReceived$);
+      // 3.subscribe for incoming messages
 
-    //   //  1.create a listener object
-    //   let onMessageReceived$ = new BroadcastEventListener<any>('receiveMessage')
-    //   // 2.register the listener
-    //   c.listen(onMessageReceived$);
-    //   // 3.subscribe for incoming messages
-    //   onMessageReceived$.subscribe((chatMessage) => {
-    //     var destinationData = null;
-    //     destinationData = this.userChats.find(x => x.destination_user_id == chatMessage.from_user_id);
+      onMessageReceived$.subscribe((chatMessage) => {
+        var destinationData = null;
+        destinationData = this.userChats.find(x => x.destination_user_id == chatMessage.from_user_id);
 
-    //     if (destinationData != null) {
-    //       // Bind last message on messages list 
-    //       destinationData.message = chatMessage.message;
-    //       destinationData.time = "🔔" + chatMessage.time;
-    //       destinationData.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
-    //       destinationData.unreadmessages = true;
+        if (destinationData != null) {
+          // Bind last message on messages list 
+          destinationData.message = chatMessage.message;
+          destinationData.time = "🔔" + chatMessage.time;
+          destinationData.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
+          destinationData.unreadmessages = true;
 
-    //       this.events.publish("tab:changed:messagesCount" , 1 , "increase");
-    //       this.userChats = _.orderBy(this.userChats, ['sortDate'], ['desc']);
-    //     } else {
-    //       let newArrivedMessage = {
-    //         destination_user_id : chatMessage.from_user_id,
-    //         destination_user_name : chatMessage.senderName ,
-    //         destination_user_email : chatMessage.senderEmail ,
-    //         destination_user_photo : chatMessage.senderPhoto ,
-    //         time : "🔔" + chatMessage.time ,
-    //         date : chatMessage.date ,
-    //         message : chatMessage.message,
-    //         ad_id : chatMessage.ad_id,
-    //         sortDate : new Date(),
-    //         unreadmessages : true
-    //       };
+          this.events.publish("tab:changed:messagesCount", 1, "increase");
+          console.log(this.userChats);
+          this.userChats = _.orderBy(this.userChats, ['sortDate'], ['desc']);
+          console.log(this.userChats);
+        } else {
+          let newArrivedMessage = {
+            destination_user_id: chatMessage.from_user_id,
+            destination_user_name: chatMessage.senderName,
+            destination_user_email: chatMessage.senderEmail,
+            destination_user_photo: chatMessage.senderPhoto,
+            time: "🔔" + chatMessage.time,
+            date: chatMessage.date,
+            message: chatMessage.message,
+            ad_id: chatMessage.ad_id,
+            sortDate: new Date(),
+            unreadmessages: true
+          };
           
-    //       this.events.publish("tab:changed:messagesCount" , 1 , "increase");
-    //       newArrivedMessage.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
-    //       this.userChats.push(newArrivedMessage);
+          this.events.publish("tab:changed:messagesCount" , 1 , "increase");
+          newArrivedMessage.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
+          this.userChats.push(newArrivedMessage);
 
-    //       this.userChats = _.orderBy(this.userChats, ['sortDate'], ['desc']);
-    //     }
-        
-    //     // publish event to the chat page 
-    //     this.events.publish("message:received" , chatMessage);
+          this.userChats = _.orderBy(this.userChats, ['sortDate'], ['desc']);
+        }
 
-    //     // Notify 
-    //     // this.localNotifications.schedule({
-    //     //   title: chatMessage.senderName + " " + "sent you a message",
-    //     //   text:  chatMessage.message,
-    //     // });
+        this.events.publish("message:received" , chatMessage);
 
-    //   });
-    // });
+
+        // Notify 
+        // this.localNotifications.schedule({
+        //   title: chatMessage.senderName + " " + "sent you a message",
+        //   text:  chatMessage.message,
+        // });
+      });
+    });
   }
 
   startChat(Id) {
