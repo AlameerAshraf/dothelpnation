@@ -1,5 +1,5 @@
 import { IonicPage, NavController, NavParams, MenuController, Platform, Events, Tabs } from 'ionic-angular';
-import { SignalR, SignalRConnection, ConnectionStatus, BroadcastEventListener } from 'ng2-signalr';
+import { SignalR, SignalRConnection, ConnectionStatus, BroadcastEventListener, ISignalRConnection } from 'ng2-signalr';
 
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { Url } from '../../CoreAssestiveModules/Url';
@@ -14,6 +14,8 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
 import { Badge } from '@ionic-native/badge';
 
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 
 
@@ -55,6 +57,8 @@ export class DhnHomeTabsPage implements OnDestroy {
     public navParams: NavParams,
     private keyboard: Keyboard,
     private instanceStorage: instanceStorageService,
+    private fb: Facebook,
+    private googlePlus: GooglePlus,
     private translate: TranslateService) {
 
     this.platform.ready().then(() => {
@@ -78,6 +82,12 @@ export class DhnHomeTabsPage implements OnDestroy {
 
     events.subscribe('logout:clicked', () => {
       this.navCtrl.setRoot('DhnLoginPage');
+      this.instanceStorage.SignalRConnectionDelivery.subscribe((connection: ISignalRConnection) => {
+        connection.stop();
+      });
+
+      this.fb.logout();
+      this.googlePlus.logout();
     });
 
     this.events.subscribe("tab:chnaged:messages" , (flag) => {
