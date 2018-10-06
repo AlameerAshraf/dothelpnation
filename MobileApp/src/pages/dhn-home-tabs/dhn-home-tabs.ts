@@ -75,11 +75,9 @@ export class DhnHomeTabsPage implements OnDestroy {
     });
 
     this.events.subscribe("tab:chnaged:messages" , (flag) => {
-      console.warn("888888888")
       if(flag)
         this.mianTabs.select(1);
     });
-
 
     this.events.subscribe("tab:changed:messagesCount" , (messagesCount , operation) => {
       if(operation == "increase"){
@@ -126,11 +124,12 @@ export class DhnHomeTabsPage implements OnDestroy {
   // Increase Counter 
   increaseCounter(increaseBy){
     if(this.messagesCount == 0 || this.messagesCount == null){
-      this.messagesCount == 0 ;
-      let newMessageCounts = this.messagesCount + increaseBy;
+      let newMessageCounts = increaseBy;
+      this.messagesCount = newMessageCounts;
       this.badge.set(newMessageCounts);
     } else {
       this.messagesCount += 1;
+      this.badge.set(this.messagesCount);
     }
   }
 

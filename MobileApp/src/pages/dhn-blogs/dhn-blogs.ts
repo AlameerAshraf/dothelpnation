@@ -244,7 +244,6 @@ export class DhnBlogsPage {
         });
 
         pushObject.on('notification').subscribe((notification: any)=> {
- 
           if(notification.additionalData.foreground){
             this.events.publish("tab:changed:messagesCount" , 1 , "increase");
           } else {
