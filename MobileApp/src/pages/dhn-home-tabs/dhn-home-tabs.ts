@@ -1,16 +1,20 @@
 import { IonicPage, NavController, NavParams, MenuController, Platform, Events, Tabs } from 'ionic-angular';
+import { SignalR, SignalRConnection, ConnectionStatus, BroadcastEventListener } from 'ng2-signalr';
+
+import { DataService } from '../../CoreAssestiveModules/Services/DataService';
+import { Url } from '../../CoreAssestiveModules/Url';
+import { instanceStorageService } from '../../CoreAssestiveModules/Services/instanceStorageService';
+import { BlogsRoot, SettingsRoot, ProfileRoot, MessagesRoot } from './../index';
+
 
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-
-import { BlogsRoot, SettingsRoot, ProfileRoot, MessagesRoot } from './../index';
 
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
 import { Badge } from '@ionic-native/badge';
 
-import { DataService } from '../../CoreAssestiveModules/Services/DataService';
-import { Url } from '../../CoreAssestiveModules/Url';
+
 
 
 @IonicPage()
@@ -41,6 +45,7 @@ export class DhnHomeTabsPage implements OnDestroy {
   }
 
   constructor(public navCtrl: NavController,
+    private _signalR: SignalR,
     private badge: Badge,
     private DataService: DataService,
     private Storage: Storage,
@@ -49,6 +54,7 @@ export class DhnHomeTabsPage implements OnDestroy {
     private events: Events,
     public navParams: NavParams,
     private keyboard: Keyboard,
+    private instanceStorage: instanceStorageService,
     private translate: TranslateService) {
 
     this.platform.ready().then(() => {
@@ -104,6 +110,21 @@ export class DhnHomeTabsPage implements OnDestroy {
           this.messagesCount = "";
           this.badge.clear();
         }
+      });
+    });
+
+
+    this._signalR.connect().then((c) => {
+      console.warn("********* connected ")
+      this.instanceStorage.deliverSignalRInstance(c);
+
+      c.errors.subscribe((error: any) => {
+        console.warn('Error while establishing connection with server');
+        setTimeout(() => {
+          console.warn("********* re-connected ")
+          c.start();
+          this.instanceStorage.deliverSignalRInstance(c);
+        }, 2000);
       });
     });
 
