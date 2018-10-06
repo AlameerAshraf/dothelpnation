@@ -1,11 +1,12 @@
 import { Url } from './../CoreAssestiveModules/Url';
+import { instanceStorageService } from '../CoreAssestiveModules/Services/instanceStorageService';
+import { VolatileStorage } from '../CoreAssestiveModules/VolatileStorage';
+import { FirstRunPage } from '../pages';
+import { Settings } from '../providers';
+
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
-
-import { FirstRunPage } from '../pages';
-import { Settings } from '../providers';
-import { VolatileStorage } from '../CoreAssestiveModules/VolatileStorage';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';

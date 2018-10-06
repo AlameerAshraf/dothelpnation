@@ -1,35 +1,43 @@
+// Core assestive modules 
 import { LoadingService } from './../CoreAssestiveModules/Services/LoadingService';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { FakeService } from './../CoreAssestiveModules/Services/FakeService';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { IonicStorageModule, Storage } from '@ionic/storage';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { Facebook } from '@ionic-native/facebook'
-
-import { File } from '@ionic-native/file';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { FilePath } from '@ionic-native/file-path';
-import { Camera } from '@ionic-native/camera';
+import { DataService } from '../CoreAssestiveModules/Services/DataService';
+import { instanceStorageService } from '../CoreAssestiveModules/Services/instanceStorageService';
 
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
-import { DataService } from '../CoreAssestiveModules/Services/DataService';
-import { HttpModule } from '@angular/http';
-import { GooglePlus } from '@ionic-native/google-plus';
 
+
+// Ionic 
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
+// NPM Modules 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AgmCoreModule } from '@agm/core';
+import { HttpModule } from '@angular/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
+// Cordova Plugins
+import { NativeStorage } from '@ionic-native/native-storage';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule, Storage } from '@ionic/storage';
+import { Facebook } from '@ionic-native/facebook'
+import { File } from '@ionic-native/file';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { WheelSelector } from '@ionic-native/wheel-selector';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
-import { AgmCoreModule } from '@agm/core';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Badge } from '@ionic-native/badge';
@@ -71,7 +79,7 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -92,6 +100,7 @@ export function provideSettings(storage: Storage) {
     FilePath,
     FileTransferObject,
     GooglePlus,
+    instanceStorageService,
     DataService,
     LoadingService,
     NativeStorage,
