@@ -18,8 +18,8 @@
           <img src="{{ singleChat.destination_user_photo }}">
         </ion-avatar>
 
-        <h2>{{ singleChat.destination_user_name }}</h2>
-        <p>{{ singleChat.message }}</p>
+        <h2 [ngClass]="{'unreadmessagebold': singleChat.unreadmessages , 'readmessagebold': !singleChat.unreadmessages}" >{{ singleChat.destination_user_name }}</h2>
+        <p [ngClass]="{'unreadmessagebold': singleChat.unreadmessages , 'readmessagebold': !singleChat.unreadmessages}" >{{ singleChat.message }}</p>
         <ion-note item-end> {{ singleChat.time }}</ion-note>
       </ion-item>
       <ion-item-options>

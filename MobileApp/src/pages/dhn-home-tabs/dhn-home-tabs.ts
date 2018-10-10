@@ -47,7 +47,7 @@ export class DhnHomeTabsPage implements OnDestroy {
   }
 
   constructor(public navCtrl: NavController,
-    private _signalR: SignalR,
+    // private _signalR: SignalR,
     private badge: Badge,
     private DataService: DataService,
     private Storage: Storage,
@@ -82,12 +82,6 @@ export class DhnHomeTabsPage implements OnDestroy {
 
     events.subscribe('logout:clicked', () => {
       this.navCtrl.setRoot('DhnLoginPage');
-      this.instanceStorage.SignalRConnectionDelivery.subscribe((connection: ISignalRConnection) => {
-        connection.stop();
-      });
-
-      this.fb.logout();
-      this.googlePlus.logout();
     });
 
     this.events.subscribe("tab:chnaged:messages" , (flag) => {
@@ -121,25 +115,7 @@ export class DhnHomeTabsPage implements OnDestroy {
           this.badge.clear();
         }
       });
-    });
-
-
-    this._signalR.connect().then((c) => {
-      console.warn("********* connected ")
-      this.instanceStorage.deliverSignalRInstance(c);
-
-      c.errors.subscribe((error: any) => {
-        console.warn('Error while establishing connection with server');
-        setTimeout(() => {
-          console.warn("********* re-connected ")
-          c.start();
-          this.instanceStorage.deliverSignalRInstance(c);
-        }, 2000);
-      });
-    });
-
-
-
+    });   
   }
 
   ngOnDestroy(): void {

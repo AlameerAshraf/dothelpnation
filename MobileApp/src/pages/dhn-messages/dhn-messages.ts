@@ -26,6 +26,7 @@ export class DhnMessagesPage  {
 
 
   constructor(
+    private _signalR : SignalR,
     public navCtrl: NavController,
     private events: Events,
     private DataService: DataService,
@@ -57,9 +58,11 @@ export class DhnMessagesPage  {
           element.destination_user_photo = "assets/img/avatar2.png";
         }
         if(element.source == "from" && element.stuts == 1){ // unread messages found 
-          element.time = "🔔" + element.time;
+          element.time = element.time;
           element.unreadmessages = true;
           unreadMessagesCounter += 1;
+        } else {
+          element.unreadmessages = false;
         }
       });
       
@@ -71,20 +74,18 @@ export class DhnMessagesPage  {
   }
 
   ionViewDidLoad(): void {
-
-    this.instanceStorage.SignalRConnectionDelivery.subscribe((connectionObject: ISignalRConnection) => {
+    this._signalR.connect().then((c) => {
+      console.log(c);
       this.events.subscribe("message:sent", (messageDetails) => {
         // Send messages ..
-        console.warn("******** message sent")
-        connectionObject.invoke("sendMessage", messageDetails);
+        c.invoke("sendMessage", messageDetails);
       });
-
+      
       //  1.create a listener object
       let onMessageReceived$ = new BroadcastEventListener<any>('receiveMessage')
       // 2.register the listener
-      connectionObject.listen(onMessageReceived$);
+      c.listen(onMessageReceived$);
       // 3.subscribe for incoming messages
-
       onMessageReceived$.subscribe((chatMessage) => {
         var destinationData = null;
         destinationData = this.userChats.find(x => x.destination_user_id == chatMessage.from_user_id);
@@ -92,7 +93,7 @@ export class DhnMessagesPage  {
         if (destinationData != null) {
           // Bind last message on messages list 
           destinationData.message = chatMessage.message;
-          destinationData.time = "🔔" + chatMessage.time;
+          destinationData.time = chatMessage.time;
           destinationData.sortDate = new Date(`${chatMessage.date.split('T')[0]} ${chatMessage.time}`);
           destinationData.unreadmessages = true;
 
@@ -106,7 +107,7 @@ export class DhnMessagesPage  {
             destination_user_name: chatMessage.senderName,
             destination_user_email: chatMessage.senderEmail,
             destination_user_photo: chatMessage.senderPhoto,
-            time: "🔔" + chatMessage.time,
+            time: chatMessage.time,
             date: chatMessage.date,
             message: chatMessage.message,
             ad_id: chatMessage.ad_id,
@@ -120,9 +121,9 @@ export class DhnMessagesPage  {
 
           this.userChats = _.orderBy(this.userChats, ['sortDate'], ['desc']);
         }
-
+        
+        // publish event to the chat page 
         this.events.publish("message:received" , chatMessage);
-
 
         // Notify 
         // this.localNotifications.schedule({

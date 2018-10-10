@@ -1,6 +1,6 @@
 import { Storage } from '@ionic/storage';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams , Events } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidationSupplier } from './../../CoreAssestiveModules/forms/ValidationSupplier';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -16,7 +16,7 @@ import { VolatileStorage } from '../../CoreAssestiveModules/VolatileStorage';
   selector: "page-dhn-login",
   templateUrl: "dhn-login.html"
 })
-export class DhnLoginPage {
+export class DhnLoginPage implements OnInit{
   dir: string = "ltr";
   revDir: string;
   data = {
@@ -41,6 +41,7 @@ export class DhnLoginPage {
   loginform: FormGroup;
 
   constructor(
+    private events: Events,
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
@@ -90,6 +91,14 @@ export class DhnLoginPage {
       email: [""],
       password: [""]
     });
+  }
+
+
+  ngOnInit(): void {
+    this.events.subscribe('logout:clicked' , () => {
+      this.fb.logout();
+      this.googlePlus.logout();
+    })
   }
 
   ionViewDidLoad() {

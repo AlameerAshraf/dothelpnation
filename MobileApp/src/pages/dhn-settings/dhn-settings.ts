@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import {  Storage } from '@ionic/storage';
+import { ISignalRConnection } from 'ng2-signalr';
+import { instanceStorageService } from '../../CoreAssestiveModules/Services/instanceStorageService';
 @IonicPage()
 @Component({
   selector: 'page-dhn-settings',
@@ -9,6 +11,7 @@ import {  Storage } from '@ionic/storage';
 export class DhnSettingsPage {
 
   constructor(public navCtrl: NavController,
+    private instanceStorage : instanceStorageService,
     private events: Events,
     public navParams: NavParams ,
     private Storage: Storage,
