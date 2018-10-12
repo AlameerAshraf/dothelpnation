@@ -1,9 +1,3 @@
-<!--
-  Generated template for the DhnSettingsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -13,7 +7,38 @@
 </ion-header>
 
 
-<ion-content padding>
-  <button ion-button block color="error" outline (click)="showConfirm()">Logout</button>
+<ion-content padding no-bounce>
+
+
+  <ion-list>
+    <ion-item (click)="onLangugeSelected()">
+      <ion-icon name='ios-paper' item-start></ion-icon>
+      Langugae
+      <ion-note item-end>
+        {{ DefLang }}
+      </ion-note>
+    </ion-item>
+
+
+    <ion-item (click)="onCitySelection()">
+      <ion-icon name='ios-navigate-outline' item-start></ion-icon>
+      Default City
+      <ion-note item-end>
+        {{ DefCity }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <div class="middlePage">
+    <p class="logoutClick" (click)="showConfirm()" style="font-size: 20px; color: red;margin: 0px;"> Logout </p>
+    <br>
+    <br>
+    <p style="font-size: 10px; color: gray;margin: 0px;"> Version number 1.0.0 </p>
+    <p style="font-size: 10px; color: gray;margin: 0px;"> Powered by AppGenesis software </p>
+  </div>
+
+
+  <!-- <button ion-button block color="error" outline (click)="showConfirm()">Logout</button> -->
+
 </ion-content>
 <ion-nav #content [root]="MainPage"></ion-nav>
