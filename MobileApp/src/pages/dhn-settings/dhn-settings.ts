@@ -9,6 +9,7 @@ import { WheelSelector } from '@ionic-native/wheel-selector';
 import { instanceStorageService } from '../../CoreAssestiveModules/Services/instanceStorageService';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Url } from '../../CoreAssestiveModules/Url';
+import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 
 @IonicPage()
 @Component({
@@ -16,23 +17,30 @@ import { Url } from '../../CoreAssestiveModules/Url';
   templateUrl: 'dhn-settings.html',
 })
 export class DhnSettingsPage {
-  DefLangLabel: string;
+  DefLangShortcut: string;
+  DefCityId ;
   DefLang = "Language ..";
   DefCity = "City ..";
+
+
   Languges: any[] = [
-    { En_Lang: "English", Ar_Lang: "English" },
-    { En_Lang: "Arabic", Ar_Lang: "العربية" }
+    { En_Lang: "English", Ar_Lang: "الانجليزية" , shortcut : "en" },
+    { En_Lang: "Arabic", Ar_Lang: "العربية"  , shortcut : "ar"}
   ];
-  Cities;
+  Cities = [] ;
+
+
   access_token: any;
   attributeLangCode: string;
+  defaultlangobj: any;
+  defaultcityobj: any;
 
 
   constructor(public navCtrl: NavController,
+    private loading : LoadingService,
     private instanceStorage: instanceStorageService,
     private events: Events,
     public navParams: NavParams,
-    private Storage: Storage,
     private WheelSelector: WheelSelector,
     private DataService: DataService,
     private storage: Storage,
@@ -40,17 +48,32 @@ export class DhnSettingsPage {
     this.storage.get('access_token').then((SECURITY_DATA) => {
       this.access_token = SECURITY_DATA.access_token;
     });
-
-    this.attributeLangCode = this.DefLangLabel == "en" ? "En_Lang" : "Ar_Lang";
-
   }
 
 
   ionViewDidLoad() {
-    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`, null, this.access_token)
-      .subscribe((cities) => {
-        this.Cities = cities;
-      });
+    this.loading.show("Loading ...");
+    this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`, null, this.access_token).subscribe((cities) => {        this.Cities = cities;
+        this.storage.get('UserSettings').then((user_settings) => {
+          this.loading.hide();
+          let defaultSavedCity = this.Cities.find(x => x.id == user_settings.def_city_id);
+          // label 
+          this.DefCity = defaultSavedCity.name;
+          // data 
+          this.DefCityId = user_settings.def_city_id;
+    
+          // label
+          this.DefLang = user_settings.def_lang == "en" ? "English" : "العربية" ;
+          // data 
+          this.DefLangShortcut = user_settings.def_lang;
+    
+          this.attributeLangCode = this.DefLangShortcut == "en" ? "En_Lang" : "Ar_Lang";
+    
+    
+          this.defaultlangobj = this.Languges.find(x => x.shortcut == user_settings.def_lang);
+          this.defaultcityobj = this.Cities.find(x => x.id == user_settings.def_city_id);
+        });
+    });
   }
 
   showConfirm() {
@@ -76,7 +99,7 @@ export class DhnSettingsPage {
 
 
   Logout() {
-    Promise.all([this.Storage.remove('access_token'), this.Storage.remove('Profile_Data')]).then(() => {
+    Promise.all([this.storage.remove('access_token'), this.storage.remove('Profile_Data')]).then(() => {
       this.events.publish('logout:clicked');
     });
   }
@@ -90,12 +113,16 @@ export class DhnSettingsPage {
       ],
       displayKey: this.attributeLangCode,
       positiveButtonText: "select",
-      negativeButtonText: "cancel"
+      negativeButtonText: "cancel",
     }).then((result) => {
-      if (this.DefLangLabel = "ar")
+      if (this.DefLangShortcut = "ar"){
         this.DefLang = result[0].Ar_Lang;
-      else
+      }
+      else{
         this.DefLang = result[0].En_Lang;
+      }
+      this.DefLangShortcut = result[0].shortcut;
+      this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId});
     }, (err) => {
       console.log("Closed");
     })
@@ -116,6 +143,8 @@ export class DhnSettingsPage {
         return element.name === result[0].name;
       });
       this.DefCity = SelectedCityFilter.name;
+      this.DefCityId = SelectedCityFilter.id;
+      this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId});
     })
   }
 
