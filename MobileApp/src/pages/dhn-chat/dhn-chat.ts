@@ -82,27 +82,27 @@ export class DhnChatPage {
     //   this.loading.show("Loading chat");
     // }
 
-    if(this.unreadFlag){
-      this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SetMesssagesAsRead?email=${this.logginedUserEmail}&from_user_id=${this.currentUserId}` ,
-      null , this.access_token).subscribe();
+    if (this.unreadFlag) {
+      this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SetMesssagesAsRead?email=${this.logginedUserEmail}&from_user_id=${this.currentUserId}`,
+        null, this.access_token).subscribe();
     }
 
     let DataRequest = this.DataService.Get(
       `${Url.ApiUrlLocalTunnul()}/GetUserChat?email=${this.logginedUserEmail}&target_id=${this.currentUserId}`,
       null,
       this.access_token).subscribe(chats => {
-      chats.forEach(element => {
-        element.sendDate = element.sendDate.split("T")[0];
+        chats.forEach(element => {
+          element.sendDate = element.sendDate.split("T")[0];
+        });
+        // this.loading.hide();
+        this.chats = chats;
+
+        this.middleTextShowInitially = this.chats.length > 0 ? false : true;
+
+        setTimeout(() => {
+          this.content.scrollToBottom(300);
+        }, 200);
       });
-      // this.loading.hide();
-      this.chats = chats;
-
-      this.middleTextShowInitially = this.chats.length > 0 ? false : true ;
-
-      setTimeout(() => {
-        this.content.scrollToBottom(300);
-      }, 200);
-    });
 
     this.events.subscribe("message:received", receivedMessage => {
       this.chats.push(receivedMessage);
@@ -134,7 +134,7 @@ export class DhnChatPage {
       showMessage: true,
       senderEmail: this.logginedUserEmail,
       receiverId: this.currentUserId,
-      ad_id : this.ad_id
+      ad_id: this.ad_id
     };
     this.chats.push(newChat);
     this.newMessage = "";
@@ -142,21 +142,24 @@ export class DhnChatPage {
     // scroll content down
     this.content.scrollToBottom(0);
 
-    this.events.publish("message:sent", newChat);
+    //this.events.publish("message:sent", newChat);
+    console.log(this.access_token)
+    
+    this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/SendMessages`, this.access_token , null , newChat).subscribe();
   }
 
   formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    var ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    var serverDate = hours + ":" + minutes + ":" + seconds + " " + ampm;
-    var viewDate = hours + ":" + minutes + " " + ampm;
-    return { server: serverDate, view: viewDate };
-  }
+          var hours = date.getHours();
+          var minutes = date.getMinutes();
+          var seconds = date.getSeconds();
+          var ampm = hours >= 12 ? "PM" : "AM";
+          hours = hours % 12;
+          hours = hours ? hours : 12; // the hour '0' should be '12'
+          hours = hours < 10 ? "0" + hours : hours;
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+          var serverDate = hours + ":" + minutes + ":" + seconds + " " + ampm;
+          var viewDate = hours + ":" + minutes + " " + ampm;
+          return { server: serverDate, view: viewDate };
+        }
 }
