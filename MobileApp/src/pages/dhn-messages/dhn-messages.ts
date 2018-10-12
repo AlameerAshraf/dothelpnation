@@ -76,10 +76,10 @@ export class DhnMessagesPage  {
   ionViewDidLoad(): void {
     this._signalR.connect().then((c) => {
       console.log(c);
-      this.events.subscribe("message:sent", (messageDetails) => {
-        // Send messages ..
-        c.invoke("sendMessage", messageDetails);
-      });
+      // this.events.subscribe("message:sent", (messageDetails) => {
+      //   // Send messages ..
+      //   c.invoke("sendMessage", messageDetails);
+      // });
       
       //  1.create a listener object
       let onMessageReceived$ = new BroadcastEventListener<any>('receiveMessage')
