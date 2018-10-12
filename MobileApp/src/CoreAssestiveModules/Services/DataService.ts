@@ -24,46 +24,48 @@ export class DataService implements IDataService {
 
 
 
-  Get(url: string, models?: any , access_token?: any) {
+  Get(url: string, models?: any, access_token?: any) {
     var Request_headers = new Headers();
-    if(access_token != ""){
+    if (access_token != "") {
       Request_headers.append("Authorization", "Bearer " + access_token)
     }
     var requestUrl = this.GenerateUrl(url, models);
-    return this.http.get(requestUrl, {headers : Request_headers }).pipe(map((res) => {
+    return this.http.get(requestUrl, { headers: Request_headers }).pipe(map((res) => {
       try {
         return res.json();
       } catch (error) {
         return this.ErrorHandler(error);
       }
     }))
-      .catch((Error: Response) => {
-        return this.ErrorHandler(Error);
-      });
+    .catch((Error: Response) => {
+      return this.ErrorHandler(Error);
+    });
   }
 
-  Post(url: string, entity?: any, params?: any , options? : any) {
-    let _options: RequestOptions;
+  Post(url: string, access_token?: any, params?: any , entity? : any) {
+    var Request_headers = new Headers();
+    let model = null;
 
-    if (options != null) {
+    console.log(entity);
+    if (entity != null) {
       let body = new URLSearchParams();
-      for (var key in options) {
-        if (options.hasOwnProperty(key)) {
-          body.set(key, options[key]);
+      for (var key in entity) {
+        if (entity.hasOwnProperty(key)) {
+          body.set(key, entity[key]);
         }
       }
-      let _options = {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-      };
-      entity = body.toString();
-    }
+      Request_headers.append('Content-Type' , 'application/x-www-form-urlencoded');
+      if(access_token != null || access_token != "")
+        Request_headers.append("Authorization", "Bearer " + access_token)
 
+      model = body.toString();
+    }
+    
     var requestUrl = this.GenerateUrl(url, params);
-    return this.http.post(requestUrl, entity, _options).pipe(map((res) => {
+    return this.http.post(requestUrl, model, {headers : Request_headers}).pipe(map((res) => {
       try {
         return res.json();
       } catch (error) {
-
         return this.ErrorHandler(error);
       }
     }))
