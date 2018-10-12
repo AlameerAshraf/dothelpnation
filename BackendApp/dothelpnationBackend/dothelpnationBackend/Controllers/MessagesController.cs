@@ -7,19 +7,26 @@ using System.Web.Http;
 using AutoMapper;
 using System.Globalization;
 using System;
+using Microsoft.AspNet.SignalR;
+using System.Configuration;
+using BusinessLayer.PushService;
 
 namespace dothelpnationBackend.Controllers
 {
-    [Authorize]
+    [System.Web.Http.Authorize]
     public class MessagesController : ApiController
     {
         private readonly IRepository<ads_messages> _messagesRepo;
         private readonly IRepository<user> _userRepo;
+        private readonly IRepository<device_tokens> _deviceTokensRepo;
+        private readonly IPush _pushNotification;
 
-        public MessagesController(IRepository<ads_messages> messagesRepo, IRepository<user> userRepo)
+        public MessagesController(IRepository<ads_messages> messagesRepo, IRepository<user> userRepo , IRepository<device_tokens> deviceTokenRepo , IPush push)
         {
             _messagesRepo = messagesRepo;
+            _deviceTokensRepo = deviceTokenRepo;
             _userRepo = userRepo;
+            _pushNotification = push;
         }
 
         [HttpGet]
@@ -204,6 +211,66 @@ namespace dothelpnationBackend.Controllers
             var IsUpdated = _messagesRepo.Update(lastMessage);
 
             return (IsUpdated != null) ? true : false;
+        }
+
+
+        [HttpPost]
+        [Route("api/SendMessages")]
+        public void SendMessageToClient(sentMessagesDTO sentMessage)
+        {
+            var FCMServerApiKey = ConfigurationManager.AppSettings["FCMServerApiKey"];
+            var FCMSenderId = ConfigurationManager.AppSettings["FCMSenderId"];
+
+            var receiverId = long.Parse(sentMessage.receiverId);
+            var senderUser = _userRepo.Get().Where(x => x.email == sentMessage.senderEmail).FirstOrDefault();
+            var fromUserId = senderUser.id;
+            var senderName = senderUser.name;
+            var senderEmail = senderUser.email;
+            var senderPhoto = senderUser.photo;
+            var receiverDeviceTokens = _deviceTokensRepo.Get().Where(x => x.user_id == receiverId).ToList();
+            var ad_id = sentMessage.ad_id != null && sentMessage.ad_id != "null" ? int.Parse(sentMessage.ad_id) : 0;
+            var pushNotificationTitle = senderName + " " + "sent you a message";
+
+            // Repos ..
+            _messagesRepo.Insert(new ads_messages()
+            {
+                date = DateTime.Parse(sentMessage.sendDate),
+                from_user_id = (int)fromUserId,
+                to_user_id = int.Parse(sentMessage.receiverId),
+                info = sentMessage.message,
+                title = "message",
+                type = "message",
+                stuts = 1,
+                parent_id = 2,
+                time = sentMessage._time
+            });
+
+            // Hubs .. 
+            var chatHub = GlobalHost.ConnectionManager.GetHubContext<Hubs.chatHub>();
+            chatHub.Clients.Group(sentMessage.receiverId.ToString()).receiveMessage(new
+            {
+                ad_id = ad_id,
+                userId = fromUserId,
+                date = sentMessage.sendDate,
+                from_user_id = fromUserId,
+                to_user_id = sentMessage.receiverId.ToString(),
+                showMessage = true,
+                senderName = senderName,
+                senderPhoto = senderPhoto,
+                senderEmail = senderEmail,
+                message = sentMessage.message,
+                sendDate = sentMessage.sendDate,
+                time = sentMessage.time
+            });
+
+            // Push Notifications ..
+            foreach (var token in receiverDeviceTokens)
+            {
+                if (token.device_type.ToLower() == "android")
+                {
+                    _pushNotification.SendNotificationsToFCM(FCMServerApiKey, FCMSenderId, token.device_token, sentMessage.message, pushNotificationTitle, "chatMessage");
+                }
+            }
         }
 
 
