@@ -10,11 +10,13 @@ namespace dothelpnationBackend.Controllers
     {
         private readonly IRepository<user> _userRepo;
         private readonly IRepository<device_tokens> _tokensRepo;
+        private readonly IRepository<user_settings> _userSettingsRepo;
 
-        public UserController(IRepository<user> userRepo , IRepository<device_tokens> tokensRepo)
+        public UserController(IRepository<user> userRepo , IRepository<device_tokens> tokensRepo , IRepository<user_settings> userSettings)
         {
             _userRepo = userRepo;
             _tokensRepo = tokensRepo;
+            _userSettingsRepo = userSettings;
         }
 
 
@@ -70,6 +72,14 @@ namespace dothelpnationBackend.Controllers
             });
 
             return IsInserted != null ? true : false ;
+        }
+
+        [HttpGet]
+        [Route("api/GetUserSettings")]
+        public user_settings GetUserSettings([FromUri] string email)
+        {
+            var userId = _userRepo.Get().Where(x => x.email == email).FirstOrDefault()?.id;
+            return _userSettingsRepo.Get().Where(x => x.user_id == userId).FirstOrDefault();
         }
 
         [HttpGet]
