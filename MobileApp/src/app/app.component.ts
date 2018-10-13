@@ -86,27 +86,23 @@ export class MyApp implements OnInit {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen ,
     private NativeStorage: NativeStorage) {
+
     platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
+
     this.initTranslate();
   }
 
-
-
-
+  
   initTranslate() {
     // Set the default language for translation strings, and the current language.
-    this.translate.setDefaultLang('ar');
-    const browserLang = this.translate.getBrowserLang();
-    console.log(browserLang);
 
-    if (browserLang) {
-      this.translate.use('en');
-    } else {
-      this.translate.use('en'); // Set the use langauge here FROM DATABASE !
-    }
+    this.translate.setDefaultLang('ar');
+    // const browserLang = this.translate.getBrowserLang();
+    // this.translate.use(lang);
 
     this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
       this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
