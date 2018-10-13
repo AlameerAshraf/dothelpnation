@@ -30,7 +30,6 @@ export class TutorialPage {
     public platform: Platform ,
     private Storage: Storage,
     private NativeStorage: NativeStorage) {
-    this.dir = platform.dir();
     translate.get(["TUTORIAL_SLIDE1_TITLE",
       "TUTORIAL_SLIDE1_DESCRIPTION",
       "TUTORIAL_SLIDE2_TITLE",
@@ -60,7 +59,7 @@ export class TutorialPage {
   }
 
   startApp() {
-    this.Storage.set('UserSettings' , {def_lang : "ar" , def_city_id : 87});
+    this.Storage.set('UserSettings' , { def_lang : "ar" , def_city_id : 87 });
     this.Storage.set('IsAppStarted' , true);
     this.Storage.set('DeviceTokenGenerated' , false);
     this.navCtrl.setRoot('DhnLoginPage', {}, {
