@@ -80,7 +80,7 @@
   "EMAIL_LABEL" : "البريد الاكتروني",
   "PASSWORD_LABEL" : "كلمة السر",
   "LOGIN_PAGE_LABEL":"تسجيل الدخول",
-  "FACEBOOK_REGISTER_BUTTON" : "تسجيل الدخول استخدام Facebook" ,
+  "FACEBOOK_REGISTER_BUTTON" : "تسجيل الدخول باستخدام Facebook" ,
   "GOOGLE_PLUS_REGISTER_BUTTON" : "تسجيل الدخول باستخدام Google",
   "REGISTER_PAGE_LABEL":"قم بانشاء حساب جديد",
   "REGISTERATION_QUESTION" : "ليس لديك حساب؟",
@@ -94,12 +94,12 @@
 
 
 
-  "REQUIRED_ERROR" : "this field is required" ,
-  "PHONE_LENGTH" : "phone length shuold be 11" ,
-  "EMAIL_FORMAT" : "your email is not in correct format" ,
-  "PASWORD_FORMAT" : "password should contain both upercase and lowercase letters and numbers" ,
-  "PASWORD_LENGTH" : "password must be 5 characters or more" ,
-  "CONFIRMPASWORD_MATCHING" : "Password doesn't match" ,
+  "REQUIRED_ERROR" : "الحقل مطلوب" ,
+  "PHONE_LENGTH" : "رقم الهاتف غير متوافق" ,
+  "EMAIL_FORMAT" : "صيغة البريد غير صحيحة" ,
+  "PASWORD_FORMAT" : "كلمة السر ضعيفة" ,
+  "PASWORD_LENGTH" : "ادخل أكثر من 5 أحرف" ,
+  "CONFIRMPASWORD_MATCHING" : "كلمة السر غير متطابقة" ,
 
   "BLOGS_TAB" : "Blogs" ,
   "MESSAGES_TAB" : "Messages" ,

@@ -78,7 +78,7 @@
   "USERNAME_LABEL" : "Username",
   "PASSWORD_LABEL" : "Password",
   "AGE_LABEL": "age",
-  "EMAIL_LAB" : "Email",
+  "EMAIL_LABEL" : "Email",
   "FORGETPASSWORD_LABEL":"forgot Password",
   "PHONE_LABEL": "Phone" ,
   "PASSWORDCONFIRMATION_LABEL":"Confirm Password",
@@ -88,6 +88,8 @@
   "REGISTER_PAGE_TITLE":"Create new account",
   "LOGIN_PAGE_TITLE":"Login to your account",
   "LOGIN_PAGE_SUBTITLE":"Welcome To dothelpnation" ,
+  "REGISTERATION_QUESTION" : "Don't you have an account ?",
+
 
   "FACEBOOK_REGISTER_BUTTON" : "Login with Facebook" ,
   "GOOGLE_PLUS_REGISTER_BUTTON" : "Login with Google",
