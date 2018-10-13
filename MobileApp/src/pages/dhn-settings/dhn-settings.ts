@@ -68,10 +68,6 @@ export class DhnSettingsPage {
           this.DefLangShortcut = user_settings.def_lang;
     
           this.attributeLangCode = this.DefLangShortcut == "en" ? "En_Lang" : "Ar_Lang";
-    
-    
-          this.defaultlangobj = this.Languges.find(x => x.shortcut == user_settings.def_lang);
-          this.defaultcityobj = this.Cities.find(x => x.id == user_settings.def_city_id);
         });
     });
   }
@@ -115,13 +111,17 @@ export class DhnSettingsPage {
       positiveButtonText: "select",
       negativeButtonText: "cancel",
     }).then((result) => {
-      if (this.DefLangShortcut = "ar"){
-        this.DefLang = result[0].Ar_Lang;
-      }
-      else{
-        this.DefLang = result[0].En_Lang;
-      }
-      this.DefLangShortcut = result[0].shortcut;
+      let selectedAttribute = this.attributeLangCode
+      var SelectedLanguge = this.Languges.find( function(element) {
+        if(selectedAttribute == "En_Lang"){
+          return element.En_Lang === result[0].En_Lang;
+        } else {
+          return element.Ar_Lang === result[0].Ar_Lang;
+        }
+      });
+
+      this.DefLang = this.attributeLangCode == "En_Lang" ? SelectedLanguge.En_Lang : SelectedLanguge.Ar_Lang ;
+      this.DefLangShortcut = SelectedLanguge.shortcut;
       this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId});
     }, (err) => {
       console.log("Closed");

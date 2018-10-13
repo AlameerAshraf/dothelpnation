@@ -100,9 +100,18 @@ export class MyApp implements OnInit {
   initTranslate() {
     // Set the default language for translation strings, and the current language.
 
-    this.translate.setDefaultLang('ar');
+    // this.translate.use('ar');
     // const browserLang = this.translate.getBrowserLang();
     // this.translate.use(lang);
+
+    this.Storage.get('UserSettings').then((settings) => {
+      console.warn(settings);
+      if(settings != null){
+        this.translate.use(settings.def_lang);
+      } else {
+        this.translate.use("ar");
+      }
+    });
 
     this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
       this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
