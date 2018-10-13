@@ -70,7 +70,7 @@ export class DhnLoginPage implements OnInit{
       if(this.previousStatus === ConnectionStatusEnum.Online){
         let alert = this.alertCtrl.create({
           title: 'Connection problem',
-          subTitle: 'Please check your internet connection and try again.',
+          subTitle: 'Please check your internet connection and , try again later.',
           buttons: ['Dismiss']
         });
         alert.present();
