@@ -1,14 +1,22 @@
+import { Network } from '@ionic-native/network';
 import { Storage } from '@ionic/storage';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams , Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ToastController, AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { ValidationSupplier } from './../../CoreAssestiveModules/forms/ValidationSupplier';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Url } from '../../CoreAssestiveModules/Url';
-import { DataService } from '../../CoreAssestiveModules/Services/DataService';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { VolatileStorage } from '../../CoreAssestiveModules/VolatileStorage';
+import { ValidationSupplier } from './../../CoreAssestiveModules/forms/ValidationSupplier';
+import { DataService } from '../../CoreAssestiveModules/Services/DataService';
+import { Url } from '../../CoreAssestiveModules/Url';
+
+
+export enum ConnectionStatusEnum {
+  Online,
+  Offline
+}
+
 
 
 @IonicPage()
@@ -40,8 +48,12 @@ export class DhnLoginPage implements OnInit{
 
   validations = {};
   loginform: FormGroup;
+  previousStatus: ConnectionStatusEnum;
 
   constructor(
+    private network : Network,
+    private alertCtrl : AlertController ,
+    private toaster: ToastController,
     private events: Events,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,6 +64,33 @@ export class DhnLoginPage implements OnInit{
     private googlePlus: GooglePlus,
     private formBuilder: FormBuilder
   ) {
+    this.previousStatus  = ConnectionStatusEnum.Online;
+
+    this.network.onDisconnect().subscribe(() => {
+      if(this.previousStatus === ConnectionStatusEnum.Online){
+        let alert = this.alertCtrl.create({
+          title: 'Connection problem',
+          subTitle: 'Please check your internet connection and try again.',
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      }
+
+      this.previousStatus = ConnectionStatusEnum.Offline;
+    });
+
+    this.network.onConnect().subscribe(() => {
+      if(this.previousStatus === ConnectionStatusEnum.Offline){
+        let alert = this.alertCtrl.create({
+          title: 'Connected',
+          subTitle: 'Application connected.',
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      }
+
+      this.previousStatus = ConnectionStatusEnum.Online;
+    });
 
     this.storage.get("UserSettings").then(settings => {
       this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
@@ -61,6 +100,7 @@ export class DhnLoginPage implements OnInit{
         this.revDir = "rtl";
       }
     });
+    
 
     this.translate
       .get([
