@@ -17,8 +17,8 @@ import { VolatileStorage } from '../../CoreAssestiveModules/VolatileStorage';
   templateUrl: "dhn-login.html"
 })
 export class DhnLoginPage implements OnInit{
-  dir: string = "ltr";
-  revDir: string;
+  dir: string = "";
+  revDir: string = "";
   data = {
     forgotPassword: "",
     subtitle: "",
@@ -31,6 +31,7 @@ export class DhnLoginPage implements OnInit{
     facebook: "",
     GooglePlus: "",
     register: "",
+    registerationQuestion : "",
     logo: "assets/img/2.png"
   };
 
@@ -51,6 +52,16 @@ export class DhnLoginPage implements OnInit{
     private googlePlus: GooglePlus,
     private formBuilder: FormBuilder
   ) {
+
+    this.storage.get("UserSettings").then(settings => {
+      this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
+      if (this.dir == "rtl") {
+        this.revDir = "ltr";
+      } else if (this.dir == "ltr") {
+        this.revDir = "rtl";
+      }
+    });
+
     this.translate
       .get([
         "FORGETPASSWORD_LABEL",
@@ -63,14 +74,10 @@ export class DhnLoginPage implements OnInit{
         "LOGIN_PAGE_LABEL",
         "FACEBOOK_REGISTER_BUTTON",
         "GOOGLE_PLUS_REGISTER_BUTTON",
-        "REGISTER_PAGE_LABEL"
+        "REGISTER_PAGE_LABEL",
+        "REGISTERATION_QUESTION"
       ])
       .subscribe(values => {
-        if (this.dir == "rtl") {
-          this.revDir = "ltr";
-        } else if (this.dir == "ltr") {
-          this.revDir = "rtl";
-        }
         this.data.forgotPassword = values.FORGETPASSWORD_LABEL;
         this.data.subtitle = values.LOGIN_PAGE_SUBTITLE;
         this.data.title = values.LOGIN_PAGE_TITLE;
@@ -82,6 +89,7 @@ export class DhnLoginPage implements OnInit{
         this.data.facebook = values.FACEBOOK_REGISTER_BUTTON;
         this.data.GooglePlus = values.GOOGLE_PLUS_REGISTER_BUTTON;
         this.data.register = values.REGISTER_PAGE_LABEL;
+        this.data.registerationQuestion = values.REGISTERATION_QUESTION;
       });
 
     let result_translation = new ValidationSupplier(translate);
