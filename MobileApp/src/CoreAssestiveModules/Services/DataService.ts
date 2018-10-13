@@ -46,7 +46,6 @@ export class DataService implements IDataService {
     var Request_headers = new Headers();
     let model = null;
 
-    console.log(entity);
     if (entity != null) {
       let body = new URLSearchParams();
       for (var key in entity) {
