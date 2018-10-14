@@ -195,7 +195,16 @@ export class DhnLoginPage implements OnInit {
         let alert = this.alertCtrl.create({
           title: 'Login Error',
           subTitle: 'Password or username is incorrect .',
-          buttons: ['Try again']
+          buttons: [
+            {
+              text: 'try again',
+              role: 'cancel',
+              handler: () => {
+                this.email = "";
+                this.password = "";
+              }
+            }
+          ]
         });
 
         alert.present();
