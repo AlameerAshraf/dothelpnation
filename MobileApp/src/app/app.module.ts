@@ -20,7 +20,7 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpModule } from '@angular/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 
 // Cordova Plugins
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -80,12 +80,14 @@ export function provideSettings(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
+    // NgxSpinnerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
   ],
   providers: [
+    SpinnerDialog,
     Device,
     Badge,
     Push,

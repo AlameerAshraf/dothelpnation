@@ -19,20 +19,20 @@
           <!---Input field username-->
           <ion-item transparent>
             <ion-label stacked>{{data.labelEmail}}</ion-label>
-            <ion-input dir="{{dir}}"  [formControl]="loginform.controls['email']"
-            required placeholder="{{data.email}}" type="text" [(ngModel)]="email"></ion-input>
+            <ion-input dir="{{dir}}" [formControl]="loginform.controls['email']" required placeholder="{{data.email}}"
+              type="email" [(ngModel)]="email"></ion-input>
 
-            <ion-label [style.direction] = "revDir" error-field color="error" no-margin
-            *ngIf="loginform.controls.email.hasError('required') && loginform.controls.email.touched">{{ validations.Username.required }}</ion-label>
+            <ion-label [style.direction]="revDir" error-field color="error" no-margin *ngIf="loginform.controls.email.hasError('required') && loginform.controls.email.touched">{{
+              validations.Username.required }}</ion-label>
           </ion-item>
           <!---Input field password-->
           <ion-item>
             <ion-label stacked>{{data.labelPassword}}</ion-label>
-            <ion-input dir="{{dir}}"  [formControl]="loginform.controls['password']"
-            required type="password" placeholder="{{data.password}}" [(ngModel)]="password"></ion-input>
+            <ion-input dir="{{dir}}" [formControl]="loginform.controls['password']" required type="password"
+              placeholder="{{data.password}}" [(ngModel)]="password"></ion-input>
 
-            <ion-label [style.direction] = "revDir" error-field color="error" no-margin
-            *ngIf="loginform.controls.password.hasError('required') && loginform.controls.password.touched">{{ validations.Password.required }}</ion-label>
+            <ion-label [style.direction]="revDir" error-field color="error" no-margin *ngIf="loginform.controls.password.hasError('required') && loginform.controls.password.touched">{{
+              validations.Password.required }}</ion-label>
           </ion-item>
         </form>
 
