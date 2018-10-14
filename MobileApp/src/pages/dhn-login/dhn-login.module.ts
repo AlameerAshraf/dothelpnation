@@ -11,7 +11,7 @@ import { DhnLoginPage } from './dhn-login';
   ],
   imports: [
     IonicPageModule.forChild(DhnLoginPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
   exports: [
     DhnLoginPage

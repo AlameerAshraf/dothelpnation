@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { VolatileStorage } from '../../CoreAssestiveModules/VolatileStorage';
 import { ValidationSupplier } from './../../CoreAssestiveModules/forms/ValidationSupplier';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
@@ -62,7 +63,8 @@ export class DhnLoginPage implements OnInit{
     private translate: TranslateService,
     private fb: Facebook,
     private googlePlus: GooglePlus,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private spinnerDialog: SpinnerDialog
   ) {
     this.previousStatus  = ConnectionStatusEnum.Online;
 
@@ -71,7 +73,15 @@ export class DhnLoginPage implements OnInit{
         let alert = this.alertCtrl.create({
           title: 'Connection problem',
           subTitle: 'Please check your internet connection and , try again later.',
-          buttons: ['Dismiss']
+          buttons: [
+            {
+              text: 'Dissmis',
+              role: 'cancel',
+              handler: () => {
+                this.spinnerDialog.show('' , 'Trying to reconnect');
+              }
+            }
+          ]
         });
         alert.present();
       }
@@ -81,16 +91,12 @@ export class DhnLoginPage implements OnInit{
 
     this.network.onConnect().subscribe(() => {
       if(this.previousStatus === ConnectionStatusEnum.Offline){
-        let alert = this.alertCtrl.create({
-          title: 'Connected',
-          subTitle: 'Application connected.',
-          buttons: ['Dismiss']
-        });
-        alert.present();
+        this.spinnerDialog.hide();
       }
 
       this.previousStatus = ConnectionStatusEnum.Online;
     });
+
 
     this.storage.get("UserSettings").then(settings => {
       this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
@@ -158,6 +164,8 @@ export class DhnLoginPage implements OnInit{
   }
 
   onLogin(event) {
+    this.spinnerDialog.show();
+
     this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
       grant_type: "password",
       client_id: "dothelpnation",
@@ -174,6 +182,8 @@ export class DhnLoginPage implements OnInit{
           expires_in: accessToken.expires_in,
           token_type: accessToken.token_type
         };
+
+        this.spinnerDialog.hide();
         this.storage.set("access_token", access_token_auth);
         this.storage.set('Profile_Data' , UserData);
         VolatileStorage.setData(UserData);
@@ -206,6 +216,8 @@ export class DhnLoginPage implements OnInit{
           created_at: new Date(),
           updated_at: null
         }
+
+        this.spinnerDialog.show();
         this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, null , null , newUserData).subscribe((x) => {
           if (x) {
             this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
@@ -220,6 +232,8 @@ export class DhnLoginPage implements OnInit{
                 "expires_in": accessToken.expires_in,
                 "token_type": accessToken.token_type
               };
+
+              this.spinnerDialog.hide();
               this.storage.set('access_token', access_token_auth);
               this.storage.set('Profile_Data' , newUserData);
               VolatileStorage.setData(newUserData);
@@ -260,6 +274,7 @@ export class DhnLoginPage implements OnInit{
           updated_at: null
         }
 
+        this.spinnerDialog.show();
         this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, null , null, newUserData).subscribe((x) => {
           if (x) {
             this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
@@ -275,6 +290,7 @@ export class DhnLoginPage implements OnInit{
                 "token_type": accessToken.token_type
               };
 
+              this.spinnerDialog.hide();
               this.storage.set('access_token', access_token_auth);
               this.storage.set('Profile_Data' , newUserData);
               VolatileStorage.setData(newUserData);              
