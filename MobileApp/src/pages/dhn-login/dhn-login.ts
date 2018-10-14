@@ -25,7 +25,7 @@ export enum ConnectionStatusEnum {
   selector: "page-dhn-login",
   templateUrl: "dhn-login.html"
 })
-export class DhnLoginPage implements OnInit{
+export class DhnLoginPage implements OnInit {
   dir: string = "";
   revDir: string = "";
   data = {
@@ -40,7 +40,7 @@ export class DhnLoginPage implements OnInit{
     facebook: "",
     GooglePlus: "",
     register: "",
-    registerationQuestion : "",
+    registerationQuestion: "",
     logo: "assets/img/2.png"
   };
 
@@ -52,8 +52,8 @@ export class DhnLoginPage implements OnInit{
   previousStatus: ConnectionStatusEnum;
 
   constructor(
-    private network : Network,
-    private alertCtrl : AlertController ,
+    private network: Network,
+    private alertCtrl: AlertController,
     private toaster: ToastController,
     private events: Events,
     public navCtrl: NavController,
@@ -66,10 +66,10 @@ export class DhnLoginPage implements OnInit{
     private formBuilder: FormBuilder,
     private spinnerDialog: SpinnerDialog
   ) {
-    this.previousStatus  = ConnectionStatusEnum.Online;
+    this.previousStatus = ConnectionStatusEnum.Online;
 
     this.network.onDisconnect().subscribe(() => {
-      if(this.previousStatus === ConnectionStatusEnum.Online){
+      if (this.previousStatus === ConnectionStatusEnum.Online) {
         let alert = this.alertCtrl.create({
           title: 'Connection problem',
           subTitle: 'Please check your internet connection and , try again later.',
@@ -78,7 +78,7 @@ export class DhnLoginPage implements OnInit{
               text: 'Dissmis',
               role: 'cancel',
               handler: () => {
-                this.spinnerDialog.show('' , 'Trying to reconnect');
+                this.spinnerDialog.show('', 'Trying to reconnect');
               }
             }
           ]
@@ -90,7 +90,7 @@ export class DhnLoginPage implements OnInit{
     });
 
     this.network.onConnect().subscribe(() => {
-      if(this.previousStatus === ConnectionStatusEnum.Offline){
+      if (this.previousStatus === ConnectionStatusEnum.Offline) {
         this.spinnerDialog.hide();
       }
 
@@ -106,7 +106,7 @@ export class DhnLoginPage implements OnInit{
         this.revDir = "rtl";
       }
     });
-    
+
 
     this.translate
       .get([
@@ -149,7 +149,7 @@ export class DhnLoginPage implements OnInit{
 
 
   ngOnInit(): void {
-    this.events.subscribe('logout:clicked' , () => {
+    this.events.subscribe('logout:clicked', () => {
       this.fb.logout();
       this.googlePlus.logout();
     })
@@ -185,10 +185,21 @@ export class DhnLoginPage implements OnInit{
 
         this.spinnerDialog.hide();
         this.storage.set("access_token", access_token_auth);
-        this.storage.set('Profile_Data' , UserData);
+        this.storage.set('Profile_Data', UserData);
         VolatileStorage.setData(UserData);
         this.navCtrl.setRoot("DhnHomeTabsPage");
       });
+    }, (err) => {
+      if (err.status == 400) {
+        this.spinnerDialog.hide();
+        let alert = this.alertCtrl.create({
+          title: 'Login Error',
+          subTitle: 'Password or username is incorrect .',
+          buttons: ['Try again']
+        });
+
+        alert.present();
+      }
     });
   }
 
@@ -218,7 +229,7 @@ export class DhnLoginPage implements OnInit{
         }
 
         this.spinnerDialog.show();
-        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, null , null , newUserData).subscribe((x) => {
+        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, null, null, newUserData).subscribe((x) => {
           if (x) {
             this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
               "grant_type": "password",
@@ -235,9 +246,9 @@ export class DhnLoginPage implements OnInit{
 
               this.spinnerDialog.hide();
               this.storage.set('access_token', access_token_auth);
-              this.storage.set('Profile_Data' , newUserData);
+              this.storage.set('Profile_Data', newUserData);
               VolatileStorage.setData(newUserData);
-              this.navCtrl.setRoot('DhnHomeTabsPage',{ data : newUserData} );
+              this.navCtrl.setRoot('DhnHomeTabsPage', { data: newUserData });
             })
           }
         });
@@ -275,7 +286,7 @@ export class DhnLoginPage implements OnInit{
         }
 
         this.spinnerDialog.show();
-        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, null , null, newUserData).subscribe((x) => {
+        this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, null, null, newUserData).subscribe((x) => {
           if (x) {
             this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
               "grant_type": "password",
@@ -292,8 +303,8 @@ export class DhnLoginPage implements OnInit{
 
               this.spinnerDialog.hide();
               this.storage.set('access_token', access_token_auth);
-              this.storage.set('Profile_Data' , newUserData);
-              VolatileStorage.setData(newUserData);              
+              this.storage.set('Profile_Data', newUserData);
+              VolatileStorage.setData(newUserData);
               this.navCtrl.setRoot('DhnHomeTabsPage');
             })
           }
