@@ -104,5 +104,19 @@
   "BLOGS_TAB" : "Blogs" ,
   "MESSAGES_TAB" : "Messages" ,
   "PROFILE_TAB" : "Profile" ,
-  "SETTINGS_TAB" : "Settings"
+  "SETTINGS_TAB" : "Settings",
+
+  "BLOG_TYPE_FILTER" : "Select blog ..",
+  "CITY_LABEL_FILTER" : "Select city ..",
+  "PLACE_LABEL_FILTER" : "Select place ..",
+  "SEARCH_LABEL_TEXT" : "Search ..",
+  "FILTER_BTN_LABEL" : "Filter",
+  "CLEAR_BTN_LABEL" : "Clear",
+  "BLOG_TYPE_LABEL": "Blog type",
+  "CITY_LABEL" : "City",
+  "PLACE_LABEL" : "Place",
+  "FILTERS_MODAL_LABEL" : "Search criteria"
+
+
+
 }

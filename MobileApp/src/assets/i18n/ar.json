@@ -104,6 +104,17 @@
   "BLOGS_TAB" : "Blogs" ,
   "MESSAGES_TAB" : "Messages" ,
   "PROFILE_TAB" : "Profile" ,
-  "SETTINGS_TAB" : "Settings"
+  "SETTINGS_TAB" : "Settings",
+
+  "BLOG_TYPE_FILTER" : "اختر الاعلان",
+  "CITY_LABEL_FILTER" : "اختر المدينة",
+  "PLACE_LABEL_FILTER" : "اختر المكان",
+  "SEARCH_LABEL_TEXT" : "ابحث بعنوان الاعلان",
+  "FILTER_BTN_LABEL" : "ابحث",
+  "CLEAR_BTN_LABEL" : "ازل معايير البحث",
+  "BLOG_TYPE_LABEL": "نوع الاعلان",
+  "CITY_LABEL" : "المدينة",
+  "PLACE_LABEL" : "المكان",
+  "FILTERS_MODAL_LABEL" : "معايير البحث"
 
 }

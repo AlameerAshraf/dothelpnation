@@ -11,6 +11,7 @@ import { Url } from '../../CoreAssestiveModules/Url';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/forkJoin';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -21,20 +22,34 @@ export class DhnBlogFilterPage {
 
   access_token;
   blogSections;
-  BlogType = "Select blog ..";
+  // BlogType = "Select blog ..";
   MainCities;
-  City = "Select city ..";
+  // City = "Select city ..";
   places;
-  Place = "Select place ..";
+  // Place = "Select place ..";
 
   BlogFilter = `?BlogFilter=`;
   CityFilter = `&CityFilter=`;
   PlaceFilter = `&PlaceFilter=`;
   SearchFilter = `&SearchFilter=`;
+  dir: string;
+  revDir: string;
+  data = {
+    BlogType : "",
+    City : "",
+    Place: "" ,
+    TextSearchLabel : "",
+    FilterLabel : "",
+    ClearLabel : "",
+    HeaderLabel : "",
+    BlogTypeLabel : "",
+    CityLabel : "",
+    PlaceLabel : "" ,
+  };
 
   constructor(public navCtrl: NavController, 
     private spinnerDialog: SpinnerDialog,
-    private loading: LoadingService,
+    private translate: TranslateService,
     private WheelSelector : WheelSelector,
     private viewCtrl : ViewController,
     private DataService: DataService,
@@ -45,6 +60,41 @@ export class DhnBlogFilterPage {
     this.storage.get('access_token').then((SECURITY_DATA) => {
       this.access_token = SECURITY_DATA.access_token;
     })
+
+    this.storage.get("UserSettings").then(settings => {
+      this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
+      if (this.dir == "rtl") {
+        this.revDir = "ltr";
+      } else if (this.dir == "ltr") {
+        this.revDir = "rtl";
+      }
+    });
+
+    this.translate
+      .get([
+        "BLOG_TYPE_FILTER",
+        "CITY_LABEL_FILTER",
+        "PLACE_LABEL_FILTER",
+        "SEARCH_LABEL_TEXT",
+        "FILTER_BTN_LABEL",
+        "CLEAR_BTN_LABEL",
+        "BLOG_TYPE_LABEL",
+        "CITY_LABEL",
+        "PLACE_LABEL",
+        "FILTERS_MODAL_LABEL"
+      ])
+      .subscribe(values => {
+        this.data.BlogType = values.BLOG_TYPE_FILTER,
+        this.data.City = values.CITY_LABEL_FILTER,
+        this.data.Place = values.CLEAR_BTN_LABEL,
+        this.data.BlogTypeLabel = values.BLOG_TYPE_LABEL,
+        this.data.CityLabel = values.CITY_LABEL,
+        this.data.PlaceLabel = values.PLACE_LABEL,
+        this.data.TextSearchLabel = values.SEARCH_LABEL_TEXT,
+        this.data.FilterLabel = values.FILTER_BTN_LABEL,
+        this.data.ClearLabel = values.CLEAR_BTN_LABEL,
+        this.data.HeaderLabel = values.FILTERS_MODAL_LABEL
+      });
 
     // Show loading for blog types 
     this.spinnerDialog.show();
@@ -84,7 +134,7 @@ export class DhnBlogFilterPage {
       var SelectedBlogFilter = this.blogSections.find(function (element) {
         return element.title === result[0].title;
       });
-      this.BlogType = SelectedBlogFilter.title;
+      this.data.BlogType = SelectedBlogFilter.title;
       this.BlogFilter = `?BlogFilter=${SelectedBlogFilter.id}`;
     } , (err) => {
       console.log("closed");
@@ -104,7 +154,7 @@ export class DhnBlogFilterPage {
       var SelectedCityFilter = this.MainCities.find(function (element) {
         return element.name === result[0].name;
       });
-      this.City = SelectedCityFilter.name;
+      this.data.City = SelectedCityFilter.name;
       this.CityFilter = `&CityFilter=${SelectedCityFilter.id}`;
 
       this.spinnerDialog.show();  // show loading places 
@@ -128,7 +178,7 @@ export class DhnBlogFilterPage {
         var SelectedPlaceFilter = this.places.find(function (element) {
           return element.name === result[0].name;
         });
-        this.Place = SelectedPlaceFilter.name;
+        this.data.Place = SelectedPlaceFilter.name;
         this.PlaceFilter = `&PlaceFilter=${SelectedPlaceFilter.id}`;
       } , (err) => {
       });

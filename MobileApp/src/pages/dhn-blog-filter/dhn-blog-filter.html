@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Blogs Filter</ion-title>
+  <ion-navbar dir="{{dir}}">
+    <ion-title>{{ data.HeaderLabel }}</ion-title>
 
     <ion-buttons start>
       <button ion-button (click)="filter()">
@@ -19,38 +19,39 @@
 <ion-content padding no-bounce>
   
   <ion-list>
-    <ion-item (click)="onblogSections()">
+    <ion-item (click)="onblogSections()" dir="{{dir}}">
       <ion-icon name='ios-create' item-start></ion-icon>
-      Blog type
+      {{ data.BlogTypeLabel }}
       <ion-note item-end>
-        {{ BlogType }}
+        {{ data.BlogType }}
       </ion-note>
     </ion-item>
 
-    <ion-item (click)="onMainCities()" > 
+    <ion-item (click)="onMainCities()" dir="{{dir}}"> 
       <ion-icon name='ios-navigate-outline' item-start></ion-icon>
-      City
+      {{ data.CityLabel }}
       <ion-note item-end>
-        {{ City }} 
+        {{ data.City }} 
       </ion-note>
     </ion-item>
 
-    <ion-item (click)="onPlaces()" >
+    <ion-item (click)="onPlaces()" dir="{{dir}}">
       <ion-icon name='ios-flag'  item-start></ion-icon>
-      Place
+      {{ data.PlaceLabel }}
       <ion-note item-end>
-        {{ Place }} 
+        {{ data.Place }} 
       </ion-note>
     </ion-item>
 
 
-    <ion-item>
+    <ion-item dir="{{dir}}">
       <ion-icon name='md-text'  item-start></ion-icon>
-      <ion-label>Search</ion-label>
+      <ion-label>{{ data.TextSearchLabel }}</ion-label>
       <ion-input (keyup)="searchFilterWord($event)"></ion-input>
     </ion-item>
 
   </ion-list>
 
-  <button ion-button block color="primary" outline (click)="filter()">Filter</button>
+  <button ion-button block color="primary" outline (click)="filter()">{{ data.FilterLabel }}</button>
+  <button ion-button block color="primary" outline (click)="clear()">{{ data.ClearLabel }}</button>
 </ion-content>
