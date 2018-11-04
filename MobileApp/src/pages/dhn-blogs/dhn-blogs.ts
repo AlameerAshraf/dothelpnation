@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Device } from '@ionic-native/device';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+
 
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
@@ -37,7 +39,8 @@ export class DhnBlogsPage {
     private device: Device,
     private alertController : AlertController,
     private events: Events,
-    private LoadingService: LoadingService) {
+    private LoadingService: LoadingService,
+    private spinnerDialog: SpinnerDialog) {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
       this.access_token = SECURITY_DATA.access_token;
@@ -53,6 +56,8 @@ export class DhnBlogsPage {
   }
 
   ionViewWillEnter() {
+    this.Blogs = null;
+    this.spinnerDialog.show();
     let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
       data.forEach(element => {
         element.date = this.createFormatedDate(element.publish_date, element.time);
@@ -61,6 +66,7 @@ export class DhnBlogsPage {
       });
 
       this.Blogs = data;
+      this.spinnerDialog.hide();
     });
   }
 
@@ -111,11 +117,14 @@ export class DhnBlogsPage {
       // toaster.present();
     } else {
       this.Blogs = null;
+      this.spinnerDialog.show();
       let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
         data.forEach(element => {
           element.date = this.createFormatedDate(element.publish_date, element.time);
           element.shareIcon = "more"
         });
+
+        this.spinnerDialog.hide();
         this.Blogs = data;
       });
     }
@@ -125,6 +134,7 @@ export class DhnBlogsPage {
   // Filters Handler 
   filteredBlogs(filterTail) {
     this.Blogs = null;
+    this.spinnerDialog.show();
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/SearchBlogs${filterTail.DataFilters}`, null, this.access_token).subscribe((data) => {
 
       if (data.length > 0) {
@@ -133,9 +143,11 @@ export class DhnBlogsPage {
           element.shareIcon = "more"
         });
 
+        this.spinnerDialog.hide();
         this.Blogs = data;
       } else {
 
+        this.spinnerDialog.show();
         let toast = this.toast.create({ message: "No results found ", duration: 1000 });
         toast.present();
         let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
@@ -144,6 +156,7 @@ export class DhnBlogsPage {
             element.shareIcon = "more"
           });
 
+          this.spinnerDialog.hide();
           this.Blogs = data;
         });
       }
@@ -154,10 +167,10 @@ export class DhnBlogsPage {
 
   // View Selected Blog 
   viewSingleBlog(blogId) {
-    this.LoadingService.show("Loading blog data");
+    this.spinnerDialog.show();
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/ViewSingleBlog?blogId=${blogId}`, null, this.access_token)
       .subscribe((blogData) => {
-        this.LoadingService.hide();
+        this.spinnerDialog.hide();
         this.navCtrl.push("DhnBlogViewPage", {
           "blogData": blogData
         });

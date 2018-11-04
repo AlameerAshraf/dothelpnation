@@ -2,6 +2,7 @@ import { WheelSelector } from '@ionic-native/wheel-selector';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 
 import { IonicPage, NavController, NavParams, ModalController, ViewController, ToastController } from 'ionic-angular';
 import { DataService } from '../../CoreAssestiveModules/Services/DataService';
@@ -32,6 +33,7 @@ export class DhnBlogFilterPage {
   SearchFilter = `&SearchFilter=`;
 
   constructor(public navCtrl: NavController, 
+    private spinnerDialog: SpinnerDialog,
     private loading: LoadingService,
     private WheelSelector : WheelSelector,
     private viewCtrl : ViewController,
@@ -45,7 +47,7 @@ export class DhnBlogFilterPage {
     })
 
     // Show loading for blog types 
-    this.loading.show("Loading data");
+    this.spinnerDialog.show();
 
     let blogTypeData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfBlogSections?site_lang=en`, null, this.access_token);
     let mainCitiesData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`, null, this.access_token);
@@ -55,7 +57,7 @@ export class DhnBlogFilterPage {
       this.MainCities = results[1];
 
       // Hide the loader 
-      this.loading.hide();
+      this.spinnerDialog.hide();
     });
 
     
@@ -105,7 +107,7 @@ export class DhnBlogFilterPage {
       this.City = SelectedCityFilter.name;
       this.CityFilter = `&CityFilter=${SelectedCityFilter.id}`;
 
-      this.loading.show("Loading Places");  // show loading places 
+      this.spinnerDialog.show();  // show loading places 
       this.GetPalces(SelectedCityFilter.id);
     } , (err) => {
       console.log("closed");
@@ -143,7 +145,7 @@ export class DhnBlogFilterPage {
 
   GetPalces(id){
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfSubCities?MohafzaId=${id}`, null, this.access_token).subscribe((data) => {
-      this.loading.hide(); // Loading places loader  
+      this.spinnerDialog.hide(); // Loading places loader  
       this.places = data;
     });
   }

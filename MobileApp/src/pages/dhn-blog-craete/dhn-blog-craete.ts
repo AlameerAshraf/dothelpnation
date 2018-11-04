@@ -14,6 +14,8 @@ import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { Geolocation } from '@ionic-native/geolocation';
 import { MouseEvent } from '@agm/core';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+
 
 
 import { WheelSelector } from "@ionic-native/wheel-selector";
@@ -72,6 +74,7 @@ export class DhnBlogCraetePage {
 
   constructor(
     private loadingService: LoadingService,
+    private spinnerDialog: SpinnerDialog,
     public navCtrl: NavController,
     public navParams: NavParams,
     private camera: Camera,
@@ -93,7 +96,7 @@ export class DhnBlogCraetePage {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
 
-    this.loadingService.show("Loading data"); // show loaders 
+    this.spinnerDialog.show(); // show loaders 
     let blogTypeData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfBlogSections?site_lang=en`,null,this.access_token)
     let mainCitiesData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`,null,this.access_token)
 
@@ -102,7 +105,7 @@ export class DhnBlogCraetePage {
       this.MainCities = results[1];
 
       // Hide the loaders for loading data 
-      this.loadingService.hide();
+      this.spinnerDialog.hide();
     });
 
     this.map = {
@@ -228,7 +231,7 @@ export class DhnBlogCraetePage {
         this.City = SelectedCityFilter.name;
         this.city_id = `&city_id=${SelectedCityFilter.id}`;
         this.CityId = SelectedCityFilter.id;
-        this.loadingService.show("Loading Places"); // Places loader
+        this.spinnerDialog.show(); // Places loader
         this.GetPalces(SelectedCityFilter.id);
         delete this.errors["CityId"];
       },
@@ -245,7 +248,7 @@ export class DhnBlogCraetePage {
       this.access_token
     ).subscribe(data => {
       this.places = data;
-      this.loadingService.hide(); // Places hidder 
+      this.spinnerDialog.hide(); // Places hidder 
     });
   }
 
@@ -295,7 +298,6 @@ export class DhnBlogCraetePage {
       // Destination URL
       var url = `${Url.ApiUrlLocalTunnul()}/CraeteNewBlog${requestParams}`;
       // File for Upload
-      console.log(url)
 
       // File name only
       var filename = this.createFileName();
@@ -309,13 +311,17 @@ export class DhnBlogCraetePage {
       };
 
       const fileTransfer: FileTransferObject = this.transfer.create();
-      this.loadingService.show("Posting Blog"); // Posting blog loader 
+      this.spinnerDialog.show(); // Posting blog loader 
+
+      this.blogImage = this.blogImage != null 
+        ? this.blogImage 
+        : "data:image/jpeg;base64," + "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAE7A1IDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECBv/EACcQAQEAAgIBAwMEAwAAAAAAAAABAhESITEDQdEikcETMlFxUmGh/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAEDBv/EABcRAQEBAQAAAAAAAAAAAAAAAAARARL/2gAMAwEAAhEDEQA/AONAYuZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABrHGZb3dam5v+5Pyakk5XW7Z/Xj5FjI3cZjbMt/TPq+Ex4ZZSayx3fHkIyNTjlLxmUs9qcLbqXG3etS+AmsjUx3vVl7ncvXv8LPTuWuOWOW7qavuE1gWzUllll95drx15yxl1vVvYRka4X+ZvW9b70yAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAb6s1vc1/2X8LcrljMbrrff8+PhAWry+rLLj1lbub/AN7JnJZZ6d6u+8vKAVedn7MeN67t2t9S5TVmet9y+pb9mQXrWv1Lb3NS+bbu+LO/uc8JrhJdXd73+GQOll1JLjuTfvrzJ8HKWd+nvLWt8uvsgJV5e/D6v8t9fZADdoAI/9k=";
 
       fileTransfer
         .upload(this.blogImage, url, options)
         .then(data => {
           console.log(data);
-          this.loadingService.hide(); // Posting blog hidder 
+          this.spinnerDialog.hide(); // Posting blog hidder 
           this.viewCtrl.dismiss({ "Close": false });
         })
         .catch(err => {
@@ -332,7 +338,7 @@ export class DhnBlogCraetePage {
     let count = 0;
     if (this.UserAddress == undefined) { this.errors.address = "error"; count++; }
     if (this.BlogTitle == undefined) { this.errors.title = "error"; count++; }
-    if (this.BlogDescription == undefined) { this.errors.description = "error"; count++; }
+    // if (this.BlogDescription == undefined) { this.errors.description = "error"; count++; }
     if (this.SectionId == undefined) { this.errors.SectionId = "error"; count++; }
     if (this.CityId == undefined) { this.errors.CityId = "error"; count++; }
     if (this.PlaceId == undefined) { this.errors.PlaceId = "error"; count++; }
