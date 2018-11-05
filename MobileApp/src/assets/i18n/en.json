@@ -122,6 +122,8 @@
   "DESCRIPTION_LABEL" : "Post Description" ,
   "PUBLISH_BTN_LABEL" : "Post",
 
+  "HomeLabel" : "Posts" ,
+
 
   "IOS_CANCEL" : "cancel",
   "CITY_LABEL" : "City",

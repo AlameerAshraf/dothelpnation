@@ -11,6 +11,7 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { Url } from './../../CoreAssestiveModules/Url';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @IonicPage()
@@ -26,6 +27,10 @@ export class DhnBlogsPage {
   access_token: string;
   logginedUserEmail: any;
   deviceType: string;
+  dir: string;
+  data = {
+    HeaderLabel : "",
+  }
 
   constructor(public navCtrl: NavController,
     private push: Push,
@@ -39,7 +44,7 @@ export class DhnBlogsPage {
     private device: Device,
     private alertController : AlertController,
     private events: Events,
-    private LoadingService: LoadingService,
+    private translate : TranslateService,
     private spinnerDialog: SpinnerDialog) {
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
@@ -49,6 +54,14 @@ export class DhnBlogsPage {
     this.storage.get("Profile_Data").then(PROFILE_DATA => {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
+
+    this.storage.get("UserSettings").then(settings => {
+      this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
+    });
+
+    this.translate.get(["HomeLabel"]).subscribe(values => {
+      this.data.HeaderLabel = values.HomeLabel
+    })
 
     // Initialize push notifications
     this.deviceType = this.device.platform; 

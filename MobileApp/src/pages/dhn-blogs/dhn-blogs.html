@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Advertisement</ion-title>
+  <ion-navbar dir="{{dir}}">
+    <ion-title> {{ data.HeaderLabel }} </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openBlogAddItem()">
         <ion-icon name="add"></ion-icon>
@@ -21,14 +21,14 @@
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Seach in blogs"></ion-searchbar>
 
 
-  <ion-grid no-padding>
+  <ion-grid no-padding dir="{{dir}}">
     <ion-row *ngIf="Blogs != null">
       <ion-col col-12 col-lg-4 *ngFor="let advertisement of Blogs;let i = index">
         <ion-card text-left (click)="viewSingleBlog(advertisement.id)">
           <!--Card Image-->
           <div card-image>
             <img class="image-blog" onError="this.src='assets/img/dothelpnation.png';" [src]="advertisement.photo" />
-            <ion-badge ion-fixed item-end class="badge-dark">about {{advertisement.date | timeAgo}}</ion-badge>
+            <ion-badge ion-fixed item-end class="badge-dark"> about {{advertisement.date | timeAgo}}</ion-badge>
             <button ion-fixed ion-button button-action-shit (click)="presentBlogOptionsActionSheet(advertisement.id);  $event.stopPropagation();">
               <ion-icon name="{{advertisement.shareIcon}}"></ion-icon>
             </button>

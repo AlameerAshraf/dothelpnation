@@ -101,10 +101,10 @@
   "PASWORD_LENGTH" : "ادخل أكثر من 5 أحرف" ,
   "CONFIRMPASWORD_MATCHING" : "كلمة السر غير متطابقة" ,
 
-  "BLOGS_TAB" : "Blogs" ,
-  "MESSAGES_TAB" : "Messages" ,
-  "PROFILE_TAB" : "Profile" ,
-  "SETTINGS_TAB" : "Settings",
+  "BLOGS_TAB" : "الرئيسية" ,
+  "MESSAGES_TAB" : "الرسائل" ,
+  "PROFILE_TAB" : "معلوماتي" ,
+  "SETTINGS_TAB" : "الإعدادات",
 
   "BLOG_TYPE_FILTER" : "اختر الاعلان",
   "CITY_LABEL_FILTER" : "اختر المدينة",
@@ -122,6 +122,8 @@
   "DESCRIPTION_LABEL" : "تفاصيل الإعلان" ,
   "PUBLISH_BTN_LABEL" : "أضف إعلاني",
 
+
+  "HomeLabel" : "الرئيسية" ,
 
 
   "IOS_CANCEL" : "الغاء" ,
