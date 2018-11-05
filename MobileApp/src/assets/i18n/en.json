@@ -132,7 +132,9 @@
 
   "DEFAULT_LANGUGE_LABEL" : "Default Languge",
   "DEFAULT_CITY_LABEL" : "Default City" ,
-  "LOGOUT_LABEL" : "Logout"
+  "LOGOUT_LABEL" : "Logout" , 
+
+  "NoBlogsData" : "Sorry we couldn't find ant posts at your current city , change default city or add post"
 
 
 

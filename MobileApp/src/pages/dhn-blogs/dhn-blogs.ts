@@ -30,7 +30,10 @@ export class DhnBlogsPage {
   dir: string;
   data = {
     HeaderLabel : "",
+    NoBlogs : ""
   }
+  defCityId: any;
+  noBlogsFlag: boolean = false;
 
   constructor(public navCtrl: NavController,
     private push: Push,
@@ -57,10 +60,12 @@ export class DhnBlogsPage {
 
     this.storage.get("UserSettings").then(settings => {
       this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
+      this.defCityId = settings.def_city_id;
     });
 
-    this.translate.get(["HomeLabel"]).subscribe(values => {
+    this.translate.get(["HomeLabel" , "NoBlogsData"]).subscribe(values => {
       this.data.HeaderLabel = values.HomeLabel
+      this.data.NoBlogs = values.NoBlogsData
     })
 
     // Initialize push notifications
@@ -71,7 +76,7 @@ export class DhnBlogsPage {
   ionViewWillEnter() {
     this.Blogs = null;
     this.spinnerDialog.show();
-    let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
+    let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
       data.forEach(element => {
         element.date = this.createFormatedDate(element.publish_date, element.time);
         element.shareIcon = "more"
@@ -80,6 +85,10 @@ export class DhnBlogsPage {
 
       this.Blogs = data;
       this.spinnerDialog.hide();
+
+      if(this.Blogs == null){
+        this.noBlogsFlag = true;
+      }
     });
   }
 
