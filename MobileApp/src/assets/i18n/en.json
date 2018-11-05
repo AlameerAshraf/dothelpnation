@@ -128,6 +128,12 @@
   "IOS_CANCEL" : "cancel",
   "CITY_LABEL" : "City",
   "PLACE_LABEL" : "Place",
-  "BLOG_TYPE_LABEL": "Blog type"
+  "BLOG_TYPE_LABEL": "Blog type",
+
+  "DEFAULT_LANGUGE_LABEL" : "Default Languge",
+  "DEFAULT_CITY_LABEL" : "Default City" ,
+  "LOGOUT_LABEL" : "Logout"
+
+
 
 }

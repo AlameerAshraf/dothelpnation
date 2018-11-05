@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -10,6 +11,7 @@ import { instanceStorageService } from '../../CoreAssestiveModules/Services/inst
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Url } from '../../CoreAssestiveModules/Url';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 
 @IonicPage()
 @Component({
@@ -19,8 +21,8 @@ import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingServi
 export class DhnSettingsPage {
   DefLangShortcut: string;
   DefCityId ;
-  DefLang = "Language ..";
-  DefCity = "City ..";
+  DefLang = "";
+  DefCity = "";
 
 
   Languges: any[] = [
@@ -34,28 +36,46 @@ export class DhnSettingsPage {
   attributeLangCode: string;
   defaultlangobj: any;
   defaultcityobj: any;
+  data = {
+    SettingsLabel : "" ,
+    DefaultLangugeLabel : "",
+    DefaultCityLabel : "" ,
+    LogoutLabel : ""
+  };
 
 
   constructor(public navCtrl: NavController,
     private loading : LoadingService,
-    private instanceStorage: instanceStorageService,
+    private translate: TranslateService,
     private events: Events,
     public navParams: NavParams,
     private WheelSelector: WheelSelector,
     private DataService: DataService,
     private storage: Storage,
+    private spinnerDialog: SpinnerDialog,
     public alertCtrl: AlertController) {
     this.storage.get('access_token').then((SECURITY_DATA) => {
       this.access_token = SECURITY_DATA.access_token;
     });
+
+    this.translate.get([
+      'SETTINGS_TAB' , 'DEFAULT_LANGUGE_LABEL' , 'DEFAULT_CITY_LABEL' , 'LOGOUT_LABEL'
+    ]).subscribe((values) => {
+      this.data.SettingsLabel = values.SETTINGS_TAB;
+      this.data.DefaultLangugeLabel = values.DEFAULT_LANGUGE_LABEL;
+      this.data.DefaultCityLabel  = values.DEFAULT_CITY_LABEL;
+      this.data.LogoutLabel = values.LOGOUT_LABEL
+    })
+
+
   }
 
 
   ionViewDidLoad() {
-    this.loading.show("Loading ...");
+    this.spinnerDialog.show();
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`, null, this.access_token).subscribe((cities) => {        this.Cities = cities;
         this.storage.get('UserSettings').then((user_settings) => {
-          this.loading.hide();
+          this.spinnerDialog.hide();
           let defaultSavedCity = this.Cities.find(x => x.id == user_settings.def_city_id);
           // label 
           this.DefCity = defaultSavedCity.name;

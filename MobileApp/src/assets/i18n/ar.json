@@ -129,6 +129,11 @@
   "IOS_CANCEL" : "الغاء" ,
   "BLOG_TYPE_LABEL": "نوع الاعلان",
   "CITY_LABEL" : "المدينة",
-  "PLACE_LABEL" : "المكان"
+  "PLACE_LABEL" : "المكان",
+
+
+  "DEFAULT_LANGUGE_LABEL" : "اللغة",
+  "DEFAULT_CITY_LABEL" : "المدينة" ,
+  "LOGOUT_LABEL" : "تسجيل الخروج"
 
 }

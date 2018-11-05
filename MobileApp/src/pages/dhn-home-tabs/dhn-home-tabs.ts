@@ -41,6 +41,7 @@ export class DhnHomeTabsPage implements OnDestroy {
   access_token: any;
   logginedUserEmail: any;
   messagesCount: any;
+  dir: string;
 
   ionViewDidEnter() {
     this.menu.enable(true);
@@ -70,6 +71,11 @@ export class DhnHomeTabsPage implements OnDestroy {
         document.body.classList.remove('keyboard-is-open');
       });
     });
+
+    this.Storage.get("UserSettings").then(settings => {
+      this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
+    });
+
 
     this.translate.get([
       'BLOGS_TAB', 'MESSAGES_TAB', 'PROFILE_TAB', 'SETTINGS_TAB'

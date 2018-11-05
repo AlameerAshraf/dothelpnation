@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title> Settings </ion-title>
+    <ion-title> {{data.SettingsLabel}} </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,7 +13,7 @@
   <ion-list>
     <ion-item (click)="onLangugeSelected()">
       <ion-icon name='ios-paper' item-start></ion-icon>
-      Langugae
+      {{data.DefaultLangugeLabel}}
       <ion-note item-end>
         {{ DefLang }}
       </ion-note>
@@ -22,7 +22,7 @@
 
     <ion-item (click)="onCitySelection()">
       <ion-icon name='ios-navigate-outline' item-start></ion-icon>
-      Default City
+      {{data.DefaultCityLabel}}
       <ion-note item-end>
         {{ DefCity }}
       </ion-note>
@@ -30,7 +30,7 @@
   </ion-list>
 
   <div class="middlePage">
-    <p class="logoutClick" (click)="showConfirm()" style="font-size: 20px; color: red;margin: 0px;"> Logout </p>
+    <p class="logoutClick" (click)="showConfirm()" style="font-size: 20px; color: red;margin: 0px;"> {{data.LogoutLabel}} </p>
     <br>
     <br>
     <p style="font-size: 10px; color: gray;margin: 0px;"> Version number 1.0.0 </p>

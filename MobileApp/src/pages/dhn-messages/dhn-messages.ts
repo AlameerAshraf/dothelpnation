@@ -11,6 +11,7 @@ import { Url } from '../../CoreAssestiveModules/Url';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { instanceStorageService } from '../../CoreAssestiveModules/Services/instanceStorageService';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @IonicPage()
@@ -22,6 +23,7 @@ export class DhnMessagesPage  {
   userChats;
   logginedUserEmail;
   access_token;
+  MessagesTablabel: any;
 
 
 
@@ -33,7 +35,7 @@ export class DhnMessagesPage  {
     private loading: LoadingService,
     private storage: Storage,
     private toast: ToastController,
-    private instanceStorage: instanceStorageService,
+    private translate: TranslateService,
     // private localNotifications : LocalNotifications,
     public navParams: NavParams) {
 
@@ -44,6 +46,10 @@ export class DhnMessagesPage  {
     this.storage.get("Profile_Data").then(PROFILE_DATA => {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
+
+    this.translate.get(['MESSAGES_TAB']).subscribe((values) => {
+      this.MessagesTablabel = values.MESSAGES_TAB;
+    })
 
   }
 
