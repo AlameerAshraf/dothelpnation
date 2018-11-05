@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Profile</ion-title>
+    <ion-title>{{ data.HeaderLabel }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,18 +14,18 @@
 
   </div>
   <ion-item>
-    <ion-label stacked>Username</ion-label>
+    <ion-label stacked>{{data.Username_profile}}</ion-label>
     <ion-input disabled="true" value="{{CurrentUserProfileData?.name}}"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label stacked>Email</ion-label>
+    <ion-label stacked>{{data.Email_profile}}</ion-label>
     <ion-input disabled="true" value="{{CurrentUserProfileData?.email}}"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label stacked>Age</ion-label>
-    <ion-input disabled="true" value="22"></ion-input>
+    <ion-label stacked>{{data.Age_profile}}</ion-label>
+    <ion-input disabled="true" value="{{CurrentUserProfileData?.phone}}"></ion-input>
   </ion-item>
 
   <!-- <ion-item>
@@ -34,12 +34,12 @@
   </ion-item> -->
 
   <ion-item>
-    <ion-label stacked>Phone</ion-label>
+    <ion-label stacked>{{data.phone_profile}}</ion-label>
     <ion-input disabled="true" value="{{CurrentUserProfileData?.mobile}}"></ion-input>
   </ion-item>
 
   <br>
-  <button ion-button block color="primary" outline (click)="showConfirm()">Show My Ads</button>
+  <!-- <button ion-button block color="primary" outline (click)="showConfirm()">Show My Ads</button> -->
 
 
 </ion-content>

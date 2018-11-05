@@ -18,7 +18,7 @@
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="Seach in blogs"></ion-searchbar>
+  <!-- <ion-searchbar (ionInput)="getItems($event)" placeholder="Seach in blogs"></ion-searchbar> -->
 
 
   <ion-grid no-padding dir="{{dir}}">
@@ -41,6 +41,7 @@
               <!--Card Subtitle-->
               <h1 card-subtitle>{{advertisement.user_name}}</h1>
               <!--Card Body Text-->
+              <p card-body-text>{{advertisement.section_name}}</p>
               <p card-body-text>{{advertisement.content}}</p>
             </ion-card-title>
           </ion-card-content>

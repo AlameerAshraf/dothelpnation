@@ -1,3 +1,4 @@
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { Storage } from '@ionic/storage';
 import { Component, OnInit } from '@angular/core';
 import { Events, ToastController } from 'ionic-angular';
@@ -23,7 +24,10 @@ export class DhnMessagesPage  {
   userChats;
   logginedUserEmail;
   access_token;
-  MessagesTablabel: any;
+  data = {
+    MessagesTablabel : "" ,
+    // searchtext : ""
+  };
 
 
 
@@ -32,7 +36,7 @@ export class DhnMessagesPage  {
     public navCtrl: NavController,
     private events: Events,
     private DataService: DataService,
-    private loading: LoadingService,
+    private SpinnerDialog: SpinnerDialog,
     private storage: Storage,
     private toast: ToastController,
     private translate: TranslateService,
@@ -47,14 +51,15 @@ export class DhnMessagesPage  {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
 
-    this.translate.get(['MESSAGES_TAB']).subscribe((values) => {
-      this.MessagesTablabel = values.MESSAGES_TAB;
+    this.translate.get(['MESSAGES_TAB' , 'SEARCH_TITLE']).subscribe((values) => {
+      this.data.MessagesTablabel = values.MESSAGES_TAB;
+      // this.data.searchtext = values.SEARCH_TITLE;
     })
 
   }
 
   ionViewWillEnter() {
-    this.loading.show("Loading messages");
+    this.SpinnerDialog.show();
 
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetChatList?email=${this.logginedUserEmail}`, null, this.access_token).subscribe((data) => {
       let unreadMessagesCounter = 0 ;
@@ -74,7 +79,7 @@ export class DhnMessagesPage  {
       
       this.events.publish("tab:changed:messagesCount" , unreadMessagesCounter , "set");
 
-      this.loading.hide();
+      this.SpinnerDialog.hide();
       this.userChats = data;
     })
   }

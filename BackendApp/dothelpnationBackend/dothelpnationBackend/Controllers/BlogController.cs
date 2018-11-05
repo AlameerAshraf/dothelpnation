@@ -77,9 +77,9 @@ namespace dothelpnationBackend.Controllers
 
         [HttpGet]
         [Route("api/GetBlogs")]
-        public IEnumerable<blogDTO> GetAllBlogs()
+        public IEnumerable<blogDTO> GetAllBlogs([FromUri] int Def_City_id)
         {
-            var blogs = _blogRepo.Get();
+            var blogs = _blogRepo.Get().Where(x => x.city_id == Def_City_id).ToList();
             var MappedBlogs = Mapper.Map<IEnumerable<blogDTO>>(blogs);
 
             foreach (var blog in MappedBlogs)
