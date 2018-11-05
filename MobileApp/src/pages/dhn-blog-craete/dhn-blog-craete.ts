@@ -25,6 +25,7 @@ import { Url } from "../../CoreAssestiveModules/Url";
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/forkJoin';
+import { TranslateService } from "@ngx-translate/core";
 
 
 
@@ -71,9 +72,25 @@ export class DhnBlogCraetePage {
   PlaceId;
 
   map;
+  dir: string;
+  data = {
+    HeaderLabel : "" ,
+    IOScancel : "" ,
+    ImageAddingLabel : "" ,
+    BlogTypeLabel : "" ,
+    BlogType : "" ,
+    CityLabel : "" ,
+    City : "" ,
+    PlaceLabel : "",
+    Place : "",
+    Address : "" ,
+    Title : "",
+    Description : "" ,
+    PublishLabel : ""
+  }
 
   constructor(
-    private loadingService: LoadingService,
+    private translate: TranslateService,
     private spinnerDialog: SpinnerDialog,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -96,6 +113,36 @@ export class DhnBlogCraetePage {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
 
+    // dierction based on languge 
+    this.storage.get("UserSettings").then(settings => {
+      this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
+    });
+
+    this.translate.get([
+      "CREATE_MODAL_LABEL" ,
+      "IOS_CANCEL" ,
+      "ADD_IMIAGE_LABEL",
+      "BLOG_TYPE_LABEL" ,
+      "CITY_LABEL",
+      "PLACE_LABEL",
+      "ADDRESS_LABEL",
+      "TITLE_LABEL",
+      "DESCRIPTION_LABEL",
+      "PUBLISH_BTN_LABEL"
+    ]).subscribe((values) => {
+      this.data.HeaderLabel = values.CREATE_MODAL_LABEL,
+      this.data.IOScancel = values.IOS_CANCEL,
+      this.data.ImageAddingLabel = values.ADD_IMIAGE_LABEL,
+      this.data.BlogTypeLabel = values.BLOG_TYPE_LABEL ,
+      this.data.CityLabel = values.CITY_LABEL ,
+      this.data.PlaceLabel = values.PLACE_LABEL ,
+      this.data.Address = values.ADDRESS_LABEL ,
+      this.data.Title = values.TITLE_LABEL ,
+      this.data.Description = values.DESCRIPTION_LABEL ,
+      this.data.PublishLabel = values.PUBLISH_BTN_LABEL
+    });
+
+    
     this.spinnerDialog.show(); // show loaders 
     let blogTypeData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfBlogSections?site_lang=en`,null,this.access_token)
     let mainCitiesData = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetListOfMainCities`,null,this.access_token)

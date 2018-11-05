@@ -112,9 +112,21 @@
   "SEARCH_LABEL_TEXT" : "ابحث بعنوان الاعلان",
   "FILTER_BTN_LABEL" : "ابحث",
   "CLEAR_BTN_LABEL" : "ازل معايير البحث",
+  "FILTERS_MODAL_LABEL" : "معايير البحث",
+
+
+  "CREATE_MODAL_LABEL" : "أضف إعلانًا" ,
+  "ADD_IMIAGE_LABEL"  : "أضف الصورة" ,
+  "ADDRESS_LABEL" : "العنوان" ,
+  "TITLE_LABEL" : "الموضوع" ,
+  "DESCRIPTION_LABEL" : "تفاصيل الإعلان" ,
+  "PUBLISH_BTN_LABEL" : "أضف إعلاني",
+
+
+
+  "IOS_CANCEL" : "الغاء" ,
   "BLOG_TYPE_LABEL": "نوع الاعلان",
   "CITY_LABEL" : "المدينة",
-  "PLACE_LABEL" : "المكان",
-  "FILTERS_MODAL_LABEL" : "معايير البحث"
+  "PLACE_LABEL" : "المكان"
 
 }

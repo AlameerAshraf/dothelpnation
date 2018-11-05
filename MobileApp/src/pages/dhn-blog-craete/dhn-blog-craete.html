@@ -1,12 +1,12 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Add Advertisement</ion-title>
+  <ion-navbar dir="{{dir}}">
+    <ion-title>{{ data.HeaderLabel }}</ion-title>
 
     <ion-buttons start>
       <button ion-button (click)="close()">
         <span color="primary" showWhen="ios">
-          cancel
+          {{ data.IOScancel }}
         </span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
@@ -25,49 +25,49 @@
     <div class="profile-image-placeholder" *ngIf="!blogImage">
       <ion-icon name="add"></ion-icon>
       <div>
-        Add Image
+        {{ data.ImageAddingLabel}}
       </div>
     </div>
     <div class="profile-image" [style.backgroundImage]="imageViewer()" *ngIf="blogImage"></div>
   </div>
 
   <ion-list>
-    <ion-item (click)="onblogSections()">
-      <ion-label [style.color]="errors.SectionId != null ? 'red' : 'black'"> Blog Type </ion-label>
+    <ion-item (click)="onblogSections()" dir="{{dir}}">
+      <ion-label [style.color]="errors.SectionId != null ? 'red' : 'black'"> {{ data.BlogTypeLabel }} </ion-label>
       <ion-note item-end>
         {{ BlogType }}
       </ion-note>
     </ion-item>
 
-    <ion-item (click)="onMainCities()">
-      <ion-label [style.color]="errors.CityId != null ? 'red' : 'black'"> City </ion-label>
+    <ion-item (click)="onMainCities()" dir="{{dir}}">
+      <ion-label [style.color]="errors.CityId != null ? 'red' : 'black'"> {{ data.CityLabel }} </ion-label>
       <ion-note item-end>
         {{ City }}
       </ion-note>
     </ion-item>
 
-    <ion-item (click)="onPlaces()">
-      <ion-label [style.color]="errors.PlaceId != null ? 'red' : 'black'"> Place </ion-label>
+    <ion-item (click)="onPlaces()" dir="{{dir}}">
+      <ion-label [style.color]="errors.PlaceId != null ? 'red' : 'black'"> {{ data.PlaceLabel }} </ion-label>
       <ion-note item-end>
         {{ Place }}
       </ion-note>
     </ion-item>
 
 
-    <ion-item>
-      <ion-label [style.color]="errors.address != null ? 'red' : 'black'" stacked>Your address</ion-label>
+    <ion-item dir="{{dir}}">
+      <ion-label [style.color]="errors.address != null ? 'red' : 'black'" stacked>{{ data.Address }}</ion-label>
       <ion-input (keyup)="reValidateErrors('address')" [(ngModel)]="UserAddress" type="text"></ion-input>
     </ion-item>
 
 
-    <ion-item>
-      <ion-label [style.color]="errors.title != null ? 'red' : 'black'" stacked>Title</ion-label>
+    <ion-item dir="{{dir}}">
+      <ion-label [style.color]="errors.title != null ? 'red' : 'black'" stacked>{{ data.Title }}</ion-label>
       <ion-input (keyup)="reValidateErrors('title')" [(ngModel)]="BlogTitle" type="text"></ion-input>
     </ion-item>
 
 
-    <ion-item>
-      <ion-label [style.color]="errors.description != null ? 'red' : 'black'" stacked>Description</ion-label>
+    <ion-item dir="{{dir}}">
+      <ion-label [style.color]="errors.description != null ? 'red' : 'black'" stacked>{{ data.Description }}</ion-label>
       <ion-textarea (keyup)="reValidateErrors('description')" [(ngModel)]="BlogDescription" rows="4">
       </ion-textarea>
     </ion-item>
@@ -101,7 +101,7 @@
 
 
 
-  <button ion-button block color="primary" outline (click)="uploadImage()">Publish My Blog</button>
+  <button ion-button block color="primary" outline (click)="uploadImage()">{{ data.PublishLabel }}</button>
 
 
 </ion-content>

@@ -112,11 +112,20 @@
   "SEARCH_LABEL_TEXT" : "Search ..",
   "FILTER_BTN_LABEL" : "Filter",
   "CLEAR_BTN_LABEL" : "Clear",
-  "BLOG_TYPE_LABEL": "Blog type",
+  "FILTERS_MODAL_LABEL" : "Search criteria",
+
+
+  "CREATE_MODAL_LABEL" : "Post Something" ,
+  "ADD_IMIAGE_LABEL"  : "Add Image" ,
+  "ADDRESS_LABEL" : "Post Address" ,
+  "TITLE_LABEL" : "Post Title" ,
+  "DESCRIPTION_LABEL" : "Post Description" ,
+  "PUBLISH_BTN_LABEL" : "Post",
+
+
+  "IOS_CANCEL" : "cancel",
   "CITY_LABEL" : "City",
   "PLACE_LABEL" : "Place",
-  "FILTERS_MODAL_LABEL" : "Search criteria"
-
-
+  "BLOG_TYPE_LABEL": "Blog type"
 
 }

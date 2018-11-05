@@ -45,6 +45,8 @@ export class DhnBlogFilterPage {
     BlogTypeLabel : "",
     CityLabel : "",
     PlaceLabel : "" ,
+    IOScancel : ""      
+
   };
 
   constructor(public navCtrl: NavController, 
@@ -63,11 +65,6 @@ export class DhnBlogFilterPage {
 
     this.storage.get("UserSettings").then(settings => {
       this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
-      if (this.dir == "rtl") {
-        this.revDir = "ltr";
-      } else if (this.dir == "ltr") {
-        this.revDir = "rtl";
-      }
     });
 
     this.translate
@@ -81,7 +78,8 @@ export class DhnBlogFilterPage {
         "BLOG_TYPE_LABEL",
         "CITY_LABEL",
         "PLACE_LABEL",
-        "FILTERS_MODAL_LABEL"
+        "FILTERS_MODAL_LABEL",
+        "IOS_CANCEL"
       ])
       .subscribe(values => {
         this.data.BlogType = values.BLOG_TYPE_FILTER,
@@ -93,7 +91,8 @@ export class DhnBlogFilterPage {
         this.data.TextSearchLabel = values.SEARCH_LABEL_TEXT,
         this.data.FilterLabel = values.FILTER_BTN_LABEL,
         this.data.ClearLabel = values.CLEAR_BTN_LABEL,
-        this.data.HeaderLabel = values.FILTERS_MODAL_LABEL
+        this.data.HeaderLabel = values.FILTERS_MODAL_LABEL,
+        this.data.IOScancel = values.IOS_CANCEL
       });
 
     // Show loading for blog types 
