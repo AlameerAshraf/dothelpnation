@@ -9,6 +9,8 @@ using AutoMapper;
 using System.Web;
 using System.Web.Http;
 using System.Globalization;
+using BusinessLayer.PushService;
+using System.Configuration;
 
 namespace dothelpnationBackend.Controllers
 {
@@ -20,15 +22,20 @@ namespace dothelpnationBackend.Controllers
         private readonly IRepository<place> _placeRepo;
         private readonly IRepository<user> _userRepo;
         private readonly IRepository<rating> _rateRepo;
+        private readonly IRepository<device_tokens> _deviceTokensRepo;
+        private readonly IPush _pushNotification;
+
 
         public BlogController(IRepository<blog> blogRepo , IRepository<blog_sections> blogSectionsRepo, IRepository<place> placeRepo ,
-            IRepository<user> userRepo , IRepository<rating> rateRepo)
+            IRepository<user> userRepo , IRepository<rating> rateRepo, IPush push , IRepository<device_tokens> deviceTokenRepo)
         {
             _blogRepo = blogRepo;
             _blogSectionsRepo = blogSectionsRepo;
+            _deviceTokensRepo = deviceTokenRepo;
             _placeRepo = placeRepo;
             _userRepo = userRepo;
             _rateRepo = rateRepo;
+            _pushNotification = push;
         }
 
 
@@ -106,6 +113,9 @@ namespace dothelpnationBackend.Controllers
             [FromUri] string map_latitude,
             [FromUri] string map_longitude)
         {
+            var FCMServerApiKey = ConfigurationManager.AppSettings["FCMServerApiKey"];
+            var FCMSenderId = ConfigurationManager.AppSettings["FCMSenderId"];
+
             var file = HttpContext.Current.Request.Files.Count > 0 ?
                 HttpContext.Current.Request.Files[0] : null;
             var ImageUploaded = false;
@@ -153,6 +163,17 @@ namespace dothelpnationBackend.Controllers
                 map_longitude = map_longitude
             };
             var IsInserted = _blogRepo.Insert(newBlog);
+
+            if(section_id == 2) // Blood donation 
+            {
+                var AllDeviceTokens = _deviceTokensRepo.Get().ToList();
+                var CityName = _placeRepo.Get().Where(x => x.id == city_id).FirstOrDefault().name;
+                string BloodDonationMessage = CityName + " " + "أحدهم بحاجة للدم الأن في";
+                foreach (var token in AllDeviceTokens)
+                {
+                    _pushNotification.SendNotificationsToFCM(FCMServerApiKey, FCMSenderId, token.device_token, "", BloodDonationMessage , "BloodDonationNotification");
+                }
+            }
 
 
             return (IsInserted != null && ImageUploaded == true) ? true : false;

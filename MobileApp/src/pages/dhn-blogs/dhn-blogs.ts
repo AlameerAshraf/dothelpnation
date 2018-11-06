@@ -80,6 +80,7 @@ export class DhnBlogsPage {
       data.forEach(element => {
         element.date = this.createFormatedDate(element.publish_date, element.time);
         element.shareIcon = "more"
+        element.content = element.content == typeof undefined ? "" : element.content;
         // element.alt = "assets/img/dothelpnation.jpg";
       });
 
@@ -140,10 +141,11 @@ export class DhnBlogsPage {
     } else {
       this.Blogs = null;
       this.spinnerDialog.show();
-      let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
+      let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
         data.forEach(element => {
           element.date = this.createFormatedDate(element.publish_date, element.time);
-          element.shareIcon = "more"
+          element.shareIcon = "more";
+          element.content = element.content == typeof undefined ? "" : element.content;
         });
 
         this.spinnerDialog.hide();
@@ -162,7 +164,8 @@ export class DhnBlogsPage {
       if (data.length > 0) {
         data.forEach(element => {
           element.date = this.createFormatedDate(element.publish_date, element.time);
-          element.shareIcon = "more"
+          element.shareIcon = "more";
+          element.content = element.content == typeof undefined ? "" : element.content;
         });
 
         this.spinnerDialog.hide();
@@ -172,7 +175,7 @@ export class DhnBlogsPage {
         this.spinnerDialog.show();
         let toast = this.toast.create({ message: "No results found ", duration: 1000 });
         toast.present();
-        let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs`, null, this.access_token).subscribe((data) => {
+        let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
           data.forEach(element => {
             element.date = this.createFormatedDate(element.publish_date, element.time);
             element.shareIcon = "more"

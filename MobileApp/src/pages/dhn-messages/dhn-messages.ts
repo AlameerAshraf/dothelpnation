@@ -28,6 +28,7 @@ export class DhnMessagesPage  {
     MessagesTablabel : "" ,
     // searchtext : ""
   };
+  dir: string;
 
 
 
@@ -54,7 +55,11 @@ export class DhnMessagesPage  {
     this.translate.get(['MESSAGES_TAB' , 'SEARCH_TITLE']).subscribe((values) => {
       this.data.MessagesTablabel = values.MESSAGES_TAB;
       // this.data.searchtext = values.SEARCH_TITLE;
-    })
+    });
+
+    this.storage.get("UserSettings").then(settings => {
+      this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
+    });
 
   }
 
