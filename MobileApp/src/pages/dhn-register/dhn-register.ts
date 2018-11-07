@@ -134,7 +134,7 @@ export class DhnRegisterPage {
       updated_at: null
     };
 
-    this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`, newUserData).subscribe((x) => {
+    this.DataService.Post(`${Url.ApiUrlLocalTunnul()}/CraeteUser`,null , null , newUserData).subscribe((x) => {
       if (x) {
         this.DataService.Post(`${Url.SecurityLocalTunnul()}/token`, null, null, {
           "grant_type": "password",

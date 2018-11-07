@@ -142,7 +142,7 @@ export class DhnSettingsPage {
 
       this.DefLang = this.attributeLangCode == "En_Lang" ? SelectedLanguge.En_Lang : SelectedLanguge.Ar_Lang ;
       this.DefLangShortcut = SelectedLanguge.shortcut;
-      this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId});
+      this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId}).then();
     }, (err) => {
       console.log("Closed");
     })
@@ -164,7 +164,7 @@ export class DhnSettingsPage {
       });
       this.DefCity = SelectedCityFilter.name;
       this.DefCityId = SelectedCityFilter.id;
-      this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId});
+      this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId}).then();
     })
   }
 

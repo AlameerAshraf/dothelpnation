@@ -60,7 +60,6 @@ export class DhnBlogsPage {
 
     this.storage.get("UserSettings").then(settings => {
       this.dir = settings.def_lang == "ar" ? "rtl" : "ltr";
-      this.defCityId = settings.def_city_id;
     });
 
     this.translate.get(["HomeLabel" , "NoBlogsData"]).subscribe(values => {
@@ -74,23 +73,28 @@ export class DhnBlogsPage {
   }
 
   ionViewWillEnter() {
-    this.Blogs = null;
-    this.spinnerDialog.show();
-    let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
-      data.forEach(element => {
-        element.date = this.createFormatedDate(element.publish_date, element.time);
-        element.shareIcon = "more"
-        element.content = element.content == typeof undefined ? "" : element.content;
-        // element.alt = "assets/img/dothelpnation.jpg";
+    this.storage.get("UserSettings").then(settings => {
+      this.defCityId = settings.def_city_id;
+      this.Blogs = null;
+      this.spinnerDialog.show();
+      let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
+        data.forEach(element => {
+          element.date = this.createFormatedDate(element.publish_date, element.time);
+          element.shareIcon = "more"
+          element.content = element.content == typeof undefined ? "" : element.content;
+          // element.alt = "assets/img/dothelpnation.jpg";
+        });
+  
+        this.Blogs = data;
+        this.spinnerDialog.hide();
+  
+        if(this.Blogs == null){
+          this.noBlogsFlag = true;
+        }
       });
-
-      this.Blogs = data;
-      this.spinnerDialog.hide();
-
-      if(this.Blogs == null){
-        this.noBlogsFlag = true;
-      }
     });
+
+
   }
 
 

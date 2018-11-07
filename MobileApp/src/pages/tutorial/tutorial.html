@@ -1,31 +1,25 @@
-<!-- <ion-header no-shadow>
+<ion-header no-shadow style="background-color: rgb(24, 153, 121);">
   <ion-navbar>
     <ion-buttons end *ngIf="showSkip">
-      <button ion-button (click)="startApp()" color="primary">{{ 'TUTORIAL_SKIP_BUTTON' | translate}}</button>
+      <button ion-button (click)="startApp()" style="color:white;">{{ 'TUTORIAL_SKIP_BUTTON' | translate}}</button>
     </ion-buttons>
   </ion-navbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content no-bounce>
 
   <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
 
     <ion-slide *ngFor="let slide of slides" >
-      <!-- <ion-buttons end *ngIf="showSkip">
-        <button ion-button (click)="startApp()" color="primary">{{ 'TUTORIAL_SKIP_BUTTON' | translate}}</button>
-      </ion-buttons> -->
       <img [src]="slide.image"/>
-      <!-- <br><br><br><br> -->
-      <!-- <h2 class="slide-title" [innerHTML]="slide.title"></h2> -->
       <p style="color: white;">{{ slide.title }}</p>
     </ion-slide>
-    <!-- <ion-slide>`
-      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
-      <h2 class="slide-title">{{ 'TUTORIAL_SLIDE4_TITLE' | translate }}</h2>
-      <button ion-button icon-end large clear (click)="startApp()">
-        {{ 'TUTORIAL_CONTINUE_BUTTON' | translate }}
-      </button>
-    </ion-slide> -->
+
+    <ion-slide>
+      <img src="assets/img/mising.jpg"/>
+      <p style="color: white;">{{ 'TUTORIAL_SLIDE4_TITLE' | translate }}</p>
+      <p (click)="startApp()" style="color: white; font-weight: bold;">{{ 'TUTORIAL_SLIDE_LAST_TITLE' | translate }}</p>
+    </ion-slide>
   </ion-slides>
 </ion-content>
 

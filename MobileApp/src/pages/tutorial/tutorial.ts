@@ -30,39 +30,39 @@ export class TutorialPage {
     public platform: Platform ,
     private Storage: Storage,
     private NativeStorage: NativeStorage) {
-    translate.get(["TUTORIAL_SLIDE1_TITLE",
-      "TUTORIAL_SLIDE1_DESCRIPTION",
+    translate.get([
+      "TUTORIAL_SLIDE1_TITLE",
       "TUTORIAL_SLIDE2_TITLE",
-      "TUTORIAL_SLIDE2_DESCRIPTION",
       "TUTORIAL_SLIDE3_TITLE",
-      "TUTORIAL_SLIDE3_DESCRIPTION",
+      "TUTORIAL_SLIDE4_TITLE",
+      "TUTORIAL_SLIDE5_TITLE",
     ]).subscribe(
       (values) => {
         this.slides = [
           {
             title: values.TUTORIAL_SLIDE1_TITLE,
-            description: values.TUTORIAL_SLIDE1_DESCRIPTION,
-            image: 'assets/img/blood-donation.jpg',
+            description: "",
+            image: 'assets/img/bd.jpg',
           },
           {
             title: values.TUTORIAL_SLIDE2_TITLE,
-            description: values.TUTORIAL_SLIDE2_DESCRIPTION,
-            image: 'assets/img/found.jpg',
+            description: "",
+            image: 'assets/img/fond.jpg',
           },
           {
             title: values.TUTORIAL_SLIDE3_TITLE,
-            description: values.TUTORIAL_SLIDE3_DESCRIPTION,
-            image: 'assets/img/help-pets.jpg',
+            description: "",
+            image: 'assets/img/hp.jpg',
           },
           {
-            title: values.TUTORIAL_SLIDE3_TITLE,
-            description: values.TUTORIAL_SLIDE3_DESCRIPTION,
-            image: 'assets/img/miss.jpg',
+            title: values.TUTORIAL_SLIDE4_TITLE,
+            description: "",
+            image: 'assets/img/mess.jpg',
           },
           {
-            title: values.TUTORIAL_SLIDE3_TITLE,
-            description: values.TUTORIAL_SLIDE3_DESCRIPTION,
-            image: 'assets/img/missing.jpg',
+            title: values.TUTORIAL_SLIDE5_TITLE,
+            description: "",
+            image: 'assets/img/mising.jpg',
           }
         ];
       });
