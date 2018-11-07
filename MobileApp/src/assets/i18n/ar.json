@@ -17,16 +17,15 @@
   "TUTORIAL_SKIP_BUTTON": "تخطى",
   "TUTORIAL_CONTINUE_BUTTON": "استمر",
 
-  "TUTORIAL_SLIDE1_TITLE": "مرحبا بكم في عدة البدء Ionic Super Starter",
-  "TUTORIAL_SLIDE1_DESCRIPTION": "<b>Ionic Super Starter</b> عبارة عن عدة لبدء التطوير بواسطة Ionic. وهي تتميز بالعديد من الصفحات وأفضل الممارسات.",
+  "TUTORIAL_SLIDE1_TITLE": "ساعد غيرك بالتبرع بالدم , انشر الحالات التي تحتاج التبرع بالدم",
 
-  "TUTORIAL_SLIDE2_TITLE": "كيفية استخدام Ionic Super Starter",
-  "TUTORIAL_SLIDE2_DESCRIPTION": "يمكنك تجميع أنواع الصفحات المختلفة التي ترغب بها وإزالة الباقي. وتوفر عدة البدء ​​العديد من تخطيطات الصفحات الاكثر شيوعا في التطبيقات النقالة، مثل صفحات تسجيل الدخول وانشاء الحساب، علامات التبويب، وهذه الصفحة التعليمية.",
+  "TUTORIAL_SLIDE2_TITLE": "ساعد من فقد اغراضه باضافتها هنا",
 
-  "TUTORIAL_SLIDE3_TITLE": "كيفية الشروع",
-  "TUTORIAL_SLIDE3_DESCRIPTION": "هل تحتاج إلى مساعدة؟ يمكنك الاطلاع على README لبرنامج تعليمي كامل على Ionic Super Starter",
+  "TUTORIAL_SLIDE3_TITLE": "قدم المساعدة وقم بايواء الحيوانات الضائعة ",
 
-  "TUTORIAL_SLIDE4_TITLE": "مستعد للعب؟",
+  "TUTORIAL_SLIDE4_TITLE": "اذا فقدت شيء فلا تتردد في اضافتها هنا",
+
+  "TUTORIAL_SLIDE5_TITLE": "ساعد الآباء في العثور على أطفالهم المفقودين",
 
   "WELCOME_INTRO": "نقطة الانطلاق لتطبيق Ionic العظيم الخاص بك",
 
