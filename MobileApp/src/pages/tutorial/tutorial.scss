@@ -1,6 +1,17 @@
 page-tutorial {
+  
+  ion-slide {
+    background-color: rgb(24, 153, 121);
+  }
+  
   .swiper-pagination-bullet-active {
-    background: #21E7B6 !important,
+    background: white !important,
+  }
+
+  ion-slide img {
+    margin-top: 10vh !important;
+    height: 70vh !important;
+    width: auto !important;
   }
 
   .toolbar-background {
