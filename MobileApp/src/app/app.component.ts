@@ -6,7 +6,7 @@ import { Settings } from '../providers';
 
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform } from 'ionic-angular';
+import { Config, Nav, Platform, MenuController } from 'ionic-angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -85,9 +85,11 @@ export class MyApp implements OnInit {
     private config: Config,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen ,
+    private menu : MenuController,
     private NativeStorage: NativeStorage) {
 
     platform.ready().then(() => {
+      this.menu.enable(false);
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
