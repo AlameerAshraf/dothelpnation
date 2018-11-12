@@ -208,7 +208,7 @@ export class DhnBlogsPage {
       })
   }
 
-
+  
   // Show Action sheet for blog options 
   presentBlogOptionsActionSheet(blogId) {
     let blogOptions = this.actionSheet.create({
