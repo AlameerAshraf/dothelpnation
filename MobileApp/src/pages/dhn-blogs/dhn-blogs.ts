@@ -69,6 +69,7 @@ export class DhnBlogsPage {
 
     // Initialize push notifications
     this.deviceType = this.device.platform; 
+    
     this.initPushNotifications();
   }
 
@@ -259,6 +260,7 @@ export class DhnBlogsPage {
 
   // Initialize Push Notifications 
   initPushNotifications() {
+    console.log("sdsdsdsdsd")
     this.storage.get('DeviceTokenGenerated').then((DeviceTokenGenerated) => {
       if (!DeviceTokenGenerated && this.platform.is('cordova')) {
         const options: PushOptions = {

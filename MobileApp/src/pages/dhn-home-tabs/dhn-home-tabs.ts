@@ -90,6 +90,8 @@ export class DhnHomeTabsPage implements OnDestroy {
       this.navCtrl.setRoot('DhnLoginPage');
     });
 
+ 
+
     this.events.subscribe("tab:chnaged:messages" , (flag) => {
       if(flag)
         this.mianTabs.select(1);
@@ -127,6 +129,8 @@ export class DhnHomeTabsPage implements OnDestroy {
   ngOnDestroy(): void {
     this.events.unsubscribe('logout:clicked');
   }
+
+
 
 
   ionViewDidLoad() {

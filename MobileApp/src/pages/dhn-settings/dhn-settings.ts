@@ -12,6 +12,7 @@ import { DataService } from './../../CoreAssestiveModules/Services/DataService';
 import { Url } from '../../CoreAssestiveModules/Url';
 import { LoadingService } from '../../CoreAssestiveModules/Services/LoadingService';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @IonicPage()
 @Component({
@@ -47,6 +48,7 @@ export class DhnSettingsPage {
   constructor(public navCtrl: NavController,
     private loading : LoadingService,
     private translate: TranslateService,
+    private splashScreen: SplashScreen ,
     private events: Events,
     public navParams: NavParams,
     private WheelSelector: WheelSelector,
@@ -143,6 +145,9 @@ export class DhnSettingsPage {
       this.DefLang = this.attributeLangCode == "En_Lang" ? SelectedLanguge.En_Lang : SelectedLanguge.Ar_Lang ;
       this.DefLangShortcut = SelectedLanguge.shortcut;
       this.storage.set('UserSettings' , {def_lang : this.DefLangShortcut , def_city_id : this.DefCityId}).then();
+      this.splashScreen.show();
+      window.location.reload();
+
     }, (err) => {
       console.log("Closed");
     })

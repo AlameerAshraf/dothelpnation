@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, Content, ActionSheetController, To
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Storage } from "@ionic/storage";
 import { Url } from '../../CoreAssestiveModules/Url';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -23,6 +24,7 @@ export class DhnBlogViewPage {
 
   data
   active: boolean = false
+  MessagePublisherLabel: any;
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
@@ -30,12 +32,18 @@ export class DhnBlogViewPage {
     private storage: Storage,
     private actionSheet: ActionSheetController,
     private DataService: DataService,
+    private translate: TranslateService,
     private toast : ToastController
   ) {
 
     this.storage.get("Profile_Data").then(PROFILE_DATA => {
       this.logginedUserEmail = PROFILE_DATA.email;
     });
+
+
+    this.translate.get(["MESSAGE_PUBLISHER_BTN_LABEL"]).subscribe(values => {
+      this.MessagePublisherLabel = values.MESSAGE_PUBLISHER_BTN_LABEL
+    })
 
 
     let BlogData = this.navParams.get("blogData");

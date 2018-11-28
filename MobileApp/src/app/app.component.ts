@@ -6,7 +6,7 @@ import { Settings } from '../providers';
 
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform, MenuController } from 'ionic-angular';
+import { Config, Nav, Platform, MenuController, Events } from 'ionic-angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -47,12 +47,12 @@ export class MyApp implements OnInit {
     { title: 'Signup', component: 'SignupPage' },
     { title: 'Master Detail', component: 'ListMasterPage' },
     { title: 'Menu', component: 'MenuPage' },
-    { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' },
     { title: 'Login', component: 'DhnLoginPage' },
   ]
 
   ngOnInit(): void {
+    console.warn("]]]]]]]]]]]")
     this.Storage.get('IsAppStarted').then((IsAppStarted) => {
       if (IsAppStarted) {
         this.Storage.get('access_token').then((access_token) => {
@@ -76,6 +76,7 @@ export class MyApp implements OnInit {
         this.rootPage = "TutorialPage";
       }
     })
+
   }
 
 
@@ -84,6 +85,7 @@ export class MyApp implements OnInit {
     private Storage: Storage,
     private config: Config,
     private statusBar: StatusBar,
+    private events: Events,
     private splashScreen: SplashScreen ,
     private menu : MenuController,
     private NativeStorage: NativeStorage) {
@@ -94,8 +96,7 @@ export class MyApp implements OnInit {
       this.splashScreen.hide();
     });
 
-
-    this.initTranslate();
+    this.initTranslate(); 
   }
 
   

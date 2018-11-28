@@ -277,9 +277,8 @@ export class DhnLoginPage implements OnInit {
   // Private Methods
   getUserDestailsFBGraphCall(userId) {
     this.fb
-      .api("/" + userId + "/?fields=id,email,name,picture,birthday", [
+      .api("/" + userId + "/?fields=id,email,name,picture", [
         "public_profile",
-        "user_birthday",
         "email"
       ])
       .then(res => {
