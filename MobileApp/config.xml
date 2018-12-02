@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.dothelpnation.appgenesis" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.dothelpnation.appgenesisEG" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>dothelpnation</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <description>Help your self and help other people.</description>
+    <author email="alamiir.ashraf@gmail.com" href="">Alameer Ashraf</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
