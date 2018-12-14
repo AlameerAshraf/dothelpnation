@@ -31,7 +31,7 @@
           <div card-image>
             <img class="image-blog" onError="this.src='assets/img/dothelpnation.png';" [src]="advertisement.photo" />
             <ion-badge ion-fixed item-end class="badge-dark TimeLabel"> about {{advertisement.date | timeAgo}}</ion-badge>
-            <button ion-fixed ion-button button-action-shit (click)="presentBlogOptionsActionSheet(advertisement.id);  $event.stopPropagation();">
+            <button ion-fixed ion-button button-action-shit (click)="messageBlogPoster(advertisement.user_id , advertisement.user_name , advertisement.user_email , advertisement.id);  $event.stopPropagation();">
               <ion-icon name="{{advertisement.shareIcon}}"></ion-icon>
             </button>
           </div>

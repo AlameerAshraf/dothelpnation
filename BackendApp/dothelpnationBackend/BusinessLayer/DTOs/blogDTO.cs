@@ -27,6 +27,7 @@ namespace BusinessLayer.DTOs
         public string user_name { get; set; }
         public string place_name { get; set; }
         public string city_name { get; set; }
+        public string user_email { get; set; }
 
 
     }

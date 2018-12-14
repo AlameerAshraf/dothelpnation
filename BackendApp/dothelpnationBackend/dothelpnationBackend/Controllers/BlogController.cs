@@ -73,7 +73,8 @@ namespace dothelpnationBackend.Controllers
             {
                 blog.time_span = DateTime.ParseExact(blog.time, "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay;
                 blog.section_name = GetSectionNameById((int)blog.section_id);
-                blog.user_name = GetUserNameById((int)blog.user_id);
+                blog.user_name = GetUserData((int)blog.user_id).name;
+                blog.user_email = GetUserData((int)blog.user_id).email;
                 blog.place_name = GetPlaceById((int)blog.place_id);
                 blog.city_name = GetPlaceById((int)blog.city_id);
             }
@@ -93,7 +94,8 @@ namespace dothelpnationBackend.Controllers
             {
                 blog.time_span = DateTime.ParseExact(blog.time , "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay;
                 blog.section_name = GetSectionNameById((int)blog.section_id);
-                blog.user_name = GetUserNameById((int)blog.user_id);
+                blog.user_name = GetUserData((int)blog.user_id).name;
+                blog.user_email = GetUserData((int)blog.user_id).email;
                 blog.place_name = GetPlaceById((int)blog.place_id);
                 blog.city_name = GetPlaceById((int)blog.city_id);
             }
@@ -256,15 +258,21 @@ namespace dothelpnationBackend.Controllers
             return _blogSectionsRepo.Get().Where(x => x.id == sectionId).Single()?.title;
         }
 
-        private string GetUserNameById(int userId)
+        private dynamic GetUserData(int userId)
         {
-            return _userRepo.Get().Where(x => x.id == userId).Single()?.name;
+            var user = _userRepo.Get().Where(x => x.id == userId).Single();
+            return new
+            {
+                email = user?.email,
+                name = user?.name
+            };
         }
 
         private string GetPlaceById(int placeId)
         {
             return _placeRepo.Get().Where(x => x.id == placeId).Single()?.name;
         }
+
 
     }
 }

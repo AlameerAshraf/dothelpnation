@@ -68,8 +68,8 @@ export class DhnBlogsPage {
     })
 
     // Initialize push notifications
-    this.deviceType = this.device.platform; 
-    
+    this.deviceType = this.device.platform;
+
     this.initPushNotifications();
   }
 
@@ -85,10 +85,10 @@ export class DhnBlogsPage {
           element.content = element.content == typeof undefined ? "" : element.content;
           // element.alt = "assets/img/dothelpnation.jpg";
         });
-  
+
         this.Blogs = data;
         this.spinnerDialog.hide();
-  
+
         if(this.Blogs == null){
           this.noBlogsFlag = true;
         }
@@ -114,7 +114,7 @@ export class DhnBlogsPage {
     return notificationFomrattedDate;
   }
 
-  // Add new Item 
+  // Add new Item
   openBlogAddItem() {
     let addModal = this.modalCtrl.create('DhnBlogCraetePage');
     addModal.present();
@@ -127,7 +127,7 @@ export class DhnBlogsPage {
   }
 
 
-  //Filter advertiesmsnets 
+  //Filter advertiesmsnets
   filter() {
     let filterModal = this.modalCtrl.create('DhnBlogFilterPage');
     filterModal.present();
@@ -138,7 +138,7 @@ export class DhnBlogsPage {
   }
 
 
-  // Addition handlers 
+  // Addition handlers
   AddBlogToServer(Blog_Item) {
     if (Blog_Item.Close) {
       // let toaster = this.toast.create({ message: "Close function" });
@@ -160,7 +160,7 @@ export class DhnBlogsPage {
   }
 
 
-  // Filters Handler 
+  // Filters Handler
   filteredBlogs(filterTail) {
     this.Blogs = null;
     this.spinnerDialog.show();
@@ -195,7 +195,7 @@ export class DhnBlogsPage {
 
 
 
-  // View Selected Blog 
+  // View Selected Blog
   viewSingleBlog(blogId) {
     this.spinnerDialog.show();
     this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/ViewSingleBlog?blogId=${blogId}`, null, this.access_token)
@@ -209,49 +209,28 @@ export class DhnBlogsPage {
       })
   }
 
-  
-  // Show Action sheet for blog options 
-  presentBlogOptionsActionSheet(blogId) {
-    let blogOptions = this.actionSheet.create({
-      title: "Blog options",
-      buttons: [
-        {
-          text: "Message blog publisher",
-          handler: () => {
-            this.messageBlogPoster();
-          }
-        },
-        {
-          text: "Cancel",
-          role: "cancel",
-          handler: () => {
-            console.log("cancel");
-          }
-        }
-      ]
+
+
+
+  // Message the poster
+  messageBlogPoster(user_id , user_name , user_email , ad_id) {
+    var MessagingParamsdata = {
+      destination_user_id : user_id ,
+      destination_user_name : user_name,
+      destination_user_email : user_email,
+      ad_id : ad_id
+    }
+
+    this.navCtrl.push("DhnChatPage", {
+      "MessagingParams": MessagingParamsdata,
+      "IsTextInitializer" : {textShow : true}
     });
-
-    blogOptions.present();
   }
 
 
-  // Message the poster 
-  messageBlogPoster() {
-
-    // TODO : Get the poster (user) data from server and send message to the user 
-
-  }
 
 
-  // Report this blog 
-  reportBlog() {
-
-    // No functionality to implement 
-
-  }
-
-
-  // Initialize Push Notifications 
+  // Initialize Push Notifications
   initPushNotifications() {
     console.log("sdsdsdsdsd")
     this.storage.get('DeviceTokenGenerated').then((DeviceTokenGenerated) => {
@@ -260,7 +239,7 @@ export class DhnBlogsPage {
           android: {
             senderID: '323317174806',
             vibrate : true ,
-            sound : true, 
+            sound : true,
           },
           ios: {
             alert: 'true',
@@ -284,7 +263,7 @@ export class DhnBlogsPage {
           if(notification.additionalData.foreground){
             this.events.publish("tab:changed:messagesCount" , 1 , "increase");
           } else {
-            this.events.publish("tab:chnaged:messages" , true);           
+            this.events.publish("tab:chnaged:messages" , true);
           }
         });
         pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
