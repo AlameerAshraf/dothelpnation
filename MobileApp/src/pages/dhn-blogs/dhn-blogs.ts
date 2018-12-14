@@ -81,7 +81,7 @@ export class DhnBlogsPage {
       let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
         data.forEach(element => {
           element.date = this.createFormatedDate(element.publish_date, element.time);
-          element.shareIcon = "more"
+          element.shareIcon = "ios-send-outline"
           element.content = element.content == typeof undefined ? "" : element.content;
           // element.alt = "assets/img/dothelpnation.jpg";
         });
@@ -149,7 +149,7 @@ export class DhnBlogsPage {
       let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
         data.forEach(element => {
           element.date = this.createFormatedDate(element.publish_date, element.time);
-          element.shareIcon = "more";
+          element.shareIcon = "ios-send-outline";
           element.content = element.content == typeof undefined ? "" : element.content;
         });
 
@@ -169,7 +169,7 @@ export class DhnBlogsPage {
       if (data.length > 0) {
         data.forEach(element => {
           element.date = this.createFormatedDate(element.publish_date, element.time);
-          element.shareIcon = "more";
+          element.shareIcon = "ios-send-outline";
           element.content = element.content == typeof undefined ? "" : element.content;
         });
 
@@ -183,7 +183,7 @@ export class DhnBlogsPage {
         let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
           data.forEach(element => {
             element.date = this.createFormatedDate(element.publish_date, element.time);
-            element.shareIcon = "more"
+            element.shareIcon = "ios-send-outline"
           });
 
           this.spinnerDialog.hide();
@@ -219,13 +219,6 @@ export class DhnBlogsPage {
           text: "Message blog publisher",
           handler: () => {
             this.messageBlogPoster();
-          }
-        },
-        {
-          text: "Report",
-          role: "destructive",
-          handler: () => {
-            this.reportBlog();
           }
         },
         {
