@@ -81,8 +81,8 @@
   "EMAIL_LABEL" : "البريد الاكتروني",
   "PASSWORD_LABEL" : "كلمة السر",
   "LOGIN_PAGE_LABEL":"تسجيل الدخول",
-  "FACEBOOK_REGISTER_BUTTON" : "تسجيل الدخول باستخدام Facebook" ,
-  "GOOGLE_PLUS_REGISTER_BUTTON" : "تسجيل الدخول باستخدام Google",
+  "FACEBOOK_REGISTER_BUTTON" : "Facebook" ,
+  "GOOGLE_PLUS_REGISTER_BUTTON" : "Google",
   "REGISTER_PAGE_LABEL":"قم بانشاء حساب جديد",
   "REGISTERATION_QUESTION" : "ليس لديك حساب؟",
 
@@ -136,6 +136,8 @@
   "DEFAULT_LANGUGE_LABEL" : "اللغة",
   "DEFAULT_CITY_LABEL" : "المدينة" ,
   "LOGOUT_LABEL" : "تسجيل الخروج" ,
-  "NoBlogsData" : "نأسف لا توجد اي اعلانات في المدينة التي قمت باختيارها , قم بتغيير المدينة أو أضف اعلانًا جديداً"
+  "NoBlogsData" : "نأسف لا توجد اي اعلانات في المدينة التي قمت باختيارها , قم بتغيير المدينة أو أضف اعلانًا جديداً",
+  "SUCCEFULL_RATE" : "تم حفظ تقييمك شكراً" ,
+  "UNSUCCEFULL_RATE" : "حدث خطأ حاول مرة أخرى"
 
 }

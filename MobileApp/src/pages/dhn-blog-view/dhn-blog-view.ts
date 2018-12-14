@@ -25,6 +25,8 @@ export class DhnBlogViewPage {
   data
   active: boolean = false
   MessagePublisherLabel: any;
+  SuccessfullRate: any;
+  UnsuccessfullRate: any;
 
   constructor(private navCtrl: NavController,
     private navParams: NavParams,
@@ -41,8 +43,10 @@ export class DhnBlogViewPage {
     });
 
 
-    this.translate.get(["MESSAGE_PUBLISHER_BTN_LABEL"]).subscribe(values => {
+    this.translate.get(["MESSAGE_PUBLISHER_BTN_LABEL" , "SUCCEFULL_RATE" , "UNSUCCEFULL_RATE"]).subscribe(values => {
       this.MessagePublisherLabel = values.MESSAGE_PUBLISHER_BTN_LABEL
+      this.SuccessfullRate = values.SUCCEFULL_RATE
+      this.UnsuccessfullRate = values.UNSUCCEFULL_RATE
     })
 
 
@@ -103,10 +107,10 @@ export class DhnBlogViewPage {
       this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/RateBlog?blogId=${this.blogId}&email=${this.logginedUserEmail}&stars=${index+1}`)
       .subscribe((x) => {
         if(x){
-          let toaster = this.toast.create({message : "Blog rated successfully" , duration : 2000});
+          let toaster = this.toast.create({message : this.SuccessfullRate , duration : 1000});
           toaster.present();
         } else {
-          let toaster = this.toast.create({message : "Something went wrong" , duration : 2000});
+          let toaster = this.toast.create({message : this.UnsuccessfullRate , duration : 1000});
           toaster.present();
         }
       })

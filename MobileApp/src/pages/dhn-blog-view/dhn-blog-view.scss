@@ -1,6 +1,8 @@
 page-dhn-blog-view {
 
 
+
+
   // Animation
   @include settingAnimationHeader;
 
@@ -119,3 +121,13 @@ page-dhn-blog-view {
     list-style-type: none;
 }
 }
+
+
+.toast-ios,.toast-md {
+  .toast-wrapper {
+      &.toast-bottom {
+          bottom: 59px;
+          z-index: auto;
+      }
+    }
+  }

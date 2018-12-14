@@ -92,8 +92,8 @@
   "REGISTERATION_QUESTION" : "Don't you have an account ?",
 
 
-  "FACEBOOK_REGISTER_BUTTON" : "Login with Facebook" ,
-  "GOOGLE_PLUS_REGISTER_BUTTON" : "Login with Google",
+  "FACEBOOK_REGISTER_BUTTON" : "Facebook" ,
+  "GOOGLE_PLUS_REGISTER_BUTTON" : "Google",
 
   "REQUIRED_ERROR" : "this field is required" ,
   "PHONE_LENGTH" : "phone length shuold be 11" ,
@@ -135,7 +135,10 @@
   "DEFAULT_CITY_LABEL" : "Default City" ,
   "LOGOUT_LABEL" : "Logout" , 
 
-  "NoBlogsData" : "Sorry we couldn't find ant posts at your current city , change default city or add post"
+  "NoBlogsData" : "Sorry we couldn't find ant posts at your current city , change default city or add post",
+
+  "SUCCEFULL_RATE" : "Your rating saved successfully, Thank you" ,
+  "UNSUCCEFULL_RATE" : "Something went wrong, Try again later"
 
 
 
