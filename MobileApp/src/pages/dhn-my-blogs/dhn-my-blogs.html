@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>My Blogs</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="outer-content">
+
+  <ion-list>
+
+    <ion-item-sliding >
+      <ion-item (click)="startChat()">
+        <ion-avatar item-start>
+          <img src="assets/img/2.png">
+        </ion-avatar>
+
+        <h2>Blog title</h2>
+        <p >Blog desc</p>
+        <ion-note item-end> sd </ion-note>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="delateButton" icon-start>
+          Delete
+        </button>
+
+        <button ion-button color="primary" icon-start>
+            Edit
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>
