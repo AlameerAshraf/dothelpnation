@@ -86,7 +86,7 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Locate you is making experince very easier and helpful , dothelpnation" />
     </plugin>
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>Locate you is making experince very easier and helpful , dothelpnation</string>
+        <string>Locate you is making experince very easier and helpful.</string>
     </edit-config>
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
     <platform name="android">

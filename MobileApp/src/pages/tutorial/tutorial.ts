@@ -58,11 +58,6 @@ export class TutorialPage {
             title: values.TUTORIAL_SLIDE4_TITLE,
             description: "",
             image: 'assets/img/mess.jpg',
-          },
-          {
-            title: values.TUTORIAL_SLIDE5_TITLE,
-            description: "",
-            image: 'assets/img/mising.jpg',
           }
         ];
       });

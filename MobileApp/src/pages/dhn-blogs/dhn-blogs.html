@@ -2,17 +2,23 @@
 
   <ion-navbar dir="{{dir}}">
     <ion-title> {{ data.HeaderLabel }} </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="openBlogAddItem()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
+
+  
 
     <ion-buttons end>
+        <button ion-button color="secondary" clear>
+            <ion-icon name="add"></ion-icon>
+          </button>
+      <!-- <button ion-button icon-only (click)="openBlogAddItem()">
+        <ion-icon name="add"></ion-icon>
+      </button> -->
+    </ion-buttons>
+
+    <!-- <ion-buttons end>
       <button ion-button icon-only (click)="filter()">
         <ion-icon name="ios-funnel-outline"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
