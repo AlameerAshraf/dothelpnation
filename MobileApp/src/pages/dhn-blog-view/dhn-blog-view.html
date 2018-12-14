@@ -14,7 +14,7 @@
 <ion-content elastic-header>
 
 
-  <ion-item no-lines background-size id="elastic-header" [ngStyle]="{'background-image': 'url(' + data.photo + ')'}">
+  <ion-item no-lines background-size id="elastic-header" [ngStyle]="{'background-image': 'url(' + data.photo + ') , url('+ data.altr +')'}">
     <div title-block *ngIf="data != null">
       <!--- Category -->
       <span new-category>{{data.category}}</span>

@@ -48,6 +48,7 @@ export class DhnBlogViewPage {
 
     let BlogData = this.navParams.get("blogData");
     this.data = BlogData;
+    this.data.altr = 'assets/img/dothelpnation.png';
     this.data.shareIcon = "md-share-alt"
     this.map = {
       "map": {
