@@ -22,6 +22,11 @@
 <ion-content>
   <!-- <ion-searchbar (ionInput)="getItems($event)" placeholder="Seach in blogs"></ion-searchbar> -->
 
+  <ion-refresher (ionRefresh)="refreshData($event)">
+    <ion-refresher-content
+      refreshingText="Refreshing..."
+    ></ion-refresher-content>
+  </ion-refresher>
 
   <ion-grid no-padding dir="{{dir}}">
     <ion-row *ngIf="Blogs != null">

@@ -78,24 +78,8 @@ export class DhnBlogsPage {
       this.defCityId = settings.def_city_id;
       this.Blogs = null;
       this.spinnerDialog.show();
-      let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
-        data.forEach(element => {
-          element.date = this.createFormatedDate(element.publish_date, element.time);
-          element.shareIcon = "ios-send-outline"
-          element.content = element.content == typeof undefined ? "" : element.content;
-          // element.alt = "assets/img/dothelpnation.jpg";
-        });
-
-        this.Blogs = data;
-        this.spinnerDialog.hide();
-
-        if(this.Blogs == null){
-          this.noBlogsFlag = true;
-        }
-      });
+      this.LoadBlogsData('page' , null);
     });
-
-
   }
 
 
@@ -224,6 +208,33 @@ export class DhnBlogsPage {
     this.navCtrl.push("DhnChatPage", {
       "MessagingParams": MessagingParamsdata,
       "IsTextInitializer" : {textShow : true}
+    });
+  }
+
+  refreshData(refresher){
+    this.LoadBlogsData('refresher' , {refresher : refresher});
+  }
+
+
+  LoadBlogsData(mode , additionalData){
+    let DataRequest = this.DataService.Get(`${Url.ApiUrlLocalTunnul()}/GetBlogs?Def_City_id=${this.defCityId}`, null, this.access_token).subscribe((data) => {
+      data.forEach(element => {
+        element.date = this.createFormatedDate(element.publish_date, element.time);
+        element.shareIcon = "ios-send-outline"
+        element.content = element.content == typeof undefined ? "" : element.content;
+        // element.alt = "assets/img/dothelpnation.jpg";
+      });
+
+      this.Blogs = data;
+      if(mode === 'page')
+        this.spinnerDialog.hide();
+      else if(mode === 'refresher')
+        additionalData.refresher.complete();
+
+
+      if(this.Blogs == null){
+        this.noBlogsFlag = true;
+      }
     });
   }
 
