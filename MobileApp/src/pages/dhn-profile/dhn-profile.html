@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content dir="{{dir}}" padding>
 
   <div text-center>
     <img class="circle-pic" src="{{CurrentUserProfileData?.photo}}" />
@@ -15,31 +15,26 @@
   </div>
   <ion-item>
     <ion-label stacked>{{data.Username_profile}}</ion-label>
-    <ion-input disabled="true" value="{{CurrentUserProfileData?.name}}"></ion-input>
+    <ion-input dir="{{dir}}" disabled="true" value="{{CurrentUserProfileData?.name}}"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label stacked>{{data.Email_profile}}</ion-label>
-    <ion-input disabled="true" value="{{CurrentUserProfileData?.email}}"></ion-input>
+    <ion-input dir="{{dir}}" disabled="true" value="{{CurrentUserProfileData?.email}}"></ion-input>
   </ion-item>
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-label stacked>{{data.Age_profile}}</ion-label>
     <ion-input disabled="true" value="{{CurrentUserProfileData?.phone}}"></ion-input>
   </ion-item>
 
-  <!-- <ion-item>
-    <ion-label stacked>Password</ion-label>
-    <ion-input type="password" disabled="true" value="{{CurrentUserProfileData?.password}}"></ion-input>
-  </ion-item> -->
-
   <ion-item>
     <ion-label stacked>{{data.phone_profile}}</ion-label>
     <ion-input disabled="true" value="{{CurrentUserProfileData?.mobile}}"></ion-input>
-  </ion-item>
+  </ion-item> -->
 
   <br>
-  <!-- <button ion-button block color="primary" outline (click)="showConfirm()">Show My Ads</button> -->
+  <button ion-button block color="primary" outline (click)="showMyBlogs()">{{data.Ads_Btn}}</button>
 
 
 </ion-content>

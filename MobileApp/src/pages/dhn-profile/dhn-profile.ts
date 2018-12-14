@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, MenuController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -17,10 +17,12 @@ export class DhnProfilePage {
     Username_profile : "" ,
     Email_profile : "",
     Age_profile : "",
-    phone_profile : ""
+    phone_profile : "",
+    Ads_Btn : ""
   }
 
   constructor(public navCtrl: NavController, 
+    public menu: MenuController,
     public navParams: NavParams,
     private translate : TranslateService,
     private storage: Storage,
@@ -44,20 +46,28 @@ export class DhnProfilePage {
       'AGE_LABEL' ,
       'EMAIL_LABEL',
       'PHONE_LABEL',
-      'PROFILE_TAB'
+      'PROFILE_TAB',
+      "PRE_ADS_BTN"
     ]).subscribe((values) => {
       this.data.HeaderLabel = values.PROFILE_TAB;
       this.data.Age_profile = values.AGE_LABEL;
       this.data.Email_profile = values.EMAIL_LABEL;
       this.data.phone_profile = values.PHONE_LABEL;
       this.data.Username_profile = values.USERNAME_LABEL;
+      this.data.Ads_Btn = values.PRE_ADS_BTN
     })
 
 
   }
 
   ionViewDidLoad() {
+    this.menu.enable(false);
     console.log('ionViewDidLoad DhnProfilePage');
+  }
+
+
+  showMyBlogs(){
+    this.navCtrl.push("DhnMyBlogsPage");
   }
 
 }

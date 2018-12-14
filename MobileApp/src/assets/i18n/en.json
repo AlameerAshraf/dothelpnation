@@ -138,7 +138,8 @@
   "NoBlogsData" : "Sorry we couldn't find ant posts at your current city , change default city or add post",
 
   "SUCCEFULL_RATE" : "Your rating saved successfully, Thank you" ,
-  "UNSUCCEFULL_RATE" : "Something went wrong, Try again later"
+  "UNSUCCEFULL_RATE" : "Something went wrong, Try again later" ,
+  "PRE_ADS_BTN" : "My Blogs"
 
 
 
