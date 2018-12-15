@@ -11,15 +11,15 @@
 
   <ion-list>
 
-    <ion-item-sliding >
-      <ion-item (click)="startChat()">
+    <ion-item-sliding *ngFor="let blog of blogs" >
+      <ion-item (click)="viewBlog()">
         <ion-avatar item-start>
-          <img src="assets/img/2.png">
+          <img onError="this.src='assets/img/dothelpnation.png';" [src]=" blog.photo ">
         </ion-avatar>
 
-        <h2>Blog title</h2>
-        <p >Blog desc</p>
-        <ion-note item-end> sd </ion-note>
+        <h2>{{ blog.title }}</h2>
+        <p > {{ blog.content }}</p>
+        <ion-note item-end> {{blog.date}} </ion-note>
       </ion-item>
       <ion-item-options>
         <button ion-button color="delateButton" icon-start>

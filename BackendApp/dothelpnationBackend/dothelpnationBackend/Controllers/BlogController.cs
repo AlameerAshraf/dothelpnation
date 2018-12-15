@@ -252,6 +252,25 @@ namespace dothelpnationBackend.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/GetOldPosts")]
+        public IEnumerable<blogDTO> GetOldPostsForUser([FromUri] string email)
+        {
+            try
+            {
+                var userId = _userRepo.Get().Where(x => x.email == email).Single()?.id;
+                var blogs = _blogRepo.Get().Where(x => x.user_id == userId).ToList();
+                var MappedBlogs = Mapper.Map<IEnumerable<blogDTO>>(blogs);
+
+                return MappedBlogs.OrderByDescending(x => x.publish_date).ThenByDescending(x => x.time);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
         // Private Metods 
         private string GetSectionNameById(int sectionId)
         {
