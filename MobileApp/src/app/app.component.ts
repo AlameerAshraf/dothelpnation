@@ -52,7 +52,6 @@ export class MyApp implements OnInit {
   ]
 
   ngOnInit(): void {
-    console.warn("]]]]]]]]]]]")
     this.Storage.get('IsAppStarted').then((IsAppStarted) => {
       if (IsAppStarted) {
         this.Storage.get('access_token').then((access_token) => {
@@ -108,7 +107,6 @@ export class MyApp implements OnInit {
     // this.translate.use(lang);
 
     this.Storage.get('UserSettings').then((settings) => {
-      console.warn(settings);
       if(settings != null){
         this.translate.use(settings.def_lang);
       } else {

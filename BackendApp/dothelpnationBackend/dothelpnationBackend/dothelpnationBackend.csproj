@@ -62,7 +62,7 @@
     </Reference>
     <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DataAccessLayer\bin\Debug\DataAccessLayer.dll</HintPath>
+      <HintPath>..\BusinessLayer\bin\Debug\DataAccessLayer.dll</HintPath>
     </Reference>
     <Reference Include="EngineIoClientDotNet, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EngineIoClientDotNet.1.0.7\lib\net45\EngineIoClientDotNet.dll</HintPath>

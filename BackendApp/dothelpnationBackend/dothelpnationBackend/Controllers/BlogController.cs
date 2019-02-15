@@ -87,12 +87,12 @@ namespace dothelpnationBackend.Controllers
         [Route("api/GetBlogs")]
         public IEnumerable<blogDTO> GetAllBlogs([FromUri] int Def_City_id)
         {
-            var blogs = _blogRepo.Get().Where(x => x.city_id == Def_City_id).ToList();
+            var blogs = _blogRepo.Get().Where(x => x.place_id == Def_City_id).ToList();
             var MappedBlogs = Mapper.Map<IEnumerable<blogDTO>>(blogs);
 
             foreach (var blog in MappedBlogs)
             {
-                blog.time_span = DateTime.ParseExact(blog.time , "hh:mm:ss tt", CultureInfo.InvariantCulture).TimeOfDay;
+                blog.time_span = DateTime.ParseExact(blog.time , "hh-mm-ss-tt", CultureInfo.InvariantCulture).TimeOfDay;
                 blog.section_name = GetSectionNameById((int)blog.section_id);
                 blog.user_name = GetUserData((int)blog.user_id).name;
                 blog.user_email = GetUserData((int)blog.user_id).email;
