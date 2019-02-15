@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Events , IonicPage, NavController, NavParams, ModalController, ToastController, ActionSheetController, Platform, AlertController } from 'ionic-angular';
+import { Events , IonicPage, NavController, NavParams, ModalController, ToastController, ActionSheetController, Platform, AlertController, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
@@ -48,7 +48,9 @@ export class DhnBlogsPage {
     private alertController : AlertController,
     private events: Events,
     private translate : TranslateService,
+    private menu : MenuController,
     private spinnerDialog: SpinnerDialog) {
+      this.menu.enable(false);
 
     this.storage.get('access_token').then((SECURITY_DATA) => {
       this.access_token = SECURITY_DATA.access_token;

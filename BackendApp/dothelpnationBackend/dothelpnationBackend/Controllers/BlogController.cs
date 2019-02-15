@@ -152,10 +152,10 @@ namespace dothelpnationBackend.Controllers
             {
                 user_id = (int) userId,
                 publish_date = DateTime.Now,
-                time = DateTime.Now.ToString("hh:mm:ss tt"),
+                time = DateTime.Now.ToString("hh-mm-ss-tt"),
                 section_id = section_id,
-                city_id = city_id,
-                place_id = place_id,
+                city_id = place_id,
+                place_id = city_id,
                 title = title,
                 content = description,
                 photo = photoPath ,
